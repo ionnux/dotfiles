@@ -1,0 +1,7 @@
+[git]
+    autoCommit = true
+    # autoPush = true
+
+[data]
+    email = "sadiq_abdulazeez@outlook.com"
+    name = "Sadiq Abdulazeez"
