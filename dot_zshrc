@@ -92,7 +92,7 @@ bindkey -v
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='nvim'
+   export EDITOR='nvim.appimage'
  fi
 
 # Compilation flags
