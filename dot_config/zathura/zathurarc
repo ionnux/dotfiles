@@ -1,0 +1,85 @@
+set font "JetBrainsMono Nerd Font normal 12"
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 50
+set scroll-hstep -0.5
+
+set vertical-center true
+
+#zoom settings
+set zoom-min 10
+set zoom-step 5
+set link-zoom false
+set zoom-center true
+
+set guioptions "v"
+
+set highlight-transparancy 0.1
+set page-padding 4
+
+# zathurarc-dark
+
+set default-bg "#1f2335" 
+set default-fg "#c0caf5" 
+
+set statusbar-fg "#1f2335" 
+set statusbar-bg "#7aa2f7" 
+
+set inputbar-bg "#292e42" 
+set inputbar-fg "#c0caf5" 
+
+set notification-error-bg "#f7768e" 
+set notification-error-fg "#1f2335" 
+
+set notification-warning-bg "#f7768e" 
+set notification-warning-fg "#1f2335" 
+
+set highlight-color "#7aa2f7" 
+set highlight-active-color "#f7768e" 
+
+set completion-highlight-fg "#1f2335" 
+set completion-highlight-bg "#7aa2f7" 
+
+set completion-bg "#1f2335" 
+set completion-fg "#737aa2" 
+
+set completion-group-bg "#1f2335"
+set completion-group-fg "#7aa2f7"
+
+set index-bg "#1f2335"
+set index-fg "#c0caf5"
+set index-active-bg "#7aa2f7"
+set index-active-fg "#1f2335"
+
+set notification-bg "#90A959" 
+set notification-fg "#151515" 
+
+set recolor "true"
+# set recolor-lightcolor "#000000" 
+set recolor-lightcolor "#1f2335" 
+# set recolor-darkcolor "#E0E0E0" 
+set recolor-darkcolor "#c0caf5" 
+set recolor-reverse-video "false"
+set recolor-keephue "true"
+
+
+set render-loading "false"
+# unmap f
+map gf toggle_fullscreen
+map [fullscreen] gf toggle_fullscreen
+
+unmap s
+map s toggle_statusbar
+map [fullscreen] s toggle_statusbar
+set statusbar-home-tilde "true"
+
+map i toggle_index
+map [index] i toggle_index
