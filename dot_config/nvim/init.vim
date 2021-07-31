@@ -249,7 +249,7 @@ nnoremap <SPACE> <Nop>
 let mapleader=" "
 
 "map <leader>ev to edit my vimrc file
-nnoremap <silent><leader>ev :call EditVimrc()<cr>
+nnoremap <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.vim<cr>
 function EditVimrc()
     if winwidth('.') > 110
         :vs $MYVIMRC
