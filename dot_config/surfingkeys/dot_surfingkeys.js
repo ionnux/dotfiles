@@ -8,9 +8,9 @@ map("L", "D");
 http://192.168.0.1/index.html#login
 mapkey('<Ctrl-l>', 'fill in login form', function() {
  const origin = window.location.origin
- if(origin === "some-specific-domain"){           
-  window.document.getElementById("username").value = username
-   window.document.getElementById("password").value = password 
-   window.document.getElementById("loginButton").click() 
+    if(origin === "http://192.168.0.1/index.html#login"){           
+   window.document.getElementById("txtPwd").value = Qetuo0112 
+   window.document.getElementById("btnLogin").click() 
    return 
  }
+});
