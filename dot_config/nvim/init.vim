@@ -501,7 +501,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 "startify settings
 "startify bookmark setting
-let g:startify_bookmarks = [ {'c': '~/.config/nvim/init.vim'}]
+let g:startify_bookmarks = [ {'c': '~/.local/share/chezmoi/dot_config/nvim/init.vim'}]
 "startify indices setting
 let g:startify_custom_indices = ['g', 'f', 'd', 's', 'a']
 "automatically set airline theme to gruvbox whenever startify starts
