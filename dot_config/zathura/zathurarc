@@ -80,6 +80,7 @@ unmap s
 map s toggle_statusbar
 map [fullscreen] s toggle_statusbar
 set statusbar-home-tilde "true"
+set statusbar-basename "true"
 
 map i toggle_index
 map [index] i toggle_index
