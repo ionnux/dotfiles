@@ -7,7 +7,6 @@
  *
  */
 
-configuration {
 	font:							"jetbrainsmono nerd font 12";
     modi: "window,drun,ssh,combi";
     show-icons:                     true;
