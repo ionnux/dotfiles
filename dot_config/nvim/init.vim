@@ -204,6 +204,9 @@ set noshowmode
 " mouse support
 set mouse=nv
 
+" set maximum number of items to show in the popup menu
+set pumheight=15
+
 "set tab to have 4 spaces
 set tabstop=4
 

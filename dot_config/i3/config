@@ -390,3 +390,5 @@ bindsym $mod+n nop kitti3
 # Android emulator settings 
 for_window [title="Android Emulator*"] floating enable, border none, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
 bindsym $mod+comma [title="Android Emulator*"] scratchpad show
+
+exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
