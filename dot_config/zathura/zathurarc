@@ -14,6 +14,8 @@ set scroll-hstep -0.5
 
 set vertical-center true
 
+set selection-clipboard "clipboard"
+
 #zoom settings
 set zoom-min 10
 set zoom-step 5
