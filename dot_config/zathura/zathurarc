@@ -6,6 +6,8 @@ set adjust-open "best-fit"
 # One page per row by default
 set pages-per-row 1
 
+set sandbox "none"
+
 #stop at page boundries
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
@@ -19,8 +21,8 @@ set selection-clipboard "clipboard"
 #zoom settings
 set zoom-min 10
 set zoom-step 5
-set link-zoom false
-set zoom-center true
+set link-zoom "false"
+set zoom-center "true"
 
 set guioptions "v"
 
