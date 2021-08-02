@@ -9,7 +9,7 @@
 
 configuration {
 	font:							"jetbrainsmono nerd font 12";
-    modi:                           "window,drun,ssh,combi";
+    modi:                           "window,drun,run,ssh,combi";
 	combi-modi:                     "window,drun";
 	kb-row-up:                      "Up,Control+k,ISO_Left_Tab";
 	kb-row-down:                    "Down,Control+j";
@@ -18,7 +18,7 @@ configuration {
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-combi: 					"";
-    drun-display-format:            "| {name}";
+    drun-display-format:            "{name}";
 	/* window-format:                  "{w}    {c}   {t}"; */
 	window-format:                  "{w}    {c}";
     disable-history:                false;
