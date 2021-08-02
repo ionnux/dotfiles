@@ -46,6 +46,7 @@ floating_modifier $mod
 
 # start a terminal
 set $myTerm kitty
+
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id $myTerm
 
@@ -69,13 +70,11 @@ client.focused #555555 #555555 #ffffff #2e9ef4     #fb4934
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
+# start rofi
 bindsym Control+Return exec --no-startup-id "rofi -show combi"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+
+# Toggle polybar
+bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
 
 # mouse focus
 focus_follows_mouse no
@@ -391,4 +390,4 @@ bindsym $mod+n nop kitti3
 for_window [title="Android Emulator*"] floating enable, border none, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
 bindsym $mod+comma [title="Android Emulator*"] scratchpad show
 
-exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
+# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
