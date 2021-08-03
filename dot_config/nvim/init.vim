@@ -201,6 +201,9 @@ set colorcolumn=80
 "hide insert display in insert mode
 set noshowmode
 
+set ignorecase
+set smartcase
+
 " mouse support
 set mouse=nv
 
@@ -250,6 +253,33 @@ set shortmess+=c
 "use space key as leader
 nnoremap <SPACE> <Nop>
 let mapleader=" "
+
+" keep cursor in center of screen when transversing search
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ'z
+
+" add undo break points whenever certain characters are pressed
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" populate jumplist whenever I move upward or downward 5 lines and above
+nnoremap <expr> k (v:count > 4 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 4 ? "m'" . v:count : "") . 'j'
+
+" mapping for moving line(s) in normal, insert and visual modes.
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+inoremap <c-k> <esc>:m .-2<cr>==
+inoremap <c-j> <esc>:m .+1<cr>==
+nnoremap <leader>k <esc>:m .-2<cr>==
+nnoremap <leader>j <esc>:m .+1<cr>==
+
+
+" yank from cursor to eol
+nnoremap Y y$
 
 "map <leader>ev to edit my vimrc file
 nnoremap <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.vim<cr>
@@ -570,12 +600,15 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 "vim mundo settings
+let g:mundo_preview_bottom = 1
 nnoremap <silent><leader>vm :MundoToggle<cr>
 
 "undotree settings
 nnoremap <silent><leader>ut :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
+let g:undotree_WindowLayout = 2
+let g:undotree_SplitWidth = 30
 "let g:mundo_inline_undo = 1
 
 autocmd BufReadPost *.kt setlocal filetype=kotlin
@@ -697,7 +730,7 @@ nnoremap <silent> [g :Lspsaga diagnostic_jump_prev<CR>
 nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 " automatically show diagnostics in hover window
-autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
+" autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
 
 
 "flutter-tools settings
@@ -789,7 +822,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
     underline = true,
     virtual_text = false,
     signs = true,
-    update_in_insert = true,
+    update_in_insert = false,
     severity_sort = false,
     }
 )
@@ -873,20 +906,24 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 " " trouble nvim settings
-" lua <<EOF
-"   require("trouble").setup {
-"     }
+lua <<EOF
+  require("trouble").setup {
+      position = "bottom",
+      auto_close = true,
+      auto_open = true,
+      mode = "lsp_document_diagnostics",
+    }
 
-"   -- keymappings
-"   vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
-"   vim.api.nvim_set_keymap("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})
+  -- keymappings
+  vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})
 
-" EOF
+EOF
 
 " which-key settings
 lua <<EOF
@@ -1162,4 +1199,7 @@ augroup dartrun
 augroup END
 
 " Run chezmoi apply whenever I save a dotfile
-autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
+augroup chezmoiApply
+    autocmd!
+    autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
+augroup END
