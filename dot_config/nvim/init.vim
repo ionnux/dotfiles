@@ -99,6 +99,7 @@ let g:tokyonight_style = "night"
 let g:tokyonight_day_brightness = 0.1
 let g:tokyonight_transparent = 0
 let g:tokyonight_lualine_bold = 1
+" let g:tokyonight_sidebars = ['terminal',]
 " let g:tokyonight_italic_functions = 1
 " let g:tokyonight_italic_variables = 1
 " let g:tokyonight_hide_inactive_statusline = 1
@@ -730,7 +731,7 @@ nnoremap <silent> [g :Lspsaga diagnostic_jump_prev<CR>
 nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 " automatically show diagnostics in hover window
-" autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
+autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
 
 
 "flutter-tools settings
@@ -822,7 +823,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
     underline = true,
     virtual_text = false,
     signs = true,
-    update_in_insert = false,
+    update_in_insert = true,
     severity_sort = false,
     }
 )
@@ -910,7 +911,7 @@ lua <<EOF
   require("trouble").setup {
       position = "bottom",
       auto_close = true,
-      auto_open = true,
+      auto_open = false,
       mode = "lsp_document_diagnostics",
     }
 

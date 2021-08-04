@@ -51,10 +51,10 @@ set $myTerm kitty
 bindsym $mod+Return exec --no-startup-id $myTerm
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5; notify-send -t 500 'brightness '$(xbacklight)"
-# bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5"
-bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5; notify-send -t 500 'brightness '$(xbacklight)"
-# bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5"
+# bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5; notify-send -t 500 'brightness '$(xbacklight)"
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5"
+# bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5; notify-send -t 500 'brightness '$(xbacklight)"
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5"
 
 # Media control
 bindsym XF86AudioNext exec --no-startup-id "playerctl next"
