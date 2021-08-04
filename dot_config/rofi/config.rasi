@@ -10,7 +10,7 @@
 configuration {
 	font:							"jetbrainsmono nerd font 12";
     modi:                           "window,drun,run,ssh,combi";
-	combi-modi:                     "window,drun";
+	combi-modi:                     "window,drun,run";
 	kb-row-up:                      "Up,Control+k,ISO_Left_Tab";
 	kb-row-down:                    "Down,Control+j";
 	kb-remove-to-eol:               "Control+l";
