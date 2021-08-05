@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$PATH:$HOME/bin:/usr/local/bin"
 # Add android studio to path
-export PATH="$PATH:/usr/local/android-studio/bin/studio.sh"
+# export PATH="$PATH:/usr/local/android-studio/bin/studio.sh"
 # Add flutter to path
 export PATH="$PATH:/home/og_saaz/development/flutter/bin"
 
@@ -107,6 +107,7 @@ bindkey -v
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nvim="/usr/bin/nvim.appimage"
+alias studio="/usr/local/android-studio/bin/studio.sh"
 
 ### colorize commands
 alias ls='lsd --color=auto'
