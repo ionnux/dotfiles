@@ -174,6 +174,10 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# open edge in workspace 2
+assign [class="Microsoft-edge-beta"] 2
+assign [title="cmus v2.9.1"] 3
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -387,7 +391,7 @@ exec_always --no-startup-id kitti3 -p right -s 1.0 0.5
 bindsym $mod+n nop kitti3
 
 # Android emulator settings 
-for_window [title="Android Emulator*"] floating enable, border none, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
+for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
 bindsym $mod+comma [title="Android Emulator*"] scratchpad show
 
 # exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"

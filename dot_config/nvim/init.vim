@@ -26,9 +26,6 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'mhartington/formatter.nvim'
 Plug 'nacro90/numb.nvim'
 
-Plug 'nvim-lua/plenary.nvim'
-Plug 'akinsho/flutter-tools.nvim'
-Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'kassio/neoterm'
 Plug 'haringsrob/nvim_context_vt' "show virtual text of current context
@@ -78,6 +75,9 @@ Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 Plug 'p00f/nvim-ts-rainbow'
 
 " dart and flutter related
+Plug 'nvim-lua/plenary.nvim'
+Plug 'akinsho/flutter-tools.nvim'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'Neevash/awesome-flutter-snippets' "flutter snippets
 Plug 'Alexisvt/flutter-snippets' "flutter snippets
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
@@ -735,6 +735,7 @@ autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
 
 
 "flutter-tools settings
+" au BufEnter *.dart  highlight FlutterWidgetGuides guifg=#7aa2f7
 lua <<EOF
   require("flutter-tools").setup{
   widget_guides = {
@@ -744,6 +745,13 @@ lua <<EOF
     autostart = true,
     auto_open_browser = false,
     },
+  dev_log = {
+    open_cmd = "8new", -- command to use to open the log buffer
+    },
+  outline = {
+    open_cmd = "50vnew", -- command to use to open the outline buffer
+    auto_open = false -- if true this will open the outline automatically when it is first populated
+        },
   } -- use defaults
 EOF
 
@@ -1151,7 +1159,7 @@ EOF
 " indent blankline settings
 let g:indent_balnkline_use_treesitter = v:true
 let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim']
-let g:indent_blankline_char = '¦'
+" let g:indent_blankline_char = '¦'
 
 
 " formatter nvim settings
