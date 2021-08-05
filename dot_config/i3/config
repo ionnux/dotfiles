@@ -66,6 +66,7 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 client.focused #555555 #555555 #ffffff #2e9ef4     #fb4934
 # client.focused #555555 #555555 #ffffff #2e9ef4     #bd93f9
 # client.unfocused #555555 #555555 #ffffff #2e9ef4     #bd93f9
+client.background #fabd2f
 
 # kill focused window
 bindsym $mod+Shift+q kill
