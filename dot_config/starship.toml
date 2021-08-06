@@ -5,8 +5,12 @@ add_newline = true
 # [package]
 # disabled = false
 
+# format = '''
+# [╭─\($username$hostname\)$jobs-\[$directory\]-\[ $git_commit$git_state$git_metrics$java$kotlin$python$lua$cmake\]$git_branch$git_status$dart$battery](bold blue)
+# [╰─$character](bold blue)
+# '''
 format = '''
-[╭─\($username$hostname\)$jobs-\[$directory\]-\[ $git_branch$git_commit$git_state$git_metrics$git_status$dart$java$kotlin$python$lua$cmake\]$battery](bold blue)
+[╭─\($username$hostname\)$jobs-\[$directory\]$git_branch$git_status$dart$battery](bold blue)
 [╰─$character](bold blue)
 '''
 [character]
@@ -75,3 +79,47 @@ style = "bold red"
 format = '[-\[](bold blue)[$symbol$number]($style)[\]](bold blue)'
 symbol = "✦"
 threshold = 1
+
+[dart]
+style = 'bold blue'
+format = '-\[via [$symbol($version)]($style)\]'
+
+[git_branch]
+style = 'bold purple'
+format = '-\[on [$symbol$branch]($style)\]' 
+symbol = ' '
+truncation_length = '2^63 - 1'
+truncation_symbol = '…'
+only_attached = false
+
+[git_status]
+style = 'bold red'
+format = '([\[$all_status$ahead_behind\]]($style) )'
+
+# Show ahead/behind count of the branch being tracked
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+
+# ahead = "⇡"
+# behind = "⇣"
+# diverged = "⇕"
+conflicted = "="
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# Alternate settings
+# conflicted = "🏳"
+# ahead = "🏎💨"
+# behind = "😰"
+# diverged = "😵"
+# untracked = "🤷‍"
+# stashed = "📦"
+# modified = "📝"
+# staged = '[++\($count\)](green)'
+# renamed = "👅"
+# deleted = "🗑"
