@@ -78,7 +78,8 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'akinsho/flutter-tools.nvim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'Neevash/awesome-flutter-snippets' "flutter snippets
+Plug 'Neevash/awesome-flutter-snippets' "flutter snippets for vim-vsnip
+Plug 'RobertBrunhage/flutter-riverpod-snippets'
 Plug 'Alexisvt/flutter-snippets' "flutter snippets
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
 
