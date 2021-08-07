@@ -1,9 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$PATH:$HOME/bin:/usr/local/bin"
 # Add android studio to path
-# export PATH="$PATH:/usr/local/android-studio/bin/studio.sh"
+export PATH="$PATH:/usr/local/android-studio/bin/"
 # Add flutter to path
-export PATH="$PATH:/home/og_saaz/development/flutter/bin"
+export PATH="$PATH:$HOME/development/flutter/bin/"
+# Add adb and platform tools to path
+export PATH="$PATH:$HOME/Android/Sdk/platform-tools/"
+# Add android emulator to path
+export PATH="$PATH:$HOME/Android/Sdk/emulator/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/og_saaz/.oh-my-zsh"
@@ -107,8 +111,8 @@ bindkey -v
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias nvim="/usr/bin/nvim.appimage"
-alias studio="/usr/local/android-studio/bin/studio.sh"
-alias emulator="~/Android/Sdk/emulator/emulator"
+alias studio="studio.sh"
+# alias emulator="~/Android/Sdk/emulator/emulator"
 
 ### colorize commands
 alias ls='lsd --color=auto'
