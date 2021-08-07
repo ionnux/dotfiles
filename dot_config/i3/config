@@ -180,6 +180,9 @@ assign [class="Microsoft-edge-beta"] 2
 assign [class="kitty" title="cmus v2.9.1"] 3
 
 # layout files
+# load android dev layout to workspace 4
+exec --no-startup-id i3-msg 'workspace 4; append_layout ~/.config/i3/layout_files/dev_workspace.json; exec kitty'
+exec_always --no-startup-id i3-msg 'workspace 3; exec kitty cmus; workspace 1'
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
