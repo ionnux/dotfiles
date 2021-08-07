@@ -177,7 +177,9 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # open edge in workspace 2
 assign [class="Microsoft-edge-beta"] 2
-assign [title="cmus v2.9.1"] 3
+assign [class="kitty" title="cmus v2.9.1"] 3
+
+# layout files
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

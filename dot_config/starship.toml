@@ -10,7 +10,7 @@ add_newline = true
 # [╰─$character](bold blue)
 # '''
 format = '''
-[╭─\($username$hostname\)$jobs-\[$directory\]$git_branch$git_status$dart$battery](bold blue)
+[╭─\($username$hostname\)$jobs$directory$git_branch$git_status$dart$battery](bold blue)
 [╰─$character](bold blue)
 '''
 [character]
@@ -47,7 +47,7 @@ style = 'bold yellow'
 # style = "bold green"
 
 [directory]
-format = "[$path]($style)[$read_only]($read_only_style)"
+format = '-\[[$path]($style)[$read_only]($read_only_style)\]'
 style = "bold cyan"
 # read_only = " "
 truncation_length = 2
