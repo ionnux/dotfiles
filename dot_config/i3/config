@@ -183,8 +183,8 @@ assign [class="Microsoft-edge-beta"] 3
 bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_workspace.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
 
 # auto start apps
-exec --no-startup-id i3-msg 'workspace 4; exec kitty cmus; workspace 1'
-exec --no-startup-id i3-msg 'workspace 5; exec kitty vifm; workspace 1'
+# exec --no-startup-id i3-msg 'workspace 4; exec kitty cmus; workspace 1'
+# exec --no-startup-id i3-msg 'workspace 5; exec kitty vifm; workspace 1'
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
