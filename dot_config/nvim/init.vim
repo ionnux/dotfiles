@@ -78,8 +78,8 @@ Plug 'p00f/nvim-ts-rainbow'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'akinsho/flutter-tools.nvim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'Neevash/awesome-flutter-snippets' "flutter snippets for vim-vsnip
-Plug 'RobertBrunhage/flutter-riverpod-snippets'
+Plug 'Neevash/awesome-flutter-snippets' "vscode flutter snippets for vim-vsnip
+Plug 'RobertBrunhage/flutter-riverpod-snippets' "vscode riverpod snippets for vim-vsnip
 Plug 'Alexisvt/flutter-snippets' "flutter snippets
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
 
@@ -634,10 +634,10 @@ let g:compe.documentation = v:true
 let g:compe.source = {}
 let g:compe.source.path = v:true
 let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
 let g:compe.source.nvim_lsp = v:true
+let g:compe.source.vsnip = {'priority': 1000,}
+let g:compe.source.calc = v:true
 let g:compe.source.nvim_lua = v:true
-let g:compe.source.vsnip = v:true
 let g:compe.source.ultisnips = v:true
 let g:compe.source.luasnip = v:true
 let g:compe.source.treesitter = v:false
