@@ -79,6 +79,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'akinsho/flutter-tools.nvim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'Neevash/awesome-flutter-snippets' "vscode flutter snippets for vim-vsnip
+Plug 'SushanShakya/bloc_extension'
 Plug 'RobertBrunhage/flutter-riverpod-snippets' "vscode riverpod snippets for vim-vsnip
 Plug 'Alexisvt/flutter-snippets' "flutter snippets
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
@@ -743,12 +744,12 @@ lua <<EOF
     enabled = true,
     },
   dev_tools = {
-    autostart = true,
+    autostart = false,
     auto_open_browser = false,
     },
-  dev_log = {
-    open_cmd = "8new", -- command to use to open the log buffer
-    },
+  --dev_log = {
+    --open_cmd = "tabedit", -- command to use to open the log buffer
+    --},
   outline = {
     open_cmd = "50vnew", -- command to use to open the outline buffer
     auto_open = false -- if true this will open the outline automatically when it is first populated
