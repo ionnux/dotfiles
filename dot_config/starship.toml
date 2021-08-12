@@ -27,12 +27,12 @@ charging_symbol = " "
 discharging_symbol = " "
 unknown_symbol = " "
 empty_symbol = " "
-format = '-[\[]($style)[$symbol$percentage]($style)[\]]($style)'
+format = '-[\[](bold blue)[$symbol$percentage]($style)[\]](bold blue)'
 disabled = false
 
-[[battery.display]]
-threshold = 14
-style = "bold red"
+# [[battery.display]]
+# threshold = 14
+# style = "bold red"
 
 # [[battery.display]]
 # threshold = 29
@@ -40,7 +40,7 @@ style = "bold red"
 
 [[battery.display]]
 threshold = 29
-style = 'bold yellow'
+style = 'bold red'
 
 # [[battery.display]]
 # threshold = 100
