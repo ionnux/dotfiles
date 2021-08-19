@@ -9,8 +9,12 @@ Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo'
 Plug 'mbbill/undotree'
 "Plug 'justinmk/vim-sneak'
-Plug 'preservim/nerdtree'
+
+" Plug 'preservim/nerdtree'
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
 Plug 'tpope/vim-unimpaired'
+Plug 'ahmedkhalf/project.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
@@ -54,6 +58,7 @@ Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 Plug 'hoob3rt/lualine.nvim'
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ryanoasis/vim-devicons'
 
 Plug 'mhinz/vim-startify'
@@ -67,7 +72,8 @@ Plug 'norcalli/snippets.nvim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'hrsh7th/nvim-compe'
-Plug 'glepnir/lspsaga.nvim'
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'numtostr/FTerm.nvim'
 Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
@@ -181,6 +187,8 @@ augroup numbertoggle
     autocmd!
     autocmd TermEnter * set nonumber
     autocmd TermLeave * set number
+    autocmd FileType log set nonumber norelativenumber
+    autocmd FileType flutterToolsOutline set nonumber norelativenumber
 augroup END
 
 "show relative number
@@ -197,6 +205,10 @@ augroup END
 set scrolloff=8
 
 set colorcolumn=80
+augroup colorcolumnToggle
+    autocmd!
+    autocmd FileType log set colorcolumn=""
+augroup END
 
 "increase nvim command timeout from 1000 to 2000
 "set timeoutlen=2000
@@ -275,8 +287,8 @@ nnoremap <expr> j (v:count > 4 ? "m'" . v:count : "") . 'j'
 " mapping for moving line(s) in normal, insert and visual modes.
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
-inoremap <c-k> <esc>:m .-2<cr>==
-inoremap <c-j> <esc>:m .+1<cr>==
+" inoremap <c-k> <esc>:m .-2<cr>==
+" inoremap <c-j> <esc>:m .+1<cr>==
 nnoremap <leader>k <esc>:m .-2<cr>==
 nnoremap <leader>j <esc>:m .+1<cr>==
 
@@ -387,8 +399,11 @@ autocmd TermLeave * set timeoutlen=1000
 
 
 "ultisnips settings
-let g:UltiSnipsJumpForwardTrigger = '<Tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsExpandTrigger = '<Nop>'
+let g:UltiSnipsListSnippets = '<Nop>'
+
 
 "vim-rainbow settings
 "let g:rainbow_active = 1
@@ -402,11 +417,13 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'
 
 
 "nerdtree settings
-"nnoremap <leader>nn :NERDTree<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
-nnoremap <leader>nt :NERDTreeFocus<CR>
-nnoremap <leader>nn :NERDTreeToggle<CR>
+""nnoremap <leader>nn :NERDTree<CR>
+"nnoremap <leader>nf :NERDTreeFind<CR>
+"nnoremap <leader>nt :NERDTreeFocus<CR>
+"nnoremap <leader>nn :NERDTreeToggle<CR>
 
+""CHADtree settings
+"nnoremap <leader>v :CHADopen<cr>
 
 
 "neoterm settings
@@ -654,8 +671,11 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 " inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " C-j and C-k completion
-inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+
+"coq_nvim settings
 
 
 
@@ -663,6 +683,7 @@ inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
 lua <<EOF
 require'lspconfig'.vimls.setup{}
 EOF
+
 
 "lspsaga setup
 lua <<EOF
@@ -1161,7 +1182,7 @@ EOF
 
 " indent blankline settings
 let g:indent_balnkline_use_treesitter = v:true
-let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim']
+let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim', 'log', 'flutterToolsOutline']
 " let g:indent_blankline_char = '¦'
 
 
@@ -1201,17 +1222,156 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
+" imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+" smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
 " numb nvim settings
 lua require('numb').setup()
 
 " dart settings
 augroup dartrun
     autocmd!
-    autocmd filetype dart nnoremap <silent><leader>rr :w \| belowright 13split \| terminal dart --enable-asserts run <C-r>\%<Cr>i
+    autocmd filetype dart nnoremap <buffer><silent><leader>rr :w \| belowright 13split \| terminal dart --enable-asserts run <C-r>\%<Cr>i
 augroup END
+
+" flutter mappings
+augroup flutterMappings
+    autocmd!
+    autocmd filetype dart nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+    autocmd filetype dart nnoremap <buffer><silent><leader>fl :b __FLUTTER_DEV_LOG__ <cr>
+
+    autocmd filetype log nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+    autocmd filetype log nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>flc :FlutterflutterToolsOutlineClear <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+augroup End
 
 " Run chezmoi apply whenever I save a dotfile
 augroup chezmoiApply
     autocmd!
     autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
 augroup END
+
+
+
+"project nvim settings
+lua << EOF
+  require("project_nvim").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+  require('telescope').load_extension('projects')
+EOF
+
+let g:nvim_tree_side = 'left' "left by default
+let g:nvim_tree_width = 30 "30 by default, can be width_in_columns or 'width_in_percent%'
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
+let g:nvim_tree_gitignore = 1 "0 by default
+let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
+let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
+let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:nvim_tree_hide_dotfiles = 1 "0 by default, this option hides files and folders starting with a dot `.`
+let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
+let g:nvim_tree_auto_resize = 0 "1 by default, will resize the tree to its saved width when opening a file
+let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
+let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
+let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
+let g:nvim_tree_hijack_cursor = 0 "1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
+let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
+let g:nvim_tree_update_cwd = 1 "0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
+let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+let g:nvim_tree_window_picker_exclude = {
+    \   'filetype': [
+    \     'packer',
+    \     'qf'
+    \   ],
+    \   'buftype': [
+    \     'terminal'
+    \   ]
+    \ }
+" Dictionary of buffer option names mapped to a list of option values that
+" indicates to the window picker that the buffer's window should not be
+" selectable.
+let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
+let g:nvim_tree_show_icons = {
+    \ 'git': 1,
+    \ 'folders': 0,
+    \ 'files': 0,
+    \ 'folder_arrows': 0,
+    \ }
+"If 0, do not show the icons for one of 'git' 'folder' and 'files'
+"1 by default, notice that if 'files' is 1, it will only display
+"if nvim-web-devicons is installed and on your runtimepath.
+"if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
+"but this will not work when you set indent_markers (because of UI conflict)
+
+" default will show icon by default if no icon is provided
+" default shows no icon by default
+let g:nvim_tree_icons = {
+    \ 'default': '',
+    \ 'symlink': '',
+    \ 'git': {
+    \   'unstaged': "✗",
+    \   'staged': "✓",
+    \   'unmerged': "",
+    \   'renamed': "➜",
+    \   'untracked': "★",
+    \   'deleted': "",
+    \   'ignored': "◌"
+    \   },
+    \ 'folder': {
+    \   'arrow_open': "",
+    \   'arrow_closed': "",
+    \   'default': "",
+    \   'open': "",
+    \   'empty': "",
+    \   'empty_open': "",
+    \   'symlink': "",
+    \   'symlink_open': "",
+    \   },
+    \   'lsp': {
+    \     'hint': "",
+    \     'info': "",
+    \     'warning': "",
+    \     'error': "",
+    \   }
+    \ }
+
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
+
+set termguicolors " this variable must be enabled for colors to be applied properly
+
+" a list of groups can be found at `:help nvim_tree_highlight`
+highlight NvimTreeFolderIcon guibg=blue
+
