@@ -58,7 +58,10 @@ Plug 'bluz71/vim-nightfly-guicolors'
 
 Plug 'folke/tokyonight.nvim'
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
-Plug 'hoob3rt/lualine.nvim'
+
+" Plug 'hoob3rt/lualine.nvim'
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
 Plug 'akinsho/nvim-bufferline.lua'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
@@ -68,6 +71,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'roman/golden-ratio'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -109,11 +113,13 @@ let g:gruvbox_sign_column = 'bg0'
 "vim nightfly guicolors settings
 lua <<EOF
 vim.g.nightflyCursorColor = 1
-vim.g.nightflyUnderlineMatchParen = 1
+vim.g.nightflyUnderlineMatchParen = 0
 vim.g.nightflyTransparent = 1
+vim.g.nightflyTerminalColors = 1
 vim.g.nightflyTerminalColors = 0
 vim.g.nightflyUndercurls = 1
 vim.g.nightflyVertSplits = 1
+vim.g.nightflyItalics = 1
 vim.g.nightflyNormalFloat = 1
 EOF
 "
@@ -158,9 +164,9 @@ EOF
 
 " colorscheme gruvbox
 " colorscheme dracula
-" colorscheme tokyonight
+colorscheme tokyonight
 " colorscheme material
-colorscheme nightfly
+" colorscheme nightfly
 " colorscheme substrata
 " colorscheme moonlight
 " colorscheme blue-moon
@@ -656,69 +662,8 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 
 
 "telescope settings
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fp <cmd>telescope projects theme=get_cursor<cr><esc>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr><esc>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
- " Using Lua functions
- nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
- " nnoremap <leader>qq <cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({layout_config = {width = 0.23, height = 0.4}}))<cr><esc>
- " nnoremap <leader>gd <cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_cursor({layout_config = {width = 0.8, height = 0.3, preview_width = 0.5}}))<cr><esc>
- " nnoremap <leader>fp <cmd>lua require('telescope.builtin').projects(require('telescope.themes').get_cursor({}))<cr><esc>
- nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
- nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr><esc>
- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 lua <<EOF
-require('telescope').setup{
-  defaults = {
-    vimgrep_arguments = {
-      'rg',
-      '--color=never',
-      '--no-heading',
-      '--with-filename',
-      '--line-number',
-      '--column',
-      '--smart-case'
-    },
-    prompt_prefix = "> ",
-    selection_caret = "> ",
-    entry_prefix = "  ",
-    initial_mode = "insert",
-    selection_strategy = "reset",
-    sorting_strategy = "descending",
-    layout_strategy = "flex",
-    layout_config = {
-      horizontal = {
-        mirror = false,
-        preview_width = 0.6,
-      },
-      vertical = {
-        mirror = false,
-      },
-    },
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-    file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-    winblend = 0,
-    border = {},
-    --borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-    color_devicons = true,
-    use_less = true,
-    path_display = {},
-    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
-    -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-  }
-}
-
+require('telescope_config')
 EOF
 
 
@@ -789,6 +734,7 @@ EOF
 
 
 "lspsaga setup
+highlight LspFloatWinNormal guibg=None
 lua <<EOF
   local saga = require 'lspsaga'
   saga.init_lsp_saga {
@@ -840,7 +786,7 @@ nnoremap <silent> <C-j> <cmd>lua require('lspsaga.action').smart_scroll_with_sag
 nnoremap <silent> <C-k> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 " show signature help
 nnoremap <silent> gs :Lspsaga signature_help<CR>
-inoremap gsh <c-o>:Lspsaga signature_help<cr>
+" inoremap gsh <c-o>:Lspsaga signature_help<cr>
 " rename
 " nnoremap <silent>gr :Lspsaga rename<CR>
 nnoremap <silent><leader>rn :Lspsaga rename<CR>
@@ -965,63 +911,82 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 EOF
 
 " lualine settings
-lua <<EOF
-require('lualine').setup {
-options = {
-    --theme = "tokyonight",
-    --theme = "material-nvim",
-    theme = "nightfly",
-    --theme = "moonlight",
-    section_separators = { "", "" },
-    component_separators = { "", "" },
-    -- section_separators = { "", "" },
-    -- component_separators = { "", "" },
-    icons_enabled = true,
-  },
-  sections = {
-    lualine_a = { 'mode' },
-    lualine_b = { 'branch' },
-    lualine_c = { 
-                    { 
-                        'diagnostics', 
-                        sources = { "nvim_lsp" },
-                    }, 
-                    {
-                        'filename',
-                        file_status = true,
-                        path = 1,
-                    }
-                },
-    lualine_x = { 'filetype', lsp_progress },
-    lualine_y = { "progress" },
-    lualine_z = { 'location' },
-    --lualine_z = { clock },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  extensions = {'nerdtree', 'quickfix'}
-}
-EOF
+" lua <<EOF
+" require('lualine').setup {
+" options = {
+"     --theme = "tokyonight",
+"     --theme = "material-nvim",
+"     theme = "nightfly",
+"     --theme = "moonlight",
+"     section_separators = { "", "" },
+"     component_separators = { "", "" },
+"     -- section_separators = { "", "" },
+"     -- component_separators = { "", "" },
+"     icons_enabled = true,
+"   },
+"   sections = {
+"     lualine_a = { 'mode' },
+"     lualine_b = { 'branch' },
+"     lualine_c = { 
+"                     { 
+"                         'diagnostics', 
+"                         sources = { "nvim_lsp" },
+"                     }, 
+"                     {
+"                         'filename',
+"                         file_status = true,
+"                         path = 1,
+"                     }
+"                 },
+"     lualine_x = { 'filetype', lsp_progress },
+"     lualine_y = { "progress" },
+"     lualine_z = { 'location' },
+"     --lualine_z = { clock },
+"   },
+"   inactive_sections = {
+"     lualine_a = {},
+"     lualine_b = {},
+"     lualine_c = {'filename'},
+"     lualine_x = {'location'},
+"     lualine_y = {},
+"     lualine_z = {},
+"   },
+"   tabline = {},
+"   extensions = {'nerdtree', 'quickfix'}
+" }
+" EOF
 
-" nvim bufferline settings
+" " nvim bufferline settings
 lua <<EOF
 require("bufferline").setup{
   options = {
     --numbers = "buffer_id", 
     number_style = "",
     diagnostics = "nvim_lsp",
-    show_buffer_close_icons = falsetrue,
+    show_buffer_close_icons = false,
     show_close_icon = false,
     show_tab_indicators = true,
-    --seperator_style = "slant"
-    }
+    seperator_style = "thick"
+    },
+highlights = {
+    buffer_selected = {
+        guifg = "#7aa2f7",
+        guibg = normal_bg,
+        gui = "bold,italic"
+        },
+    separator = {
+        guifg = "#7aa2f7",
+        guibg = normal_bg,
+        },
+    modified = {
+        guifg = "#f7768e",
+        guibg = normal_bg,
+        },
+    modified_selected = {
+        guifg = "#f7768e",
+        guibg = normal_bg,
+        },
+    },
 }
 EOF
 
@@ -1413,7 +1378,7 @@ let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in 
 let g:nvim_tree_disable_window_picker = 0 "0 by default, will disable the window picker.
 let g:nvim_tree_hijack_cursor = 1 "1 by default, when moving cursor in the tree, will position the cursor at the start of the file on the current line
 let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
-let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
+" let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
 let g:nvim_tree_update_cwd = 1 "0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
 let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 let g:nvim_tree_window_picker_exclude = {
@@ -1557,4 +1522,29 @@ require "lsp_signature".setup({
   shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
   toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 })
+EOF
+
+lua <<EOF
+--require('galaxyline.eviline')
+require('galaxyline/my_theme')
+--require('galaxyline.spaceline')
+EOF
+
+"lsp install settings
+lua <<EOF
+local function setup_servers()
+  require'lspinstall'.setup()
+  local servers = require'lspinstall'.installed_servers()
+  for _, server in pairs(servers) do
+    require'lspconfig'[server].setup{}
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require'lspinstall'.post_install_hook = function ()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
 EOF
