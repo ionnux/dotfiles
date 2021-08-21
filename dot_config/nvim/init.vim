@@ -53,6 +53,9 @@ Plug 'shaunsingh/nord.nvim'
 Plug 'kyazdani42/blue-moon'
 Plug 'shaunsingh/moonlight.nvim'
 Plug 'dracula/vim',{'as':'dracula'}
+Plug 'marko-cerovac/material.nvim'
+Plug 'bluz71/vim-nightfly-guicolors'
+
 Plug 'folke/tokyonight.nvim'
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 Plug 'hoob3rt/lualine.nvim'
@@ -65,6 +68,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'roman/golden-ratio'
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'L3MON4D3/LuaSnip'
@@ -102,25 +106,61 @@ let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_sign_column = 'bg0'
 " let g:gruvbox_italic = 1
 
+"vim nightfly guicolors settings
+lua <<EOF
+vim.g.nightflyCursorColor = 1
+vim.g.nightflyUnderlineMatchParen = 1
+vim.g.nightflyTransparent = 1
+vim.g.nightflyTerminalColors = 0
+vim.g.nightflyUndercurls = 1
+vim.g.nightflyVertSplits = 1
+vim.g.nightflyNormalFloat = 1
+EOF
+"
+
 " tokyonight settings
-let g:tokyonight_style = "night"
-let g:tokyonight_day_brightness = 0.1
-let g:tokyonight_transparent = 0
-let g:tokyonight_lualine_bold = 1
-" let g:tokyonight_sidebars = ['terminal',]
-" let g:tokyonight_italic_functions = 1
-" let g:tokyonight_italic_variables = 1
-" let g:tokyonight_hide_inactive_statusline = 1
+lua <<EOF
+vim.g.tokyonight_style = "night"
+--vim.g.tokyonight_day_brightness = 0.1
+vim.g.tokyonight_terminal_colors = false
+vim.g.tokyonight_italic_comments = true
+vim.g.tokyonight_italic_functions = true
+vim.g.tokyonight_italic_keywords = true
+vim.g.tokyonight_italic_variables = true
+vim.g.tokyonight_transparent = false
+vim.g.tokyonight_lualine_bold = 1
+vim.g.tokyonight_hide_inactive_statusline = true
+--vim.g.tokyonight_sidebars = {"NvimTree"}
+vim.g.tokyonight_transparent_sidebar = true
+vim.g.tokyonight_dark_sidebar = true
+vim.g.tokyonight_dark_float = true
+vim.g.tokyonight_lualine_bold = true
+EOF
 
 " nord settings
 let g:nord_contrast = v:true
 let g:nord_borders = v:true
 let g:nord_disable_background = v:true
 
+" material nvim settings
+lua <<EOF
+vim.g.material_style = 'palenight'
+vim.g.material_italic_comments = true
+vim.g.material_italic_keywords = true
+vim.g.material_italic_functions = true
+vim.g.material_italic_variables = true
+vim.g.material_italic_strings = true
+vim.g.material_contrast = true
+vim.g.material_borders = true
+vim.g.material_disable_background = true
+vim.g.material_hide_eob = true
+EOF
 
 " colorscheme gruvbox
 " colorscheme dracula
-colorscheme tokyonight
+" colorscheme tokyonight
+" colorscheme material
+colorscheme nightfly
 " colorscheme substrata
 " colorscheme moonlight
 " colorscheme blue-moon
@@ -156,6 +196,9 @@ function ColorSettings()
         hi CursorLineNr guibg=None
         hi CursorLineNr guifg=#7aa2f7
         " hi LineNr guifg=#7aa2f7
+    elseif g:colors_name ==# "moonlight"
+        highlight IncSearch guifg=white
+        highlight IncSearch guibg=black
     endif
 hi ColorColumn guibg=#292e42
 endfunction
@@ -183,21 +226,21 @@ augroup END
 
 "show line number
 set number
-augroup numbertoggle
-    autocmd!
-    autocmd TermEnter * set nonumber
-    autocmd TermLeave * set number
-    autocmd FileType log set nonumber norelativenumber
-    autocmd FileType flutterToolsOutline set nonumber norelativenumber
-augroup END
+" augroup numbertoggle
+"     autocmd!
+"     autocmd TermEnter * set nonumber
+"     autocmd TermLeave * set number
+"     autocmd FileType log set nonumber norelativenumber
+"     autocmd FileType flutterToolsOutline set nonumber norelativenumber
+" augroup END
 
 "show relative number
 set relativenumber
 "settings for when to show relativenumber
 augroup relativenumbertoggle
   autocmd!
-  autocmd BufEnter,InsertLeave,WinEnter,TermLeave * set relativenumber
-  autocmd BufLeave,InsertEnter,WinLeave,TermEnter  * set norelativenumber
+  autocmd BufEnter,InsertLeave,WinEnter,TermLeave * set relativenumber number
+  autocmd BufLeave,InsertEnter,WinLeave,TermEnter  * set norelativenumber nonumber
 augroup END
 
 
@@ -613,10 +656,70 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 
 
 "telescope settings
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fp <cmd>telescope projects theme=get_cursor<cr><esc>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr><esc>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+ " Using Lua functions
+ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+ " nnoremap <leader>qq <cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor({layout_config = {width = 0.23, height = 0.4}}))<cr><esc>
+ " nnoremap <leader>gd <cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_cursor({layout_config = {width = 0.8, height = 0.3, preview_width = 0.5}}))<cr><esc>
+ " nnoremap <leader>fp <cmd>lua require('telescope.builtin').projects(require('telescope.themes').get_cursor({}))<cr><esc>
+ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr><esc>
+ nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+lua <<EOF
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_prefix = "> ",
+    selection_caret = "> ",
+    entry_prefix = "  ",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "flex",
+    layout_config = {
+      horizontal = {
+        mirror = false,
+        preview_width = 0.6,
+      },
+      vertical = {
+        mirror = false,
+      },
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    winblend = 0,
+    border = {},
+    --borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
+    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+    color_devicons = true,
+    use_less = true,
+    path_display = {},
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
+  }
+}
+
+EOF
 
 
 "vim mundo settings
@@ -723,7 +826,7 @@ lua <<EOF
 EOF
 "definition and references
 " nnoremap <silent> gh :Lspsaga lsp_finder<CR>
-nnoremap <silent> gd :Lspsaga lsp_finder<CR>
+nnoremap <silent><leader>gd :Lspsaga lsp_finder<CR>
 "Code Action
 " nnoremap <silent><leader>ca :Lspsaga code_action<CR>
 " vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
@@ -865,7 +968,9 @@ EOF
 lua <<EOF
 require('lualine').setup {
 options = {
-    theme = "tokyonight",
+    --theme = "tokyonight",
+    --theme = "material-nvim",
+    theme = "nightfly",
     --theme = "moonlight",
     section_separators = { "", "" },
     component_separators = { "", "" },
@@ -1283,9 +1388,9 @@ EOF
 
 
 
-"nvim tree lua settings
+"nvimtree lua settings
 let g:nvim_tree_side = 'left' "left by default
-let g:nvim_tree_width = 30 "30 by default, can be width_in_columns or 'width_in_percent%'
+let g:nvim_tree_width = 25 "30 by default, can be width_in_columns or 'width_in_percent%'
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
 let g:nvim_tree_gitignore = 1 "0 by default
 let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
@@ -1296,7 +1401,7 @@ let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be up
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_hide_dotfiles = 0 "0 by default, this option hides files and folders starting with a dot `.`
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
-let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+let g:nvim_tree_highlight_opened_files = 3 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
 let g:nvim_tree_tab_open = 1 "0 by default, will open the tree when entering a new tab and the tree was previously open
 let g:nvim_tree_auto_resize = 0 "1 by default, will resize the tree to its saved width when opening a file
@@ -1328,7 +1433,7 @@ let g:nvim_tree_show_icons = {
     \ 'git': 1,
     \ 'folders': 1,
     \ 'files': 1,
-    \ 'folder_arrows': 1,
+    \ 'folder_arrows': 0,
     \ }
 "If 0, do not show the icons for one of 'git' 'folder' and 'files'
 "1 by default, notice that if 'files' is 1, it will only display
@@ -1369,11 +1474,87 @@ let g:nvim_tree_icons = {
     \ }
 
 nnoremap <leader>nn :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <leader>nf :NvimTreeFocus<CR>
 " NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
 
 " a list of groups can be found at `:help nvim_tree_highlight`
-highlight NvimTreeFolderIcon guibg=blue
+highlight NvimTreeFolderIcon guibg=red
+lua <<EOF
+  local tree_cb = require'nvim-tree.config'.nvim_tree_callback
+  vim.g.nvim_tree_bindings = {
+    { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
+    { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
+    { key = "<C-v>",                        cb = tree_cb("vsplit") },
+    { key = "<C-s>",                        cb = tree_cb("split") },
+    { key = "<C-t>",                        cb = tree_cb("tabnew") },
+    { key = "<",                            cb = tree_cb("prev_sibling") },
+    { key = ">",                            cb = tree_cb("next_sibling") },
+    { key = "P",                            cb = tree_cb("parent_node") },
+    { key = "<BS>",                         cb = tree_cb("close_node") },
+    { key = "<S-CR>",                       cb = tree_cb("close_node") },
+    { key = "<Tab>",                        cb = tree_cb("preview") },
+    { key = "K",                            cb = tree_cb("first_sibling") },
+    { key = "J",                            cb = tree_cb("last_sibling") },
+    { key = "I",                            cb = tree_cb("toggle_ignored") },
+    { key = "H",                            cb = tree_cb("toggle_dotfiles") },
+    { key = "R",                            cb = tree_cb("refresh") },
+    { key = "a",                            cb = tree_cb("create") },
+    { key = "d",                            cb = tree_cb("remove") },
+    { key = "r",                            cb = tree_cb("rename") },
+    { key = "<C-r>",                        cb = tree_cb("full_rename") },
+    { key = "x",                            cb = tree_cb("cut") },
+    { key = "c",                            cb = tree_cb("copy") },
+    { key = "p",                            cb = tree_cb("paste") },
+    { key = "y",                            cb = tree_cb("copy_name") },
+    { key = "Y",                            cb = tree_cb("copy_path") },
+    { key = "gy",                           cb = tree_cb("copy_absolute_path") },
+    { key = "[c",                           cb = tree_cb("prev_git_item") },
+    { key = "]c",                           cb = tree_cb("next_git_item") },
+    { key = "-",                            cb = tree_cb("dir_up") },
+    { key = "s",                            cb = tree_cb("system_open") },
+    { key = "q",                            cb = tree_cb("close") },
+    { key = "g?",                           cb = tree_cb("toggle_help") },
+  }
+EOF
 
+
+"lsp signature settings
+lua <<EOF
+require "lsp_signature".setup({
+  bind = true, -- This is mandatory, otherwise border config won't get registered.
+               -- If you want to hook lspsaga or other signature handler, pls set to false
+  doc_lines = 10, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
+                 -- set to 0 if you DO NOT want any API comments be shown
+                 -- This setting only take effect in insert mode, it does not affect signature help in normal
+                 -- mode, 10 by default
+
+  floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+  fix_pos = true,  -- set to true, the floating window will not auto-close until finish all parameters
+  hint_enable = false, -- virtual hint enable
+  hint_prefix = "🐼 ",  -- Panda for parameter
+  hint_scheme = "String",
+  use_lspsaga = false,  -- set to true if you want to use lspsaga popup
+  hi_parameter = "incSearch", -- how your parameter will be highlight
+  max_height = 20, -- max height of signature floating_window, if content is more than max_height, you can scroll down
+                   -- to view the hiding contents
+  max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
+  handler_opts = {
+    border = "single"   -- double, single, shadow, none
+  },
+
+  trigger_on_newline = false, -- sometime show signature on new line can be confusing, set it to false for #58
+  extra_trigger_chars = {"(", ",", ":"}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
+  -- deprecate !!
+  -- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
+  zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
+  debug = false, -- set to true to enable debug logging
+  log_path = "debug_log_file_path", -- debug log path
+
+  padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
+
+  shadow_blend = 36, -- if you using shadow as border use this set the opacity
+  shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
+  toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+})
+EOF
