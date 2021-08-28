@@ -11,8 +11,8 @@ require'lightspeed'.setup {
   -- By default, the values of these will be decided at runtime,
   -- based on `jump_to_first_match`.
   labels = nil,
-  cycle_group_fwd_key = nil,
-  cycle_group_bwd_key = nil,
+  cycle_group_fwd_key = '<tab>',
+  cycle_group_bwd_key = '<s-tab>',
 }
 
   function repeat_ft(reverse)
@@ -20,6 +20,7 @@ require'lightspeed'.setup {
     ls.ft['instant-repeat?'] = true
     ls.ft:to(reverse, ls.ft['prev-t-like?'])
   end
+
   vim.api.nvim_set_keymap('n', ';', '<cmd>lua repeat_ft(false)<cr>', {noremap = true, silent = true})
   vim.api.nvim_set_keymap('x', ';', '<cmd>lua repeat_ft(false)<cr>', {noremap = true, silent = true})
   vim.api.nvim_set_keymap('n', ',', '<cmd>lua repeat_ft(true)<cr>', {noremap = true, silent = true})

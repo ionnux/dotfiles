@@ -666,9 +666,9 @@ require('telescope_config')
 EOF
 
 "hop config
-lua <<EOF
-require('hop_config')
-EOF
+" lua <<EOF
+" require('hop_config')
+" EOF
 
 
 "vim mundo settings
