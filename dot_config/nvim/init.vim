@@ -2,12 +2,13 @@ call plug#begin('~/.nvim/plugged')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 Plug 'phaazon/hop.nvim'
+Plug 'edluffy/specs.nvim' "lua - cursor position
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
-Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
+" Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
 Plug 'sindrets/diffview.nvim' "lua - diffview
 Plug 'lewis6991/gitsigns.nvim' "lua - gitsigns
-" Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
+Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
 
@@ -1496,3 +1497,6 @@ lua require('config/toggleterm')
 
 "diffview settings
 lua require('config/diffview')
+
+"scrollbar settings
+lua require('config/scrollbar')
