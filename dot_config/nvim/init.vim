@@ -38,6 +38,7 @@ Plug 'nacro90/numb.nvim'
 
 
 Plug 'kassio/neoterm'
+Plug 'akinsho/toggleterm.nvim' "lua - multiple persistent terminal
 Plug 'haringsrob/nvim_context_vt' "show virtual text of current context
 
 " Plug 'vim-airline/vim-airline'
@@ -623,14 +624,10 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 
 
 "telescope settings
-lua <<EOF
-require('config/telescope')
-EOF
+lua require('config/telescope')
 
 "hop config
-lua <<EOF
-require('config/hop')
-EOF
+lua require('config/hop')
 
 
 "vim mundo settings
@@ -694,9 +691,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 
 "vimls setup
-lua <<EOF
-require'lspconfig'.vimls.setup{}
-EOF
+lua require'lspconfig'.vimls.setup{}
 
 
 "lspsaga setup
@@ -957,7 +952,7 @@ highlights = {
 EOF
 
 " nvim colorizer settings
-lua require'colorizer'.setup()
+lua require('config/colorizer')
 
 " nvim treesitter settings
 lua <<EOF
@@ -1078,15 +1073,11 @@ EOF
 nnoremap <leader>tt :Twilight<cr>
 
 " dependency assist settings
-lua <<EOF
-  require'dependency_assist'.setup{}
-EOF
+lua require'dependency_assist'.setup{}
 
 
 ""lightspeed settings
-" lua <<EOF
-" require('config/lightspeed')
-" EOF
+"lua require('config/lightspeed')
 
 
 " nvim ts rainbow settings
@@ -1177,9 +1168,7 @@ EOF
 
 
 "nvim-comment settings
-lua <<EOF
-require('config/nvim-comment')
-EOF
+lua require('config/nvim-comment')
 
 " indent blankline settings
 let g:indent_balnkline_use_treesitter = v:true
@@ -1456,14 +1445,10 @@ require "lsp_signature".setup({
 EOF
 
 "galaxyline settings
-lua <<EOF
-require('galaxyline/my_theme')
-EOF
+lua require('galaxyline/my_theme')
 
 "nvim-autopairs settings
-" lua <<EOF
-" require('config/nvim-autopairs')
-" EOF
+"lua require('config/nvim-autopairs')
 
 "lsp install settings
 lua <<EOF
@@ -1499,12 +1484,11 @@ augroup END
 
 
 "neoscroll settings
-lua <<EOF
-  require('config/neoscroll')
-EOF
+lua require('config/neoscroll')
 
 
 "gitsigns settings
-lua <<EOF
-  require('config/gitsigns')
-EOF
+lua require('config/gitsigns')
+
+"toggleterm settings
+lua require('config/toggleterm')
