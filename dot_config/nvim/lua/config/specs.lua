@@ -5,9 +5,9 @@ require("specs").setup({
     delay_ms = 0, -- delay before popup displays
     inc_ms = 20, -- time increments used for fade/resize effects
     blend = 10, -- starting blend, between 0-100 (fully transparent), see :h winblend
-    width = 20,
+    width = 10,
     winhl = "PMenu",
-    fader = require("specs").linear_fader,
+    fader = require("specs").pulse_fader,
     resizer = require("specs").shrink_resizer,
   },
   ignore_filetypes = {},
