@@ -667,7 +667,7 @@ EOF
 
 "hop config
 lua <<EOF
-require('hop_config.lua')
+require('hop_config')
 EOF
 
 
