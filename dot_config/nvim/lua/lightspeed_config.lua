@@ -11,8 +11,8 @@ require'lightspeed'.setup {
   -- By default, the values of these will be decided at runtime,
   -- based on `jump_to_first_match`.
   labels = nil,
-  cycle_group_fwd_key = '<tab>',
-  cycle_group_bwd_key = '<s-tab>',
+  -- cycle_group_fwd_key = '<tab>',
+  -- cycle_group_bwd_key = '<s-tab>',
 }
 
   function repeat_ft(reverse)

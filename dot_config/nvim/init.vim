@@ -1,7 +1,7 @@
 call plug#begin('~/.nvim/plugged')
 " Plug 'easymotion/vim-easymotion'
-Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
-" Plug 'phaazon/hop.nvim'
+" Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
+Plug 'phaazon/hop.nvim'
 Plug 'dstein64/nvim-scrollview' "scrollbar plugin
 Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
@@ -19,8 +19,8 @@ Plug 'ahmedkhalf/project.nvim' "project manager
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-" Plug 'b3nj5m1n/kommentary' "commentary plugin written in lua
+" Plug 'tpope/vim-commentary'
+Plug 'b3nj5m1n/kommentary' "commentary plugin written in lua
 " Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -666,9 +666,9 @@ require('telescope_config')
 EOF
 
 "hop config
-" lua <<EOF
-" require('hop_config')
-" EOF
+lua <<EOF
+require('hop_config')
+EOF
 
 
 "vim mundo settings
@@ -965,7 +965,7 @@ lua <<EOF
 require("bufferline").setup{
   options = {
     --numbers = "buffer_id", 
-    number_style = "",
+    --number_style = "",
     diagnostics = "nvim_lsp",
     show_buffer_close_icons = false,
     show_close_icon = false,
@@ -1122,9 +1122,9 @@ EOF
 
 
 ""lightspeed settings
-lua <<EOF
-require('lightspeed_config')
-EOF
+" lua <<EOF
+" require('lightspeed_config')
+" EOF
 
 
 " nvim ts rainbow settings
