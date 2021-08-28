@@ -2,6 +2,8 @@ call plug#begin('~/.nvim/plugged')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 Plug 'phaazon/hop.nvim'
+Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
+
 Plug 'dstein64/nvim-scrollview' "scrollbar plugin
 " Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
@@ -21,7 +23,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
 Plug 'terrortylor/nvim-comment' "lua commentary plugin written in lua
-Plug 'windwp/nvim-autopairs'
+" Plug 'windwp/nvim-autopairs'
 " Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -554,7 +556,6 @@ let g:UltiSnipsListSnippets = '<Nop>'
 "nmap <silent> [w <Plug>(ale_previous-wrap)
 "nmap <silent> ]w <Plug>(ale_next-wrap)
 "nmap <silent> ]W <Plug>(ale_last)
-
 
 
 
@@ -1458,9 +1459,9 @@ require('galaxyline/my_theme')
 EOF
 
 "nvim-autopairs settings
-lua <<EOF
-require('nvim-autopairs_config')
-EOF
+" lua <<EOF
+" require('nvim-autopairs_config')
+" EOF
 
 "lsp install settings
 lua <<EOF
@@ -1479,4 +1480,34 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+EOF
+
+"auto pairs settings
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsShortcutFastWrap = '<c-f>'
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+
+" filetype autopairs
+augroup autoPair
+    autocmd!
+    autocmd FileType dart let b:AutoPairs = AutoPairsDefine({'<':'>'})
+augroup END
+
+
+"neoscroll settings
+lua <<EOF
+  require('neoscroll').setup({
+    -- All these keys will be mapped to their corresponding default scrolling animation
+    mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+    hide_cursor = true,          -- Hide cursor while scrolling
+    stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+    use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+    respect_scrolloff = true,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+    cursor_scrolls_alone = false, -- The cursor will keep on scrolling even if the window cannot scroll further
+    easing_function = nil,        -- Default easing function
+    pre_hook = nil,              -- Function to run before the scrolling animation starts
+    post_hook = nil,              -- Function to run after the scrolling animation ends
+})
 EOF
