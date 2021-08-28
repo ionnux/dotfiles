@@ -15,13 +15,13 @@ Plug 'mbbill/undotree'
 " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 Plug 'tpope/vim-unimpaired'
-Plug 'ahmedkhalf/project.nvim' "project manager
+Plug 'ahmedkhalf/project.nvim' "lua project manager
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
-" Plug 'b3nj5m1n/kommentary' "commentary plugin written in lua
-Plug 'terrortylor/nvim-comment'
+Plug 'terrortylor/nvim-comment' "lua commentary plugin written in lua
+Plug 'windwp/nvim-autopairs'
 " Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -555,48 +555,6 @@ let g:UltiSnipsListSnippets = '<Nop>'
 "nmap <silent> ]w <Plug>(ale_next-wrap)
 "nmap <silent> ]W <Plug>(ale_last)
 
-
-
-"autopairs settings
-let g:AutoPairsFlyMode = 1
-
-
-
-"airline settings
-"this setting automatically populate the g:airline_symbols dictionary with the powerline symbols.
-let g:airline_powerline_fonts = 1
-
-"enable/disable bufferline integration >
-"let g:airline#extensions#bufferline#enabled = 1
-
-"determine whether bufferline will overwrite customization variables >
-"let g:airline#extensions#bufferline#overwrite_variables = 1
-
-"enable tabline
-let g:airline#extensions#tabline#enabled = 1
-
-"show buffer number in tabline
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-"tabline formatter
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-" let g:airline_focuslost_inactive=0
-" let g:airline_inactive_alt_sep=0
-" let g:airline_inactive_collapse=0
-"airlinetheme setting
-" function AirlineTheme()
-"     if g:colors_name ==# "gruvbox"
-"         :AirlineTheme base16_gruvbox_dark_hard
-"         " :AirlineTheme gruvbox
-"     endif
-" endfunction
-
-" augroup AirlineTheme
-"     autocmd!
-"     autocmd SourcePost * :call AirlineTheme()
-"     " autocmd SourcePost * :call AirlineTheme()
-" augroup END
 
 
 
@@ -1214,17 +1172,10 @@ lua <<EOF
   })
 EOF
 
-" " kommentary settings
+
+"nvim-comment settings
 lua <<EOF
-  require('kommentary.config').configure_language("default", {
-    prefer_multi_line_comments = true,
-  })
-  vim.api.nvim_set_keymap("n", "<leader>cic", "<Plug>kommentary_line_increase", {})
-  vim.api.nvim_set_keymap("n", "<leader>ci", "<Plug>kommentary_motion_increase", {})
-  vim.api.nvim_set_keymap("x", "<leader>ci", "<Plug>kommentary_visual_increase", {})
-  vim.api.nvim_set_keymap("n", "<leader>cdc", "<Plug>kommentary_line_decrease", {})
-  vim.api.nvim_set_keymap("n", "<leader>cd", "<Plug>kommentary_motion_decrease", {})
-  vim.api.nvim_set_keymap("x", "<leader>cd", "<Plug>kommentary_visual_decrease", {})
+require('nvim-comment_config')
 EOF
 
 " indent blankline settings
@@ -1501,10 +1452,14 @@ require "lsp_signature".setup({
 })
 EOF
 
+"galaxyline settings
 lua <<EOF
---require('galaxyline.eviline')
 require('galaxyline/my_theme')
---require('galaxyline.spaceline')
+EOF
+
+"nvim-autopairs settings
+lua <<EOF
+require('nvim-autopairs_config')
 EOF
 
 "lsp install settings
