@@ -4,7 +4,9 @@ call plug#begin('~/.nvim/plugged')
 Plug 'phaazon/hop.nvim'
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
-Plug 'dstein64/nvim-scrollview' "scrollbar plugin
+Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
+Plug 'lewis6991/gitsigns.nvim' "lua - gitsigns
+" Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
 
@@ -1290,7 +1292,7 @@ let g:nvim_tree_gitignore = 1 "0 by default
 let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
-let g:nvim_tree_quit_on_open = 0 "0 by default, closes the tree when you open a file
+let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_hide_dotfiles = 0 "0 by default, this option hides files and folders starting with a dot `.`
@@ -1492,22 +1494,12 @@ let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 augroup autoPair
     autocmd!
     autocmd FileType dart let b:AutoPairs = AutoPairsDefine({'<':'>'})
+    autocmd FileType vim let b:AutoPairs = AutoPairsDefine({'lua <<EOF':'EOF'})
 augroup END
 
 
 "neoscroll settings
 lua <<EOF
-  require('neoscroll').setup({
-    -- All these keys will be mapped to their corresponding default scrolling animation
-    mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-                '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-    hide_cursor = true,          -- Hide cursor while scrolling
-    stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-    use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-    respect_scrolloff = true,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-    cursor_scrolls_alone = false, -- The cursor will keep on scrolling even if the window cannot scroll further
-    easing_function = nil,        -- Default easing function
-    pre_hook = nil,              -- Function to run before the scrolling animation starts
-    post_hook = nil,              -- Function to run after the scrolling animation ends
-})
+  require('neoscroll_config')
 EOF
+
