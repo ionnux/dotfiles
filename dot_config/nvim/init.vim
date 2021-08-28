@@ -3,7 +3,7 @@ call plug#begin('~/.nvim/plugged')
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 Plug 'phaazon/hop.nvim'
 Plug 'dstein64/nvim-scrollview' "scrollbar plugin
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
 
 "Plug 'yuezk/vim-js'
@@ -20,7 +20,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
-Plug 'b3nj5m1n/kommentary' "commentary plugin written in lua
+" Plug 'b3nj5m1n/kommentary' "commentary plugin written in lua
+Plug 'terrortylor/nvim-comment'
 " Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -1214,17 +1215,17 @@ lua <<EOF
 EOF
 
 " " kommentary settings
-" lua <<EOF
-"   require('kommentary.config').configure_language("default", {
-"       prefer_multi_line_comments = true,
-"   })
-"   vim.api.nvim_set_keymap("n", "<leader>cic", "<Plug>kommentary_line_increase", {})
-"   vim.api.nvim_set_keymap("n", "<leader>ci", "<Plug>kommentary_motion_increase", {})
-"   vim.api.nvim_set_keymap("x", "<leader>ci", "<Plug>kommentary_visual_increase", {})
-"   vim.api.nvim_set_keymap("n", "<leader>cdc", "<Plug>kommentary_line_decrease", {})
-"   vim.api.nvim_set_keymap("n", "<leader>cd", "<Plug>kommentary_motion_decrease", {})
-"   vim.api.nvim_set_keymap("x", "<leader>cd", "<Plug>kommentary_visual_decrease", {})
-" EOF
+lua <<EOF
+  require('kommentary.config').configure_language("default", {
+    prefer_multi_line_comments = true,
+  })
+  vim.api.nvim_set_keymap("n", "<leader>cic", "<Plug>kommentary_line_increase", {})
+  vim.api.nvim_set_keymap("n", "<leader>ci", "<Plug>kommentary_motion_increase", {})
+  vim.api.nvim_set_keymap("x", "<leader>ci", "<Plug>kommentary_visual_increase", {})
+  vim.api.nvim_set_keymap("n", "<leader>cdc", "<Plug>kommentary_line_decrease", {})
+  vim.api.nvim_set_keymap("n", "<leader>cd", "<Plug>kommentary_motion_decrease", {})
+  vim.api.nvim_set_keymap("x", "<leader>cd", "<Plug>kommentary_visual_decrease", {})
+EOF
 
 " indent blankline settings
 let g:indent_balnkline_use_treesitter = v:true
