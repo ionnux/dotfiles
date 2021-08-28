@@ -1503,3 +1503,8 @@ lua <<EOF
   require('neoscroll_config')
 EOF
 
+
+"gitsigns settings
+lua <<EOF
+  require('gitsigns_config')
+EOF
