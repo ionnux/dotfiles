@@ -4,7 +4,7 @@ Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 Plug 'dstein64/nvim-scrollview' "scrollbar plugin
 Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
-"syntax highlighter for javascript
+
 "Plug 'yuezk/vim-js'
 Plug 'simnalamburt/vim-mundo'
 Plug 'mbbill/undotree'
@@ -399,9 +399,6 @@ inoremap <c-l> <c-o>A
 nnoremap <silent><leader>ww :write<cr>
 nnoremap <silent><leader>wq :exit<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
-" nnoremap <leader>sp :set paste<cr>
-" nnoremap <leader>snp :set nopaste<cr>
-set pastetoggle=pp
 nnoremap <leader>pi :PlugInstall<cr>
 
 
