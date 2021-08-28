@@ -624,12 +624,12 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 
 "telescope settings
 lua <<EOF
-require('telescope_config')
+require('config/telescope')
 EOF
 
 "hop config
 lua <<EOF
-require('hop_config')
+require('config/hop')
 EOF
 
 
@@ -1085,7 +1085,7 @@ EOF
 
 ""lightspeed settings
 " lua <<EOF
-" require('lightspeed_config')
+" require('config/lightspeed')
 " EOF
 
 
@@ -1178,7 +1178,7 @@ EOF
 
 "nvim-comment settings
 lua <<EOF
-require('nvim-comment_config')
+require('config/nvim-comment')
 EOF
 
 " indent blankline settings
@@ -1462,7 +1462,7 @@ EOF
 
 "nvim-autopairs settings
 " lua <<EOF
-" require('nvim-autopairs_config')
+" require('config/nvim-autopairs')
 " EOF
 
 "lsp install settings
@@ -1500,11 +1500,11 @@ augroup END
 
 "neoscroll settings
 lua <<EOF
-  require('neoscroll_config')
+  require('config/neoscroll')
 EOF
 
 
 "gitsigns settings
 lua <<EOF
-  require('gitsigns_config')
+  require('config/gitsigns')
 EOF
