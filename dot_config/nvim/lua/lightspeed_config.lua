@@ -14,6 +14,7 @@ require'lightspeed'.setup {
   cycle_group_fwd_key = nil,
   cycle_group_bwd_key = nil,
 }
+
   function repeat_ft(reverse)
     local ls = require'lightspeed'
     ls.ft['instant-repeat?'] = true
