@@ -1495,4 +1495,4 @@ lua require('config/gitsigns')
 lua require('config/toggleterm')
 
 "diffview settings
-" lua require('config/diffview')
+lua require('config/diffview')
