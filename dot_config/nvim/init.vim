@@ -5,6 +5,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
 Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
+Plug 'sindrets/diffview.nvim' "lua - diffview
 Plug 'lewis6991/gitsigns.nvim' "lua - gitsigns
 " Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
@@ -1070,7 +1071,7 @@ lua << EOF
    --exclude = {"vim"}, -- exclude these filetypes
   }
 EOF
-nnoremap <leader>tt :Twilight<cr>
+" nnoremap <leader>tt :Twilight<cr>
 
 " dependency assist settings
 lua require'dependency_assist'.setup{}
@@ -1492,3 +1493,6 @@ lua require('config/gitsigns')
 
 "toggleterm settings
 lua require('config/toggleterm')
+
+"diffview settings
+lua require('config/diffview')
