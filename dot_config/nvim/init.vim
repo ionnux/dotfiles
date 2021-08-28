@@ -401,7 +401,7 @@ nnoremap <silent><leader>wq :exit<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
 " nnoremap <leader>sp :set paste<cr>
 " nnoremap <leader>snp :set nopaste<cr>
-set pastetoggle=<leader>sp
+set pastetoggle=pp
 nnoremap <leader>pi :PlugInstall<cr>
 
 
