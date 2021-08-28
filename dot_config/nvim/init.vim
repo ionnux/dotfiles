@@ -43,7 +43,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'folke/trouble.nvim'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
-Plug 'folke/which-key.nvim'
+" Plug 'folke/which-key.nvim'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Plug 'joshdick/onedark.vim'
@@ -399,8 +399,9 @@ inoremap <c-l> <c-o>A
 nnoremap <silent><leader>ww :write<cr>
 nnoremap <silent><leader>wq :exit<cr>
 nnoremap <silent><leader>bd :bdelete<cr>
-nnoremap <leader>sp :set paste<cr>
-nnoremap <leader>snp :set nopaste<cr>
+" nnoremap <leader>sp :set paste<cr>
+" nnoremap <leader>snp :set nopaste<cr>
+set pastetoggle=<leader>sp
 nnoremap <leader>pi :PlugInstall<cr>
 
 
@@ -1028,14 +1029,14 @@ lua <<EOF
 
 EOF
 
-" which-key settings
-lua <<EOF
-  require("which-key").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
+" " which-key settings
+" lua <<EOF
+"   require("which-key").setup {
+"     -- your configuration comes here
+"     -- or leave it empty to use the default settings
+"     -- refer to the configuration section below
+"   }
+" EOF
 
 " zen mode settings
 lua << EOF
