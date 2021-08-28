@@ -1,5 +1,0 @@
-require'hop'.setup()
-vim.api.nvim_set_keymap('n', 's', ':HopChar1AC<cr>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', 'S', ':HopChar1BC<cr>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', 'gl', ':HopLineAC<cr>', { noremap = true, silent = false })
-vim.api.nvim_set_keymap('n', 'gL', ':HopLineBC<cr>', { noremap = true, silent = false })
