@@ -3,12 +3,13 @@ call plug#begin('~/.nvim/plugged')
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 Plug 'phaazon/hop.nvim'
 Plug 'edluffy/specs.nvim' "lua - cursor position
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' } "lua - register
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
-" Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
+Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
 Plug 'sindrets/diffview.nvim' "lua - diffview
 Plug 'lewis6991/gitsigns.nvim' "lua - gitsigns
-Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
+" Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
 
@@ -76,7 +77,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ryanoasis/vim-devicons'
 
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 Plug 'glepnir/dashboard-nvim' "lua - startup
 " Plug 'roman/golden-ratio'
 
@@ -311,7 +312,7 @@ set termguicolors
 set splitbelow
 
 "do not highlight search
-set hlsearch
+set nohlsearch
 
 "open vertical splits to the right of the current window
 set splitright
@@ -569,22 +570,13 @@ let g:UltiSnipsListSnippets = '<Nop>'
 "startify settings
 "startify bookmark setting
 let g:startify_bookmarks = [ {'c': '~/.local/share/chezmoi/dot_config/nvim/init.vim'}]
-"startify indices setting
+let g:startify_update_oldfiles = 1
 let g:startify_custom_indices = ['g', 'f', 'd', 's', 'a']
-"automatically set airline theme to gruvbox whenever startify starts
-
-""deoplete settings
-"let g:deoplete#enable_at_startup = 1
-
-"" Trigger configuration. Do not use <tab> if you use
-"let g:UltiSnipsExpandTrigger='<tab>'
-
-"" shortcut to go to next position
-"let g:UltiSnipsJumpForwardTrigger='<Tab>'
-
-"" shortcut to go to previous position
-"let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
+let g:startify_custom_header = [ " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+                                \" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+                                \" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+                                \" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+                                \" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",]
 
 
 
@@ -1175,7 +1167,7 @@ lua require('config/nvim-comment')
 
 " indent blankline settings
 let g:indent_balnkline_use_treesitter = v:true
-let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim', 'log', 'flutterToolsOutline']
+let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim', 'log', 'flutterToolsOutline', 'dashboard']
 " let g:indent_blankline_char = '¦'
 
 
@@ -1281,7 +1273,7 @@ let g:nvim_tree_side = 'left' "left by default
 let g:nvim_tree_width = 25 "30 by default, can be width_in_columns or 'width_in_percent%'
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
 let g:nvim_tree_gitignore = 1 "0 by default
-let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_open = 0 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
 let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
@@ -1500,7 +1492,20 @@ lua require('config/toggleterm')
 lua require('config/diffview')
 
 "scrollbar settings
-lua require('config/scrollbar')
+" lua require('config/scrollbar')
 
 "specs settings
 lua require('config/specs')
+
+"dashboard settings
+lua require('config/dashboard')
+
+"registers settings
+lua require('config/registers')
+
+"nvim-scrollview settings
+let g:scrollview_current_only = 1
+let g:scrollview_excluded_filetypes = ['nvimtree']
+let g:scrollview_column = 1
+highlight ScrollView guibg=LightCyan
+
