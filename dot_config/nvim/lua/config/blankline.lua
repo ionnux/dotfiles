@@ -7,6 +7,9 @@ vim.g.indent_blankline_filetype_exclude = {
   "neogitstatus",
   "NvimTree",
   "Trouble",
+  "man",
+  "log",
+  "flutterToolsOutline",
 }
 vim.g.indent_blankline_char = "│"
 vim.g.indent_blankline_use_treesitter = true
