@@ -7,5 +7,3 @@ vim.g.registers_show_empty_registers = 0 -- "1 by default, an additional line wi
 vim.g.registers_trim_whitespace = 0 -- "1 by default, don't show whitespace at the begin and end of the registers
 vim.g.registers_hide_only_whitespace = 1 -- "0 by default, don't show registers filled exclusively with whitespace
 vim.g.registers_window_border = "single" -- "'none' by default, can be 'none', 'single','double', 'rounded', 'solid', or 'shadow' (requires Neovim 0.5.0+)
-vim.g.registers_window_min_height = 10 -- "3 by default, minimum height of the window when there is the cursor at the bottom
-vim.g.registers_window_max_width = 100 -- "100 by default, maximum width of the window
