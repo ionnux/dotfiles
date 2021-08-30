@@ -160,6 +160,15 @@ function(use)
       end,
   })
 
+  -- flutter-tools
+  use({
+      "akinsho/flutter-tools.nvim",
+      ft = { "flutter", "dart" },
+      config = function()
+          require("config.flutter-tools")
+      end,
+  })
+
 end),
 
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])

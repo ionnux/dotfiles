@@ -89,7 +89,6 @@ Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 
 " dart and flutter related
 Plug 'nvim-lua/plenary.nvim'
-Plug 'akinsho/flutter-tools.nvim'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'Neevash/awesome-flutter-snippets' "vscode flutter snippets for vim-vsnip
 Plug 'SushanShakya/bloc_extension'
@@ -684,26 +683,6 @@ tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
 
 
-"flutter-tools settings
-" au BufEnter *.dart  highlight FlutterWidgetGuides guifg=#7aa2f7
-lua <<EOF
-  require("flutter-tools").setup{
-  widget_guides = {
-    enabled = true,
-    },
-  dev_tools = {
-    autostart = false,
-    auto_open_browser = false,
-    },
-  --dev_log = {
-    --open_cmd = "tabedit", -- command to use to open the log buffer
-    --},
-  outline = {
-    open_cmd = "50vnew", -- command to use to open the outline buffer
-    auto_open = false -- if true this will open the outline automatically when it is first populated
-        },
-  } -- use defaults
-EOF
 
 " dart vim settings
 let g:dartfmt_options = ['--fix']
