@@ -11,7 +11,6 @@ Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
 " Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
-"Plug 'frazrepo/vim-rainbow'
 
 "Plug 'yuezk/vim-js'
 Plug 'simnalamburt/vim-mundo'
@@ -89,11 +88,10 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Plug 'numtostr/FTerm.nvim'
 Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 
-Plug 'p00f/nvim-ts-rainbow'
+" Plug 'p00f/nvim-ts-rainbow'
 
 " dart and flutter related
 Plug 'nvim-lua/plenary.nvim'
@@ -882,20 +880,6 @@ EOF
 " nvim colorizer settings
 lua require('config/colorizer')
 
-" nvim treesitter settings
- lua <<EOF
- require'nvim-treesitter.configs'.setup {
-   highlight = {
-     enable = true,
-     use_languagetree = true,
-   },
-   query_linter = {
-     enable = true,
-     use_virtual_text = true,
-     lint_events = { "BufWrite", "CursorHold" },
-   },
- }
- EOF
 
 " " trouble nvim settings
 lua <<EOF
@@ -1008,34 +992,6 @@ lua require'dependency_assist'.setup{}
 "lua require('config/lightspeed')
 
 
-" nvim ts rainbow settings
-lua <<EOF
-  require'nvim-treesitter.configs'.setup {
-    rainbow = {
-      enable = true,
-      extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
-      max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-      colors = {  
-        "#cc241d",
-        "#a89984",
-        "#b16286",
-        "#d79921",
-        "#689d6a",
-        "#d65d0e",
-        "#458588",
-       }, -- table of hex strings
-      termcolors = {
-        'Red',
-	    'Green',
-	    'Yellow',
-	    'Blue',
-	    'Magenta',
-	    'Cyan',
-	    'White',
-      }, -- table of colour name strings
-    },
-  }
-EOF
 
 
 " moonlight nvim settings

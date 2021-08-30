@@ -1,6 +1,7 @@
 
 return require('packer').startup(
 function(use)
+  -- packer
   use 'wbthomason/packer.nvim'
 
   -- nvim-compe
@@ -118,12 +119,14 @@ function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    -- opt = true,
-    -- event = "BufRead",
+    opt = true,
+    event = "BufRead",
     requires = {
-      { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+      { "nvim-treesitter/playground"},
       "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-refactor",
       "RRethy/nvim-treesitter-textsubjects",
+      "p00f/nvim-ts-rainbow",
     },
     config = function()
         require('config.treesitter')
