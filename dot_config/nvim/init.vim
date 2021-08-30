@@ -16,8 +16,6 @@ Plug 'simnalamburt/vim-mundo'
 Plug 'mbbill/undotree'
 "Plug 'justinmk/vim-sneak'
 
-" Plug 'preservim/nerdtree'
-" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 Plug 'tpope/vim-unimpaired'
 Plug 'ahmedkhalf/project.nvim' "lua project manager
@@ -25,14 +23,12 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
-Plug 'terrortylor/nvim-comment' "lua commentary plugin written in lua
 " Plug 'windwp/nvim-autopairs'
 " Plug 'puremourning/vimspector'
 Plug 'szw/vim-maximizer'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 
-Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'mhartington/formatter.nvim'
 Plug 'nacro90/numb.nvim'
@@ -592,10 +588,6 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 " nnoremap <silent><leader>fcs :Colors<cr>
 
 
-"telescope settings
-lua require('config/telescope')
-
-
 "vim mundo settings
 let g:mundo_preview_bottom = 1
 nnoremap <silent><leader>vm :MundoToggle<cr>
@@ -1050,10 +1042,6 @@ lua <<EOF
 EOF
 
 
-"nvim-comment settings
-lua require('config/nvim-comment')
-
-
 
 " formatter nvim settings
 lua <<EOF
@@ -1147,7 +1135,6 @@ lua << EOF
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
   }
-  require('telescope').load_extension('projects')
 EOF
 
 
@@ -1374,11 +1361,4 @@ lua require('config/neoscroll')
 
 "dashboard settings
 lua require('config/dashboard')
-
-
-"nvim-scrollview settings
-" let g:scrollview_current_only = 1
-" let g:scrollview_excluded_filetypes = ['nvimtree']
-" let g:scrollview_column = 1
-" highlight ScrollView guibg=LightCyan
 

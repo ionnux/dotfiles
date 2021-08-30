@@ -29,8 +29,7 @@ function(use)
       require("config.telescope")
     end,
     cmd = { "Telescope" },
-    module = "telescope",
-    keys = { "<leader><space>", "<leader>fz", "<leader>pp" },
+    keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr"},
     -- wants = {
     --   "plenary.nvim",
     --   "popup.nvim",
@@ -43,12 +42,10 @@ function(use)
     -- },
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
-      "nvim-telescope/telescope-project.nvim",
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-symbols.nvim",
+      {"ahmedkhalf/project.nvim", config =function() require("config.project") end},
       "nvim-telescope/telescope-fzy-native.nvim",
-      -- { "nvim-telescope/telescope-frecency.nvim", requires = "tami5/sql.nvim" }
     },
   })
 
@@ -145,9 +142,22 @@ function(use)
     keys = { { 'n', '"' }, { 'v', '"' }, { 'i', '<c-r>' } },
   })
 
+  -- scrollview
   use ({
       "dstein64/nvim-scrollview",
-      event = "InsertEnter",
+      event = "bufRead",
+      config = function()
+          require("config.scrollview")
+      end,
+  })
+
+  -- nvim-comment
+  use ({
+      "terrortylor/nvim-comment",
+      keys = { { 'n', 'gcc' }, { 'v', 'gc' }, { 'o', 'gc' } },
+      config = function()
+          require("config.nvim-comment")
+      end,
   })
 
 end),
