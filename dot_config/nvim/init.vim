@@ -4,14 +4,11 @@ lua require('plugins')
 call plug#begin('~/.nvim/plugged')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
-" Plug 'phaazon/hop.nvim'
 Plug 'edluffy/specs.nvim' "lua - cursor position
 Plug 'tversteeg/registers.nvim', { 'branch': 'main' } "lua - register
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
 Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
-" Plug 'sindrets/diffview.nvim' "lua - diffview
-" Plug 'lewis6991/gitsigns.nvim' "lua - gitsigns
 " Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 "Plug 'frazrepo/vim-rainbow'
@@ -44,7 +41,6 @@ Plug 'nacro90/numb.nvim'
 
 
 " Plug 'kassio/neoterm'
-" Plug 'akinsho/toggleterm.nvim' "lua - multiple persistent terminal
 Plug 'haringsrob/nvim_context_vt' "show virtual text of current context
 
 " Plug 'vim-airline/vim-airline'
@@ -57,7 +53,6 @@ Plug 'folke/trouble.nvim'
 Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 " Plug 'folke/which-key.nvim'
-Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Plug 'joshdick/onedark.vim'
 Plug 'gruvbox-community/gruvbox'
@@ -69,7 +64,6 @@ Plug 'dracula/vim',{'as':'dracula'}
 Plug 'marko-cerovac/material.nvim'
 Plug 'bluz71/vim-nightfly-guicolors'
 
-" Plug 'folke/tokyonight.nvim'
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 
 " Plug 'hoob3rt/lualine.nvim'
@@ -93,7 +87,6 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'norcalli/snippets.nvim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
-" Plug 'hrsh7th/nvim-compe'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -138,24 +131,6 @@ vim.g.nightflyNormalFloat = 1
 EOF
 "
 
-" tokyonight settings
-" lua <<EOF
-" vim.g.tokyonight_style = "night"
-" --vim.g.tokyonight_day_brightness = 0.1
-" vim.g.tokyonight_terminal_colors = false
-" vim.g.tokyonight_italic_comments = true
-" vim.g.tokyonight_italic_functions = true
-" vim.g.tokyonight_italic_keywords = true
-" vim.g.tokyonight_italic_variables = true
-" vim.g.tokyonight_transparent = true
-" vim.g.tokyonight_lualine_bold = 1
-" vim.g.tokyonight_hide_inactive_statusline = true
-" --vim.g.tokyonight_sidebars = {"NvimTree"}
-" vim.g.tokyonight_transparent_sidebar = true
-" vim.g.tokyonight_dark_sidebar = false
-" vim.g.tokyonight_dark_float = true
-" vim.g.tokyonight_lualine_bold = true
-" EOF
 
 " nord settings
 let g:nord_contrast = v:true
@@ -178,7 +153,6 @@ EOF
 
 " colorscheme gruvbox
 " colorscheme dracula
-" colorscheme tokyonight
 " colorscheme material
 " colorscheme nightfly
 " colorscheme substrata
@@ -624,9 +598,6 @@ vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
 "telescope settings
 lua require('config/telescope')
 
-"hop config
-" lua require('config/hop')
-
 
 "vim mundo settings
 let g:mundo_preview_bottom = 1
@@ -641,48 +612,6 @@ let g:undotree_SplitWidth = 30
 "let g:mundo_inline_undo = 1
 
 autocmd BufReadPost *.kt setlocal filetype=kotlin
-
-"nvim-compe settings
-" let g:compe = {}
-" let g:compe.enabled = v:true
-" let g:compe.autocomplete = v:true
-" let g:compe.debug = v:false
-" let g:compe.min_length = 1
-" let g:compe.preselect = 'enable'
-" let g:compe.throttle_time = 80
-" let g:compe.source_timeout = 200
-" let g:compe.resolve_timeout = 800
-" let g:compe.incomplete_delay = 400
-" let g:compe.max_abbr_width = 100
-" let g:compe.max_kind_width = 100
-" let g:compe.max_menu_width = 100
-" let g:compe.documentation = v:true
-" 
-" let g:compe.source = {}
-" let g:compe.source.path = v:true
-" let g:compe.source.buffer = v:true
-" let g:compe.source.nvim_lsp = v:true
-" " let g:compe.source.vsnip = {'priority': 1000,}
-" let g:compe.source.vsnip = v:true
-" let g:compe.source.calc = v:true
-" let g:compe.source.nvim_lua = v:true
-" let g:compe.source.ultisnips = v:true
-" let g:compe.source.luasnip = v:true
-" let g:compe.source.treesitter = v:false
-" let g:compe.source.emoji = v:true
-" 
-" inoremap <silent><expr> <C-Space> compe#complete()
-" inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-" inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-" inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-" inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-" Tab and S-Tab completion
-"
-" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" C-j and C-k completion
-" inoremap <silent><expr> <C-j> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 
 "coq_nvim settings
@@ -954,19 +883,19 @@ EOF
 lua require('config/colorizer')
 
 " nvim treesitter settings
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    use_languagetree = true,
-  },
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = { "BufWrite", "CursorHold" },
-  },
-}
-EOF
+ lua <<EOF
+ require'nvim-treesitter.configs'.setup {
+   highlight = {
+     enable = true,
+     use_languagetree = true,
+   },
+   query_linter = {
+     enable = true,
+     use_virtual_text = true,
+     lint_events = { "BufWrite", "CursorHold" },
+   },
+ }
+ EOF
 
 " " trouble nvim settings
 lua <<EOF
@@ -1169,10 +1098,6 @@ EOF
 "nvim-comment settings
 lua require('config/nvim-comment')
 
-" indent blankline settings
-let g:indent_balnkline_use_treesitter = v:true
-let g:indent_blankline_filetype_exclude = ['help', 'startify', 'man', 'vim', 'log', 'flutterToolsOutline', 'dashboard']
-" let g:indent_blankline_char = '¦'
 
 
 " formatter nvim settings
@@ -1486,14 +1411,8 @@ augroup END
 lua require('config/neoscroll')
 
 
-"gitsigns settings
-" lua require('config/gitsigns')
 
-"toggleterm settings
-" lua require('config/toggleterm')
 
-"diffview settings
-" lua require('config/diffview')
 
 "scrollbar settings
 " lua require('config/scrollbar')

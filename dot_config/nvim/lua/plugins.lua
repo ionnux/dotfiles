@@ -75,6 +75,7 @@ function(use)
   -- gitsigns
   use({
     "lewis6991/gitsigns.nvim",
+    opt = true,
     event = "BufReadPre",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
@@ -85,6 +86,7 @@ function(use)
   -- hop
   use({
     "phaazon/hop.nvim",
+    opt = true,
     keys = {"s", "S", "gl", "gL"},
     cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
     config = function()
@@ -95,9 +97,36 @@ function(use)
   --diffview
   use({
     "sindrets/diffview.nvim",
+    opt = true,
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
     config = function()
       require("config.diffview")
+    end,
+  })
+
+  -- indent-blankline
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    opt = true,
+    event = "BufReadPre",
+    config = function()
+      require("config.blankline")
+    end,
+  })
+
+  -- treesitter
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    -- opt = true,
+    -- event = "BufRead",
+    requires = {
+      { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" },
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-textsubjects",
+    },
+    config = function()
+        require('config.treesitter')
     end,
   })
 
