@@ -173,8 +173,7 @@ function(use)
   use({
       "jasonrhansen/lspsaga.nvim",
       branch = "finder-preview-fixes",
-      event = "BufRead",
-      requires = { "neovim/nvim-lspconfig" },
+      after = { "nvim-lspconfig" },
       config = function()
           require("config.lspsaga")
       end,
@@ -183,6 +182,7 @@ function(use)
   use({
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
+    requires = { "kabouzeid/nvim-lspinstall" },
     config = function()
       require("config.lsp")
     end,

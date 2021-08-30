@@ -1,88 +1,3 @@
--- vim.lsp.set_log_level("debug")
--- needs https://github.com/microsoft/vscode-codicons/blob/master/dist/codicon.ttf
-require("vim.lsp.protocol").CompletionItemKind = {
-  "  Text", -- = 1
-  "  Function", -- = 2;
-  "  Method", -- = 3;
-  "  Constructor", -- = 4;
-  "  Field", -- = 5;
-  "  Variable", -- = 6;
-  "  Class", -- = 7;
-  "  Interface", -- = 8;
-  "  Module", -- = 9;
-  "  Property", -- = 10;
-  "  Unit", -- = 11;
-  "  Value", -- = 12;
-  "  Enum", -- = 13;
-  "  Keyword", -- = 14;
-  "  Snippet", -- = 15;
-  "  Color", -- = 16;
-  "  File", -- = 17;
-  "  Reference", -- = 18;
-  "  Folder", -- = 19;
-  "  EnumMember", -- = 20;
-  "  Constant", -- = 21;
-  "  Struct", -- = 22;
-  "  Event", -- = 23;
-  "  Operator", -- = 24;
-  "  TypeParameter", -- = 25;
-}
-
-vim.lsp.handlers["textDocument/publishDiagnostics"] =
-  vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = { prefix = "●" } })
-
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
-local icons = require("nvim-nonicons")
-vim.fn.sign_define("LspDiagnosticsSignError",
-                   { text = icons.get("x-circle"), texthl = "LspDiagnosticsSignError" })
-
-vim.fn.sign_define("LspDiagnosticsSignWarning",
-                   { text = icons.get("alert"), texthl = "LspDiagnosticsSignWarning" })
-
-vim.fn.sign_define("LspDiagnosticsSignInformation",
-                   { text = icons.get("info"), texthl = "LspDiagnosticsSignInformation" })
-
-vim.fn.sign_define("LspDiagnosticsSignHint",
-                   { text = icons.get("comment"), texthl = "LspDiagnosticsSignHint" })
-
-vim.api.nvim_command("highlight default link LspCodeLens Comment")
-
--- keymaps
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- vim already has builtin docs
-  if vim.bo.ft ~= "vim" then buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts) end
-
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-    augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-    ]], false)
-  end
-
-  if client.resolved_capabilities.code_lens then
-    vim.cmd [[
-    augroup lsp_codelens
-      autocmd! * <buffer>
-      autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
-    augroup END
-    ]]
-  end
-
-  if client.server_capabilities.colorProvider then
-    require"lsp-documentcolors".buf_attach(bufnr, { single_column = true })
-  end
-end
-
 -- Configure lua language server for neovim development
 local lua_settings = {
   Lua = {
@@ -124,9 +39,6 @@ local function setup_servers()
 
   -- get all installed servers
   local servers = require"lspinstall".installed_servers()
-  -- ... and add manually installed servers
-  table.insert(servers, "sourcekit")
-
   for _, server in pairs(servers) do
     local config = make_config()
 
@@ -139,22 +51,7 @@ local function setup_servers()
         return util.find_git_ancestor(fname) or util.path.dirname(fname)
       end
     end
-    if server == "sourcekit" then
-      config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
-    end
-    if server == "clangd" then
-      config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
-    end
-    if server == "efm" then config = vim.tbl_extend("force", config, require "efm") end
-    if server == "diagnosticls" then
-      config = vim.tbl_extend("force", config, require "diagnosticls")
-    end
     if server == "vim" then config.init_options = { isNeovim = true } end
-    if server == "haskell" then
-      config.root_dir = require"lspconfig/util".root_pattern("*.cabal", "stack.yaml",
-                                                             "cabal.project", "package.yaml",
-                                                             "hie.yaml", ".git");
-    end
 
     require"lspconfig"[server].setup(config)
   end
@@ -167,7 +64,4 @@ require"lspinstall".post_install_hook = function()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
-
--- UI just like `:LspInfo` to show which capabilities each attached server has
-vim.api.nvim_command("command! LspCapabilities lua require'lsp-capabilities'()")
 

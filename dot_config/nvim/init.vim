@@ -71,8 +71,6 @@ Plug 'mhinz/vim-startify'
 " Plug 'glepnir/dashboard-nvim' "lua - startup
 " Plug 'roman/golden-ratio'
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -603,12 +601,6 @@ autocmd BufReadPost *.kt setlocal filetype=kotlin
 
 "coq_nvim settings
 
-
-
-"vimls setup
-lua require'lspconfig'.vimls.setup{}
-
-
 " dart vim settings
 let g:dartfmt_options = ['--fix']
 augroup FormatDart
@@ -642,54 +634,18 @@ augroup END
 " flutter integration
 autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
 
-" " nvim-lspconfig settings
-" lua <<EOF
-" local M = {}
-" M.icons = {
-"   Class = " ",
-"   Color = " ",
-"   Constant = " ",
-"   Constructor = " ",
-"   Enum = "了 ",
-"   EnumMember = " ",
-"   Field = " ",
-"   File = " ",
-"   Folder = " ",
-"   Function = " ",
-"   Interface = "ﰮ ",
-"   Keyword = " ",
-"   Method = "ƒ ",
-"   Module = " ",
-"   Property = " ",
-"   Snippet = "﬌ ",
-"   Struct = " ",
-"   Text = " ",
-"   Unit = " ",
-"   Value = " ",
-"   Variable = " ",
-" }
-
-" function M.setup()
-"   local kinds = vim.lsp.protocol.CompletionItemKind
-"   for i, kind in ipairs(kinds) do
-"     kinds[i] = M.icons[kind] or kind
-"   end
-" end
-
-" return M
-" EOF
 
 " disable diagnostic virtual text
-lua <<EOF
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-    severity_sort = false,
-    }
-)
-EOF
+" lua <<EOF
+" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+"     underline = true,
+"     virtual_text = false,
+"     signs = true,
+"     update_in_insert = true,
+"     severity_sort = false,
+"     }
+" )
+" EOF
 
 " lualine settings
 " lua <<EOF
@@ -1209,24 +1165,6 @@ EOF
 "nvim-autopairs settings
 "lua require('config/nvim-autopairs')
 
-"lsp install settings
-lua <<EOF
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    require'lspconfig'[server].setup{}
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-EOF
 
 "auto pairs settings
 let g:AutoPairsFlyMode = 1
