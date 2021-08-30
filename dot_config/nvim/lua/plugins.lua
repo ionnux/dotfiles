@@ -6,7 +6,7 @@ function(use)
 
   -- nvim-compe
   use({
-    "hrsh7th/nvim-compe",
+    "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
       require("config.compe")
