@@ -33,3 +33,14 @@ saga.init_lsp_saga {
 }
 
 vim.api.nvim_set_keymap('n', '<leader>gd', ':Lspsaga lsp_finder<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>qq', ':Lspsaga code_action<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'K', ':Lspsaga hover_doc<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-j>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rn', ':Lspsaga rename<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_prev<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_next<cr>', { noremap = true, silent = true })
+
+-- automatically show diagnostics in hover window
+vim.cmd("autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()")
+vim.cmd("highlight LspFloatWinNormal guibg=None")

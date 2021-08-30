@@ -169,6 +169,25 @@ function(use)
       end,
   })
 
+  -- lspsaga
+  use({
+      "jasonrhansen/lspsaga.nvim",
+      branch = "finder-preview-fixes",
+      event = "BufRead",
+      requires = { "neovim/nvim-lspconfig" },
+      config = function()
+          require("config.lspsaga")
+      end,
+  })
+
+  use({
+    "neovim/nvim-lspconfig",
+    event = "BufReadPre",
+    config = function()
+      require("config.lsp")
+    end,
+  })
+
 end),
 
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])

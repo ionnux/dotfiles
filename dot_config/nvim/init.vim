@@ -81,9 +81,9 @@ Plug 'norcalli/snippets.nvim'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 " Plug 'numtostr/FTerm.nvim'
 Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
+
 
 " Plug 'p00f/nvim-ts-rainbow'
 
@@ -607,81 +607,6 @@ autocmd BufReadPost *.kt setlocal filetype=kotlin
 
 "vimls setup
 lua require'lspconfig'.vimls.setup{}
-
-
-"lspsaga setup
-highlight LspFloatWinNormal guibg=None
-lua <<EOF
-  local saga = require 'lspsaga'
-  saga.init_lsp_saga {
-    use_saga_diagnostic_sign = true,
-    error_sign = '',
-    warn_sign = '',
-    --hint_sign = '',
-    hint_sign = '',
-    infor_sign = '',
-    dianostic_header_icon = '   ',
-    code_action_icon = ' ',
-    code_action_prompt = {
-      enable = true,
-      sign = false,
-      sign_priority = 20,
-      virtual_text = true,
-    },
-    finder_definition_icon = '  ',
-    finder_reference_icon = '  ',
-    max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
-    finder_action_keys = {
-      open = 'o', vsplit = 'v',split = 's',quit = 'q',scroll_down = '<C-j>', scroll_up = '<C-k>' -- quit can be a table
-    },
-    code_action_keys = {
-      quit = 'q',exec = '<CR>'
-    },
-    rename_action_keys = {
-      quit = '<C-c>',exec = '<CR>'  -- quit can be a table
-    },
-    definition_preview_icon = '  ',
-    --"single" "double" "round" "plus" "bold"
-    border_style = "single",
-    rename_prompt_prefix = '➤',
-  }
-EOF
-"definition and references
-" nnoremap <silent> gh :Lspsaga lsp_finder<CR>
-nnoremap <silent><leader>gd :Lspsaga lsp_finder<CR>
-"Code Action
-" nnoremap <silent><leader>ca :Lspsaga code_action<CR>
-" vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
-nnoremap <silent><leader>qq :Lspsaga code_action<CR>
-vnoremap <silent><leader>qq :<C-U>Lspsaga range_code_action<CR>
-" show hover doc
-nnoremap <silent>K :Lspsaga hover_doc<CR>
-" scroll down hover doc or scroll in definition preview
-nnoremap <silent> <C-j> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-" scroll up hover doc
-nnoremap <silent> <C-k> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-" show signature help
-nnoremap <silent> gs :Lspsaga signature_help<CR>
-" inoremap gsh <c-o>:Lspsaga signature_help<cr>
-" rename
-" nnoremap <silent>gr :Lspsaga rename<CR>
-nnoremap <silent><leader>rn :Lspsaga rename<CR>
-" preview definition
-nnoremap <silent> gh :Lspsaga preview_definition<CR>
-"diagnostics
-" show
-nnoremap <silent> <leader>ld :Lspsaga show_line_diagnostics<CR>
-" only show diagnostic if cursor is over the area
-nnoremap <silent> <leader>cd :Lspsaga show_cursor_diagnostics<CR>
-" jump diagnostic
-nnoremap <silent> ]g :Lspsaga diagnostic_jump_next<CR>
-nnoremap <silent> [g :Lspsaga diagnostic_jump_prev<CR>
-" float terminal also you can pass the cli command in open_float_terminal function
-nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
-tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
-" automatically show diagnostics in hover window
-autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()
-
 
 
 " dart vim settings
