@@ -8,11 +8,9 @@ function(use)
   use({
     "hrsh7th/nvim-compe",
     event = "InsertEnter",
-    opt = true,
     config = function()
       require("config.compe")
     end,
-    wants = { "LuaSnip" },
     requires = {
       {
         "L3MON4D3/LuaSnip",
@@ -27,7 +25,6 @@ function(use)
   -- telescope
   use({
     "nvim-telescope/telescope.nvim",
-    opt = true,
     config = function()
       require("config.telescope")
     end,
@@ -58,7 +55,6 @@ function(use)
 -- toggleterm
   use({
     "akinsho/nvim-toggleterm.lua",
-    opt = true,
     keys = "<leader>tt",
     config = function()
       require("config.toggleterm")
@@ -68,6 +64,7 @@ function(use)
   -- tokyonight
   use ({
     'folke/tokyonight.nvim',
+    event = "VimEnter",
     config = function ()
         require('config.tokyonight')
     end,
@@ -76,7 +73,6 @@ function(use)
   -- gitsigns
   use({
     "lewis6991/gitsigns.nvim",
-    opt = true,
     event = "BufReadPre",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
@@ -87,7 +83,6 @@ function(use)
   -- hop
   use({
     "phaazon/hop.nvim",
-    opt = true,
     keys = {"s", "S", "gl", "gL"},
     cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
     config = function()
@@ -98,7 +93,6 @@ function(use)
   --diffview
   use({
     "sindrets/diffview.nvim",
-    opt = true,
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
     config = function()
       require("config.diffview")
@@ -108,7 +102,6 @@ function(use)
   -- indent-blankline
   use({
     "lukas-reineke/indent-blankline.nvim",
-    opt = true,
     event = "BufReadPre",
     config = function()
       require("config.blankline")
@@ -119,10 +112,10 @@ function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    opt = true,
-    event = "BufRead",
+    -- opt = true,
+    -- event = "BufRead",
     requires = {
-      { "nvim-treesitter/playground"},
+      "nvim-treesitter/playground",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-refactor",
       "RRethy/nvim-treesitter-textsubjects",
@@ -133,6 +126,30 @@ function(use)
     end,
   })
 
+  -- galaxyline
+  use ({
+  "glepnir/galaxyline.nvim",
+  branch = 'main',
+  config = function()
+      require("galaxyline.my_theme")
+  end,
+  requires = {"kyazdani42/nvim-web-devicons", opt = true}
+  })
+
+  -- registers
+  use ({
+    "tversteeg/registers.nvim",
+    config = function()
+        require("config.registers")
+    end,
+    keys = { { 'n', '"' }, { 'v', '"' }, { 'i', '<c-r>' } },
+  })
+
+  use ({
+      "dstein64/nvim-scrollview",
+      event = "InsertEnter",
+  })
 
 end),
+
 vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])

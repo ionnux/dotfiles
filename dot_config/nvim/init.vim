@@ -4,11 +4,10 @@ lua require('plugins')
 call plug#begin('~/.nvim/plugged')
 " Plug 'easymotion/vim-easymotion'
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
-Plug 'edluffy/specs.nvim' "lua - cursor position
-Plug 'tversteeg/registers.nvim', { 'branch': 'main' } "lua - register
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
 Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
 
-Plug 'dstein64/nvim-scrollview' "lua - scrollbar plugin
 " Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 
@@ -49,7 +48,7 @@ Plug 'haringsrob/nvim_context_vt' "show virtual text of current context
 Plug 'jiangmiao/auto-pairs'
 
 Plug 'folke/trouble.nvim'
-Plug 'folke/twilight.nvim'
+" Plug 'folke/twilight.nvim'
 Plug 'folke/zen-mode.nvim'
 " Plug 'folke/which-key.nvim'
 
@@ -66,10 +65,10 @@ Plug 'bluz71/vim-nightfly-guicolors'
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 
 " Plug 'hoob3rt/lualine.nvim'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 Plug 'akinsho/nvim-bufferline.lua'
-Plug 'kyazdani42/nvim-web-devicons'
+" Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ryanoasis/vim-devicons'
 
@@ -963,25 +962,25 @@ nnoremap <leader>zm :ZenMode<cr>
 
 
 " twilight settings
-lua << EOF
-  require("twilight").setup {
-    dimming = {
-      alpha = 0.5, -- amount of dimming
-      -- we try to get the foreground from the highlight groups or fallback color
-      color = { "Normal", "#ffffff" },
-    },
-    context = 10, -- amount of lines we will try to show around the current line
-    -- treesitter is used to automatically expand the visible text,
-    -- but you can further control the types of nodes that should always be fully expanded
-    expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-      "function",
-      "method",
-      "table",
-      "if_statement",
-    },
-   --exclude = {"vim"}, -- exclude these filetypes
-  }
-EOF
+"lua << EOF
+  "require("twilight").setup {
+    "dimming = {
+      "alpha = 0.5, -- amount of dimming
+      "-- we try to get the foreground from the highlight groups or fallback color
+      "color = { "Normal", "#ffffff" },
+    "},
+    "context = 10, -- amount of lines we will try to show around the current line
+    "-- treesitter is used to automatically expand the visible text,
+    "-- but you can further control the types of nodes that should always be fully expanded
+    "expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
+      ""function",
+      ""method",
+      ""table",
+      ""if_statement",
+    "},
+   "--exclude = {"vim"}, -- exclude these filetypes
+  "}
+"EOF
 " nnoremap <leader>tt :Twilight<cr>
 
 " dependency assist settings
@@ -1325,7 +1324,7 @@ require "lsp_signature".setup({
 EOF
 
 "galaxyline settings
-lua require('galaxyline/my_theme')
+" lua require('galaxyline/my_theme')
 
 "nvim-autopairs settings
 "lua require('config/nvim-autopairs')
@@ -1373,18 +1372,13 @@ lua require('config/neoscroll')
 "scrollbar settings
 " lua require('config/scrollbar')
 
-"specs settings
-lua require('config/specs')
-
 "dashboard settings
 lua require('config/dashboard')
 
-"registers settings
-lua require('config/registers')
 
 "nvim-scrollview settings
-let g:scrollview_current_only = 1
-let g:scrollview_excluded_filetypes = ['nvimtree']
-let g:scrollview_column = 1
-highlight ScrollView guibg=LightCyan
+" let g:scrollview_current_only = 1
+" let g:scrollview_excluded_filetypes = ['nvimtree']
+" let g:scrollview_column = 1
+" highlight ScrollView guibg=LightCyan
 
