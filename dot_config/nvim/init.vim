@@ -18,7 +18,6 @@ Plug 'mbbill/undotree'
 
 
 Plug 'tpope/vim-unimpaired'
-Plug 'ahmedkhalf/project.nvim' "lua project manager
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
@@ -1126,16 +1125,6 @@ augroup chezmoiApply
     autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
 augroup END
 
-
-
-"project nvim settings
-lua << EOF
-  require("project_nvim").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
 
 
 
