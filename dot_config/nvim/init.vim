@@ -8,7 +8,7 @@ call plug#begin('~/.nvim/plugged')
 
 "Plug 'yuezk/vim-js'
 Plug 'simnalamburt/vim-mundo'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'mbbill/undotree'
 "Plug 'justinmk/vim-sneak'
 

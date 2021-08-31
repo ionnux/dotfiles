@@ -50,7 +50,7 @@ function(use)
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      {"ahmedkhalf/project.nvim", event = "bufRead", config = function() require("config.project") end},
+      {"ahmedkhalf/project.nvim", event = "BufReadPre", config = function() require("config.project") end},
       {"nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true},
     },
   })
@@ -142,6 +142,7 @@ function(use)
   use ({
   "glepnir/galaxyline.nvim",
   branch = 'main',
+  after = "nvim-treesitter",
   config = function()
       require("galaxyline.my_theme")
   end,

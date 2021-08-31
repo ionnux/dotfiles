@@ -42,5 +42,5 @@ vim.api.nvim_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_prev<cr>', { norema
 vim.api.nvim_set_keymap('n', '[g', ':Lspsaga diagnostic_jump_next<cr>', { noremap = true, silent = true })
 
 -- automatically show diagnostics in hover window
-vim.cmd("autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()")
+--vim.cmd("autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()")
 vim.cmd("highlight LspFloatWinNormal guibg=None")
