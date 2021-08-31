@@ -45,22 +45,13 @@ function(use)
     end,
     cmd = { "Telescope" },
     keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr"},
-    -- wants = {
-    --   "plenary.nvim",
-    --   "popup.nvim",
-    --   "telescope-z.nvim",
-    --   -- "telescope-frecency.nvim",
-    --   "telescope-fzy-native.nvim",
-    --   "telescope-project.nvim",
-    --   "trouble.nvim",
-    --   "telescope-symbols.nvim",
-    -- },
+    after = { "project.nvim", "telescope-fzf-native.nvim"},
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
       {"ahmedkhalf/project.nvim", config = function() require("config.project") end},
-      "nvim-telescope/telescope-fzy-native.nvim",
+      {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     },
   })
 
@@ -130,7 +121,7 @@ function(use)
       "nvim-treesitter/playground",
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-refactor",
-      "RRethy/nvim-treesitter-textsubjects",
+      "JoosepAlviste/nvim-ts-context-commentstring",
       "p00f/nvim-ts-rainbow",
     },
     config = function()
@@ -169,7 +160,7 @@ function(use)
   -- neoscroll
   use ({
       "karb94/neoscroll.nvim",
-      event = "bufRead",
+      keys = {'<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
       config = function ()
           require("config.neoscroll")
       end

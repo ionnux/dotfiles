@@ -10,5 +10,7 @@ require('nvim_comment').setup({
   -- Visual/Operator mapping left hand side
   operator_mapping = "gc",
   -- Hook function to call before commenting takes place
-  hook = nil
+  hook = function()
+    require("ts_context_commentstring.internal").update_commentstring()
+  end,
 })

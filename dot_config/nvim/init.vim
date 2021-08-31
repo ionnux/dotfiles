@@ -2,13 +2,8 @@
 lua require('plugins')
 
 call plug#begin('~/.nvim/plugged')
-" Plug 'easymotion/vim-easymotion'
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
-Plug 'karb94/neoscroll.nvim' "lua - smooth schrolling
-
-" Plug 'Xuyuanp/scrollbar.nvim' "lua - scrollbar
 " Plug 'sheerun/vim-polyglot'
 
 "Plug 'yuezk/vim-js'
@@ -59,7 +54,6 @@ Plug 'bluz71/vim-nightfly-guicolors'
 
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 
-" Plug 'hoob3rt/lualine.nvim'
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 " Plug 'kyazdani42/nvim-web-devicons'
@@ -67,8 +61,6 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ryanoasis/vim-devicons'
 
 " Plug 'mhinz/vim-startify'
-" Plug 'glepnir/dashboard-nvim' "lua - startup
-" Plug 'roman/golden-ratio'
 
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'honza/vim-snippets'
@@ -395,46 +387,6 @@ endif
 autocmd TermEnter * set timeoutlen=500
 autocmd TermLeave * set timeoutlen=1000
 
-
-
-"easymotion settings
-" let g:EasyMotion_verbose = 0
-" let g:EasyMotion_use_upper = 1
-" let g:EasyMotion_keys = 'ASDGHKLQWERTYUIOPZXCVBNMFJ;'
-" let g:EasyMotion_smartcase = 1
-
-"two character search
-"nmap s <Plug>(easymotion-s2)
-"nmap t <Plug>(easymotion-t2)
-
-"n character search
-"map  / <Plug>(easymotion-sn)
-"omap / <Plug>(easymotion-tn)
-"map  n <Plug>(easymotion-next)
-"map  N <Plug>(easymotion-prev)
-
-
-"vim-rainbow settings
-"let g:rainbow_active = 1
-
-
-"golden ratio settings
-"let g:loaded_golden_ratio = 0
-"let g:golden_ratio_exclude_nonmodifiable = 1
-"nmap yog <Plug>(golden_ratio_toggle)
-
-
-
-"nerdtree settings
-""nnoremap <leader>nn :NERDTree<CR>
-"nnoremap <leader>nf :NERDTreeFind<CR>
-"nnoremap <leader>nt :NERDTreeFocus<CR>
-"nnoremap <leader>nn :NERDTreeToggle<CR>
-
-""CHADtree settings
-"nnoremap <leader>v :CHADopen<cr>
-
-
 "neoterm settings
 "map <leader>ii to toggling neoterm
 " nnoremap <silent> <leader>ii :<c-u>exec v:count.'Ttoggle'<cr>
@@ -626,53 +578,6 @@ augroup END
 "     }
 " )
 " EOF
-
-" lualine settings
-" lua <<EOF
-" require('lualine').setup {
-" options = {
-"     --theme = "tokyonight",
-"     --theme = "material-nvim",
-"     theme = "nightfly",
-"     --theme = "moonlight",
-"     section_separators = { "", "" },
-"     component_separators = { "", "" },
-"     -- section_separators = { "", "" },
-"     -- component_separators = { "", "" },
-"     icons_enabled = true,
-"   },
-"   sections = {
-"     lualine_a = { 'mode' },
-"     lualine_b = { 'branch' },
-"     lualine_c = { 
-"                     { 
-"                         'diagnostics', 
-"                         sources = { "nvim_lsp" },
-"                     }, 
-"                     {
-"                         'filename',
-"                         file_status = true,
-"                         path = 1,
-"                     }
-"                 },
-"     lualine_x = { 'filetype', lsp_progress },
-"     lualine_y = { "progress" },
-"     lualine_z = { 'location' },
-"     --lualine_z = { clock },
-"   },
-"   inactive_sections = {
-"     lualine_a = {},
-"     lualine_b = {},
-"     lualine_c = {'filename'},
-"     lualine_x = {'location'},
-"     lualine_y = {},
-"     lualine_z = {},
-"   },
-"   tabline = {},
-"   extensions = {'nerdtree', 'quickfix'}
-" }
-" EOF
-
 
 " nvim colorizer settings
 lua require('config/colorizer')
@@ -1075,15 +980,3 @@ augroup autoPair
     autocmd FileType dart let b:AutoPairs = AutoPairsDefine({'<':'>'})
     autocmd FileType vim let b:AutoPairs = AutoPairsDefine({'lua <<EOF':'EOF'})
 augroup END
-
-
-"neoscroll settings
-lua require('config/neoscroll')
-
-
-
-
-
-"scrollbar settings
-" lua require('config/scrollbar')
-
