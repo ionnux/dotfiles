@@ -1,4 +1,3 @@
-
 return require('packer').startup(
 function(use)
   -- packer
@@ -9,16 +8,32 @@ function(use)
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
-      require("config.compe")
+      require("config.cmp")
     end,
     requires = {
       {
         "L3MON4D3/LuaSnip",
-        -- wants = "friendly-snippets",
-        -- config = function()
-        --   require("config.snippets")
-        -- end,
+      --   -- wants = "friendly-snippets",
+      --   -- config = function()
+      --   --   require("config.snippets")
+      --   -- end,
       },
+    {
+        "hrsh7th/vim-vsnip",
+        requires = {
+            "hrsh7th/vim-vsnip-integ",
+            "Neevash/awesome-flutter-snippets",
+            "Alexisvt/flutter-snippets",
+        },
+    },
+    { "hrsh7th/cmp-buffer", after = "nvim-cmp", },
+    { "hrsh7th/cmp-path", after = "nvim-cmp", },
+    { "hrsh7th/cmp-vsnip", after = "nvim-cmp", },
+    { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", },
+    { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
+    { "hrsh7th/cmp-calc", after = "nvim-cmp", },
+    { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
+
     },
   })
 
@@ -80,7 +95,7 @@ function(use)
   -- hop
   use({
     "phaazon/hop.nvim",
-    keys = {"s", "S", "gl", "gL"},
+    keys = {"s", "S", "gl", "gL", { "v", "s" }, {"v", "gl"}},
     cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
     config = function()
       require("config.hop")
@@ -131,6 +146,33 @@ function(use)
       require("galaxyline.my_theme")
   end,
   requires = {"kyazdani42/nvim-web-devicons", opt = true}
+  })
+
+  -- buffer-line
+  use ({
+      "akinsho/nvim-bufferline.lua",
+      event = "BufReadPre",
+      config = function ()
+          require("config.bufferline")
+      end
+  })
+
+  -- dashboard
+  use ({
+      "glepnir/dashboard-nvim",
+      event = "VimEnter",
+      config = function ()
+          require("config.dashboard")
+      end
+  })
+
+  -- neoscroll
+  use ({
+      "karb94/neoscroll.nvim",
+      event = "bufRead",
+      config = function ()
+          require("config.neoscroll")
+      end
   })
 
   -- registers

@@ -62,22 +62,18 @@ Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 " Plug 'hoob3rt/lualine.nvim'
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
-Plug 'akinsho/nvim-bufferline.lua'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'ryanoasis/vim-devicons'
 
-Plug 'mhinz/vim-startify'
+" Plug 'mhinz/vim-startify'
 " Plug 'glepnir/dashboard-nvim' "lua - startup
 " Plug 'roman/golden-ratio'
 
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'L3MON4D3/LuaSnip'
+" Plug 'SirVer/ultisnips'
 Plug 'norcalli/snippets.nvim'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 " Plug 'numtostr/FTerm.nvim'
 Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
@@ -88,10 +84,7 @@ Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 " dart and flutter related
 Plug 'nvim-lua/plenary.nvim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'Neevash/awesome-flutter-snippets' "vscode flutter snippets for vim-vsnip
 Plug 'SushanShakya/bloc_extension'
-Plug 'RobertBrunhage/flutter-riverpod-snippets' "vscode riverpod snippets for vim-vsnip
-Plug 'Alexisvt/flutter-snippets' "flutter snippets
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
 
 " Games
@@ -421,14 +414,6 @@ autocmd TermLeave * set timeoutlen=1000
 "map  N <Plug>(easymotion-prev)
 
 
-
-"ultisnips settings
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsExpandTrigger = '<Nop>'
-let g:UltiSnipsListSnippets = '<Nop>'
-
-
 "vim-rainbow settings
 "let g:rainbow_active = 1
 
@@ -630,11 +615,6 @@ augroup END
 " map('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
 " EOF
 
-" vim-snippets settings
-" flutter integration
-autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
-
-
 " disable diagnostic virtual text
 " lua <<EOF
 " vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -693,39 +673,6 @@ autocmd BufRead,BufNewFile,BufEnter *.dart UltiSnipsAddFiletypes dart-flutter
 " }
 " EOF
 
-" " nvim bufferline settings
-lua <<EOF
-require("bufferline").setup{
-  options = {
-    --numbers = "buffer_id", 
-    --number_style = "",
-    diagnostics = "nvim_lsp",
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    show_tab_indicators = true,
-    seperator_style = "thick"
-    },
-highlights = {
-    buffer_selected = {
-        guifg = "#7aa2f7",
-        guibg = normal_bg,
-        gui = "bold,italic"
-        },
-    separator = {
-        guifg = "#7aa2f7",
-        guibg = normal_bg,
-        },
-    modified = {
-        guifg = "#f7768e",
-        guibg = normal_bg,
-        },
-    modified_selected = {
-        guifg = "#f7768e",
-        guibg = normal_bg,
-        },
-    },
-}
-EOF
 
 " nvim colorizer settings
 lua require('config/colorizer')
@@ -857,50 +804,6 @@ vim.g.moonlight_borders = true
 EOF
 
 
-" lspkind settings
-lua <<EOF
-  require('lspkind').init({
-      -- enables text annotations
-      --
-      -- default: true
-      with_text = true,
-  
-      -- default symbol map
-      -- can be either 'default' or
-      -- 'codicons' for codicon preset (requires vscode-codicons font installed)
-      --
-      -- default: 'default'
-      preset = 'codicons',
-  
-      -- override preset symbols
-      --
-      -- default: {}
-      symbol_map = {
-        Text = '',
-        Method = 'ƒ',
-        Function = '',
-        Constructor = '',
-        Variable = '',
-        Class = '',
-        Interface = 'ﰮ',
-        Module = '',
-        Property = '',
-        Unit = '',
-        Value = '',
-        Enum = '了',
-        Keyword = '',
-        Snippet = '﬌',
-        Color = '',
-        File = '',
-        Folder = '',
-        EnumMember = '',
-        Constant = '',
-        Struct = ''
-      },
-  })
-EOF
-
-
 
 " formatter nvim settings
 lua <<EOF
@@ -931,12 +834,6 @@ lua <<EOF
 EOF
 nnoremap <leader>fm :Format<cr>
 
-" vsnip
-" Jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 " smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
@@ -1189,7 +1086,4 @@ lua require('config/neoscroll')
 
 "scrollbar settings
 " lua require('config/scrollbar')
-
-"dashboard settings
-lua require('config/dashboard')
 
