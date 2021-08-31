@@ -8,3 +8,5 @@ vim.g.nb_style = "midnight"
 
 require("nebulous").setup()
 vim.cmd("hi CursorLineNr guibg=None")
+vim.cmd("hi normalFloat guibg=None")
+vim.cmd("hi pmenu guibg=None")

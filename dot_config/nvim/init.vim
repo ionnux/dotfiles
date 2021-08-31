@@ -43,14 +43,6 @@ Plug 'folke/trouble.nvim'
 Plug 'folke/zen-mode.nvim'
 " Plug 'folke/which-key.nvim'
 
-" Plug 'joshdick/onedark.vim'
-Plug 'gruvbox-community/gruvbox'
-Plug 'arzg/vim-substrata'
-Plug 'shaunsingh/nord.nvim'
-Plug 'kyazdani42/blue-moon'
-Plug 'dracula/vim',{'as':'dracula'}
-Plug 'marko-cerovac/material.nvim'
-Plug 'bluz71/vim-nightfly-guicolors'
 
 Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 
@@ -91,19 +83,6 @@ let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_sign_column = 'bg0'
 " let g:gruvbox_italic = 1
 
-"vim nightfly guicolors settings
-"lua <<EOF
-"vim.g.nightflyCursorColor = 1
-"vim.g.nightflyUnderlineMatchParen = 0
-"vim.g.nightflyTransparent = 1
-"vim.g.nightflyTerminalColors = 1
-"vim.g.nightflyTerminalColors = 0
-"vim.g.nightflyUndercurls = 1
-"vim.g.nightflyVertSplits = 1
-"vim.g.nightflyItalics = 1
-"vim.g.nightflyNormalFloat = 1
-"EOF
-"
 
 
 " nord settings
@@ -125,14 +104,6 @@ let g:nord_disable_background = v:true
 "vim.g.material_hide_eob = true
 "EOF
 
-" colorscheme gruvbox
-" colorscheme dracula
-" colorscheme material
-" colorscheme nightfly
-" colorscheme substrata
-" colorscheme moonlight
-" colorscheme blue-moon
-" colorscheme nord
 
 "highlight settings for cusorline
 function ColorSettings()

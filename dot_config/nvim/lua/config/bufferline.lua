@@ -9,11 +9,11 @@ require("bufferline").setup{
     seperator_style = "thick"
     },
 highlights = {
-    buffer_selected = {
-        guifg = "#9ece6a",
-        guibg = normal_bg,
-        gui = "bold,italic"
-        },
+    -- buffer_selected = {
+    --     guifg = "#9ece6a",
+    --     guibg = normal_bg,
+    --     gui = "bold,italic"
+    --     },
     separator = {
         guifg = "#7aa2f7",
         guibg = normal_bg,

@@ -94,6 +94,19 @@ function(use)
         -- gitsigns
     })
 
+  -- nightfly
+    use({
+        "bluz71/vim-nightfly-guicolors",
+        disable = true,
+        event = "bufEnter",
+        after = "nvim-treesitter",
+        config = function ()
+            require("config.nightfly")
+        end,
+        requires = "nvim-treesitter/nvim-treesitter",
+        -- gitsigns
+    })
+
 -- moonlight
   use({
       "shaunsingh/moonlight.nvim",
@@ -107,6 +120,8 @@ function(use)
       -- gitsigns
   })
 
+
+  -- gitsigns
   use({
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -255,6 +270,7 @@ function(use)
       end,
   })
 
+  -- lspconfig
   use({
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
