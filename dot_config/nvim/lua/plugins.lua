@@ -48,10 +48,10 @@ function(use)
     after = { "project.nvim", "telescope-fzf-native.nvim"},
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
-      "nvim-lua/popup.nvim",
+      -- "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      {"ahmedkhalf/project.nvim", config = function() require("config.project") end},
-      {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+      {"ahmedkhalf/project.nvim", event = "bufRead", config = function() require("config.project") end},
+      {"nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true},
     },
   })
 
@@ -68,6 +68,7 @@ function(use)
   use ({
     'folke/tokyonight.nvim',
     event = "VimEnter",
+    after = "nvim-treesitter",
     config = function ()
         require('config.tokyonight')
     end,
@@ -115,6 +116,14 @@ function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
+    event = "BufReadPre",
+    after = {
+        "playground",
+        "nvim-treesitter-textobjects",
+        "nvim-treesitter-refactor",
+        "nvim-ts-context-commentstring",
+        "nvim-ts-rainbow"
+    },
     -- opt = true,
     -- event = "BufRead",
     requires = {
@@ -122,7 +131,7 @@ function(use)
       "nvim-treesitter/nvim-treesitter-textobjects",
       "nvim-treesitter/nvim-treesitter-refactor",
       "JoosepAlviste/nvim-ts-context-commentstring",
-      "p00f/nvim-ts-rainbow",
+      {"p00f/nvim-ts-rainbow"},
     },
     config = function()
         require('config.treesitter')
