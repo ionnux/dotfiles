@@ -41,9 +41,9 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       -- if vim.fn.pumvisible() == 1 then
       --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      if luasnip.jumpable(-1) then
+      if luasnip.jumpable(1) then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
-      elseif vim.fn['vsnip#jumpable']() == -1 then
+      elseif vim.fn['vsnip#jumpable']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-jump-prev)', true, true, true), '')
       else
         fallback()

@@ -6,13 +6,16 @@ function(use)
   -- nvim-compe
   use({
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       require("config.cmp")
     end,
+    after = {"vim-vsnip", "LuaSnip"},
     requires = {
       {
         "L3MON4D3/LuaSnip",
+        event = "InsertEnter",
+        -- event = "bufRead",
       --   -- wants = "friendly-snippets",
       --   -- config = function()
       --   --   require("config.snippets")
@@ -20,10 +23,12 @@ function(use)
       },
     {
         "hrsh7th/vim-vsnip",
+        event = "InsertEnter",
+        -- event = "bufRead",
         requires = {
-            "hrsh7th/vim-vsnip-integ",
-            "Neevash/awesome-flutter-snippets",
-            "Alexisvt/flutter-snippets",
+            {"hrsh7th/vim-vsnip-integ", event = "bufRead"},
+            {"Neevash/awesome-flutter-snippets", event = "bufRead"},
+            {"Alexisvt/flutter-snippets", event = "bufRead"},
         },
     },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp", },
@@ -50,7 +55,7 @@ function(use)
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      {"ahmedkhalf/project.nvim", event = "BufRead", config = function() require("config.project") end},
+      {"ahmedkhalf/project.nvim", config = function() require("config.project") end},
       {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     },
   })
@@ -67,14 +72,23 @@ function(use)
   -- tokyonight
   use ({
     'folke/tokyonight.nvim',
-    event = "VimEnter",
+    event = "bufEnter",
     after = "nvim-treesitter",
     config = function ()
         require('config.tokyonight')
     end,
 })
 
-  -- gitsigns
+use({
+    "Yagua/nebulous.nvim",
+    event = "bufEnter",
+    after = "nvim-treesitter",
+    config = function ()
+        require("config.nebulous")
+    end,
+    -- gitsigns
+})
+
   use({
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -161,9 +175,11 @@ function(use)
   use ({
       "glepnir/dashboard-nvim",
       event = "VimEnter",
+      after = "telescope.nvim",
       config = function ()
           require("config.dashboard")
-      end
+      end,
+      requires = "nvim-telescope/telescope.nvim",
   })
 
   -- neoscroll

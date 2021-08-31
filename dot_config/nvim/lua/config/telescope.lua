@@ -65,7 +65,7 @@ require('telescope').setup{
 }
 require('telescope').load_extension('fzf')
 
-vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>:Telescope projects theme=get_cursor<cr><esc>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fp', [[<cmd>:Telescope projects theme=get_dropdown<cr><esc>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr><esc>]], {noremap = true, silent = true})
