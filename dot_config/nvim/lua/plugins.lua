@@ -287,6 +287,7 @@ function(use)
 
  use {
   "folke/trouble.nvim",
+  keys = { "<leader>xx", "<leader>xw", "<leader>xd", "<leader>xl", "<leader>xq", "gR", "gD" },
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
     require("config.trouble")
