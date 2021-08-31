@@ -93,17 +93,17 @@ let g:gruvbox_sign_column = 'bg0'
 " let g:gruvbox_italic = 1
 
 "vim nightfly guicolors settings
-lua <<EOF
-vim.g.nightflyCursorColor = 1
-vim.g.nightflyUnderlineMatchParen = 0
-vim.g.nightflyTransparent = 1
-vim.g.nightflyTerminalColors = 1
-vim.g.nightflyTerminalColors = 0
-vim.g.nightflyUndercurls = 1
-vim.g.nightflyVertSplits = 1
-vim.g.nightflyItalics = 1
-vim.g.nightflyNormalFloat = 1
-EOF
+"lua <<EOF
+"vim.g.nightflyCursorColor = 1
+"vim.g.nightflyUnderlineMatchParen = 0
+"vim.g.nightflyTransparent = 1
+"vim.g.nightflyTerminalColors = 1
+"vim.g.nightflyTerminalColors = 0
+"vim.g.nightflyUndercurls = 1
+"vim.g.nightflyVertSplits = 1
+"vim.g.nightflyItalics = 1
+"vim.g.nightflyNormalFloat = 1
+"EOF
 "
 
 
@@ -113,18 +113,18 @@ let g:nord_borders = v:true
 let g:nord_disable_background = v:true
 
 " material nvim settings
-lua <<EOF
-vim.g.material_style = 'palenight'
-vim.g.material_italic_comments = true
-vim.g.material_italic_keywords = true
-vim.g.material_italic_functions = true
-vim.g.material_italic_variables = true
-vim.g.material_italic_strings = true
-vim.g.material_contrast = true
-vim.g.material_borders = true
-vim.g.material_disable_background = true
-vim.g.material_hide_eob = true
-EOF
+"lua <<EOF
+"vim.g.material_style = 'palenight'
+"vim.g.material_italic_comments = true
+"vim.g.material_italic_keywords = true
+"vim.g.material_italic_functions = true
+"vim.g.material_italic_variables = true
+"vim.g.material_italic_strings = true
+"vim.g.material_contrast = true
+"vim.g.material_borders = true
+"vim.g.material_disable_background = true
+"vim.g.material_hide_eob = true
+"EOF
 
 " colorscheme gruvbox
 " colorscheme dracula
@@ -585,24 +585,24 @@ lua require('config/colorizer')
 
 
 " " trouble nvim settings
-lua <<EOF
-  require("trouble").setup {
-      position = "bottom",
-      auto_close = true,
-      auto_open = false,
-      mode = "lsp_document_diagnostics",
-    }
-
-  -- keymappings
-  vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})
-
-EOF
+"lua <<EOF
+  "require("trouble").setup {
+      "position = "bottom",
+      "auto_close = true,
+      "auto_open = false,
+      "mode = "lsp_document_diagnostics",
+    "}
+"
+  "-- keymappings
+  "vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+  "vim.api.nvim_set_keymap("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})
+"
+"EOF
 
 " " which-key settings
 " lua <<EOF
@@ -614,54 +614,54 @@ EOF
 " EOF
 
 " zen mode settings
-lua << EOF
-  require("zen-mode").setup {
-    window = {
-      --backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-      backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-      -- height and width can be:
-      -- * an absolute number of cells when > 1
-      -- * a percentage of the width / height of the editor when <= 1
-      width = 120, -- width of the Zen window
-      --width = 1, -- width of the Zen window
-      height = 1, -- height of the Zen window
-      -- by default, no options are changed for the Zen window
-      -- uncomment any of the options below, or add other vim.wo options you want to apply
-      options = {
-        -- signcolumn = "no", -- disable signcolumn
-        -- number = false, -- disable number column
-        -- relativenumber = false, -- disable relative numbers
-        -- cursorline = false, -- disable cursorline
-        -- cursorcolumn = false, -- disable cursor column
-        -- foldcolumn = "0", -- disable fold column
-        -- list = false, -- disable whitespace characters
-      },
-    },
-    plugins = {
-      -- disable some global vim options (vim.o...)
-      -- comment the lines to not apply the options
-      options = {
-        enabled = true,
-        ruler = false, -- disables the ruler text in the cmd line area
-        showcmd = false, -- disables the command in the last line of the screen
-      },
-      twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-      gitsigns = { enabled = false }, -- disables git signs
-      tmux = { enabled = false }, -- disables the tmux statusline
-      -- this will change the font size on kitty when in zen mode
-      -- to make this work, you need to set the following kitty options:
-      -- - allow_remote_control socket-only
-      -- - listen_on unix:/tmp/kitty
-    },
-    -- callback where you can add custom code when the Zen window opens
-    on_open = function(win)
-    end,
-    -- callback where you can add custom code when the Zen window closes
-    on_close = function()
-    end,
-
-  }
-EOF
+"lua << EOF
+  "require("zen-mode").setup {
+    "window = {
+      "--backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+      "backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+      "-- height and width can be:
+      "-- * an absolute number of cells when > 1
+      "-- * a percentage of the width / height of the editor when <= 1
+      "width = 120, -- width of the Zen window
+      "--width = 1, -- width of the Zen window
+      "height = 1, -- height of the Zen window
+      "-- by default, no options are changed for the Zen window
+      "-- uncomment any of the options below, or add other vim.wo options you want to apply
+      "options = {
+        "-- signcolumn = "no", -- disable signcolumn
+        "-- number = false, -- disable number column
+        "-- relativenumber = false, -- disable relative numbers
+        "-- cursorline = false, -- disable cursorline
+        "-- cursorcolumn = false, -- disable cursor column
+        "-- foldcolumn = "0", -- disable fold column
+        "-- list = false, -- disable whitespace characters
+      "},
+    "},
+    "plugins = {
+      "-- disable some global vim options (vim.o...)
+      "-- comment the lines to not apply the options
+      "options = {
+        "enabled = true,
+        "ruler = false, -- disables the ruler text in the cmd line area
+        "showcmd = false, -- disables the command in the last line of the screen
+      "},
+      "twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+      "gitsigns = { enabled = false }, -- disables git signs
+      "tmux = { enabled = false }, -- disables the tmux statusline
+      "-- this will change the font size on kitty when in zen mode
+      "-- to make this work, you need to set the following kitty options:
+      "-- - allow_remote_control socket-only
+      "-- - listen_on unix:/tmp/kitty
+    "},
+    "-- callback where you can add custom code when the Zen window opens
+    "on_open = function(win)
+    "end,
+    "-- callback where you can add custom code when the Zen window closes
+    "on_close = function()
+    "end,
+"
+  "}
+"EOF
 nnoremap <leader>zm :ZenMode<cr>
 
 
@@ -698,16 +698,16 @@ lua require'dependency_assist'.setup{}
 
 
 " moonlight nvim settings
-lua <<EOF
-vim.g.moonlight_italic_comments = true
-vim.g.moonlight_italic_keywords = true
-vim.g.moonlight_italic_functions = true
-vim.g.moonlight_italic_variables = true
-vim.g.moonlight_contrast = true
-vim.g.moonlight_borders = true
--- load the colorscheme
---require('moonlight').set()
-EOF
+"lua <<EOF
+"vim.g.moonlight_italic_comments = true
+"vim.g.moonlight_italic_keywords = true
+"vim.g.moonlight_italic_functions = true
+"vim.g.moonlight_italic_variables = true
+"vim.g.moonlight_contrast = true
+"vim.g.moonlight_borders = true
+"-- load the colorscheme
+"--require('moonlight').set()
+"EOF
 
 
 

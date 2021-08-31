@@ -51,7 +51,7 @@ function(use)
       -- "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
       {"ahmedkhalf/project.nvim", event = "BufReadPre", config = function() require("config.project") end},
-      {"nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true},
+      {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     },
   })
 
@@ -67,7 +67,7 @@ function(use)
   -- tokyonight
   use ({
     'folke/tokyonight.nvim',
-    --event = "VimEnter",
+    event = "VimEnter",
     after = "nvim-treesitter",
     config = function ()
         require('config.tokyonight')
@@ -116,22 +116,22 @@ function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    event = "BufReadPre",
-    after = {
-        "playground",
-        "nvim-treesitter-textobjects",
-        "nvim-treesitter-refactor",
-        "nvim-ts-context-commentstring",
-        "nvim-ts-rainbow"
-    },
+    --event = "BufReadPre",
+    --after = {
+        --"playground",
+        --"nvim-treesitter-textobjects",
+        --"nvim-treesitter-refactor",
+        --"nvim-ts-context-commentstring",
+        --"nvim-ts-rainbow"
+    --},
     -- opt = true,
     -- event = "BufRead",
     requires = {
-      {"nvim-treesitter/playground", opt = true},
-      {"nvim-treesitter/nvim-treesitter-textobjects", opt = true},
-      {"nvim-treesitter/nvim-treesitter-refactor", opt = true},
-      {"JoosepAlviste/nvim-ts-context-commentstring", opt = true},
-      {"p00f/nvim-ts-rainbow", opt = true},
+      "nvim-treesitter/playground",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-refactor",
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "p00f/nvim-ts-rainbow",
     },
     config = function()
         require('config.treesitter')
@@ -142,7 +142,6 @@ function(use)
   use ({
   "glepnir/galaxyline.nvim",
   branch = 'main',
-  after = "nvim-treesitter",
   config = function()
       require("galaxyline.my_theme")
   end,
@@ -198,7 +197,6 @@ function(use)
   use ({
       "terrortylor/nvim-comment",
       keys = { { 'n', 'gcc' }, { 'v', 'gc' }, { 'o', 'gc' } },
-      after = "nvim-treesitter",
       config = function()
           require("config.nvim-comment")
       end,
