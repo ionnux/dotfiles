@@ -72,22 +72,27 @@ function(use)
   -- tokyonight
   use ({
     'folke/tokyonight.nvim',
+    disable = true,
     event = "bufEnter",
     after = "nvim-treesitter",
     config = function ()
         require('config.tokyonight')
     end,
+    requires = "nvim-treesitter/nvim-treesitter",
 })
 
-use({
-    "Yagua/nebulous.nvim",
-    event = "bufEnter",
-    after = "nvim-treesitter",
-    config = function ()
-        require("config.nebulous")
-    end,
-    -- gitsigns
-})
+  -- nebulous
+    use({
+        "Yagua/nebulous.nvim",
+        disable = false,
+        event = "bufEnter",
+        after = "nvim-treesitter",
+        config = function ()
+            require("config.nebulous")
+        end,
+        requires = "nvim-treesitter/nvim-treesitter",
+        -- gitsigns
+    })
 
   use({
     "lewis6991/gitsigns.nvim",
