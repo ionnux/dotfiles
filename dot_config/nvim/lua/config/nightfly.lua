@@ -12,3 +12,4 @@ vim.cmd [[colorscheme nightfly]]
 vim.cmd("hi CursorLineNr guibg=None")
 vim.cmd("hi normalFloat guibg=None")
 vim.cmd("hi pmenu guibg=None")
+vim.cmd("highlight StatusLine guibg=None")

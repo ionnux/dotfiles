@@ -8,3 +8,4 @@ vim.g.moonlight_disable_background = true
 
 -- load the colorscheme
 require('moonlight').set()
+vim.cmd("highlight StatusLine guibg=None")

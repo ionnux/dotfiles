@@ -12,3 +12,7 @@ vim.g.material_hide_eob = true
 
 --Lua:
 require('material').set()
+vim.cmd("hi CursorLineNr guibg=None")
+vim.cmd("hi normalFloat guibg=None")
+vim.cmd("hi pmenu guibg=None")
+vim.cmd("highlight StatusLine guibg=None")

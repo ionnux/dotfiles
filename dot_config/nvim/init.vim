@@ -66,9 +66,9 @@ Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 " Plug 'p00f/nvim-ts-rainbow'
 
 " dart and flutter related
-Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-lua/plenary.nvim'
 Plug 'dart-lang/dart-vim-plugin'
-Plug 'SushanShakya/bloc_extension'
+"Plug 'SushanShakya/bloc_extension'
 Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
 
 " Games
@@ -90,19 +90,6 @@ let g:nord_contrast = v:true
 let g:nord_borders = v:true
 let g:nord_disable_background = v:true
 
-" material nvim settings
-"lua <<EOF
-"vim.g.material_style = 'palenight'
-"vim.g.material_italic_comments = true
-"vim.g.material_italic_keywords = true
-"vim.g.material_italic_functions = true
-"vim.g.material_italic_variables = true
-"vim.g.material_italic_strings = true
-"vim.g.material_contrast = true
-"vim.g.material_borders = true
-"vim.g.material_disable_background = true
-"vim.g.material_hide_eob = true
-"EOF
 
 
 "highlight settings for cusorline

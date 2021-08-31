@@ -29,6 +29,7 @@ function(use)
             {"hrsh7th/vim-vsnip-integ", event = "bufRead"},
             {"Neevash/awesome-flutter-snippets", event = "bufRead"},
             {"Alexisvt/flutter-snippets", event = "bufRead"},
+            {"~/.nvim/local_plugins/bloc_snippets", event = "bufRead"} -- local plugin
         },
     },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp", },
@@ -72,7 +73,7 @@ function(use)
   -- tokyonight
   use ({
     'folke/tokyonight.nvim',
-    disable = true,
+    disable = false,
     event = "bufEnter",
     after = "nvim-treesitter",
     config = function ()
@@ -94,6 +95,19 @@ function(use)
         -- gitsigns
     })
 
+  -- material
+    use({
+        "marko-cerovac/material.nvim",
+        disable = true,
+        event = "bufEnter",
+        after = "nvim-treesitter",
+        config = function ()
+            require("config.material")
+        end,
+        requires = "nvim-treesitter/nvim-treesitter",
+        -- gitsigns
+    })
+
   -- nightfly
     use({
         "bluz71/vim-nightfly-guicolors",
@@ -110,7 +124,7 @@ function(use)
 -- moonlight
   use({
       "shaunsingh/moonlight.nvim",
-      disable = false,
+      disable = true,
       event = "bufEnter",
       after = "nvim-treesitter",
       config = function ()
@@ -189,10 +203,11 @@ function(use)
   use ({
   "glepnir/galaxyline.nvim",
   branch = 'main',
+  event = "bufEnter",
   config = function()
       require("galaxyline.my_theme")
   end,
-  requires = {"kyazdani42/nvim-web-devicons", opt = true}
+  requires = {"kyazdani42/nvim-web-devicons"}
   })
 
   -- buffer-line
@@ -269,6 +284,14 @@ function(use)
           require("config.lspsaga")
       end,
   })
+
+ use {
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("config.trouble")
+  end
+}
 
   -- lspconfig
   use({

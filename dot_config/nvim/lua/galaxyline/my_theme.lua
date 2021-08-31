@@ -3,6 +3,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
+colors.bg = "#1f2335"
 gl.short_line_list = {'NvimTree', 'Mundo', 'MundoDiff', 'vista','dbui','packer'}
 
 gls.left[1] = {
@@ -226,4 +227,3 @@ gls.short_line_right[1] = {
     highlight = {colors.fg,colors.bg}
   }
 }
-
