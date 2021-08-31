@@ -48,7 +48,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'arzg/vim-substrata'
 Plug 'shaunsingh/nord.nvim'
 Plug 'kyazdani42/blue-moon'
-Plug 'shaunsingh/moonlight.nvim'
 Plug 'dracula/vim',{'as':'dracula'}
 Plug 'marko-cerovac/material.nvim'
 Plug 'bluz71/vim-nightfly-guicolors'
@@ -695,19 +694,6 @@ lua require'dependency_assist'.setup{}
 "lua require('config/lightspeed')
 
 
-
-
-" moonlight nvim settings
-"lua <<EOF
-"vim.g.moonlight_italic_comments = true
-"vim.g.moonlight_italic_keywords = true
-"vim.g.moonlight_italic_functions = true
-"vim.g.moonlight_italic_variables = true
-"vim.g.moonlight_contrast = true
-"vim.g.moonlight_borders = true
-"-- load the colorscheme
-"--require('moonlight').set()
-"EOF
 
 
 

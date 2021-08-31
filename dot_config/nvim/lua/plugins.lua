@@ -84,7 +84,7 @@ function(use)
   -- nebulous
     use({
         "Yagua/nebulous.nvim",
-        disable = false,
+        disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
         config = function ()
@@ -93,6 +93,19 @@ function(use)
         requires = "nvim-treesitter/nvim-treesitter",
         -- gitsigns
     })
+
+-- moonlight
+  use({
+      "shaunsingh/moonlight.nvim",
+      disable = false,
+      event = "bufEnter",
+      after = "nvim-treesitter",
+      config = function ()
+          require("config.moonlight")
+      end,
+      requires = "nvim-treesitter/nvim-treesitter",
+      -- gitsigns
+  })
 
   use({
     "lewis6991/gitsigns.nvim",
