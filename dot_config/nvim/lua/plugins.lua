@@ -51,7 +51,7 @@ function(use)
     end,
     cmd = { "Telescope" },
     keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr"},
-    after = { "project.nvim", "telescope-fzf-native.nvim"},
+    after = { "project.nvim", "telescope-fzf-native.nvim", "trouble.nvim"},
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
