@@ -50,7 +50,7 @@ function(use)
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      {"ahmedkhalf/project.nvim", event = "BufReadPre", config = function() require("config.project") end},
+      {"ahmedkhalf/project.nvim", event = "BufRead", config = function() require("config.project") end},
       {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     },
   })
