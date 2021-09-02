@@ -6,7 +6,6 @@ call plug#begin('~/.nvim/plugged')
 
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
-" Plug 'windwp/nvim-autopairs'
 " Plug 'puremourning/vimspector'
 " Plug 'kassio/neoterm'
 
@@ -14,10 +13,6 @@ Plug 'tpope/vim-surround'
 " Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'dense-analysis/ale'
-Plug 'jiangmiao/auto-pairs'
-
-" Plug 'folke/twilight.nvim'
-
 
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
@@ -426,28 +421,6 @@ let g:undotree_SplitWidth = 30
 autocmd BufReadPost *.kt setlocal filetype=kotlin
 
 
-" twilight settings
-"lua << EOF
-  "require("twilight").setup {
-    "dimming = {
-      "alpha = 0.5, -- amount of dimming
-      "-- we try to get the foreground from the highlight groups or fallback color
-      "color = { "Normal", "#ffffff" },
-    "},
-    "context = 10, -- amount of lines we will try to show around the current line
-    "-- treesitter is used to automatically expand the visible text,
-    "-- but you can further control the types of nodes that should always be fully expanded
-    "expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-      ""function",
-      ""method",
-      ""table",
-      ""if_statement",
-    "},
-   "--exclude = {"vim"}, -- exclude these filetypes
-  "}
-"EOF
-" nnoremap <leader>tt :Twilight<cr>
-
 
 ""lightspeed settings
 "lua require('config/lightspeed')
@@ -680,8 +653,6 @@ EOF
 "galaxyline settings
 " lua require('galaxyline/my_theme')
 
-"nvim-autopairs settings
-"lua require('config/nvim-autopairs')
 
 
 "auto pairs settings
@@ -691,8 +662,8 @@ let g:AutoPairsShortcutFastWrap = '<c-f>'
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 " filetype autopairs
-augroup autoPair
-    autocmd!
-    autocmd FileType dart let b:AutoPairs = AutoPairsDefine({'<':'>'})
-    autocmd FileType vim let b:AutoPairs = AutoPairsDefine({'lua <<EOF':'EOF'})
-augroup END
+" augroup autoPair
+"     autocmd!
+"     autocmd FileType dart let b:AutoPairs = AutoPairsDefine({'<':'>'})
+"     autocmd FileType vim let b:AutoPairs = AutoPairsDefine({'lua <<EOF':'EOF'})
+" augroup END

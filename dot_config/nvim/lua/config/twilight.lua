@@ -18,3 +18,5 @@ require("twilight").setup {
   },
   exclude = {}, -- exclude these filetypes
 }
+
+vim.api.nvim_set_keymap("n", "<leader>zt", ":Twilight<cr>", { noremap = true, silent = true })
