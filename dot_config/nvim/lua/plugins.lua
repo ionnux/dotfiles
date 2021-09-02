@@ -271,13 +271,15 @@ function(use)
       end
   })
 
-  -- registers
+  -- which-key
   use ({
-    "tversteeg/registers.nvim",
-    config = function()
-        require("config.registers")
-    end,
-    keys = { { 'n', '"' }, { 'v', '"' }, { 'i', '<c-r>' } },
+      "folke/which-key.nvim",
+      event = "VimEnter",
+      config = function ()
+          require("config.which-key")
+      end
+
+
   })
 
   -- scrollview

@@ -17,7 +17,6 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 
 " Plug 'folke/twilight.nvim'
-" Plug 'folke/which-key.nvim'
 
 
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
@@ -425,18 +424,6 @@ let g:undotree_SplitWidth = 30
 "let g:mundo_inline_undo = 1
 
 autocmd BufReadPost *.kt setlocal filetype=kotlin
-
-
-
-" " which-key settings
-" lua <<EOF
-"   require("which-key").setup {
-"     -- your configuration comes here
-"     -- or leave it empty to use the default settings
-"     -- refer to the configuration section below
-"   }
-" EOF
-
 
 
 " twilight settings
