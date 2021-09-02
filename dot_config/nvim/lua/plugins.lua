@@ -216,6 +216,15 @@ function(use)
     end,
   })
 
+  -- zen-mode
+  use ({
+      "folke/zen-mode.nvim",
+      keys = "<leader>zz",
+      config = function ()
+          require("config.zen-mode")
+      end
+  })
+
   -- nvim_context_vt
   use ({
       "haringsrob/nvim_context_vt",
@@ -302,7 +311,8 @@ function(use)
   use({
       "jasonrhansen/lspsaga.nvim",
       branch = "finder-preview-fixes",
-      after = { "nvim-lspconfig" },
+      event = "bufRead",
+      wants = { "nvim-lspconfig" },
       config = function()
           require("config.lspsaga")
       end,
@@ -317,6 +327,15 @@ function(use)
   config = function()
     require("config.trouble")
   end
+})
+
+-- formatter
+use ({
+    "mhartington/formatter.nvim",
+    cmd = { "Format", "FormatWrite" },
+    config = function ()
+        require("config.formatter")
+    end
 })
 
 -- persistence
