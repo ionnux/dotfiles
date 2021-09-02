@@ -4,18 +4,10 @@ lua require('plugins')
 call plug#begin('~/.nvim/plugged')
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 
-Plug 'simnalamburt/vim-mundo'
-
-
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
 " Plug 'windwp/nvim-autopairs'
 " Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
-
-Plug 'mhartington/formatter.nvim'
-
-
 " Plug 'kassio/neoterm'
 
 " Plug 'vim-airline/vim-airline'
@@ -27,8 +19,6 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'folke/twilight.nvim'
 " Plug 'folke/which-key.nvim'
 
-
-Plug 'norcalli/nvim-colorizer.lua' " color highlighter
 
 " Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
@@ -45,17 +35,6 @@ Plug 'ray-x/lsp_signature.nvim'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 " Plug 'numtostr/FTerm.nvim'
 
-
-" Plug 'p00f/nvim-ts-rainbow'
-
-" dart and flutter related
-" Plug 'nvim-lua/plenary.nvim'
-Plug 'dart-lang/dart-vim-plugin'
-"Plug 'SushanShakya/bloc_extension'
-Plug 'akinsho/dependency-assist.nvim' "dependency assist for dart
-
-" Games
-Plug 'alec-gibson/nvim-tetris'
 call plug#end()
 
 "nvim settings
@@ -437,29 +416,6 @@ let g:startify_custom_header = [ " ███╗   ██╗ ██████�
 " let g:indentLine_char = '┊'
 
 
-
-"vim-maximizer settings
-nnoremap <silent><leader>m :MaximizerToggle!<CR>
-vnoremap <silent><leader>m :MaximizerToggle!<CR>gv
-
-
-
-"fzf settings
-" nnoremap <silent><leader>ff :Files<cr>
-" nnoremap <silent><leader>fif :Rg<cr>
-" nnoremap <silent><leader>fb :Buffers<cr>
-" nnoremap <silent><leader>fbl :BLines<cr>
-" nnoremap <silent><leader>fh :History<cr>
-" nnoremap <silent><leader>fc :Commands<cr>
-" nnoremap <silent><leader>fch :History:<cr>
-" nnoremap <silent><leader>fsh :History/<cr>
-" nnoremap <silent><leader>fcs :Colors<cr>
-
-
-"vim mundo settings
-let g:mundo_preview_bottom = 1
-nnoremap <silent><leader>vm :MundoToggle<cr>
-
 "undotree settings
 nnoremap <silent><leader>ut :UndotreeToggle<cr>
 let g:undotree_SetFocusWhenToggle = 1
@@ -470,52 +426,6 @@ let g:undotree_SplitWidth = 30
 
 autocmd BufReadPost *.kt setlocal filetype=kotlin
 
-
-"coq_nvim settings
-
-" dart vim settings
-let g:dartfmt_options = ['--fix']
-augroup FormatDart
-    autocmd!
-    autocmd BufWritePost *.dart DartFmt
-augroup END
-
-" FTerm settings
-" lua <<EOF
-" require('FTerm').setup()
-
-" require'FTerm'.setup({
-"     dimensions  = {
-"         height = 0.8,
-"         width = 0.8,
-"         x = 0.5,
-"         y = 0.5
-"     },
-"     border = 'single' -- or 'double'
-" })
-
-" -- Keybinding
-" local map = vim.api.nvim_set_keymap
-" local opts = { noremap = true, silent = true }
-
-" map('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
-" map('t', '<A-i>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opts)
-" EOF
-
-" disable diagnostic virtual text
-" lua <<EOF
-" vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-"     underline = true,
-"     virtual_text = false,
-"     signs = true,
-"     update_in_insert = true,
-"     severity_sort = false,
-"     }
-" )
-" EOF
-
-" nvim colorizer settings
-lua require('config/colorizer')
 
 
 " " which-key settings
@@ -551,45 +461,12 @@ lua require('config/colorizer')
 "EOF
 " nnoremap <leader>tt :Twilight<cr>
 
-" dependency assist settings
-lua require'dependency_assist'.setup{}
-
 
 ""lightspeed settings
 "lua require('config/lightspeed')
 
 
 
-
-
-" formatter nvim settings
-lua <<EOF
-  require('formatter').setup({
-    logging = false,
-    filetype = {
-        dart = {
-          -- dart format
-          function()
-              return{
-                exe = "dart format",
-                args = {"--fix"},
-                stdin = true,
-            }
-          end
-        },
-    }
-  })
-
-  -- format on save
-  vim.api.nvim_exec([[
-  augroup FormatAutogroup
-    autocmd!
-    autocmd BufWritePost  FormatWrite
-  augroup END
-  ]], true)
-
-EOF
-nnoremap <leader>fm :Format<cr>
 
 
 " imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'

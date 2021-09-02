@@ -318,6 +318,15 @@ function(use)
       end,
   })
 
+  -- nvim colorizer
+  use ({
+      "norcalli/nvim-colorizer.lua",
+      event = "bufRead",
+      config = function ()
+          require("config.colorizer")
+      end
+  })
+
   -- trouble
  use ({
   "folke/trouble.nvim",
@@ -375,6 +384,26 @@ use({
   use ({
       "tpope/vim-repeat",
       event = "bufEnter",
+  })
+
+  -- vim-mundo (vimscript)
+  use ({
+      "simnalamburt/vim-mundo",
+      keys = "<leader>vm",
+      config = function ()
+          vim.g.mundo_preview_bottom = 1
+          vim.api.nvim_set_keymap("n", "<leader>vm", ":MundoToggle<cr>", { noremap = true, silent = true })
+      end
+  })
+
+  -- vim-maximizer (vimscript)
+  use ({
+      "szw/vim-maximizer",
+      keys = { "<leader>m", { "v", "<leader>m" } },
+      config = function ()
+          vim.api.nvim_set_keymap("n", "<leader>m", ":MaximizerToggle!<cr>", { noremap = true, silent = true })
+          vim.api.nvim_set_keymap("v", "<leader>m", ":MaximizerToggle!<cr>gv", { noremap = true, silent = true })
+      end
   })
 
 end),
