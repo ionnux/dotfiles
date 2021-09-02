@@ -1,11 +1,11 @@
--- local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.providers.telescope")
 require('telescope').load_extension('projects')
 
 require('telescope').setup{
   defaults = {
     mappings = {
-        -- i = { ["<c-t>"] = trouble.open_with_trouble },
-        -- n = { ["<c-t>"] = trouble.open_with_trouble },
+        i = { ["<c-t>"] = trouble.open_with_trouble },
+        n = { ["<c-t>"] = trouble.open_with_trouble },
     },
     vimgrep_arguments = {
       'rg',

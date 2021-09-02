@@ -26,11 +26,10 @@ Plug 'szw/vim-maximizer'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'mhartington/formatter.nvim'
-Plug 'nacro90/numb.nvim'
+"Plug 'nacro90/numb.nvim'
 
 
 " Plug 'kassio/neoterm'
-Plug 'haringsrob/nvim_context_vt' "show virtual text of current context
 
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
@@ -662,7 +661,7 @@ nnoremap <leader>fm :Format<cr>
 " smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
 
 " numb nvim settings
-lua require('numb').setup()
+"lua require('numb').setup()
 
 " dart settings
 augroup dartrun

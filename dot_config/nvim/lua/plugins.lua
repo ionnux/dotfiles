@@ -7,6 +7,7 @@ function(use)
   use({
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
+    wants = {"vim-vsnip", "LuaSnip"},
     config = function()
       require("config.cmp")
     end,
@@ -16,6 +17,7 @@ function(use)
     { "hrsh7th/cmp-path", after = "nvim-cmp", },
     { "hrsh7th/cmp-vsnip", after = "nvim-cmp", },
     { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp", },
+    { "hrsh7th/cmp-vsnip", after = {"nvim-cmp", "vim-vsnip"}, },
     { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
     { "hrsh7th/cmp-calc", after = "nvim-cmp", },
     { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
@@ -23,22 +25,35 @@ function(use)
     },
   })
 
+  -- friendly snippet (collection)
+  use ({
+      "rafamadriz/friendly-snippets",
+      opt = true,
+  })
+
   -- LuaSnip
   use ({
       "L3MON4D3/LuaSnip",
-      after = "nvim-cmp",
+      opt = true,
+      wants = "friendly-snippets",
   })
 
   -- vim-vsnip
   use ({
     "hrsh7th/vim-vsnip",
-    after = "nvim-cmp",
+    opt = true,
+    wants = {
+        "vim-vsnip-integ",
+        "flutter-snippets",
+        "awesome-flutter-snippets",
+        "bloc_snippets",
+        "rafamadriz/friendly-snippets",
+    },
     requires = {
-        {"hrsh7th/vim-vsnip-integ", after = "vim-vsnip"},
-        { "hrsh7th/cmp-vsnip", after = {"nvim-cmp", "vim-vsnip"}, },
-        {"Neevash/awesome-flutter-snippets", after = "vim-vsnip"},
-        {"Alexisvt/flutter-snippets", after = "vim-vsnip"},
-        {"~/.nvim/local_plugins/bloc_snippets", after = "vim-vsnip"} -- local plugin
+        {"hrsh7th/vim-vsnip-integ", opt = true},
+        {"Neevash/awesome-flutter-snippets", opt = true},
+        {"Alexisvt/flutter-snippets", opt = true},
+        {"~/.nvim/local_plugins/bloc_snippets", opt = true} -- local plugin
     },
   })
 
@@ -50,14 +65,20 @@ function(use)
     end,
     cmd = { "Telescope" },
     keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr"},
-    after = { "project.nvim", "telescope-fzf-native.nvim", "trouble.nvim", "plenary.nvim"},
+    wants = { "trouble.nvim", "plenary.nvim", "project.nvim", "telescope-fzf-native.nvim" },
+    --after = { "project.nvim", "telescope-fzf-native.nvim", "plenary.nvim"},
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
-      {"nvim-lua/plenary.nvim"},
-      {"ahmedkhalf/project.nvim", config = function() require("config.project") end},
-      {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
+      {"ahmedkhalf/project.nvim", config = function() require("config.project") end, opt = true},
+      {"nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true},
     },
+  })
+
+  -- plenary
+  use ({
+      "nvim-lua/plenary.nvim",
+      opt = true,
   })
 
 -- toggleterm
@@ -74,11 +95,10 @@ function(use)
     'folke/tokyonight.nvim',
     disable = false,
     event = "bufEnter",
-    after = "nvim-treesitter",
+    wants = "nvim-treesitter",
     config = function ()
         require('config.tokyonight')
     end,
-    requires = "nvim-treesitter/nvim-treesitter",
 })
 
   -- nebulous
@@ -138,7 +158,7 @@ function(use)
   use({
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
-    requires = { "nvim-lua/plenary.nvim" },
+    wants = "plenary.nvim",
     config = function()
       require("config.gitsigns")
     end,
@@ -176,26 +196,30 @@ function(use)
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
-    --event = "BufReadPre",
-    --after = {
-        --"playground",
-        --"nvim-treesitter-textobjects",
-        --"nvim-treesitter-refactor",
-        --"nvim-ts-context-commentstring",
-        --"nvim-ts-rainbow"
-    --},
-    -- opt = true,
-    -- event = "BufRead",
+    event = "BufRead",
+    wants = {
+        "playground",
+        "nvim-treesitter-textobjects",
+        "nvim-treesitter-refactor",
+        "nvim-ts-context-commentstring",
+        "nvim-ts-rainbow"
+    },
     requires = {
-      "nvim-treesitter/playground",
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "nvim-treesitter/nvim-treesitter-refactor",
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      "p00f/nvim-ts-rainbow",
+        {"nvim-treesitter/playground", opt = true},
+        {"nvim-treesitter/nvim-treesitter-textobjects", opt = true},
+        {"nvim-treesitter/nvim-treesitter-refactor", opt = true},
+        {"JoosepAlviste/nvim-ts-context-commentstring", opt = true},
+        {"p00f/nvim-ts-rainbow", opt = true},
     },
     config = function()
         require('config.treesitter')
     end,
+  })
+
+  -- nvim_context_vt
+  use ({
+      "haringsrob/nvim_context_vt",
+      after = "nvim-treesitter",
   })
 
   -- galaxyline
@@ -284,20 +308,37 @@ function(use)
       end,
   })
 
+  -- trouble
  use {
   "folke/trouble.nvim",
   keys = { "<leader>xx", "<leader>xw", "<leader>xd", "<leader>xl", "<leader>xq", "gR", "gD" },
+  event = "BufReadPre",
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
     require("config.trouble")
   end
 }
 
+-- persistence
+  -- Lua
+use({
+  "folke/persistence.nvim",
+  event = "BufReadPre", -- this will only start session saving when an actual file was opened
+  module = "persistence",
+  config = function()
+    require("persistence").setup()
+  end,
+})
+
   -- lspconfig
   use({
     "neovim/nvim-lspconfig",
-    -- event = "VimEnter",
-    requires = { "kabouzeid/nvim-lspinstall" },
+    event = "BufReadPre",
+    wants = "lua-dev.nvim",
+    requires = {
+        "kabouzeid/nvim-lspinstall",
+        {"folke/lua-dev.nvim", opt = true}
+    },
     config = function()
       require("config.lsp")
     end,
@@ -305,4 +346,9 @@ function(use)
 
 end),
 
-vim.cmd([[autocmd BufWritePost plugins.lua source <afile> | PackerCompile]])
+vim.cmd([[
+augroup Plugin 
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+augroup END
+]])
