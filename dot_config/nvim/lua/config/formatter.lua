@@ -13,10 +13,7 @@ require('formatter').setup({
         return {
           exe = "lua-format",
           args = {
-            "--indent-width=2", "--continuation-indent-width=2",
-            "--no-keep-simple-control-bloc-one-line",
-            "--no-keep-simple-function-one-line",
-          },
+              "-c", "/home/og_saaz/.config/nvim/lua/config/lua-format-config-file" },
           stdin = true
         }
       end
