@@ -1,4 +1,4 @@
-local luasnip = require 'luasnip'
+-- local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 
 local check_back_space = function()
@@ -27,7 +27,9 @@ cmp.setup {
     ['<Tab>'] = function(fallback)
       -- if vim.fn.pumvisible() == 1 then
       --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-n>', true, true, true), 'n')
-      if luasnip.jumpable(1) then
+      -- if luasnip.jumpable(1) then
+        -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-next', true, true, true), '')
+      if vim.fn['luasnip#jumpable']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-next', true, true, true), '')
       elseif check_back_space() then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Tab>', true, true, true), 'n')
@@ -41,7 +43,9 @@ cmp.setup {
     ['<S-Tab>'] = function(fallback)
       -- if vim.fn.pumvisible() == 1 then
       --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<C-p>', true, true, true), 'n')
-      if luasnip.jumpable(1) then
+      -- if luasnip.jumpable(1) then
+      --   vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+      if vim.fn['luasnip#jumpable']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
       elseif vim.fn['vsnip#jumpable']() == 1 then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>(vsnip-jump-prev)', true, true, true), '')

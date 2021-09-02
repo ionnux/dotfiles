@@ -2,7 +2,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagn
   virtual_text = true,
   signs = true,
   underline = true,
-  update_in_insert = true,
+  update_in_insert = false,
 })
 
 -- Configure lua language server for neovim development

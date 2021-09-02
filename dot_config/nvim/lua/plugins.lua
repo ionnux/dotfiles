@@ -6,32 +6,12 @@ function(use)
   -- nvim-compe
   use({
     "hrsh7th/nvim-cmp",
-    -- event = "InsertEnter",
+    event = "InsertEnter",
     config = function()
       require("config.cmp")
     end,
-    after = {"vim-vsnip", "LuaSnip"},
+    --after = {"vim-vsnip", "LuaSnip"},
     requires = {
-      {
-        "L3MON4D3/LuaSnip",
-        event = "InsertEnter",
-        -- event = "bufRead",
-      --   -- wants = "friendly-snippets",
-      --   -- config = function()
-      --   --   require("config.snippets")
-      --   -- end,
-      },
-    {
-        "hrsh7th/vim-vsnip",
-        event = "InsertEnter",
-        -- event = "bufRead",
-        requires = {
-            {"hrsh7th/vim-vsnip-integ", event = "bufRead"},
-            {"Neevash/awesome-flutter-snippets", event = "bufRead"},
-            {"Alexisvt/flutter-snippets", event = "bufRead"},
-            {"~/.nvim/local_plugins/bloc_snippets", event = "bufRead"} -- local plugin
-        },
-    },
     { "hrsh7th/cmp-buffer", after = "nvim-cmp", },
     { "hrsh7th/cmp-path", after = "nvim-cmp", },
     { "hrsh7th/cmp-vsnip", after = "nvim-cmp", },
@@ -43,6 +23,25 @@ function(use)
     },
   })
 
+  -- LuaSnip
+  use ({
+      "L3MON4D3/LuaSnip",
+      after = "nvim-cmp",
+  })
+
+  -- vim-vsnip
+  use ({
+    "hrsh7th/vim-vsnip",
+    after = "nvim-cmp",
+    requires = {
+        {"hrsh7th/vim-vsnip-integ", after = "vim-vsnip"},
+        { "hrsh7th/cmp-vsnip", after = {"nvim-cmp", "vim-vsnip"}, },
+        {"Neevash/awesome-flutter-snippets", after = "vim-vsnip"},
+        {"Alexisvt/flutter-snippets", after = "vim-vsnip"},
+        {"~/.nvim/local_plugins/bloc_snippets", after = "vim-vsnip"} -- local plugin
+    },
+  })
+
   -- telescope
   use({
     "nvim-telescope/telescope.nvim",
@@ -51,11 +50,11 @@ function(use)
     end,
     cmd = { "Telescope" },
     keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr"},
-    after = { "project.nvim", "telescope-fzf-native.nvim", "trouble.nvim"},
+    after = { "project.nvim", "telescope-fzf-native.nvim", "trouble.nvim", "plenary.nvim"},
     requires = {
       -- "nvim-telescope/telescope-z.nvim",
       -- "nvim-lua/popup.nvim",
-      "nvim-lua/plenary.nvim",
+      {"nvim-lua/plenary.nvim"},
       {"ahmedkhalf/project.nvim", config = function() require("config.project") end},
       {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
     },
@@ -297,7 +296,7 @@ function(use)
   -- lspconfig
   use({
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    -- event = "VimEnter",
     requires = { "kabouzeid/nvim-lspinstall" },
     config = function()
       require("config.lsp")

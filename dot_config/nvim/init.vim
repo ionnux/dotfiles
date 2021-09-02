@@ -150,22 +150,16 @@ augroup END
 
 
 "show line number
-set number
-" augroup numbertoggle
-"     autocmd!
-"     autocmd TermEnter * set nonumber
-"     autocmd TermLeave * set number
-"     autocmd FileType log set nonumber norelativenumber
-"     autocmd FileType flutterToolsOutline set nonumber norelativenumber
-" augroup END
+augroup numbertoggle
+    autocmd!
+    set number
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
 
-"show relative number
-set relativenumber
-"settings for when to show relativenumber
-augroup relativenumbertoggle
+augroup RelativeNumbertoggle
   autocmd!
-  autocmd BufEnter,InsertLeave,WinEnter,TermLeave * set relativenumber number
-  autocmd BufLeave,InsertEnter,WinLeave,TermEnter  * set norelativenumber nonumber
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
 
 
