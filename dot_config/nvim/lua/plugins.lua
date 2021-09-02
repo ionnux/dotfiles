@@ -20,7 +20,7 @@ function(use)
     { "hrsh7th/cmp-vsnip", after = {"nvim-cmp", "vim-vsnip"}, },
     { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp", },
     { "hrsh7th/cmp-calc", after = "nvim-cmp", },
-    { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp", },
+    { "saadparwaiz1/cmp_luasnip", after = {"nvim-cmp", "LuaSnip"}, },
 
     },
   })
@@ -47,7 +47,7 @@ function(use)
         "flutter-snippets",
         "awesome-flutter-snippets",
         "bloc_snippets",
-        "rafamadriz/friendly-snippets",
+        "friendly-snippets",
     },
     requires = {
         {"hrsh7th/vim-vsnip-integ", opt = true},
@@ -309,7 +309,7 @@ function(use)
   })
 
   -- trouble
- use {
+ use ({
   "folke/trouble.nvim",
   keys = { "<leader>xx", "<leader>xw", "<leader>xd", "<leader>xl", "<leader>xq", "gR", "gD" },
   event = "BufReadPre",
@@ -317,26 +317,28 @@ function(use)
   config = function()
     require("config.trouble")
   end
-}
+})
 
 -- persistence
   -- Lua
 use({
   "folke/persistence.nvim",
   event = "BufReadPre", -- this will only start session saving when an actual file was opened
+  keys = { "<leader>qs", "<leader>ql", "<leader>qd" },
   module = "persistence",
   config = function()
-    require("persistence").setup()
+    require("config.persistence")
   end,
 })
 
   -- lspconfig
   use({
     "neovim/nvim-lspconfig",
-    event = "BufReadPre",
+    --event = "BufReadPre",
     wants = "lua-dev.nvim",
     requires = {
         "kabouzeid/nvim-lspinstall",
+        "onsails/lspkind-nvim",
         {"folke/lua-dev.nvim", opt = true}
     },
     config = function()
@@ -344,7 +346,20 @@ use({
     end,
   })
 
+  -- vim unimpaired (vimscript)
+  use ({
+      "tpope/vim-unimpaired",
+      event = "bufEnter",
+  })
+
+  -- vim repeat (vimscript)
+  use ({
+      "tpope/vim-repeat",
+      event = "bufEnter",
+  })
+
 end),
+
 
 vim.cmd([[
 augroup Plugin 

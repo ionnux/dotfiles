@@ -4,13 +4,7 @@ lua require('plugins')
 call plug#begin('~/.nvim/plugged')
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 
-" Plug 'sheerun/vim-polyglot'
-
-"Plug 'yuezk/vim-js'
 Plug 'simnalamburt/vim-mundo'
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'mbbill/undotree'
-"Plug 'justinmk/vim-sneak'
 
 
 Plug 'tpope/vim-unimpaired'
@@ -53,12 +47,11 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'mhinz/vim-startify'
 
 Plug 'ray-x/lsp_signature.nvim'
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
-Plug 'norcalli/snippets.nvim'
+"Plug 'norcalli/snippets.nvim'
 " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 " Plug 'numtostr/FTerm.nvim'
-Plug 'onsails/lspkind-nvim' "add vscode-like pictograms to builtin lsp
 
 
 " Plug 'p00f/nvim-ts-rainbow'
