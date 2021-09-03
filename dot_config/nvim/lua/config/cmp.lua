@@ -107,7 +107,7 @@ cmp.setup {
   },
 }
 
--- you need setup cmp first put this after cmp.setup()
+-- nvim-autopairs settings for nvim-cmp
 require( "nvim-autopairs.completion.cmp" ).setup(
   {
     map_cr = true, --  map <CR> on insert mode
@@ -115,3 +115,4 @@ require( "nvim-autopairs.completion.cmp" ).setup(
     auto_select = true, -- automatically select the first item
   }
  )
+-- afdfad

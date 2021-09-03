@@ -73,10 +73,10 @@ vim.g.nvim_tree_icons = {
 }
 
 vim.api.nvim_set_keymap(
-  "n", "<leader>nn", ":NvimTreeToggle<cr>", { noremep = true, silent = true }
+  "n", "<leader>nn", ":NvimTreeToggle<cr>", { noremap = true, silent = true }
  )
 vim.api.nvim_set_keymap(
-  "n", "<leader>nf", ":NvimTreeFocus<cr>", { noremep = true, silent = true }
+  "n", "<leader>nf", ":NvimTreeFocus<cr>", { noremap = true, silent = true }
  )
 -- NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 

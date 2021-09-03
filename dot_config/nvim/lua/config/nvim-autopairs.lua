@@ -1,9 +1,8 @@
 require( 'nvim-autopairs' ).setup(
   {
-
     map_bs = true, -- map the <BS> key
     disable_filetype = { "TelescopePrompt" },
-    -- ignored_next_char = string.gsub( [[ [%w%%%'%[%"%.] ]], "%s+", "" ),
+    ignored_next_char = "[%w%.]",
     enable_moveright = true,
     enable_afterquote = true, -- add bracket pairs after quote
     enable_check_bracket_line = true, --- check bracket in same line
@@ -18,6 +17,7 @@ require( 'nvim-autopairs' ).setup(
       hightlight = 'Search',
     },
   }
+
  )
 
 local cond = require( 'nvim-autopairs.conds' )
@@ -29,7 +29,7 @@ npairs.add_rules {
   Rule( ' ', ' ' ):with_pair(
     function( opts )
       local pair = opts.line:sub( opts.col - 1, opts.col )
-      return vim.tbl_contains( { '()', '[]', '{}' }, pair )
+      return vim.tbl_contains( { '()', '[]', '{}', '<>' }, pair )
     end
    ),
   Rule( '( ', ' )' ):with_pair(
@@ -59,4 +59,7 @@ npairs.add_rules {
       return opts.prev_char:match( '.%]' ) ~= nil
     end
    ):use_key( ']' ),
+  Rule( '<', '>' ),
 }
+
+vim.api.nvim_set_keymap( "i", "<c-h>", "<bs>", { noremap = false } )

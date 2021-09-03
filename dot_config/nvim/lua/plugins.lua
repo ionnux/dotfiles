@@ -104,14 +104,19 @@ return require( 'packer' ).startup(
       }
      )
 
-    -- nvim-tree 
+    -- nvim-tree
     use(
       {
         "kyazdani42/nvim-tree.lua",
         keys = { "<leader>nn", "<leader>nf" },
         cmd = { "NvimTreeToogle", "NvimTreeFocus" },
+        wants = { "nvim-web-devicons" },
+        config = function()
+          require( "config.nvim-tree" )
+        end,
       }
      )
+
     -- plenary
     use( { "nvim-lua/plenary.nvim", opt = true } )
 
@@ -314,15 +319,19 @@ return require( 'packer' ).startup(
         config = function()
           require( "galaxyline.my_theme" )
         end,
-        requires = { "kyazdani42/nvim-web-devicons" },
+        wants = { "nvim-web-devicons" },
       }
      )
+
+    -- nvim-web-devicons
+    use( { "kyazdani42/nvim-web-devicons", opt = true } )
 
     -- buffer-line
     use(
       {
         "akinsho/nvim-bufferline.lua",
         event = "BufReadPre",
+        wants = { "nvim-web-devicons" },
         config = function()
           require( "config.bufferline" )
         end,
