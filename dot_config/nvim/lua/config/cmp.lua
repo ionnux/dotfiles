@@ -115,4 +115,3 @@ require( "nvim-autopairs.completion.cmp" ).setup(
     auto_select = true, -- automatically select the first item
   }
  )
--- afdfad
