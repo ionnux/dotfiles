@@ -12,7 +12,6 @@ return require( 'packer' ).startup(
         config = function()
           require( "config.cmp" )
         end,
-        -- after = {"vim-vsnip", "LuaSnip"},
         requires = {
           { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
           { "hrsh7th/cmp-path", after = "nvim-cmp" },

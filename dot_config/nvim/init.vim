@@ -6,7 +6,6 @@ call plug#begin('~/.nvim/plugged')
 
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
-" Plug 'puremourning/vimspector'
 " Plug 'kassio/neoterm'
 
 " Plug 'vim-airline/vim-airline'
