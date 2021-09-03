@@ -23,7 +23,7 @@ vim.opt.joinspaces = false -- No double spaces with join after a dot
 vim.opt.list = true -- Show some invisible characters (tabs...
 vim.opt.mouse = "a" -- enable mouse mode
 -- vim.opt.number = true -- Print line number
-vim.opt.pumblend = 10 -- Popup blend
+-- vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 -- vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.scrolloff = 4 -- Lines of context
@@ -39,7 +39,7 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.tabstop = indent -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.undofile = true
-vim.opt.undodir = [[~/.nvim/undo]]
+vim.opt.undodir = [[/home/og_saaz/.nvim/undo]]
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
@@ -122,7 +122,7 @@ vim.cmd(
  )
 
 -- Highlight on yank
-vim.cmd( "au TextYankPost * lua vim.highlight.on_yank {}" )
+vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }" )
 
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )

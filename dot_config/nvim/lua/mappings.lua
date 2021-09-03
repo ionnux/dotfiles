@@ -9,7 +9,7 @@ vim.api.nvim_set_keymap( "i", ".", [[.<c-g>u]], { noremap = true } )
 vim.api.nvim_set_keymap( "i", "!", [[!<c-g>u]], { noremap = true } )
 vim.api.nvim_set_keymap( "i", "?", [[?<c-g>u]], { noremap = true } )
 vim.api.nvim_set_keymap( "i", "_", [[_<c-g>u]], { noremap = true } )
-vim.api.nvim_set_keymap( "i", "-", [[j-<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", "-", [[-<c-g>u]], { noremap = true } )
 
 -- populate jumplist whenever I move upward or downward 5 lines and above
 vim.api.nvim_set_keymap(
@@ -24,8 +24,12 @@ vim.api.nvim_set_keymap(
 -- mapping for moving line(s) in normal, insert and visual modes.
 vim.api.nvim_set_keymap( "v", "J", [[:m '>+1<cr>gv=gv]], { noremap = true } )
 vim.api.nvim_set_keymap( "v", "K", [[:m '<-2<cr>gv=gv]], { noremap = true } )
-vim.api.nvim_set_keymap( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]] , {noremap = true})
-vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]] , {noremap = true})
+vim.api.nvim_set_keymap(
+  "n", "<leader>k", [[ <esc>:m .-2<cr>== ]], { noremap = true }
+ )
+vim.api.nvim_set_keymap(
+  "n", "<leader>j", [[ <esc>:m .+1<cr>== ]], { noremap = true }
+ )
 
 -- yank from cursor to eol
 vim.api.nvim_set_keymap( "n", "Y", "y$", { noremap = true } )
@@ -47,7 +51,7 @@ vim.api.nvim_set_keymap( "t", "<c-h>", [[<backspace>]], { noremap = true } )
 
 -- use <leader>ww to write files
 vim.api.nvim_set_keymap(
-  "n", "<leader>ww", [[:write<cr>]], { noremap = true, silent = true }
+  "n", "<leader>ww", ":write<cr>", { noremap = true, silent = true }
  )
 vim.api.nvim_set_keymap(
   "n", "<leader>wq", [[:exit<cr>]], { noremap = true, silent = true }
@@ -59,14 +63,7 @@ vim.api.nvim_set_keymap(
 -- map <leader>ev to edit my vimrc file
 vim.cmd(
   [[
- <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.vim<cr>
-function EditVimrc()
-    if winwidth('.') > 110
-        :vs $MYVIMRC
-    else
-        :e $MYVIMRC
-    endif
-endfuncti
+ nnoremap <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.lua<cr>
 ]]
  )
 
