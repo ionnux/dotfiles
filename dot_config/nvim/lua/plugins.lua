@@ -3,10 +3,11 @@ return require( 'packer' ).startup(
     -- packer
     use 'wbthomason/packer.nvim'
 
-    -- nvim-compe
+    -- nvim-cmp
     use(
       {
         "hrsh7th/nvim-cmp",
+        disable = false,
         event = "InsertEnter",
         wants = { "vim-vsnip", "LuaSnip", "nvim-autopairs" },
         config = function()
@@ -25,6 +26,10 @@ return require( 'packer' ).startup(
         },
       }
      )
+
+    -- coq_nvim
+    use { 'ms-jpq/coq_nvim', branch = 'coq', disable = true } -- main one
+    use { 'ms-jpq/coq.artifacts', branch = 'artifacts', disable = true } -- 9000+ Snippets
 
     -- friendly snippet (collection)
     use( { "rafamadriz/friendly-snippets", opt = true } )
@@ -409,6 +414,7 @@ return require( 'packer' ).startup(
       {
         "akinsho/flutter-tools.nvim",
         ft = { "flutter", "dart" },
+        wants = "plenary.nvim",
         config = function()
           require( "config.flutter-tools" )
         end,
@@ -424,6 +430,17 @@ return require( 'packer' ).startup(
         wants = { "nvim-lspconfig" },
         config = function()
           require( "config.lspsaga" )
+        end,
+      }
+     )
+
+    -- lsp signagure
+    use(
+      {
+        "ray-x/lsp_signature.nvim",
+        event = "bufRead",
+        config = function()
+          require( "config.lsp-signature" )
         end,
       }
      )
