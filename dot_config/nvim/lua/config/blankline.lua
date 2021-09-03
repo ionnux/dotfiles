@@ -1,10 +1,5 @@
-vim.opt.listchars = {
-    space = "⋅",
-    eol = "↴",
-}
+vim.opt.listchars = { space = "⋅" }
 
-
-vim.g.indent_blankline_show_end_of_line = true
 vim.g.space_char_blankline = " "
 vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
 vim.g.indent_blankline_filetype_exclude = {

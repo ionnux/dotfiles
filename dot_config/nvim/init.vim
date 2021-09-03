@@ -226,33 +226,28 @@ function EditVimrc()
 endfunction
 
 "map <leader>; to add delimiter to end of line.
-nnoremap <leader>; :call Delimiter()<cr>
-function Delimiter()
+nnoremap ;; :call SemiColonDelimiter()<cr>
+nnoremap ,, :call CommaDelimiter()<cr>
+
+function CommaDelimiter()
     let cursor_pos = getpos(".")
-    if &filetype ==# "javascript"
-        if getline(".")[-1:] != ";"
-            execute "normal! A;\<esc>"
-            call setpos(".", cursor_pos)
-        else
-            execute "normal! $x"
-            call setpos(".", cursor_pos)
-        endif
-    elseif &filetype ==# "dart"
-        if getline(".")[-1:] != ";"
-            execute "normal! A;\<esc>"
-            call setpos(".", cursor_pos)
-        else
-            execute "normal! $x"
-            call setpos(".", cursor_pos)
-        endif
-    elseif &filetype ==# "json"
-        if getline(".")[-1:] != ","
-            execute "normal! A,\<esc>"
-            call setpos(".", cursor_pos)
-        else
-            execute "normal! $x"
-            call setpos(".", cursor_pos)
-        endif
+    if getline(".")[-1:] != ","
+        execute "normal! A,\<esc>"
+        call setpos(".", cursor_pos)
+    else
+        execute "normal! $x"
+        call setpos(".", cursor_pos)
+    endif
+endfunction
+
+function SemiColonDelimiter()
+    let cursor_pos = getpos(".")
+    if getline(".")[-1:] != ";"
+        execute "normal! A;\<esc>"
+        call setpos(".", cursor_pos)
+    else
+        execute "normal! $x"
+        call setpos(".", cursor_pos)
     endif
 endfunction
 
@@ -656,10 +651,10 @@ EOF
 
 
 "auto pairs settings
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
-let g:AutoPairsShortcutFastWrap = '<c-f>'
-let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+" let g:AutoPairsFlyMode = 1
+" let g:AutoPairsShortcutBackInsert = '<M-b>'
+" let g:AutoPairsShortcutFastWrap = '<c-f>'
+" let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 
 " filetype autopairs
 " augroup autoPair
