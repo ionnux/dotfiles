@@ -24,8 +24,8 @@ vim.api.nvim_set_keymap(
 -- mapping for moving line(s) in normal, insert and visual modes.
 vim.api.nvim_set_keymap( "v", "J", [[:m '>+1<cr>gv=gv]], { noremap = true } )
 vim.api.nvim_set_keymap( "v", "K", [[:m '<-2<cr>gv=gv]], { noremap = true } )
-vim.api.nvim_set_keymap( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]] )
-vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]] )
+vim.api.nvim_set_keymap( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]] , {noremap = true})
+vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]] , {noremap = true})
 
 -- yank from cursor to eol
 vim.api.nvim_set_keymap( "n", "Y", "y$", { noremap = true } )
