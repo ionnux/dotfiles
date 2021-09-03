@@ -1,54 +1,60 @@
-local map = vim.api.nvim_set_keymap
-local opts = 'afada'
-local sopts = 'afada'
-
 -- keep cursor in center of screen when transversing search
-map( "n", "n", "nzzzv", opts )
-map( "n", "N", "Nzzzv", opts )
-map( "n", "J", "mzJ'z", opts )
+vim.api.nvim_set_keymap( "n", "n", "nzzzv", { noremap = true } )
+vim.api.nvim_set_keymap( "n", "N", "Nzzzv", { noremap = true } )
+vim.api.nvim_set_keymap( "n", "J", "mzJ'z", { noremap = true } )
 
 -- add undo break points whenever certain characters are pressed
-map( "i", ",", [[,<c-g>u]], opts )
-map( "i", ".", [[.<c-g>u]], opts )
-map( "i", "!", [[!<c-g>u]], opts )
-map( "i", "?", [[?<c-g>u]], opts )
-map( "i", "_", [[_<c-g>u]], opts )
-map( "i", "-", [[j-<c-g>u]], opts )
+vim.api.nvim_set_keymap( "i", ",", [[,<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", ".", [[.<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", "!", [[!<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", "?", [[?<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", "_", [[_<c-g>u]], { noremap = true } )
+vim.api.nvim_set_keymap( "i", "-", [[j-<c-g>u]], { noremap = true } )
 
 -- populate jumplist whenever I move upward or downward 5 lines and above
-map(
-  "n", "k", [[(v:count > 4 ? "m'" . v:count : "") . 'k']], opts, { expr = true }
+vim.api.nvim_set_keymap(
+  "n", "k", [[(v:count > 4 ? "m'" . v:count : "") . 'k']],
+  { noremap = true, expr = true }
  )
-map(
-  "n", "j", [[(v:count > 4 ? "m'" . v:count : "") . 'j']], opts, { expr = true }
+vim.api.nvim_set_keymap(
+  "n", "j", [[(v:count > 4 ? "m'" . v:count : "") . 'j']],
+  { noremap = true, expr = true }
  )
 
 -- mapping for moving line(s) in normal, insert and visual modes.
-map( "v", "J", [[:m '>+1<cr>gv=gv]], opts )
-map( "v", "K", [[:m '<-2<cr>gv=gv]], opts )
-map( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]] )
-map( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]] )
+vim.api.nvim_set_keymap( "v", "J", [[:m '>+1<cr>gv=gv]], { noremap = true } )
+vim.api.nvim_set_keymap( "v", "K", [[:m '<-2<cr>gv=gv]], { noremap = true } )
+vim.api.nvim_set_keymap( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]] )
+vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]] )
 
 -- yank from cursor to eol
-map( "n", "Y", "y$", opts )
+vim.api.nvim_set_keymap( "n", "Y", "y$", { noremap = true } )
 
 -- map <leader>sv to source my vimrc file
-map( "n", "<leader>sv", [[:source $MYVIMRC<cr>]], opts )
+vim.api.nvim_set_keymap(
+  "n", "<leader>sv", [[:source $MYVIMRC<cr>]], { noremap = true }
+ )
 
 -- press ctrl l to go to the end of line in insert mode
-map( "i", "<c-l>", "<c-o>A", opts )
+vim.api.nvim_set_keymap( "i", "<c-l>", "<c-o>A", { noremap = true } )
 
 -- use jk to go to normal mode from insert mode
-map( "i", "jk", "<esc>", opts )
+vim.api.nvim_set_keymap( "i", "jk", "<esc>", { noremap = true } )
 
 -- terminal mode mapping
-map( "t", "jk", [[<c-\>'c-n']], opts )
-map( "t", "<c-h>", [[<backspace>]], opts )
+vim.api.nvim_set_keymap( "t", "jk", [[<c-\>'c-n']], { noremap = true } )
+vim.api.nvim_set_keymap( "t", "<c-h>", [[<backspace>]], { noremap = true } )
 
 -- use <leader>ww to write files
-map( "n", "<leader>ww", [[:write<cr>]], sopts )
-map( "n", "<leader>wq", [[:exit<cr>]], sopts )
-map( "n", "<leader>bd", [[:bdelete<cr>]], sopts )
+vim.api.nvim_set_keymap(
+  "n", "<leader>ww", [[:write<cr>]], { noremap = true, silent = true }
+ )
+vim.api.nvim_set_keymap(
+  "n", "<leader>wq", [[:exit<cr>]], { noremap = true, silent = true }
+ )
+vim.api.nvim_set_keymap(
+  "n", "<leader>bd", [[:bdelete<cr>]], { noremap = true, silent = true }
+ )
 
 -- map <leader>ev to edit my vimrc file
 vim.cmd(
