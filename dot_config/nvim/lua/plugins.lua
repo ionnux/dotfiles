@@ -62,7 +62,7 @@ return require( 'packer' ).startup(
     use(
       {
         "windwp/nvim-autopairs",
-        event = "VimEnter",
+        event = "InsertEnter",
         config = function()
           require( "config.nvim-autopairs" )
         end,
@@ -346,7 +346,6 @@ return require( 'packer' ).startup(
     use(
       {
         "glepnir/dashboard-nvim",
-        disable = true,
         event = "VimEnter",
         after = "telescope.nvim",
         config = function()

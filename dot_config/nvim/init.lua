@@ -8,4 +8,4 @@ vim.defer_fn(
   end, 0
  )
 
-vim.cmd(":intro")
+-- vim.cmd(":intro")
