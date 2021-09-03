@@ -522,6 +522,7 @@ return require( 'packer' ).startup(
 
     -- vim unimpaired (vimscript)
     use( { "tpope/vim-unimpaired", event = "bufEnter" } )
+    use( { "tpope/vim-surround", event = "bufRead" } )
 
     -- vim repeat (vimscript)
     use( { "tpope/vim-repeat", event = "bufEnter" } )
@@ -560,6 +561,7 @@ return require( 'packer' ).startup(
      )
 
   end
+
         ), vim.cmd(
          [[
 augroup Plugin 
@@ -567,4 +569,10 @@ augroup Plugin
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup END
 ]]
+        ), -- mappings
+vim.api.nvim_set_keymap(
+         "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true }
+        ), vim.api.nvim_set_keymap(
+         "n", "<leader>pS", ":PackerStatus<cr>",
+         { noremap = true, silent = true }
         )

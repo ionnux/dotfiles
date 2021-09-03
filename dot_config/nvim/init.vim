@@ -4,7 +4,6 @@ lua require('plugins')
 call plug#begin('~/.nvim/plugged')
 " Plug 'ggandor/lightspeed.nvim' "motion plugin written in lua
 
-Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-commentary'
 " Plug 'kassio/neoterm'
 
@@ -17,7 +16,6 @@ Plug 'tpope/vim-surround'
 
 " Plug 'mhinz/vim-startify'
 
-Plug 'ray-x/lsp_signature.nvim'
 "Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
 "Plug 'norcalli/snippets.nvim'
@@ -25,12 +23,15 @@ Plug 'ray-x/lsp_signature.nvim'
 " Plug 'numtostr/FTerm.nvim'
 
 call plug#end()
+set undofile
+set undodir=~/.nvim/undo
+set hidden
 
 "nvim settings
 
 "gruvbox settings
-"set gruvbox contrast to hard. put this before the colorscheme setting
 let g:gruvbox_contrast_dark = 'hard'
+"set gruvbox contrast to hard. put this before the colorscheme setting
 let g:gruvbox_sign_column = 'bg0'
 " let g:gruvbox_italic = 1
 
@@ -116,7 +117,6 @@ augroup END
 
 
 "set number of lines to keep above and below when scrolling
-set scrolloff=8
 
 set colorcolumn=80
 augroup colorcolumnToggle
@@ -130,27 +130,17 @@ augroup END
 "hide insert display in insert mode
 set noshowmode
 
-set ignorecase
 set smartcase
 
 " mouse support
 set mouse=nv
 
-" set maximum number of items to show in the popup menu
-set pumheight=15
 
-"set tab to have 4 spaces
-set tabstop=4
 
-"i'm setting this because of vi mundo
-set undodir=~/.nvim/undo
-set undofile
 
 "expand tabs into spaces
-set expandtab
 
 " disable curlorline highlighting
-set nocursorline
 
 "when using << or >> commands, indent line by 4 spaces
 set shiftwidth=4
@@ -162,26 +152,19 @@ set signcolumn=yes
 "force nvim to use 256 color
 set termguicolors
 
-"open horizontal splits below the current window
-set splitbelow
 
 "do not highlight search
 set nohlsearch
 
-"open vertical splits to the right of the current window
-set splitright
 
-set hidden
 set nobackup
 set cmdheight=1
 set updatetime=600
 set shortmess+=c
 
 "nvim mappings
-
+let mapleader = " "
 "use space key as leader
-nnoremap <SPACE> <Nop>
-let mapleader=" "
 
 " keep cursor in center of screen when transversing search
 nnoremap n nzzzv
@@ -471,45 +454,6 @@ augroup END
 
 
 
-"lsp signature settings
-lua <<EOF
-require "lsp_signature".setup({
-  bind = true, -- This is mandatory, otherwise border config won't get registered.
-               -- If you want to hook lspsaga or other signature handler, pls set to false
-  doc_lines = 10, -- will show two lines of comment/doc(if there are more than two lines in doc, will be truncated);
-                 -- set to 0 if you DO NOT want any API comments be shown
-                 -- This setting only take effect in insert mode, it does not affect signature help in normal
-                 -- mode, 10 by default
-
-  floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-  fix_pos = true,  -- set to true, the floating window will not auto-close until finish all parameters
-  hint_enable = false, -- virtual hint enable
-  hint_prefix = "🐼 ",  -- Panda for parameter
-  hint_scheme = "String",
-  use_lspsaga = false,  -- set to true if you want to use lspsaga popup
-  hi_parameter = "incSearch", -- how your parameter will be highlight
-  max_height = 20, -- max height of signature floating_window, if content is more than max_height, you can scroll down
-                   -- to view the hiding contents
-  max_width = 120, -- max_width of signature floating_window, line will be wrapped if exceed max_width
-  handler_opts = {
-    border = "single"   -- double, single, shadow, none
-  },
-
-  trigger_on_newline = false, -- sometime show signature on new line can be confusing, set it to false for #58
-  extra_trigger_chars = {"(", ",", ":"}, -- Array of extra characters that will trigger signature completion, e.g., {"(", ","}
-  -- deprecate !!
-  -- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
-  zindex = 200, -- by default it will be on top of all floating windows, set to 50 send it to bottom
-  debug = false, -- set to true to enable debug logging
-  log_path = "debug_log_file_path", -- debug log path
-
-  padding = '', -- character to pad on left and right of signature can be ' ', or '|'  etc
-
-  shadow_blend = 36, -- if you using shadow as border use this set the opacity
-  shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
-  toggle_key = nil -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
-})
-EOF
 
 "galaxyline settings
 " lua require('galaxyline/my_theme')

@@ -1,14 +1,8 @@
 local indent = 2
 
---[[ vim.bo.expandtab = true -- Use spaces instead of tabs
-vim.bo.shiftwidth = indent -- Size of an indent
-vim.bo.smartindent = true -- Insert indents automatically
-vim.bo.undofile = true ]]
-
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
-vim.g.node_host_prog =
-  "/Users/folke/.pnpm-global/5/node_modules/neovim/bin/cli.js"
+vim.api.nvim_set_keymap( "n", "<space>", "<Nop>", { noremap = true } )
+-- vim.g.maplocalleader = ","
 vim.opt.autowrite = true -- enable auto write
 vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
@@ -19,7 +13,7 @@ vim.opt.expandtab = true -- Use spaces instead of tabs
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- TreeSitter folding
 -- vim.opt.foldlevel = 6
 -- vim.opt.foldmethod = "expr" -- TreeSitter folding
-vim.opt.guifont = "FiraCode Nerd Font:h12"
+-- vim.opt.guifont = "FiraCode Nerd Font:h12"
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.hidden = true -- Enable modified buffers in background
@@ -28,10 +22,10 @@ vim.opt.inccommand = "split" -- preview incremental substitute
 vim.opt.joinspaces = false -- No double spaces with join after a dot
 vim.opt.list = true -- Show some invisible characters (tabs...
 vim.opt.mouse = "a" -- enable mouse mode
-vim.opt.number = true -- Print line number
+-- vim.opt.number = true -- Print line number
 vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
-vim.opt.relativenumber = true -- Relative line numbers
+-- vim.opt.relativenumber = true -- Relative line numbers
 vim.opt.scrolloff = 4 -- Lines of context
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = indent -- Size of an indent
@@ -45,6 +39,7 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.tabstop = indent -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.undofile = true
+vim.opt.undodir = [[~/.nvim/undo]]
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
@@ -93,6 +88,24 @@ vim.cmd( [[autocmd FileType markdown setlocal spell]] )
 -- Check if we need to reload the file when it changed
 vim.cmd( "au FocusGained * :checktime" )
 
+-- number and relativenumber settings
+vim.cmd(
+  [[
+"show line number
+augroup numbertoggle
+    autocmd!
+    set number
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
+augroup RelativeNumbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+]]
+ )
+
 -- show cursor line only in active window
 vim.cmd(
   [[
@@ -112,8 +125,8 @@ vim.cmd(
 vim.cmd( "au TextYankPost * lua vim.highlight.on_yank {}" )
 
 -- ftdetect
-vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
-vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
+-- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
+-- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
 
 -- windows to close with "q"
 vim.cmd(
