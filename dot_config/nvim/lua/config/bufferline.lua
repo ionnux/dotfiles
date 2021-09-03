@@ -1,9 +1,7 @@
-local colors = require( "colors.themes." .. vim.g.colors_name )
+local colors = require( "colors" )
 
 local present, bufferline = pcall( require, "bufferline" )
-if not present then
-  return
-end
+if not present then return end
 
 -- function executed for top right close button in bufferline
 vim.cmd "function! NvChad_bufferline_quitvim(a,b,c,d) \n qa \n endfunction"
@@ -33,10 +31,10 @@ bufferline.setup {
     custom_filter = function( buf_number )
       -- Func to filter out our managed/persistent split terms
       local present_type, type = pcall(
-                                   function()
+        function()
           return vim.api.nvim_buf_get_var( buf_number, "term_type" )
         end
-                                  )
+       )
 
       if present_type then
         if type == "vert" then
