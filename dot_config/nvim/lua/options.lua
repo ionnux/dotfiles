@@ -8,12 +8,11 @@ vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
 vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
 vim.opt.concealcursor = "n" -- Hide * markup for bold and italic
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
-vim.opt.cursorline = true -- Enable highlighting of the current line
+vim.opt.cursorline = false -- Enable highlighting of the current line
 vim.opt.expandtab = true -- Use spaces instead of tabs
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- TreeSitter folding
--- vim.opt.foldlevel = 6
 -- vim.opt.foldmethod = "expr" -- TreeSitter folding
--- vim.opt.guifont = "FiraCode Nerd Font:h12"
+-- vim.opt.foldlevel = 6
 vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.hidden = true -- Enable modified buffers in background
@@ -43,7 +42,7 @@ vim.opt.undodir = [[/home/og_saaz/.nvim/undo]]
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
-vim.opt.wrap = false -- Disable line wrap
+vim.opt.wrap = true -- Disable line wrap
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 vim.o.shortmess = "ToOlxfitn"
 
@@ -107,12 +106,12 @@ augroup END
  )
 
 -- show cursor line only in active window
-vim.cmd(
-  [[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]]
- )
+-- vim.cmd(
+--   [[
+--   autocmd InsertLeave,WinEnter * set cursorline
+--   autocmd InsertEnter,WinLeave * set nocursorline
+-- ]]
+--  )
 
 -- go to last loc when opening a buffer
 vim.cmd(
@@ -122,7 +121,9 @@ vim.cmd(
  )
 
 -- Highlight on yank
-vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }" )
+vim.cmd(
+  "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }"
+ )
 
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )

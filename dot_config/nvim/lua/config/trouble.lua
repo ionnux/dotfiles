@@ -11,5 +11,5 @@
   vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", {silent = true, noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", {silent = true, noremap = true})
   vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "gR", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
-  vim.api.nvim_set_keymap("n", "gD", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "gr", "<cmd>TroubleToggle lsp_references<cr>", {silent = true, noremap = true})
+  vim.api.nvim_set_keymap("n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", {silent = true, noremap = true})

@@ -139,9 +139,8 @@ return require( 'packer' ).startup(
     use(
       {
         'folke/tokyonight.nvim',
-        disable = false,
-        event = "bufEnter",
-        wants = "nvim-treesitter",
+        -- event = "bufEnter",
+        -- wants = "nvim-treesitter",
         config = function()
           require( 'config.tokyonight' )
         end,
@@ -252,7 +251,8 @@ return require( 'packer' ).startup(
     use(
       {
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufReadPre",
+        -- event = "BufEnter",
+        -- wants = "tokyonight.nvim",
         config = function()
           require( "config.blankline" )
         end,
@@ -264,20 +264,20 @@ return require( 'packer' ).startup(
       {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        event = "BufRead",
-        wants = {
-          "playground",
-          "nvim-treesitter-textobjects",
-          "nvim-treesitter-refactor",
-          "nvim-ts-context-commentstring",
-          "nvim-ts-rainbow",
-        },
+        -- event = "BufRead",
+        -- wants = {
+        --   "playground",
+        --   "nvim-treesitter-textobjects",
+        --   "nvim-treesitter-refactor",
+        --   "nvim-ts-context-commentstring",
+        --   "nvim-ts-rainbow",
+        -- },
         requires = {
-          { "nvim-treesitter/playground", opt = true },
-          { "nvim-treesitter/nvim-treesitter-textobjects", opt = true },
-          { "nvim-treesitter/nvim-treesitter-refactor", opt = true },
-          { "JoosepAlviste/nvim-ts-context-commentstring", opt = true },
-          { "p00f/nvim-ts-rainbow", opt = true },
+          { "nvim-treesitter/playground" },
+          { "nvim-treesitter/nvim-treesitter-textobjects" },
+          { "nvim-treesitter/nvim-treesitter-refactor" },
+          { "JoosepAlviste/nvim-ts-context-commentstring" },
+          { "p00f/nvim-ts-rainbow" },
         },
         config = function()
           require( 'config.treesitter' )

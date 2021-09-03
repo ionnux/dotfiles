@@ -1,3 +1,4 @@
+
 vim.g.nvim_tree_side = 'left' -- left by default
 vim.g.nvim_tree_width = 25 -- 30 by default, can be width_in_columns or 'width_in_percent%'
 vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' } -- empty by default
