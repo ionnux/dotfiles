@@ -4,7 +4,7 @@ require'lightspeed'.setup {
   -- This can get _really_ slow if the window has a lot of content,
   -- turn it on only if your machine can always cope with it.
   highlight_unique_chars = false,
-  grey_out_search_area = true,
+  grey_out_search_area = false,
   match_only_the_start_of_same_char_seqs = true,
   limit_ft_matches = 5,
   full_inclusive_prefix_key = '<c-x>',
@@ -15,13 +15,21 @@ require'lightspeed'.setup {
   -- cycle_group_bwd_key = '<s-tab>',
 }
 
-  function repeat_ft(reverse)
-    local ls = require'lightspeed'
-    ls.ft['instant-repeat?'] = true
-    ls.ft:to(reverse, ls.ft['prev-t-like?'])
-  end
+-- function repeat_ft(reverse)
+--   local ls = require'lightspeed'
+--   ls.ft['instant-repeat?'] = true
+--   ls.ft:to(reverse, ls.ft['prev-t-like?'])
+-- end
 
-  vim.api.nvim_set_keymap('n', ';', '<cmd>lua repeat_ft(false)<cr>', {noremap = true, silent = true})
-  vim.api.nvim_set_keymap('x', ';', '<cmd>lua repeat_ft(false)<cr>', {noremap = true, silent = true})
-  vim.api.nvim_set_keymap('n', ',', '<cmd>lua repeat_ft(true)<cr>', {noremap = true, silent = true})
-  vim.api.nvim_set_keymap('x', ',', '<cmd>lua repeat_ft(true)<cr>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap(
+  'n', ';', '<cmd>lua repeat_ft(false)<cr>', { noremap = true, silent = true }
+ )
+vim.api.nvim_set_keymap(
+  'x', ';', '<cmd>lua repeat_ft(false)<cr>', { noremap = true, silent = true }
+ )
+vim.api.nvim_set_keymap(
+  'n', ',', '<cmd>lua repeat_ft(true)<cr>', { noremap = true, silent = true }
+ )
+vim.api.nvim_set_keymap(
+  'x', ',', '<cmd>lua repeat_ft(true)<cr>', { noremap = true, silent = true }
+ )

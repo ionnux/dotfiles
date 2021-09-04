@@ -6,6 +6,9 @@ local paste = function()
   end
 end
 
-return {
-  paste = paste
-}
+local mode = function()
+  local mode = vim.api.nvim_eval( 'mode()' )
+  if (mode == 'v') then return '--TERMINAL--' end
+end
+
+return { paste = paste, mode = mode }

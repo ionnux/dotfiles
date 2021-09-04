@@ -1,11 +1,9 @@
--- vim.cmd(
---   [[
--- let colors = luaeval('require("colors")')
--- exe 'highlight GitSignsAdd guifg=' . colors.vibrant_green
--- exe 'highlight GitSignsChange guifg=' . colors.blue
--- exe 'highlight GitSignsDelete guifg=' . colors.red
--- ]]
---  )
+-- highlight settings
+local colors = require( "colors" )
+vim.cmd( 'highlight GitSignsAdd guifg=' .. colors.vibrant_green )
+vim.cmd( 'highlight GitSignsChange guifg=' .. colors.blue )
+vim.cmd( 'highlight GitSignsDelete guifg=' .. colors.red )
+
 require( 'gitsigns' ).setup {
   signs = {
     add = {

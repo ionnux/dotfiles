@@ -9,7 +9,7 @@ require( 'nvim-autopairs' ).setup(
     check_ts = false,
     fast_wrap = {
       map = '<c-f>',
-      chars = { '{', '[', '(', '"', "'" },
+      chars = { '{', '[', '(', '"', "'", '>' },
       pattern = string.gsub( [[ [%'%"%)%>%]%)%}%,] ]], '%s+', '' ),
       end_key = '$',
       keys = 'qwertyuiopzxcvbnmasdfghjkl',
@@ -20,7 +20,7 @@ require( 'nvim-autopairs' ).setup(
 
  )
 
-local cond = require( 'nvim-autopairs.conds' )
+-- local cond = require( 'nvim-autopairs.conds' )
 local npairs = require 'nvim-autopairs'
 local Rule = require 'nvim-autopairs.rule'
 

@@ -3,6 +3,14 @@ return require( 'packer' ).startup(
     -- packer
     use 'wbthomason/packer.nvim'
 
+    -- impatient nvim
+    -- use {
+    -- 'lewis6991/impatient.nvim',
+    -- rocks = 'mpack',
+    -- config = function()
+    -- end,
+    -- }
+
     -- nvim-cmp
     use(
       {
@@ -139,7 +147,8 @@ return require( 'packer' ).startup(
     use(
       {
         'folke/tokyonight.nvim',
-        -- event = "bufEnter",
+        disable = true,
+        event = "bufEnter",
         -- wants = "nvim-treesitter",
         config = function()
           require( 'config.tokyonight' )
@@ -193,7 +202,7 @@ return require( 'packer' ).startup(
     use(
       {
         "shaunsingh/moonlight.nvim",
-        disable = true,
+        -- disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
         config = function()
@@ -219,10 +228,22 @@ return require( 'packer' ).startup(
     use(
       {
         "phaazon/hop.nvim",
+        disable = false,
         keys = { "s", "S", "gl", "gL", { "v", "s" }, { "v", "gl" } },
         cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
         config = function()
           require( "config.hop" )
+        end,
+      }
+     )
+
+    -- lightspeed
+    use(
+      {
+        'ggandor/lightspeed.nvim',
+        disable = true,
+        config = function()
+          require( "config.lightspeed" )
         end,
       }
      )
@@ -458,15 +479,15 @@ return require( 'packer' ).startup(
     use(
       {
         "folke/trouble.nvim",
-        keys = {
-          "<leader>xx",
-          "<leader>xw",
-          "<leader>xd",
-          "<leader>xl",
-          "<leader>xq",
-          "gR",
-          "gD",
-        },
+        -- keys = {
+        --   "<leader>xx",
+        --   "<leader>xw",
+        --   "<leader>xd",
+        --   "<leader>xl",
+        --   "<leader>xq",
+        --   "gR",
+        --   "gD",
+        -- },
         event = "BufReadPre",
         wants = "nvim-web-devicons",
         config = function()

@@ -46,7 +46,7 @@ vim.api.nvim_set_keymap( "i", "<c-l>", "<c-o>A", { noremap = true } )
 vim.api.nvim_set_keymap( "i", "jk", "<esc>", { noremap = true } )
 
 -- terminal mode mapping
-vim.api.nvim_set_keymap( "t", "jk", [[<c-\>'c-n']], { noremap = true } )
+vim.api.nvim_set_keymap( "t", "jk", [[<c-\><c-n>]], { noremap = true } )
 vim.api.nvim_set_keymap( "t", "<c-h>", [[<backspace>]], { noremap = true } )
 
 -- use <leader>ww to write files
