@@ -158,7 +158,6 @@ return require( 'packer' ).startup(
           require( "config.nebulous" )
         end,
         requires = "nvim-treesitter/nvim-treesitter",
-        -- gitsigns
       }
      )
 
@@ -173,7 +172,6 @@ return require( 'packer' ).startup(
           require( "config.material" )
         end,
         requires = "nvim-treesitter/nvim-treesitter",
-        -- gitsigns
       }
      )
 
@@ -188,7 +186,6 @@ return require( 'packer' ).startup(
           require( "config.nightfly" )
         end,
         requires = "nvim-treesitter/nvim-treesitter",
-        -- gitsigns
       }
      )
 
@@ -203,7 +200,6 @@ return require( 'packer' ).startup(
           require( "config.moonlight" )
         end,
         requires = "nvim-treesitter/nvim-treesitter",
-        -- gitsigns
       }
      )
 
@@ -235,8 +231,9 @@ return require( 'packer' ).startup(
     use(
       {
         "sindrets/diffview.nvim",
+        wants = "nvim-web-devicons",
         cmd = {
-          "DiffviewOpen",
+          "DiffviewOpendevicons",
           "DiffviewClose",
           "DiffviewToggleFiles",
           "DiffviewFocusFiles",
@@ -251,6 +248,7 @@ return require( 'packer' ).startup(
     use(
       {
         "lukas-reineke/indent-blankline.nvim",
+        disable = true,
         -- event = "BufEnter",
         -- wants = "tokyonight.nvim",
         config = function()
@@ -320,10 +318,10 @@ return require( 'packer' ).startup(
         "glepnir/galaxyline.nvim",
         branch = 'main',
         event = "bufEnter",
+        wants = { "nvim-web-devicons" },
         config = function()
           require( "galaxyline.my_theme" )
         end,
-        wants = { "nvim-web-devicons" },
       }
      )
 
@@ -470,7 +468,7 @@ return require( 'packer' ).startup(
           "gD",
         },
         event = "BufReadPre",
-        requires = "kyazdani42/nvim-web-devicons",
+        wants = "nvim-web-devicons",
         config = function()
           require( "config.trouble" )
         end,

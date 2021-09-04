@@ -252,10 +252,10 @@ bindsym $mod+bracketright mode "control"
 # }
 
 # i3-gaps settings
-gaps inner 10
-# gaps outer 5
-smart_gaps on
-# smart_gaps inverse_outer
+gaps inner 8
+# gaps outer 0
+# smart_gaps on
+smart_gaps inverse_outer
 smart_borders on
 
 # Border and window settings
