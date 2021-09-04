@@ -1,6 +1,6 @@
 -- highlight settings
 local colors = require( "colors" )
-vim.cmd( 'highlight GitSignsAdd guifg=' .. colors.vibrant_green )
+vim.cmd( 'highlight GitSignsAdd guifg=' .. colors.green )
 vim.cmd( 'highlight GitSignsChange guifg=' .. colors.blue )
 vim.cmd( 'highlight GitSignsDelete guifg=' .. colors.red )
 

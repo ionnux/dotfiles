@@ -1,4 +1,4 @@
-local colors = require( "colors" )
+local colors = require( "colors.themes.tokyonight" )
 
 local present, bufferline = pcall( require, "bufferline" )
 if not present then return end
