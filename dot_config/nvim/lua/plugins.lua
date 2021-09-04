@@ -203,12 +203,24 @@ return require( 'packer' ).startup(
       {
         "shaunsingh/moonlight.nvim",
         -- disable = true,
-        event = "bufEnter",
+        -- event = "bufEnter",
         after = "nvim-treesitter",
         config = function()
           require( "config.moonlight" )
         end,
         requires = "nvim-treesitter/nvim-treesitter",
+      }
+     )
+
+    -- blue-moon
+    use(
+      {
+        "kyazdani42/blue-moon",
+        disable = true,
+        config = function()
+          vim.cmd( "colorscheme blue-moon" )
+          vim.cmd( "highlight Normal guibg=None" )
+        end,
       }
      )
 
