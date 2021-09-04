@@ -18,4 +18,4 @@ vim.cmd [[colorscheme tokyonight]]
 vim.cmd( "hi CursorLineNr guibg=None" )
 vim.cmd( "hi normalFloat guibg=None" )
 vim.cmd( "hi pmenu guibg=None" )
-vim.cmd( "highlight StatusLine guibg=#1f2335" )
+vim.cmd( "highlight StatusLine guibg=None" )

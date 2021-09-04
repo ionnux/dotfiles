@@ -63,7 +63,7 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
-client.focused #555555 #555555 #ffffff #2e9ef4     #fb4934
+client.focused #555555 #555555 #ffffff #2e9ef4     #404a6a
 # client.focused #555555 #555555 #ffffff #2e9ef4     #bd93f9
 # client.unfocused #555555 #555555 #ffffff #2e9ef4     #bd93f9
 client.background #fabd2f
@@ -252,9 +252,9 @@ bindsym $mod+bracketright mode "control"
 # }
 
 # i3-gaps settings
-gaps inner 16
-# gaps outer 0
-# smart_gaps on
+gaps inner 10
+# gaps outer 5
+smart_gaps on
 # smart_gaps inverse_outer
 smart_borders on
 

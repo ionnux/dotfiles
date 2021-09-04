@@ -1,4 +1,3 @@
-
 vim.g.nvim_tree_side = 'left' -- left by default
 vim.g.nvim_tree_width = 25 -- 30 by default, can be width_in_columns or 'width_in_percent%'
 vim.g.nvim_tree_ignore = { '.git', 'node_modules', '.cache' } -- empty by default
@@ -11,7 +10,7 @@ vim.g.nvim_tree_follow = 1 -- 0 by default, this option allows the cursor to be 
 vim.g.nvim_tree_indent_markers = 1 -- 0 by default, this option shows indent markers when folders are open
 vim.g.nvim_tree_hide_dotfiles = 0 -- 0 by default, this option hides files and folders starting with a dot `.`
 vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
-vim.g.nvim_tree_highlight_opened_files = 3 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
+vim.g.nvim_tree_highlight_opened_files = 1 -- 0 by default, will enable folder and file icon highlight for opened files/directories.
 vim.g.nvim_tree_root_folder_modifier = ':~' -- This is the default. See :help filename-modifiers for more options
 vim.g.nvim_tree_tab_open = 1 -- 0 by default, will open the tree when entering a new tab and the tree was previously open
 vim.g.nvim_tree_auto_resize = 0 -- 1 by default, will resize the tree to its saved width when opening a file

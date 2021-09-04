@@ -1,5 +1,5 @@
 return require( 'packer' ).startup(
-         function( use )
+  function( use )
     -- packer
     use 'wbthomason/packer.nvim'
 
@@ -508,11 +508,10 @@ return require( 'packer' ).startup(
       {
         "neovim/nvim-lspconfig",
         -- event = "BufReadPre",
-        wants = "lua-dev.nvim",
         requires = {
           "kabouzeid/nvim-lspinstall",
           "onsails/lspkind-nvim",
-          { "folke/lua-dev.nvim", opt = true },
+          { "folke/lua-dev.nvim" },
         },
         config = function()
           require( "config.lsp" )
@@ -562,17 +561,16 @@ return require( 'packer' ).startup(
 
   end
 
-        ), vim.cmd(
-         [[
+ ), vim.cmd(
+  [[
 augroup Plugin 
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup END
 ]]
-        ), -- mappings
+ ), -- mappings
 vim.api.nvim_set_keymap(
-         "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true }
-        ), vim.api.nvim_set_keymap(
-         "n", "<leader>pS", ":PackerStatus<cr>",
-         { noremap = true, silent = true }
-        )
+  "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true }
+ ), vim.api.nvim_set_keymap(
+  "n", "<leader>pS", ":PackerStatus<cr>", { noremap = true, silent = true }
+ )
