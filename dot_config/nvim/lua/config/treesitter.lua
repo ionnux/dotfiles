@@ -1,11 +1,7 @@
 require'nvim-treesitter.configs'.setup {
   highlight = { enable = true, use_languagetree = true },
 
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = { "BufWrite", "CursorHold" },
-  },
+  query_linter = { enable = true, use_virtual_text = true, lint_events = { "BufWrite", "CursorHold" } },
 
   playground = {
     enable = true,
@@ -49,15 +45,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     extended_mode = true, -- Highlight also non-parentheses delimiters, boolean or table: lang -> boolean
     max_file_lines = 1000, -- Do not enable for files with more than 1000 lines, int
-    colors = {
-      "#f7768e",
-      "#73daca",
-      "#0df9d7",
-      "#ff9e64",
-      "#9ec36a",
-      "#bb9af7",
-      "#7aa2f7",
-    }, -- table of hex strings
+    colors = { "#f7768e", "#73daca", "#0df9d7", "#ff9e64", "#9ec36a", "#bb9af7", "#7aa2f7" }, -- table of hex strings
     -- termcolors = { 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White' }, -- table of colour name strings
   },
 

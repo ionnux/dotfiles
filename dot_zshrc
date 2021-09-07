@@ -116,6 +116,7 @@ MODE_INDICATOR=""
 alias nvim="/usr/bin/nvim.appimage"
 alias studio="studio.sh"
 # alias emulator="~/Android/Sdk/emulator/emulator"
+alias b='xbacklight -set'
 
 ### colorize commands
 alias ls='lsd --color=auto'

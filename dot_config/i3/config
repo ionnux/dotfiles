@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 11
+font pango:Roboto Medium 13
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -63,10 +63,8 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
-client.focused #555555 #555555 #ffffff #2e9ef4     #404a6a
-# client.focused #555555 #555555 #ffffff #2e9ef4     #bd93f9
-# client.unfocused #555555 #555555 #ffffff #2e9ef4     #bd93f9
-client.background #fabd2f
+client.focused #545c7e #545c7e  #1a1b26 #2e9ef4     #404a6a
+client.unfocused #1a1b26 #1a1b26 #545c7e #2e9ef4     #bd93f9
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -221,14 +219,14 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # music and volume control mode
-mode "control" {
+mode "music & brightness" {
         # volume
         bindsym k exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
         bindsym j exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
 
         # music
-        bindsym l exec --no-startup-id "playerctl next"
-        bindsym h exec --no-startup-id "playerctl previous"
+        bindsym n exec --no-startup-id "playerctl next"
+        bindsym p exec --no-startup-id "playerctl previous"
         bindsym space exec --no-startup-id "playerctl play-pause"
 
         #brightness
@@ -238,12 +236,12 @@ mode "control" {
         # back to normal: Enter or Escape or $mod+bracketleft or $mod+bracketright
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        # bindsym $mod+bracketleft mode "default"
-        # bindsym $mod+bracketright mode "default"
+        bindsym $mod+bracketleft mode "default"
+        bindsym $mod+bracketright mode "default"
 }
 
-bindsym $mod+bracketleft mode "control"
-bindsym $mod+bracketright mode "control"
+bindsym $mod+bracketleft mode "music & brightness"
+bindsym $mod+bracketright mode "music & brightness"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -252,7 +250,7 @@ bindsym $mod+bracketright mode "control"
 # }
 
 # i3-gaps settings
-gaps inner 8
+gaps inner 5
 # gaps outer 0
 # smart_gaps on
 smart_gaps inverse_outer
@@ -395,8 +393,11 @@ exec --no-startup-id "picom --experimental-backends"
 exec --no-startup-id "~/.config/polybar/launch.sh --forest"
 
 # kitti3 mapping
-exec_always --no-startup-id kitti3 -p right -s 1.0 0.5
-bindsym $mod+n nop kitti3
+exec_always --no-startup-id kitti3 -n cmus -p ct -s 1.0 0.6 -- cmus
+bindsym $mod+c nop cmus
+
+exec_always --no-startup-id kitti3 -n Terminal -p ct -s 1.0 0.6
+bindsym $mod+n nop Terminal
 
 # Android emulator settings 
 for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show

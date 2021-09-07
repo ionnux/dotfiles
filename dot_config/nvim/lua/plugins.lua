@@ -18,9 +18,7 @@ return require( 'packer' ).startup(
         disable = false,
         event = "InsertEnter",
         wants = { "vim-vsnip", "LuaSnip", "nvim-autopairs" },
-        config = function()
-          require( "config.cmp" )
-        end,
+        config = function() require( "config.cmp" ) end,
         requires = {
           { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
           { "hrsh7th/cmp-path", after = "nvim-cmp" },
@@ -67,51 +65,22 @@ return require( 'packer' ).startup(
      )
 
     -- nvim autopairs
-    use(
-      {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        config = function()
-          require( "config.nvim-autopairs" )
-        end,
-      }
-     )
+    use( { "windwp/nvim-autopairs", event = "InsertEnter", config = function() require( "config.nvim-autopairs" ) end } )
 
     -- telescope
     use(
       {
         "nvim-telescope/telescope.nvim",
-        config = function()
-          require( "config.telescope" )
-        end,
+        config = function() require( "config.telescope" ) end,
         cmd = { "Telescope" },
-        keys = {
-          "<leader>fp",
-          "<leader>ff",
-          "<leader>fg",
-          "<leader>fb",
-          "<leader>fh",
-          "<leader>fr",
-        },
-        wants = {
-          "trouble.nvim",
-          "plenary.nvim",
-          "project.nvim",
-          "telescope-fzf-native.nvim",
-        },
+        keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr" },
+        wants = { "trouble.nvim", "plenary.nvim", "project.nvim", "telescope-fzf-native.nvim" },
         -- after = { "project.nvim", "telescope-fzf-native.nvim", "plenary.nvim"},
         requires = {
           -- "nvim-telescope/telescope-z.nvim",
           -- "nvim-lua/popup.nvim",
-          {
-            "ahmedkhalf/project.nvim",
-            config = function()
-              require( "config.project" )
-            end,
-            opt = true,
-          },
-          { "nvim-telescope/telescope-fzf-native.nvim", run = "make",
-            opt = true },
+          { "ahmedkhalf/project.nvim", config = function() require( "config.project" ) end, opt = true },
+          { "nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true },
         },
       }
      )
@@ -123,9 +92,7 @@ return require( 'packer' ).startup(
         keys = { "<leader>nn", "<leader>nf" },
         cmd = { "NvimTreeToogle", "NvimTreeFocus" },
         wants = { "nvim-web-devicons" },
-        config = function()
-          require( "config.nvim-tree" )
-        end,
+        config = function() require( "config.nvim-tree" ) end,
       }
      )
 
@@ -133,26 +100,16 @@ return require( 'packer' ).startup(
     use( { "nvim-lua/plenary.nvim", opt = true } )
 
     -- toggleterm
-    use(
-      {
-        "akinsho/nvim-toggleterm.lua",
-        keys = "<leader>tt",
-        config = function()
-          require( "config.toggleterm" )
-        end,
-      }
-     )
+    use( { "akinsho/nvim-toggleterm.lua", keys = "<leader>tt", config = function() require( "config.toggleterm" ) end } )
 
     -- tokyonight
     use(
       {
         'folke/tokyonight.nvim',
-        disable = true,
-        event = "bufEnter",
+        -- disable = true,
+        -- event = "bufEnter",
         -- wants = "nvim-treesitter",
-        config = function()
-          require( 'config.tokyonight' )
-        end,
+        config = function() require( 'config.tokyonight' ) end,
       }
      )
 
@@ -163,9 +120,7 @@ return require( 'packer' ).startup(
         disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
-        config = function()
-          require( "config.nebulous" )
-        end,
+        config = function() require( "config.nebulous" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
       }
      )
@@ -177,9 +132,7 @@ return require( 'packer' ).startup(
         disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
-        config = function()
-          require( "config.material" )
-        end,
+        config = function() require( "config.material" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
       }
      )
@@ -191,9 +144,7 @@ return require( 'packer' ).startup(
         disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
-        config = function()
-          require( "config.nightfly" )
-        end,
+        config = function() require( "config.nightfly" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
       }
      )
@@ -202,12 +153,10 @@ return require( 'packer' ).startup(
     use(
       {
         "shaunsingh/moonlight.nvim",
-        -- disable = true,
+        disable = true,
         -- event = "bufEnter",
         after = "nvim-treesitter",
-        config = function()
-          require( "config.moonlight" )
-        end,
+        config = function() require( "config.moonlight" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
       }
      )
@@ -230,9 +179,7 @@ return require( 'packer' ).startup(
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
         wants = "plenary.nvim",
-        config = function()
-          require( "config.gitsigns" )
-        end,
+        config = function() require( "config.gitsigns" ) end,
       }
      )
 
@@ -243,37 +190,20 @@ return require( 'packer' ).startup(
         disable = false,
         keys = { "s", "S", "gl", "gL", { "v", "s" }, { "v", "gl" } },
         cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
-        config = function()
-          require( "config.hop" )
-        end,
+        config = function() require( "config.hop" ) end,
       }
      )
 
     -- lightspeed
-    use(
-      {
-        'ggandor/lightspeed.nvim',
-        disable = true,
-        config = function()
-          require( "config.lightspeed" )
-        end,
-      }
-     )
+    use( { 'ggandor/lightspeed.nvim', disable = true, config = function() require( "config.lightspeed" ) end } )
 
     -- diffview
     use(
       {
         "sindrets/diffview.nvim",
         wants = "nvim-web-devicons",
-        cmd = {
-          "DiffviewOpendevicons",
-          "DiffviewClose",
-          "DiffviewToggleFiles",
-          "DiffviewFocusFiles",
-        },
-        config = function()
-          require( "config.diffview" )
-        end,
+        cmd = { "DiffviewOpendevicons", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+        config = function() require( "config.diffview" ) end,
       }
      )
 
@@ -284,9 +214,7 @@ return require( 'packer' ).startup(
         disable = true,
         -- event = "BufEnter",
         -- wants = "tokyonight.nvim",
-        config = function()
-          require( "config.blankline" )
-        end,
+        config = function() require( "config.blankline" ) end,
       }
      )
 
@@ -308,11 +236,12 @@ return require( 'packer' ).startup(
           { "nvim-treesitter/nvim-treesitter-textobjects" },
           { "nvim-treesitter/nvim-treesitter-refactor" },
           { "JoosepAlviste/nvim-ts-context-commentstring" },
+          { "romgrk/nvim-treesitter-context", config = function()
+            vim.cmd( "hi TreesitterContext guibg=#292e42" )
+          end },
           { "p00f/nvim-ts-rainbow" },
         },
-        config = function()
-          require( 'config.treesitter' )
-        end,
+        config = function() require( 'config.treesitter' ) end,
       }
      )
 
@@ -322,9 +251,7 @@ return require( 'packer' ).startup(
         "folke/zen-mode.nvim",
         keys = "<leader>zz",
         -- wants = "twilight.nvim",
-        config = function()
-          require( "config.zen-mode" )
-        end,
+        config = function() require( "config.zen-mode" ) end,
       }
      )
 
@@ -335,9 +262,7 @@ return require( 'packer' ).startup(
         disable = true,
         keys = "<leader>zt",
         wants = "nvim-treesitter",
-        config = function()
-          require( "config.twilight" )
-        end,
+        config = function() require( "config.twilight" ) end,
 
       }
      )
@@ -352,9 +277,7 @@ return require( 'packer' ).startup(
         branch = 'main',
         event = "bufEnter",
         wants = { "nvim-web-devicons" },
-        config = function()
-          require( "galaxyline.my_theme" )
-        end,
+        config = function() require( "galaxyline.my_theme" ) end,
       }
      )
 
@@ -367,9 +290,7 @@ return require( 'packer' ).startup(
         "akinsho/nvim-bufferline.lua",
         event = "BufReadPre",
         wants = { "nvim-web-devicons" },
-        config = function()
-          require( "config.bufferline" )
-        end,
+        config = function() require( "config.bufferline" ) end,
       }
      )
 
@@ -379,9 +300,7 @@ return require( 'packer' ).startup(
         "glepnir/dashboard-nvim",
         event = "VimEnter",
         after = "telescope.nvim",
-        config = function()
-          require( "config.dashboard" )
-        end,
+        config = function() require( "config.dashboard" ) end,
         requires = "nvim-telescope/telescope.nvim",
       }
      )
@@ -390,20 +309,8 @@ return require( 'packer' ).startup(
     use(
       {
         "karb94/neoscroll.nvim",
-        keys = {
-          '<C-u>',
-          '<C-d>',
-          '<C-b>',
-          '<C-f>',
-          '<C-y>',
-          '<C-e>',
-          'zt',
-          'zz',
-          'zb',
-        },
-        config = function()
-          require( "config.neoscroll" )
-        end,
+        keys = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
+        config = function() require( "config.neoscroll" ) end,
       }
      )
 
@@ -411,32 +318,21 @@ return require( 'packer' ).startup(
     use(
       {
         "folke/which-key.nvim",
+        disable = true,
         event = "VimEnter",
-        config = function()
-          require( "config.which-key" )
-        end,
+        config = function() require( "config.which-key" ) end,
       }
      )
 
     -- scrollview
-    use(
-      {
-        "dstein64/nvim-scrollview",
-        event = "bufRead",
-        config = function()
-          require( "config.scrollview" )
-        end,
-      }
-     )
+    use( { "dstein64/nvim-scrollview", event = "bufRead", config = function() require( "config.scrollview" ) end } )
 
     -- nvim-comment
     use(
       {
         "terrortylor/nvim-comment",
         keys = { { 'n', 'gcc' }, { 'v', 'gc' }, { 'o', 'gc' } },
-        config = function()
-          require( "config.nvim-comment" )
-        end,
+        config = function() require( "config.nvim-comment" ) end,
       }
      )
 
@@ -446,9 +342,7 @@ return require( 'packer' ).startup(
         "akinsho/flutter-tools.nvim",
         ft = { "flutter", "dart" },
         wants = "plenary.nvim",
-        config = function()
-          require( "config.flutter-tools" )
-        end,
+        config = function() require( "config.flutter-tools" ) end,
       }
      )
 
@@ -459,33 +353,15 @@ return require( 'packer' ).startup(
         branch = "finder-preview-fixes",
         event = "bufRead",
         wants = { "nvim-lspconfig" },
-        config = function()
-          require( "config.lspsaga" )
-        end,
+        config = function() require( "config.lspsaga" ) end,
       }
      )
 
     -- lsp signagure
-    use(
-      {
-        "ray-x/lsp_signature.nvim",
-        event = "bufRead",
-        config = function()
-          require( "config.lsp-signature" )
-        end,
-      }
-     )
+    use( { "ray-x/lsp_signature.nvim", event = "bufRead", config = function() require( "config.lsp-signature" ) end } )
 
     -- nvim colorizer
-    use(
-      {
-        "norcalli/nvim-colorizer.lua",
-        event = "bufRead",
-        config = function()
-          require( "config.colorizer" )
-        end,
-      }
-     )
+    use( { "norcalli/nvim-colorizer.lua", event = "BufReadPre", config = function() require( "config.colorizer" ) end } )
 
     -- trouble
     use(
@@ -502,9 +378,7 @@ return require( 'packer' ).startup(
         -- },
         event = "BufReadPre",
         wants = "nvim-web-devicons",
-        config = function()
-          require( "config.trouble" )
-        end,
+        config = function() require( "config.trouble" ) end,
       }
      )
 
@@ -514,9 +388,7 @@ return require( 'packer' ).startup(
         "mhartington/formatter.nvim",
         cmd = { "Format", "FormatWrite" },
         ft = { "dart", "lua" },
-        config = function()
-          require( "config.formatter" )
-        end,
+        config = function() require( "config.formatter" ) end,
       }
      )
 
@@ -528,9 +400,7 @@ return require( 'packer' ).startup(
         event = "BufReadPre", -- this will only start session saving when an actual file was opened
         keys = { "<leader>qs", "<leader>ql", "<leader>qd" },
         module = "persistence",
-        config = function()
-          require( "config.persistence" )
-        end,
+        config = function() require( "config.persistence" ) end,
       }
      )
 
@@ -539,14 +409,8 @@ return require( 'packer' ).startup(
       {
         "neovim/nvim-lspconfig",
         -- event = "BufReadPre",
-        requires = {
-          "kabouzeid/nvim-lspinstall",
-          "onsails/lspkind-nvim",
-          { "folke/lua-dev.nvim" },
-        },
-        config = function()
-          require( "config.lsp" )
-        end,
+        requires = { "kabouzeid/nvim-lspinstall", "onsails/lspkind-nvim", { "folke/lua-dev.nvim" } },
+        config = function() require( "config.lsp" ) end,
       }
      )
 
@@ -564,10 +428,7 @@ return require( 'packer' ).startup(
         keys = "<leader>vm",
         config = function()
           vim.g.mundo_preview_bottom = 1
-          vim.api.nvim_set_keymap(
-            "n", "<leader>vm", ":MundoToggle<cr>",
-            { noremap = true, silent = true }
-           )
+          vim.api.nvim_set_keymap( "n", "<leader>vm", ":MundoToggle<cr>", { noremap = true, silent = true } )
         end,
       }
      )
@@ -578,14 +439,8 @@ return require( 'packer' ).startup(
         "szw/vim-maximizer",
         keys = { "<leader>m", { "v", "<leader>m" } },
         config = function()
-          vim.api.nvim_set_keymap(
-            "n", "<leader>m", ":MaximizerToggle!<cr>",
-            { noremap = true, silent = true }
-           )
-          vim.api.nvim_set_keymap(
-            "v", "<leader>m", ":MaximizerToggle!<cr>gv",
-            { noremap = true, silent = true }
-           )
+          vim.api.nvim_set_keymap( "n", "<leader>m", ":MaximizerToggle!<cr>", { noremap = true, silent = true } )
+          vim.api.nvim_set_keymap( "v", "<leader>m", ":MaximizerToggle!<cr>gv", { noremap = true, silent = true } )
         end,
       }
      )
@@ -600,8 +455,5 @@ augroup Plugin
 augroup END
 ]]
  ), -- mappings
-vim.api.nvim_set_keymap(
-  "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true }
- ), vim.api.nvim_set_keymap(
-  "n", "<leader>pS", ":PackerStatus<cr>", { noremap = true, silent = true }
- )
+vim.api.nvim_set_keymap( "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true } ),
+       vim.api.nvim_set_keymap( "n", "<leader>pS", ":PackerStatus<cr>", { noremap = true, silent = true } )

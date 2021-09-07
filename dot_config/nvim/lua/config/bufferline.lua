@@ -8,9 +8,7 @@ vim.cmd "function! NvChad_bufferline_quitvim(a,b,c,d) \n qa \n endfunction"
 
 bufferline.setup {
   options = {
-    offsets = {
-      { filetype = "NvimTree", text = "NvimTree", text_align = "center" },
-    },
+    offsets = { { filetype = "NvimTree", text = "NvimTree", text_align = "center" } },
     buffer_close_icon = "",
     modified_icon = "",
     -- close_icon = "%@NvChad_bufferline_quitvim@%X",
@@ -30,11 +28,7 @@ bufferline.setup {
     diagnostics = false, -- "or nvim_lsp"
     custom_filter = function( buf_number )
       -- Func to filter out our managed/persistent split terms
-      local present_type, type = pcall(
-        function()
-          return vim.api.nvim_buf_get_var( buf_number, "term_type" )
-        end
-       )
+      local present_type, type = pcall( function() return vim.api.nvim_buf_get_var( buf_number, "term_type" ) end )
 
       if present_type then
         if type == "vert" then
@@ -54,8 +48,7 @@ bufferline.setup {
     background = { guifg = colors.grey_fg, guibg = colors.black2 },
 
     -- buffers
-    buffer_selected = { guifg = colors.white, guibg = colors.black,
-                        gui = "bold" },
+    buffer_selected = { guifg = colors.white, guibg = colors.black, gui = "bold" },
     buffer_visible = { guifg = colors.light_grey, guibg = colors.black2 },
 
     -- for diagnostics = "nvim_lsp"

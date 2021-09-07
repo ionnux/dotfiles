@@ -7,5 +7,8 @@ vim.g.moonlight_borders = true
 vim.g.moonlight_disable_background = true
 
 -- load the colorscheme
-require('moonlight').set()
-vim.cmd("highlight StatusLine guibg=None")
+require( 'moonlight' ).set()
+vim.cmd( "hi CursorLineNr guibg=None" )
+vim.cmd( "hi normalFloat guibg=None" )
+vim.cmd( "hi pmenu guibg=None" )
+vim.cmd( "highlight StatusLine guibg=None" )

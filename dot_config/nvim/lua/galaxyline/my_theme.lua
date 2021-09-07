@@ -8,23 +8,9 @@ colors.bg = "None"
 
 local condition = require( 'galaxyline.condition' )
 local gls = gl.section
-gl.short_line_list = {
-  'NvimTree',
-  'Mundo',
-  'MundoDiff',
-  'vista',
-  'dbui',
-  'packer',
-}
+gl.short_line_list = { 'NvimTree', 'Mundo', 'MundoDiff', 'vista', 'dbui', 'packer' }
 
-gls.left[1] = {
-  RainbowRed = {
-    provider = function()
-      return '▊ '
-    end,
-    highlight = { colors.blue, colors.bg },
-  },
-}
+gls.left[1] = { RainbowRed = { provider = function() return '▊ ' end, highlight = { colors.blue, colors.bg } } }
 gls.left[2] = {
   ViMode = {
     provider = function()
@@ -75,9 +61,7 @@ gls.left[2] = {
       --   t = colors.red,
       -- }
 
-      vim.api.nvim_command(
-        'hi GalaxyViMode guifg=' .. vim_mode[vim.fn.mode()][2]
-       )
+      vim.api.nvim_command( 'hi GalaxyViMode guifg=' .. vim_mode[vim.fn.mode()][2] )
       return ' ' .. vim_mode[vim.fn.mode()][1] .. ' '
     end,
     highlight = { colors.red, colors.bg, 'bold' },
@@ -96,10 +80,7 @@ gls.left[4] = {
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = {
-      require( 'galaxyline.provider_fileinfo' ).get_file_icon_color,
-      colors.bg,
-    },
+    highlight = { require( 'galaxyline.provider_fileinfo' ).get_file_icon_color, colors.bg },
   },
 }
 
@@ -180,11 +161,29 @@ gls.left[12] = {
   },
 }
 
+-- gls.left[13] = {
+--   treesitterStatusline = {
+--     provider = function()
+--       return require( "nvim-treesitter" ).statusline(
+--         {
+--           indicator_size = 50,
+--           type_patterns = { 'class', 'function', 'method' },
+--           transform_fn = function( line ) return line:gsub( '%s*[%[%(%{]*%s*$', '' ) end,
+--           separator = ' > ',
+--
+--         }
+--        )
+--     end,
+--     condition = condition.buffer_not_empty,
+--     highlight = { colors.blue, colors.bg, 'bold' },
+--   },
+-- }
+
 gls.mid[1] = {
   ShowLspClient = {
     provider = 'GetLspClient',
     condition = function()
-      local tbl = { ['dashboard'] = true, [''] = true, ['toggleterm'] = true }
+      local tbl = { ['dashboard'] = true, [''] = false, ['toggleterm'] = true }
       if tbl[vim.bo.filetype] then return false end
       return true
     end,
@@ -224,9 +223,7 @@ gls.right[1] = {
 
 gls.right[2] = {
   GitIcon = {
-    provider = function()
-      return '  '
-    end,
+    provider = function() return '  ' end,
     condition = condition.check_git_workspace,
     separator = ' ',
     separator_highlight = { 'NONE', colors.bg },
@@ -268,12 +265,7 @@ gls.right[8] = {
 }
 
 gls.right[9] = {
-  RainbowBlue = {
-    provider = function()
-      return '  ▊'
-    end,
-    highlight = { colors.blue, colors.bg, 'bold' },
-  },
+  RainbowBlue = { provider = function() return '  ▊' end, highlight = { colors.blue, colors.bg, 'bold' } },
 }
 
 gls.short_line_left[1] = {
@@ -293,6 +285,4 @@ gls.short_line_left[2] = {
   },
 }
 
-gls.short_line_right[1] = {
-  BufferIcon = { provider = 'BufferIcon', highlight = { colors.fg, colors.bg } },
-}
+gls.short_line_right[1] = { BufferIcon = { provider = 'BufferIcon', highlight = { colors.fg, colors.bg } } }

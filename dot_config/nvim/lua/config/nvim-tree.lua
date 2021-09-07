@@ -25,20 +25,12 @@ vim.g.nvim_tree_icon_padding = ' ' -- one space by default, used for rendering t
 -- vim.g.nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
 vim.g.nvim_tree_update_cwd = 1 -- 0 by default, will update the tree cwd when changing nvim's directory (DirChanged event). Behaves strangely with autochdir set.
 vim.g.nvim_tree_respect_buf_cwd = 1 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
-vim.g.nvim_tree_window_picker_exclude = {
-  filetype = { 'packer', 'qf' },
-  buftype = { 'terminal' },
-}
+vim.g.nvim_tree_window_picker_exclude = { filetype = { 'packer', 'qf' }, buftype = { 'terminal' } }
 -- Dictionary of buffer option names mapped to a list of option values that
 -- indicates to the window picker that the buffer's window should not be
 -- selectable.
 vim.g.nvim_tree_special_files = { README = 1, Makefile = 1, MAKEFILE = 1 } -- List of filenames that gets highlighted with NvimTreeSpecialFile
-vim.g.nvim_tree_show_icons = {
-  git = 1,
-  folders = 1,
-  files = 1,
-  folder_arrows = 0,
-}
+vim.g.nvim_tree_show_icons = { git = 1, folders = 1, files = 1, folder_arrows = 0 }
 -- If 0, do not show the icons for one of 'git' 'folder' and 'files'
 -- 1 by default, notice that if 'files' is 1, it will only display
 -- if nvim-web-devicons is installed and on your runtimepath.
@@ -72,12 +64,8 @@ vim.g.nvim_tree_icons = {
   lsp = { hint = "", info = "", warning = "", error = "" },
 }
 
-vim.api.nvim_set_keymap(
-  "n", "<leader>nn", ":NvimTreeToggle<cr>", { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  "n", "<leader>nf", ":NvimTreeFocus<cr>", { noremap = true, silent = true }
- )
+vim.api.nvim_set_keymap( "n", "<leader>nn", ":NvimTreeToggle<cr>", { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( "n", "<leader>nf", ":NvimTreeFocus<cr>", { noremap = true, silent = true } )
 -- NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
 -- a list of groups can be found at `:help nvim_tree_highlight`

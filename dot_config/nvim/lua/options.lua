@@ -8,7 +8,7 @@ vim.opt.autowrite = true -- enable auto write
 -- vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
 -- vim.opt.concealcursor = "n" -- Hide * markup for bold and italic
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
-vim.opt.cursorline = false -- Enable highlighting of the current line
+vim.opt.cursorline = true -- Enable highlighting of the current line
 vim.opt.expandtab = true -- Use spaces instead of tabs
 -- vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- TreeSitter folding
 -- vim.opt.foldmethod = "expr" -- TreeSitter folding
@@ -44,18 +44,19 @@ vim.opt.updatetime = 200 -- save swap file and trigger CursorHold
 vim.opt.wildmode = "longest:full,full" -- Command-line completion mode
 vim.opt.wrap = true -- Disable line wrap
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
-vim.o.shortmess = "ToOlxfitn"
+vim.o.shortmess = "ToOlxfFitn"
+-- vim.o.completeopt = { "menuone", "noinsert", "noselect" }
 
 -- don't load the plugins below
-vim.g.loaded_gzip = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
+-- vim.g.loaded_gzip = 1
+-- vim.g.loaded_tar = 1
+-- vim.g.loaded_tarPlugin = 1
+-- vim.g.loaded_zipPlugin = 1
+-- vim.g.loaded_2html_plugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_matchit = 1
+-- vim.g.loaded_matchparen = 1
 
 -- Use proper syntax highlighting in code blocks
 local fences = {
@@ -106,12 +107,12 @@ augroup END
  )
 
 -- show cursor line only in active window
--- vim.cmd(
---   [[
---   autocmd InsertLeave,WinEnter * set cursorline
---   autocmd InsertEnter,WinLeave * set nocursorline
--- ]]
---  )
+vim.cmd(
+  [[
+  autocmd InsertLeave,WinEnter * set cursorline
+  autocmd InsertEnter,WinLeave * set nocursorline
+]]
+ )
 
 -- go to last loc when opening a buffer
 vim.cmd(
@@ -121,16 +122,15 @@ vim.cmd(
  )
 
 -- Highlight on yank
-vim.cmd(
-  "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }"
- )
+vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }" )
 
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
 
+-- set filetypes
+vim.cmd( [[autocmd BufRead,BufNewFile *.rasi setfiletype css]] )
+
 -- windows to close with "q"
-vim.cmd(
-  [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]]
- )
+vim.cmd( [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]] )
 vim.cmd( [[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]] )

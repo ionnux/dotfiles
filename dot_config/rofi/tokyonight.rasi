@@ -9,7 +9,7 @@ configuration {
   display-calc: "  ";
 }
 
-* {
+ {
   background-color: #24283b;
   bg-alt: #414868;
   fg:  #c0caf5;
