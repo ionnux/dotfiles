@@ -63,8 +63,8 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
-client.focused #545c7e #545c7e  #1a1b26 #2e9ef4     #404a6a
-client.unfocused #1a1b26 #1a1b26 #545c7e #2e9ef4     #bd93f9
+client.focused #545c7e #545c7e  #1a1b26 #7aa2f7     #7aa2f7
+client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7     #1a1b26
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -250,14 +250,14 @@ bindsym $mod+bracketright mode "music & brightness"
 # }
 
 # i3-gaps settings
-gaps inner 5
+gaps inner 10
 # gaps outer 0
 # smart_gaps on
 smart_gaps inverse_outer
 smart_borders on
 
 # Border and window settings
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -396,7 +396,7 @@ exec --no-startup-id "~/.config/polybar/launch.sh --forest"
 exec_always --no-startup-id kitti3 -n cmus -p ct -s 1.0 0.6 -- cmus
 bindsym $mod+c nop cmus
 
-exec_always --no-startup-id kitti3 -n Terminal -p ct -s 1.0 0.6
+exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.5 0.99
 bindsym $mod+n nop Terminal
 
 # Android emulator settings 

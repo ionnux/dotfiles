@@ -96,6 +96,8 @@ augroup numbertoggle
     autocmd!
     set number
     autocmd TermOpen * setlocal nonumber norelativenumber
+    autocmd BufEnter __FLUTTER_DEV_LOG__ setlocal nonumber norelativenumber
+    setlocal nonumber norelativenumber
 augroup END
 
 augroup RelativeNumbertoggle

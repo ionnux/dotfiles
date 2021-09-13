@@ -1,5 +1,9 @@
 require'nvim-treesitter.configs'.setup {
-  highlight = { enable = true, use_languagetree = true },
+  highlight = { enable = true },
+  incremental_selection = {
+    enable = true,
+    keymaps = { init_selection = "gnn", node_incremental = "grn", scope_incremental = "grc", node_decremental = "grm" },
+  },
 
   query_linter = { enable = true, use_virtual_text = true, lint_events = { "BufWrite", "CursorHold" } },
 
@@ -39,6 +43,16 @@ require'nvim-treesitter.configs'.setup {
         goto_previous_usage = "<a-#>",
       },
     },
+
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+      goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+      goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+      goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+    },
+
   },
 
   rainbow = {
@@ -68,6 +82,7 @@ require'nvim-treesitter.configs'.setup {
         ["ib"] = "@block.inner",
         ["al"] = "@loop.outer",
         ["il"] = "@loop.inner",
+        ["as"] = "@statement.outer",
 
         -- Or you can define your own textobjects like this
         -- ["iF"] = {
@@ -80,6 +95,6 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 
-  context_commentstring = { enable = true, enable_autocmd = false },
+  context_commentstring = { enable = true, enable_autocmd = false, config = { dart = '// %s' } },
 
 }
