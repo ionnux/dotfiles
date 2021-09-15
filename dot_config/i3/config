@@ -45,7 +45,7 @@ bindsym Shift+Print exec --no-startup-id "flameshot gui -p ~/Pictures/Screenshot
 floating_modifier $mod
 
 # start a terminal
-set $myTerm kitty
+set $myTerm ~/.local/kitty.app/bin/kitty
 
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id $myTerm
@@ -112,7 +112,7 @@ bindsym $mod+semicolon split v
 bindsym $mod+m fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+e layout stacking
+# bindsym $mod+e layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+s layout toggle split
 

@@ -1,22 +1,12 @@
-" vim: filetype=vifm :
-" Sample configuration file for vifm (last updated: 2 June, 2019)
-" You can edit this file by hand.
-" The " character at the beginning of a line comments out the line.
-" Blank lines are ignored.
-" The basic format for each item is shown with an example.
-
-" ------------------------------------------------------------------------------
-
-" Command used to edit files in various contexts.  The default is vim.
-" If you would like to use another vi clone such as Elvis or Vile
-" you will need to change this setting.
+" This is the actual command used to start vi.  The default is vim.
+" If you would like to use emacs or emacsclient, you can use them.
+" Since emacs is a GUI app and not a terminal app like vim, append the command
+" with an ampersand (&).
 
 set vicmd=nvim.appimage
-" set vicmd=elvis\ -G\ termcap
-" set vicmd=vile
 
 " This makes vifm perform file operations on its own instead of relying on
-" standard utilities like `cp`.  While using `cp` and alike is a more universal
+" standard jes like `cp`.  While using `cp` and alike is a more universal
 " solution, it's also much slower when processing large amounts of files and
 " doesn't support progress measuring.
 
@@ -52,10 +42,10 @@ set sortnumbers
 
 set undolevels=100
 
-" Use Vim's format of help file (has highlighting and "hyperlinks").
-" If you would rather use a plain text help file set novimhelp.
+" If you installed the vim.txt help file set vimhelp.
+" If would rather use a plain text help file set novimhelp.
 
-set vimhelp
+set novimhelp
 
 " If you would like to run an executable file when you
 " press return on the file name set this.
@@ -63,8 +53,9 @@ set vimhelp
 set norunexec
 
 " Selected color scheme
-
-colorscheme dracula
+" The following line will cause issues if using vifm.vim with regular vim.
+" Either use neovim or comment out the following line.
+colorscheme palenight
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -93,7 +84,7 @@ set smartcase
 
 " Don't highlight search results automatically
 
-set nohlsearch
+set hlsearch
 
 " Use increment searching (search while typing)
 set incsearch
@@ -112,11 +103,12 @@ endif
 
 set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
+" Set line numbers to show
+
 " ------------------------------------------------------------------------------
 
 " :mark mark /full/directory/path [filename]
 
-mark b ~/bin/
 mark h ~/
 
 " ------------------------------------------------------------------------------
@@ -172,7 +164,10 @@ command! reload :write | restart
 
 " Pdf
 filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
-fileviewer *.pdf pdftotext -nopgbrk %c -
+fileviewer *.pdf
+        \ pdftoppm -singlefile -f 1 -r 100 -jpeg -jpegopt quality=50 %c /tmp/vifm/tempfile > /dev/null&& kitty +icat --place %pwx%ph@%pxx%py --silent /tmp/vifm/tempfile.jpg
+        \ %pc
+        \ kitty icat --clear --silent %pd
 
 " PostScript
 filextype *.ps,*.eps,*.ps.gz
@@ -190,8 +185,10 @@ filextype *.djvu
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
-       \ {Play using vlc}
-       \ vlc %f,
+        \ {View using cmus}
+        \ alacritty -e cmus %f &,
+       \ {Play using ffplay}
+       \ ffplay -nodisp -autoexit %c,
        \ {Play using MPlayer}
        \ mplayer %f,
 fileviewer *.mp3 mp3info
@@ -212,10 +209,17 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
           \*.as[fx]
-         \ ffprobe -pretty %c 2>&1
+        \ vifmimg videopreview %px %py %pw %ph %c 
+        \ %pc 
+        \ vifmimg clear
+        " \ ffprobe -pretty %c 2>&1
 
 " Web
 filextype *.html,*.htm
+        \ {Open with emacs}
+        \ emacsclient -c %c &,
+        \ {Open with vim}
+        \ vim %c &,
         \ {Open with dwb}
         \ dwb %f %i &,
         \ {Open with firefox}
@@ -233,19 +237,15 @@ fileviewer *.[1-8] man ./%c | col -b
 
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ {view in feh}
-        \ feh %f,
-        \ {view in image viewer}
-        \ eog %f,
         \ {View in sxiv}
-        \ sxiv %f,
-        \ {View in gpicview}
-        \ gpicview %c,
-        \ {View in shotwell}
-        \ shotwell,
+        \ sxiv -ia %f &,
+        \ {View in feh}
+        \ feh %d &,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-         \ identify %f
-
+        \ kitty +icat --place %pwx%ph@%pxx%py  --silent %c
+        \ %pc
+        \ kitty icat --clear --silent %pd
+        
 " OpenRaster
 filextype *.ora
         \ {Edit in MyPaint}
@@ -289,8 +289,6 @@ fileviewer *.torrent dumptorrent -v %c
 filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
        \ {Mount with fuse-zip}
        \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
-       \ {View contents}
-       \ zip -sf %c | less,
        \ {Extract here}
        \ tar -xf %c,
 fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
@@ -378,10 +376,30 @@ filextype */
 " For Windows:
 " filetype * start, explorer
 
+" GETTING ICONS TO DISPLAY IN VIFM
+" You need the next 14 lines!
+
+" file types
+set classify='  :dir:/,  :exe:,  :reg:,  :link:'
+" various file names
+set classify+='  ::../::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
+" archives
+set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
+" images
+set classify+='  ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
+" audio
+set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
+" media
+set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
+" office files
+set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
+
 " ------------------------------------------------------------------------------
 
-" What should be saved automatically between vifm sessions.  Drop "savedirs"
-" value if you don't want vifm to remember last visited directories for you.
+" What should be saved automatically between vifm runs
+" Like in previous versions of vifm
+" set vifminfo=options,filetypes,commands,bookmarks,dhistory,state,cs
+" Like in vi
 set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
@@ -391,7 +409,7 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 
 " Customize view columns a bit (enable ellipsis for truncated file names)
 "
-" set viewcolumns=-{name}..,6{}.
+ set viewcolumns=-{name}..,6{}.
 
 " Filter-out build and temporary files
 "
@@ -400,6 +418,12 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 " ------------------------------------------------------------------------------
 
 " Sample mappings
+
+"Open all images in current directory in sxiv thumbnail mode
+nnoremap sx :!sxiv -t %d & <cr>
+
+"Open selected images in gimp
+nnoremap gp :!gimp %f & <cr>
 
 " Start shell in current directory
 nnoremap s :shell<cr>
@@ -411,33 +435,14 @@ nnoremap S :sort<cr>
 nnoremap w :view<cr>
 vnoremap w :view<cr>gv
 
-" Open file in existing instance of gvim
-nnoremap o :!gvim --remote-tab-silent %f<cr>
-" Open file in new instance of gvim
-nnoremap O :!gvim %f<cr>
-
 " Open file in the background using its default program
 nnoremap gb :file &<cr>l
 
-" Interaction with system clipboard
-if has('win')
-    " Yank current directory path to Windows clipboard with forward slashes
-    nnoremap yp :!echo %"d:gs!\!/! %i | clip<cr>
-    " Yank path to current file to Windows clipboard with forward slashes
-    nnoremap yf :!echo %"c:gs!\!/! %i | clip<cr>
-elseif executable('xclip')
-    " Yank current directory path into the clipboard
-    nnoremap yd :!echo %d | xclip %i<cr>
-    " Yank current file path into the clipboard
-    nnoremap yf :!echo %c:p | xclip %i<cr>
-elseif executable('xsel')
-    " Yank current directory path into primary and selection clipboards
-    nnoremap yd :!echo -n %d | xsel --input --primary %i &&
-                \ echo -n %d | xsel --clipboard --input %i<cr>
-    " Yank current file path into into primary and selection clipboards
-    nnoremap yf :!echo -n %c:p | xsel --input --primary %i &&
-                \ echo -n %c:p | xsel --clipboard --input %i<cr>
-endif
+" Yank current directory path into the clipboard
+nnoremap yd :!echo %d | xclip %i<cr>
+
+" Yank current file path into the clipboard
+nnoremap yf :!echo %c:p | xclip %i<cr>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
