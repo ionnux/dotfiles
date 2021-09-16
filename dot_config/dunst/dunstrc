@@ -30,7 +30,7 @@
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
     # geometry = "450x2-10+34"
-    geometry = "500x1-19+49"
+    geometry = "-100x1-50+20"
     # geometry = "600x5-660+04"
 
     # Show how many messages are currently hidden (because of geometry).
@@ -302,7 +302,7 @@
     #icon = /path/to/icon
 
 [urgency_normal]
-    frame_color = "#505050"
+    frame_color = "#1a1b26"
     background = "#1a1b26"
     foreground = "#a9b1d6"
     timeout = 10

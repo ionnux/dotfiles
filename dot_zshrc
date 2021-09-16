@@ -11,7 +11,7 @@ export PATH="$PATH:$HOME/Android/Sdk/emulator/"
 # add pub executables to path
 export PATH="$PATH:$HOME/.pub-cache/bin/"
 # add kitty executable to path
-export PATH="$PATH:$HOME/.local/kitty.app/bin"
+# export PATH="$PATH:$HOME/.local/kitty.app/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/og_saaz/.oh-my-zsh"

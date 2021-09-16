@@ -38,12 +38,12 @@ saga.init_lsp_saga {
 
 vim.api.nvim_set_keymap( 'n', '<leader>qq', ':Lspsaga code_action<cr>', { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( 'n', 'K', ':Lspsaga hover_doc<cr>', { noremap = true, silent = true } )
-vim.api.nvim_set_keymap(
-  'n', '<C-k>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<C-j>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", { noremap = true, silent = true }
- )
+-- vim.api.nvim_set_keymap(
+--   'n', '<C-k>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", { noremap = true, silent = true }
+--  )
+-- vim.api.nvim_set_keymap(
+--   'n', '<C-j>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", { noremap = true, silent = true }
+--  )
 vim.api.nvim_set_keymap( 'n', '<leader>rn', ':Lspsaga rename<cr>', { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( 'n', '[d', ':Lspsaga diagnostic_jump_prev<cr>', { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( 'n', ']d', ':Lspsaga diagnostic_jump_next<cr>', { noremap = true, silent = true } )

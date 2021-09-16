@@ -250,7 +250,7 @@ bindsym $mod+bracketright mode "music & brightness"
 # }
 
 # i3-gaps settings
-gaps inner 10
+gaps inner 20
 # gaps outer 0
 # smart_gaps on
 smart_gaps inverse_outer

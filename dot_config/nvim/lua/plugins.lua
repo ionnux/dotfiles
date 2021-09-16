@@ -57,7 +57,7 @@ return require( 'packer' ).startup(
         },
         requires = {
           { "hrsh7th/vim-vsnip-integ", opt = true },
-          { "Neevash/awesome-flutter-snippets", opt = true },
+          { "Nash0x7E2/awesome-flutter-snippets", opt = true },
           { "Alexisvt/flutter-snippets", opt = true },
           { "~/.nvim/local_plugins/bloc_snippets", opt = true }, -- local plugin
         },

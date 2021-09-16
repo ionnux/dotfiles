@@ -48,14 +48,14 @@ vim.o.shortmess = "ToOlxfFitn"
 -- vim.o.completeopt = { "menuone", "noinsert", "noselect" }
 
 -- don't load the plugins below
--- vim.g.loaded_gzip = 1
--- vim.g.loaded_tar = 1
--- vim.g.loaded_tarPlugin = 1
--- vim.g.loaded_zipPlugin = 1
--- vim.g.loaded_2html_plugin = 1
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.g.loaded_matchit = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_matchit = 1
 -- vim.g.loaded_matchparen = 1
 
 -- Use proper syntax highlighting in code blocks
