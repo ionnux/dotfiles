@@ -4,19 +4,16 @@ require( 'formatter' ).setup(
     filetype = {
       dart = {
         -- dart format
-        function()
-          return { exe = "dart format", args = { "--fix" }, stdin = true }
-        end,
+        function() return { exe = "dart format", args = { "--fix" }, stdin = true } end,
       },
+
+      sh = { function() return { exe = "beautysh", stdin = false } end },
 
       lua = {
         function()
           return {
             exe = "lua-format",
-            args = {
-              "-c",
-              "/home/og_saaz/.config/nvim/lua/config/lua-format-config-file.yaml",
-            },
+            args = { "-c", "/home/og_saaz/.config/nvim/lua/config/lua-format-config-file.yaml" },
             stdin = true,
           }
         end,
@@ -30,7 +27,7 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.dart,*.lua  FormatWrite
+  autocmd BufWritePost *.dart,*.lua,*.sh FormatWrite
 augroup END
 ]], true
  )

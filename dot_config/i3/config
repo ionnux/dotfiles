@@ -32,10 +32,10 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@
 
 # Use flamechot to capture screenshot
 bindsym Print exec --no-startup-id "flameshot full -p ~/Pictures/Screenshots"
@@ -51,10 +51,8 @@ set $myTerm ~/.local/kitty.app/bin/kitty
 bindsym $mod+Return exec --no-startup-id $myTerm
 
 # Screen brightness controls
-# bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5; notify-send -t 500 'brightness '$(xbacklight)"
-bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5"
-# bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5; notify-send -t 500 'brightness '$(xbacklight)"
-bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5"
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -s 5
 
 # Media control
 bindsym XF86AudioNext exec --no-startup-id "playerctl next"
@@ -221,8 +219,8 @@ bindsym $mod+r mode "resize"
 # music and volume control mode
 mode "music & brightness" {
         # volume
-        bindsym k exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% && $refresh_i3status
-        bindsym j exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% && $refresh_i3status
+        bindsym k exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
+        bindsym j exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
 
         # music
         bindsym n exec --no-startup-id "playerctl next"
@@ -230,8 +228,8 @@ mode "music & brightness" {
         bindsym space exec --no-startup-id "playerctl play-pause"
 
         #brightness
-        bindsym bracketleft exec --no-startup-id "xbacklight -dec 5"
-        bindsym bracketright exec --no-startup-id "xbacklight -inc 5"
+        bindsym bracketright exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
+        bindsym bracketleft exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -s 5
 
         # back to normal: Enter or Escape or $mod+bracketleft or $mod+bracketright
         bindsym Return mode "default"
@@ -390,8 +388,8 @@ mode "dunst" {
         bindsym Escape mode "default"
         bindsym Return mode "default"
   }
-
 bindsym $mod+grave mode "dunst"
+bindsym control+minus exec --no-startup-id dunstctl close
 
 # Startup app
 # exec "rofi -show combi"
