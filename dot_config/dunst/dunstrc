@@ -1,3 +1,5 @@
+# See dunst(5) for all configuration options
+
 [global]
     ### Display ###
 
@@ -29,9 +31,28 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    # geometry = "450x2-10+34"
     geometry = "-100x1-50+20"
-    # geometry = "600x5-660+04"
+
+    # Scale factor. It is auto-detected if value is 0.
+    scale = 0
+
+    # Turn on the progess bar. It appears when a progress hint is passed with
+    # for example dunstify -h int:value:12
+    progress_bar = true
+
+    # Set the progress bar height. This includes the frame, so make sure
+    # it's at least twice as big as the frame width.
+    progress_bar_height = 10
+
+    # Set the frame width of the progress bar
+    progress_bar_frame_width = 1
+
+    # Set the minimum width for the progress bar
+    progress_bar_min_width = 150
+
+    # Set the maximum width for the progress bar
+    progress_bar_max_width = 300
+
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = no
@@ -42,7 +63,7 @@
 
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
-    # present (e.g. xcompmgr, compiz, etc.).
+    # present (e.g. xcompmgr, compiz, etc.). (X11 only)
     transparency = 0
 
     # The height of the entire notification.  If the height is smaller
@@ -56,17 +77,20 @@
     separator_height = 2
 
     # Padding between text and separator.
-    padding = 10
+    padding = 8
 
     # Horizontal padding.
-    horizontal_padding = 10
+    horizontal_padding = 8
+
+    # Padding between text and icon.
+    text_icon_padding = 0
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    # frame_color = "#1f2335"
+    # frame_color = "#aaaaaa"
 
     # Define a color for the separator.
     # possible values are:
@@ -128,7 +152,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b> %p\n%b"
+    format = "<b>%s</b>%p\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -145,11 +169,11 @@
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
-    word_wrap = yes
+    word_wrap = no
 
     # When word_wrap is set to no, specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
-    ellipsize = middle
+    ellipsize = end
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -232,6 +256,16 @@
     # user defined timeout.
     ignore_dbusclose = false
 
+    ### Wayland ###
+    # These settings are Wayland-specific. They have no effect when using X11
+
+    # Uncomment this if you want to let notications appear under fullscreen
+    # applications (default: overlay)
+    # layer = top
+
+    # Set this to true to use X11 output on Wayland.
+    force_xwayland = false
+
     ### Legacy
 
     # Use the Xinerama extension instead of RandR for multi-monitor support.
@@ -249,15 +283,19 @@
     # Defines list of actions for each mouse event
     # Possible values are:
     # * none: Don't do anything.
-    # * do_action: If the notification has exactly one action, or one is marked as default,
-    #              invoke it. If there are multiple and no default, open the context menu.
+    # * do_action: Invoke the action determined by the action_name rule. If there is no
+    #              such action, open the context menu.
+    # * open_url: If the notification has exactly one url, open it. If there are multiple
+    #             ones, open the context menu.
     # * close_current: Close current notification.
     # * close_all: Close all notifications.
+    # * context: Open context menu for the notification.
+    # * context_all: Open context menu for all notifications.
     # These values can be strung together for each mouse event, and
     # will be executed in sequence.
     mouse_left_click = do_action
     mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+    mouse_right_click = close_current
 
 # Experimental features that may or may not work correctly. Do not expect them
 # to have a consistent behaviour across releases.
@@ -269,27 +307,6 @@
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = false
 
-[shortcuts]
-
-    # Shortcuts are specified as [modifier+][modifier+]...key
-    # Available modifiers are "ctrl", "mod1" (the alt-key), "mod2",
-    # "mod3" and "mod4" (windows-key).
-    # Xev might be helpful to find names for keys.
-
-    # Close notification.
-    close = ctrl+space
-
-    # Close all notifications.
-    close_all = ctrl+shift+space
-
-    # Redisplay last message(s).
-    # On the US keyboard layout "grave" is normally above TAB and left
-    # of "1". Make sure this key actually exists on your keyboard layout,
-    # e.g. check output of 'xmodmap -pke'
-    History = ctrl+grave
-
-    # Context menu.
-    context = ctrl+shift+period
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
@@ -342,6 +359,7 @@
 #    set_transient
 #    timeout
 #    urgency
+#    action_name
 #
 # Shell-like globbing will get expanded.
 #
