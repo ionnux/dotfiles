@@ -161,3 +161,8 @@ source /usr/share/doc/fzf/examples/completion.zsh
 
 ### Starship settings
 eval "$(starship init zsh)"
+
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -e "$HOME/kitty/shell-integration/kitty.zsh"; then source "$HOME/kitty/shell-integration/kitty.zsh"; fi
+# END_KITTY_SHELL_INTEGRATION
