@@ -380,6 +380,19 @@ mode "$mode_gaps_left" {
         bindsym Escape mode "default"
 }
 
+
+# dunst settings
+mode "dunst" {
+        bindsym p exec --no-startup-id dunstctl history-pop
+        bindsym a exec --no-startup-id dunstctl action
+        bindsym c exec --no-startup-id dunstctl close
+        bindsym shift+c exec --no-startup-id dunstctl close-all
+        bindsym Escape mode "default"
+        bindsym Return mode "default"
+  }
+
+bindsym $mod+grave mode "dunst"
+
 # Startup app
 # exec "rofi -show combi"
 
