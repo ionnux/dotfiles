@@ -34,8 +34,8 @@ exec --no-startup-id nm-applet
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use flamechot to capture screenshot
 bindsym Print exec --no-startup-id "flameshot full -p ~/Pictures/Screenshots"
@@ -404,8 +404,8 @@ exec --no-startup-id "picom --experimental-backends"
 exec --no-startup-id "~/.config/polybar/launch.sh --forest"
 
 # kitti3 mapping
-exec_always --no-startup-id kitti3 -n cmus -p cr -s 0.5 1.0 -- cmus
-bindsym $mod+c nop cmus
+exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
+bindsym $mod+c nop cmus "kitty @ set_background_opacity --match cmdline:cmus 1"
 
 exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.5 1.0
 bindsym $mod+n nop Terminal

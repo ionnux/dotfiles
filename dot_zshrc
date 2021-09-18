@@ -99,9 +99,9 @@ MODE_INDICATOR=""
 
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+   export EDITOR='nvim'
  else
-   export EDITOR='nvim.appimage'
+   export EDITOR='nvim'
  fi
 
 # Compilation flags
@@ -115,7 +115,6 @@ MODE_INDICATOR=""
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias nvim="/usr/bin/nvim.appimage"
 alias studio="studio.sh"
 # alias emulator="~/Android/Sdk/emulator/emulator"
 alias b='xbacklight -set'
@@ -161,8 +160,3 @@ source /usr/share/doc/fzf/examples/completion.zsh
 
 ### Starship settings
 eval "$(starship init zsh)"
-
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -e "$HOME/kitty/shell-integration/kitty.zsh"; then source "$HOME/kitty/shell-integration/kitty.zsh"; fi
-# END_KITTY_SHELL_INTEGRATION
