@@ -31,7 +31,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "-100x1-50+20"
+    geometry = "500x1-50+20"
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -108,7 +108,7 @@
     # Set to 0 to disable.
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
-    idle_threshold = 120
+    idle_threshold = 200
 
     ### Text ###
 
@@ -198,19 +198,19 @@
     min_icon_size = 0
 
     # Scale larger icons down to this size, set to 0 to disable
-    max_icon_size = 0
+    max_icon_size = 32
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/32x32/
 
     ### History ###
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
-    sticky_history = no
+    sticky_history = yes
 
     # Maximum amount of notifications kept in history
-    history_length = 20
+    history_length = 30
 
     ### Misc/Advanced ###
 

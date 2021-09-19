@@ -117,7 +117,8 @@ MODE_INDICATOR=""
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias studio="studio.sh"
 # alias emulator="~/Android/Sdk/emulator/emulator"
-alias b='xbacklight -set'
+alias bl='xbacklight -set'
+alias cpu='sudo cpupower frequency-set --max'
 
 ### colorize commands
 alias ls='lsd --color=auto'

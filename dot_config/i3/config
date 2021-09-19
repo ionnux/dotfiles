@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Roboto Medium 13
+font pango:JetBrains Mono Nerd Font bold 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -61,7 +61,8 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
-client.focused #545c7e #545c7e  #1a1b26 #7aa2f7     #7aa2f7
+client.focused #545c7e #7aa2f7  #1a1b26 #7aa2f7     #7aa2f7
+client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7     #1a1b26
 client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7     #1a1b26
 
 # kill focused window
@@ -171,7 +172,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# open edge in workspace 2
+# open edge in workspace 3
 assign [class="Microsoft-edge-beta"] 3
 
 # layout files
@@ -252,10 +253,13 @@ gaps inner 20
 # gaps outer 0
 # smart_gaps on
 smart_gaps inverse_outer
-smart_borders on
+# smart_borders on
 
 # Border and window settings
-for_window [class=".*"] border pixel 2
+title_align left
+default_border normal 0
+hide_edge_borders smart
+# for_window [class=".*"] border normal 0
 
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
@@ -380,16 +384,18 @@ mode "$mode_gaps_left" {
 
 
 # dunst settings
-mode "dunst" {
-        bindsym p exec --no-startup-id dunstctl history-pop
-        bindsym a exec --no-startup-id dunstctl action
-        bindsym c exec --no-startup-id dunstctl close
-        bindsym shift+c exec --no-startup-id dunstctl close-all
-        bindsym Escape mode "default"
-        bindsym Return mode "default"
-  }
-bindsym $mod+grave mode "dunst"
-bindsym control+minus exec --no-startup-id dunstctl close
+# mode "dunst" {
+#         bindsym p exec --no-startup-id dunstctl history-pop
+#         bindsym a exec --no-startup-id dunstctl action
+#         bindsym n exec --no-startup-id dunstctl close
+#         bindsym shift+c exec --no-startup-id dunstctl close-all
+#         bindsym Escape mode "default"
+#         bindsym Return mode "default"
+#   }
+# bindsym $mod+grave mode "dunst"
+bindsym $mod+Tab exec --no-startup-id dunstctl close
+bindsym $mod+shift+Tab exec --no-startup-id dunstctl history-pop
+bindsym $mod+Escape exec --no-startup-id dunstctl close-all
 
 # Startup app
 # exec "rofi -show combi"
@@ -405,7 +411,7 @@ exec --no-startup-id "~/.config/polybar/launch.sh --forest"
 
 # kitti3 mapping
 exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
-bindsym $mod+c nop cmus "kitty @ set_background_opacity --match cmdline:cmus 1"
+bindsym $mod+c nop cmus
 
 exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.5 1.0
 bindsym $mod+n nop Terminal
