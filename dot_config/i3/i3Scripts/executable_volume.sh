@@ -6,30 +6,33 @@ do
     volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
     case "${opt}" in
         a)
-            if [[ $volume -lt 100 ]]; then
+            if [[ $volume -ge 100 ]]
+            then
+                pactl set-sink-volume @DEFAULT_SINK@ 100%
+            else
                 pactl set-sink-volume @DEFAULT_SINK@ +$OPTARG%
-                volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
-
-                if [[ $volume -gt 100 ]]; then
-                    pactl set-sink-volume @DEFAULT_SINK@ 100%
-                    volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
-                fi
-
             fi
-
             ;;
+
         s)
             if [[ $volume -gt 0 ]]; then
                 pactl set-sink-volume @DEFAULT_SINK@ -$OPTARG%
-                volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
             fi
-
             ;;
-        n)  notify="on" ;;
+
+        n) notify='on' ;;
     esac
 
+    volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
     if [[ $notify == "on" ]]; then
-        dunstify "VOLUME: " -h int:value:$volume
+        if [ $volume -le 30 ]; then
+            dunstify -h string:x-canonical-private-synchronous:audio "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-low
+        elif [ $volume -le 70 ]; then
+            dunstify -h string:x-canonical-private-synchronous:audio "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-medium
+        else
+            dunstify -h string:x-canonical-private-synchronous:audio "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-high
+        fi
+
     fi
 done
 
