@@ -90,6 +90,10 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# use neovim as manpager
+# export MANPAGER='nvim +Man!'
+export MANPAGER='nvim --appimage-extract-and-run -c "set ft=man"'
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
