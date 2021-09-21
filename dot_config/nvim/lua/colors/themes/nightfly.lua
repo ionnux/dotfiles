@@ -1,6 +1,7 @@
 local colors = {
   black = '#011627',
   white = '#c3ccdc',
+  grey = '#1d3b53',
   yellow = '#e3d18a',
   peach = '#ffcb8b',
   tan = '#ecc48d',
