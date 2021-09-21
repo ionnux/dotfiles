@@ -130,8 +130,7 @@ return require( 'packer' ).startup(
     use(
       {
         "marko-cerovac/material.nvim",
-        disable = true,
-        event = "bufEnter",
+        -- disable = true,
         after = "nvim-treesitter",
         config = function() require( "config.material" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
@@ -142,7 +141,7 @@ return require( 'packer' ).startup(
     use(
       {
         "bluz71/vim-nightfly-guicolors",
-        -- disable = true,
+        disable = true,
         -- event = "bufEnter",
         after = "nvim-treesitter",
         config = function() require( "config.nightfly" ) end,
