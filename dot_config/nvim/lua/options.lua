@@ -82,6 +82,7 @@ vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 
+
 vim.cmd( [[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]] )
 vim.cmd( [[autocmd FileType markdown setlocal spell]] )
 

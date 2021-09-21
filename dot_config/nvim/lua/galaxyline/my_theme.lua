@@ -1,7 +1,8 @@
 -- local flags = require( 'galaxyline/my_providers/flags' )
 local gl = require( 'galaxyline' )
 
-local colors = require( 'galaxyline.theme' ).default
+local colors = require( 'galaxyline.themes.colors' )["default"]
+-- local colors = require("galaxyline.themes.colors")["rose-pine"]
 local theme_colors = require( 'colors' )
 for i, v in pairs( theme_colors ) do colors[i] = v end
 -- colors.bg = "None"
@@ -80,7 +81,7 @@ gls.left[4] = {
   FileIcon = {
     provider = 'FileIcon',
     condition = condition.buffer_not_empty,
-    highlight = { require( 'galaxyline.provider_fileinfo' ).get_file_icon_color, colors.bg },
+    highlight = { require( 'galaxyline.providers.fileinfo' ).get_file_icon_color, colors.bg },
   },
 }
 
