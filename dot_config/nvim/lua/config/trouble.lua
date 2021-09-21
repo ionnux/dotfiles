@@ -44,31 +44,26 @@ require( "trouble" ).setup {
 
 }
 
--- keymappings
-vim.api.nvim_set_keymap( "n", "<leader>xx", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true } )
-
-vim.api.nvim_set_keymap(
-  "n", "<leader>xw", "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", { silent = true, noremap = true }
+-- keymaps
+local wk = require( "which-key" )
+wk.register(
+  {
+    ["<leader>x"] = {
+      name = "Trouble",
+      x = { "<cmd>TroubleToggle<cr>", "Trouble: Toggle" },
+      w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble: Workspace Diagnostics" },
+      d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Trouble: Document Diagnostics" },
+      l = { "<cmd>TroubleToggle loclist<cr>", "Trouble: Location List" },
+      q = { "<cmd>TroubleToggle quickfix<cr>", "Trouble: QuickFix List" },
+    },
+  }
  )
 
-vim.api.nvim_set_keymap(
-  "n", "<leader>xd", "<cmd>TroubleToggle lsp_document_diagnostics<cr>", { silent = true, noremap = true }
+wk.register(
+  {
+    g = {
+      r = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble: Lsp Refrences" },
+      d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Trouble: Lsp Definitions" },
+    },
+  }
  )
-
-vim.api.nvim_set_keymap( "n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>", { silent = true, noremap = true } )
-
-vim.api.nvim_set_keymap( "n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", { silent = true, noremap = true } )
-
-vim.api.nvim_set_keymap( "n", "gr", "<cmd>TroubleToggle lsp_references<cr>", { silent = true, noremap = true } )
-
-vim.api.nvim_set_keymap( "n", "gd", "<cmd>TroubleToggle lsp_definitions<cr>", { silent = true, noremap = true } )
-
--- vim.api.nvim_set_keymap(
---   "n", "]d", [[<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>]],
---   { noremap = true, silent = true }
---  )
---
--- vim.api.nvim_set_keymap(
---   "n", "[d", [[<cmd>lua require("trouble").previous({skip_groups = true, jump = true})<cr>]],
---   { noremap = true, silent = true }
---  )

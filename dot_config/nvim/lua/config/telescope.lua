@@ -3,10 +3,7 @@ require( 'telescope' ).load_extension( 'projects' )
 
 require( 'telescope' ).setup {
   defaults = {
-    mappings = {
-      i = { ["<c-t>"] = trouble.open_with_trouble },
-      n = { ["<c-t>"] = trouble.open_with_trouble },
-    },
+    mappings = { i = { ["<c-t>"] = trouble.open_with_trouble }, n = { ["<c-t>"] = trouble.open_with_trouble } },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -23,11 +20,7 @@ require( 'telescope' ).setup {
     selection_strategy = "reset",
     sorting_strategy = "descending",
     layout_strategy = "flex",
-    layout_config = {
-      horizontal = { mirror = false, preview_width = 0.55 },
-      vertical = { mirror = false },
-      width = 0.9,
-    },
+    layout_config = { horizontal = { mirror = false, preview_width = 0.55 }, vertical = { mirror = false }, width = 0.9 },
     file_sorter = require'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = { "/home/og_saaz/%.config/nvim/.*" },
     generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
@@ -37,9 +30,7 @@ require( 'telescope' ).setup {
     borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
     color_devicons = true,
     use_less = true,
-    path_display = function( opts, path )
-      return string.gsub( path, "/home/og_saaz", "~" )
-    end,
+    path_display = function( opts, path ) return string.gsub( path, "/home/og_saaz", "~" ) end,
 
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
@@ -60,28 +51,17 @@ require( 'telescope' ).setup {
 }
 require( 'telescope' ).load_extension( 'fzf' )
 
-vim.api.nvim_set_keymap(
-  'n', '<leader>fp', [[<cmd>:Telescope projects theme=get_dropdown<cr><esc>]],
-  { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]],
-  { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]],
-  { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<leader>fb',
-  [[<cmd>lua require('telescope.builtin').buffers()<cr><esc>]],
-  { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<leader>fh', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]],
-  { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-  'n', '<leader>fr', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]],
-  { noremap = true, silent = true }
+-- mappings
+local wk = require( "which-key" )
+wk.register(
+  {
+    ["<leader>t"] = {
+      name = "Telescope", -- optional group name
+      f = { "<cmd>Telescope find_files<cr>", "Telescope: Find File" }, -- create a binding with label
+      r = { "<cmd>Telescope oldfiles<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
+      p = { "<cmd>Telescope projects theme=get_dropdown<cr><esc>", "Telescope: Projects" },
+      b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
+      h = { "<cmd>Telescope buffers<cr>", "Telescope: Help Tags" },
+    },
+  }
  )

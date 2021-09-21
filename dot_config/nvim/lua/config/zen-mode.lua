@@ -45,6 +45,7 @@ require( "zen-mode" ).setup {
 
 }
 
-vim.api.nvim_set_keymap(
-  "n", "<leader>zz", ":ZenMode<cr>", { noremap = true, silent = true }
- )
+require( "which-key" ).register( { name = "Zen Mode", ["<leader>zz"] = { "<cmd>ZenMode<cr>", "Toggle ZenMode" } } )
+-- vim.api.nvim_set_keymap(
+-- "n", "<leader>zz", ":ZenMode<cr>", { noremap = true, silent = true }
+-- )

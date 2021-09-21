@@ -73,7 +73,8 @@ return require( 'packer' ).startup(
         "nvim-telescope/telescope.nvim",
         config = function() require( "config.telescope" ) end,
         cmd = { "Telescope" },
-        keys = { "<leader>fp", "<leader>ff", "<leader>fg", "<leader>fb", "<leader>fh", "<leader>fr" },
+        -- keys = { "<leader>fp", "<leader>ff", "<leader>fb", "<leader>fh", "<leader>fr" },
+        event = { "bufEnter" },
         wants = { "trouble.nvim", "plenary.nvim", "project.nvim", "telescope-fzf-native.nvim" },
         -- after = { "project.nvim", "telescope-fzf-native.nvim", "plenary.nvim"},
         requires = {
@@ -106,7 +107,7 @@ return require( 'packer' ).startup(
     use(
       {
         'folke/tokyonight.nvim',
-        -- disable = true,
+        disable = true,
         -- event = "bufEnter",
         -- wants = "nvim-treesitter",
         config = function() require( 'config.tokyonight' ) end,
@@ -141,7 +142,7 @@ return require( 'packer' ).startup(
     use(
       {
         "bluz71/vim-nightfly-guicolors",
-        disable = true,
+        -- disable = true,
         event = "bufEnter",
         after = "nvim-treesitter",
         config = function() require( "config.nightfly" ) end,
@@ -301,6 +302,7 @@ return require( 'packer' ).startup(
     use(
       {
         "glepnir/dashboard-nvim",
+        -- disable = true,
         event = "VimEnter",
         after = "telescope.nvim",
         config = function() require( "config.dashboard" ) end,
@@ -326,7 +328,7 @@ return require( 'packer' ).startup(
       {
         "folke/which-key.nvim",
         -- disable = true,
-        event = "VimEnter",
+        -- event = "VimEnter",
         config = function() require( "config.which-key" ) end,
       }
      )
@@ -466,5 +468,15 @@ augroup Plugin
 augroup END
 ]]
  ), -- mappings
-vim.api.nvim_set_keymap( "n", "<leader>ps", ":PackerSync<cr>", { noremap = true, silent = true } ),
-       vim.api.nvim_set_keymap( "n", "<leader>pS", ":PackerStatus<cr>", { noremap = true, silent = true } )
+--
+-- packer mappings
+require( "which-key" ).register(
+  {
+    ["<leader>p"] = {
+      name = "+packer",
+      s = { "<cmd>PackerSync<cr>", "Sync Packer Plugins" },
+      S = { "<cmd>PackerStatus<cr>", "Packer Status" },
+
+    },
+  }
+ )

@@ -416,7 +416,7 @@ exec --no-startup-id "~/.config/polybar/launch.sh --forest"
 exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
 bindsym $mod+c nop cmus
 
-exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.5 1.0
+exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.52 1.0
 bindsym $mod+n nop Terminal
 
 # Android emulator settings 

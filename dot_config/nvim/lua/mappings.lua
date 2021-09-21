@@ -1,3 +1,4 @@
+local wk = require( "which-key" ).register
 -- keep cursor in center of screen when transversing search
 vim.api.nvim_set_keymap( "n", "n", "nzzzv", { noremap = true } )
 vim.api.nvim_set_keymap( "n", "N", "Nzzzv", { noremap = true } )
@@ -25,7 +26,7 @@ vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]], { noremap = 
 vim.api.nvim_set_keymap( "n", "Y", "y$", { noremap = true } )
 
 -- map <leader>sv to source my vimrc file
-vim.api.nvim_set_keymap( "n", "<leader>sv", [[:source $MYVIMRC<cr>]], { noremap = true } )
+-- vim.api.nvim_set_keymap( "n", "<leader>sv", [[:source $MYVIMRC<cr>]], { noremap = true } )
 
 -- press ctrl e to go to the end of line in insert mode
 vim.api.nvim_set_keymap( "i", "<c-e>", "<end>", { noremap = true } )
