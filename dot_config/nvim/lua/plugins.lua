@@ -107,7 +107,7 @@ return require( 'packer' ).startup(
     use(
       {
         'folke/tokyonight.nvim',
-        disable = true,
+        -- disable = true,
         -- event = "bufEnter",
         -- wants = "nvim-treesitter",
         config = function() require( 'config.tokyonight' ) end,
@@ -130,7 +130,7 @@ return require( 'packer' ).startup(
     use(
       {
         "marko-cerovac/material.nvim",
-        -- disable = true,
+        disable = true,
         after = "nvim-treesitter",
         config = function() require( "config.material" ) end,
         requires = "nvim-treesitter/nvim-treesitter",

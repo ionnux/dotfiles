@@ -3,7 +3,7 @@ require( 'material' ).setup(
   {
 
     contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
-    borders = false, -- Enable borders between verticaly split windows
+    borders = true, -- Enable borders between verticaly split windows
 
     italics = {
       comments = true, -- Enable italic comments
@@ -17,7 +17,7 @@ require( 'material' ).setup(
       "terminal", -- Darker terminal background
       "packer", -- Darker packer background
       "qf", -- Darker qf list background
-      "nvimtree",
+      "NvimTree",
     },
 
     text_contrast = {
@@ -37,7 +37,7 @@ require( 'material' ).setup(
 
 vim.cmd [[colorscheme material]]
 -- Lua:
--- vim.cmd("hi CursorLineNr guibg=None")
--- vim.cmd("hi normalFloat guibg=None")
--- vim.cmd("hi pmenu guibg=None")
--- vim.cmd("highlight StatusLine guibg=None")
+vim.cmd("hi CursorLineNr guibg=None")
+vim.cmd("hi normalFloat guibg=None")
+vim.cmd("hi pmenu guibg=None")
+vim.cmd("highlight StatusLine guibg=None")
