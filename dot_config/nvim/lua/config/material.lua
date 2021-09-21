@@ -1,3 +1,4 @@
+vim.g.material_style = "palenight"
 require( 'material' ).setup(
   {
 
@@ -21,7 +22,7 @@ require( 'material' ).setup(
 
     text_contrast = {
       lighter = false, -- Enable higher contrast text for lighter style
-      darker = false, -- Enable higher contrast text for darker style
+      darker = true, -- Enable higher contrast text for darker style
     },
 
     disable = {
@@ -33,8 +34,8 @@ require( 'material' ).setup(
     -- custom_highlights = {} -- Overwrite highlights with your own
   }
  )
-vim.cmd [[colorscheme material]]
 
+vim.cmd [[colorscheme material]]
 -- Lua:
 -- vim.cmd("hi CursorLineNr guibg=None")
 -- vim.cmd("hi normalFloat guibg=None")
