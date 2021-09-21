@@ -143,7 +143,7 @@ return require( 'packer' ).startup(
       {
         "bluz71/vim-nightfly-guicolors",
         -- disable = true,
-        event = "bufEnter",
+        -- event = "bufEnter",
         after = "nvim-treesitter",
         config = function() require( "config.nightfly" ) end,
         requires = "nvim-treesitter/nvim-treesitter",
