@@ -39,7 +39,15 @@ vim.cmd( "highlight LspDiagnosticsVirtualTextInformation guifg=" .. colors.foam 
 vim.cmd( "highlight LspDiagnosticsVirtualTextHint guifg=" .. colors.iris )
 
 -- MatchParen
-vim.cmd( "highlight MatchParen term=underline cterm=underline gui=underline" )
+vim.cmd( "highlight MatchParen term=underline cterm=underline gui=underline,bold guifg=" .. colors.text )
+
+-- visual
+vim.cmd( "hi Visual gui=bold " )
+
+-- eob_lines
+vim.cmd( "highlight EndOfBuffer guibg=" .. colors.base .. " guifg=" .. colors.base )
+
+-- telescope
 vim.cmd( "highlight TelescopePromptBorder guifg=" .. colors.rose )
 vim.cmd( "highlight TelescopePreviewBorder guifg=" .. colors.pine )
 vim.cmd( "highlight TelescopeResultsBorder guifg=" .. colors.iris )

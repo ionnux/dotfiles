@@ -1,6 +1,6 @@
 
 packadd hop.nvim
-packadd tokyonight.nvim
+" packadd rose-pine.nvim
 " lua require'hop'.setup()
 nnoremap <silent>s :HopChar1AC<cr>
 nnoremap <silent>S :HopChar1BC<cr>
@@ -9,8 +9,8 @@ nnoremap <silent>gl :HopLineAC<cr>
 nnoremap <silent>gL :HopLineBC<cr>
 vnoremap <silent>gl <cmd> lua require'hop'.hint_lines()<cr>
 
-colorscheme tokyonight
-let g:tokyonight_style = "night"
+colorscheme rose-pine
+" let g:tokyonight_style = "night"
 
 set nonumber
 set cursorline

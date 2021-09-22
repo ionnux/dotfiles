@@ -196,7 +196,7 @@ return require( 'packer' ).startup(
     use(
       {
         "phaazon/hop.nvim",
-        disable = false,
+        -- disable = true,
         keys = { "s", "S", "gl", "gL", { "v", "s" }, { "v", "gl" } },
         cmd = { "HopLineAC", "HopLineBC", "HopChar1AC", "HopChar1BC" },
         config = function() require( "config.hop" ) end,
@@ -204,7 +204,13 @@ return require( 'packer' ).startup(
      )
 
     -- lightspeed
-    use( { 'ggandor/lightspeed.nvim', disable = true, config = function() require( "config.lightspeed" ) end } )
+    use(
+      {
+        'ggandor/lightspeed.nvim',
+        -- disable = true,
+        config = function() require( "config.lightspeed" ) end,
+      }
+     )
 
     -- diffview
     use( { "sindrets/diffview.nvim", event = "BufEnter", config = function() require( "config.diffview" ) end } )
