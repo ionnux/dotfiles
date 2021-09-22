@@ -32,6 +32,12 @@ vim.cmd( "highlight LspDiagnosticsUnderlineWarning guibg=bg gui=undercurl guisp=
 vim.cmd( "highlight LspDiagnosticsUnderlineInformation guibg=bg gui=undercurl guisp=" .. colors.foam )
 vim.cmd( "highlight LspDiagnosticsUnderlineHint guibg=bg gui=undercurl guisp=" .. colors.iris )
 
+-- lspDiagnostics
+vim.cmd( "highlight LspDiagnosticsVirtualTextError guifg=" .. colors.love )
+vim.cmd( "highlight LspDiagnosticsVirtualTextWarning guifg=" .. colors.gold )
+vim.cmd( "highlight LspDiagnosticsVirtualTextInformation guifg=" .. colors.foam )
+vim.cmd( "highlight LspDiagnosticsVirtualTextHint guifg=" .. colors.iris )
+
 -- MatchParen
 vim.cmd( "highlight MatchParen term=underline cterm=underline gui=underline" )
 vim.cmd( "highlight TelescopePromptBorder guifg=" .. colors.rose )
@@ -43,6 +49,6 @@ vim.cmd( "highlight TelescopeResultsBorder guifg=" .. colors.iris )
 
 -- dashboard
 vim.cmd( "highlight DashboardHeader guifg=" .. colors.rose )
-vim.cmd( "highlight DashboardFooter guifg=" .. colors.rose )
-vim.cmd( "highlight DashboardCenter guifg=" .. colors.foam )
-vim.cmd( "highlight DashboardShortCut guifg=" .. colors.iris )
+vim.cmd( "highlight DashboardFooter gui=bold guifg=" .. colors.rose )
+vim.cmd( "highlight DashboardCenter gui=bold guifg=" .. colors.foam )
+vim.cmd( "highlight DashboardShortCut gui=bold guifg=" .. colors.iris )

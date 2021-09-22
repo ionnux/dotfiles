@@ -119,7 +119,6 @@ return require( 'packer' ).startup(
       {
         'rose-pine/neovim',
         -- disable = true,
-        wants = { "galaxyline.nvim" },
         config = function() require( "config.rose-pine" ) end,
       }
      )
