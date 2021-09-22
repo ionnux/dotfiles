@@ -32,7 +32,7 @@ set nofollowlinks
 " With this option turned on you can run partially entered commands with
 " unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
 
-" set fastrun
+set fastrun
 
 " Natural sort of (version) numbers within text.
 
@@ -133,6 +133,7 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart
+command! sendFile :!fileLocation=$(echo "%d/%c" | tr -d "\\");qdbus org.kde.kdeconnect /modules/kdeconnect/devices/99c2205bc9b97222/share org.kde.kdeconnect.device.share.shareUrl "file://$fileLocation"
 
 " ------------------------------------------------------------------------------
 
@@ -467,6 +468,8 @@ nnoremap <f5> :copy<cr>
 nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
+
+nnoremap sf :sendFile<cr>
 
 " ------------------------------------------------------------------------------
 
