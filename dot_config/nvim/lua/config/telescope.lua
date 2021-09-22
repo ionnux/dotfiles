@@ -61,7 +61,7 @@ wk.register(
       r = { "<cmd>Telescope oldfiles<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
       p = { "<cmd>Telescope projects theme=get_dropdown<cr><esc>", "Telescope: Projects" },
       b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
-      h = { "<cmd>Telescope buffers<cr>", "Telescope: Help Tags" },
+      h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
     },
   }
  )

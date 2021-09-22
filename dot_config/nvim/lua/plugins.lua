@@ -208,14 +208,7 @@ return require( 'packer' ).startup(
     use( { 'ggandor/lightspeed.nvim', disable = true, config = function() require( "config.lightspeed" ) end } )
 
     -- diffview
-    use(
-      {
-        "sindrets/diffview.nvim",
-        wants = "nvim-web-devicons",
-        cmd = { "DiffviewOpendevicons", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
-        config = function() require( "config.diffview" ) end,
-      }
-     )
+    use( { "sindrets/diffview.nvim", event = "BufEnter", config = function() require( "config.diffview" ) end } )
 
     -- indent-blankline
     use(

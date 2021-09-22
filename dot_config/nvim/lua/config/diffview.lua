@@ -12,7 +12,7 @@ require'diffview'.setup {
   file_history_panel = {
     position = "bottom",
     width = 35,
-    height = 16,
+    height = 10,
     log_options = {
       max_count = 256, -- Limit the number of commits
       follow = false, -- Follow renames (only for single file)
@@ -27,13 +27,13 @@ require'diffview'.setup {
     -- The `view` bindings are active in the diff buffers, only when the current
     -- tabpage is a Diffview.
     view = {
-      ["<tab>"] = cb( "select_next_entry" ), -- Open the diff for the next file 
+      ["<tab>"] = cb( "select_next_entry" ), -- Open the diff for the next file
       ["<s-tab>"] = cb( "select_prev_entry" ), -- Open the diff for the previous file
       ["gf"] = cb( "goto_file" ), -- Open the file in a new split in previous tabpage
       ["<C-w><C-f>"] = cb( "goto_file_split" ), -- Open the file in a new split
       ["<C-w>gf"] = cb( "goto_file_tab" ), -- Open the file in a new tabpage
       ["<leader>e"] = cb( "focus_files" ), -- Bring focus to the files panel
-      ["<leader>b"] = cb( "toggle_files" ), -- Toggle the files panel.
+      -- ["<leader>b"] = cb( "toggle_files" ), -- Toggle the files panel.
     },
     file_panel = {
       ["j"] = cb( "next_entry" ), -- Bring the cursor to the next file entry
@@ -79,3 +79,16 @@ require'diffview'.setup {
     option_panel = { ["<tab>"] = cb( "select" ), ["q"] = cb( "close" ) },
   },
 }
+
+local wk = require( "which-key" )
+wk.register(
+  {
+    ["<leader>d"] = {
+      name = "Diffview",
+      o = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
+      c = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
+      h = { "<cmd>DiffviewFileHistory<cr>", "Diffview FileHistory" },
+      f = { "<cmd>DiffviewToggleFiles<cr>", "Diffview ToggleFiles" },
+    },
+  }
+ )

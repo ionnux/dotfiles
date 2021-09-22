@@ -55,13 +55,14 @@ vim.g.loaded_zipPlugin = 1
 vim.g.loaded_2html_plugin = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_matchit = 1
+-- vim.g.loaded_matchit = 1
+
 -- vim.g.loaded_matchparen = 1
 
 -- Use proper syntax highlighting in code blocks
 local fences = {
   "lua",
-  -- "vim",
+  "vim",
   "json",
   "typescript",
   "javascript",
@@ -81,7 +82,6 @@ vim.g.vim_markdown_folding_style_pythonic = 1
 vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
-
 
 vim.cmd( [[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]] )
 vim.cmd( [[autocmd FileType markdown setlocal spell]] )
@@ -125,7 +125,7 @@ vim.cmd(
  )
 
 -- Highlight on yank
-vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = search }" )
+vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = IncSearch }" )
 
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
