@@ -1,4 +1,3 @@
-local wk = require( "which-key" ).register
 -- keep cursor in center of screen when transversing search
 vim.api.nvim_set_keymap( "n", "n", "nzzzv", { noremap = true } )
 vim.api.nvim_set_keymap( "n", "N", "Nzzzv", { noremap = true } )
@@ -92,44 +91,44 @@ endfunction
  )
 
 -- flutter and dart mappings
-vim.cmd(
-  [[
-" flutter mappings
-augroup flutterMappings
-    autocmd!
-    autocmd filetype dart nnoremap <buffer><silent><leader>rr :w \| belowright 13split \| terminal dart --enable-asserts run <C-r>\%<Cr>i
-    autocmd filetype dart nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
-    autocmd filetype dart nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+-- vim.cmd(
+--   [[
+-- " flutter mappings
+-- augroup flutterMappings
+--     autocmd!
+--     autocmd filetype dart nnoremap <buffer><silent><leader>rr :w \| belowright 13split \| terminal dart --enable-asserts run <C-r>\%<Cr>i
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
 
-    autocmd filetype dart nnoremap <buffer><silent><leader>fl :b __FLUTTER_DEV_LOG__ <cr>
-    autocmd filetype __FLUTTER_DEV_LOG__ <buffer>c :FlutterLogClear<cr>
-    autocmd filetype __FLUTTER_DEV_LOG__ <buffer>r :FlutterReload<cr>
-    autocmd filetype __FLUTTER_DEV_LOG__ <buffer>R :FlutterRestart<cr>
-    autocmd filetype __FLUTTER_DEV_LOG__ <buffer>q :FlutterQuit<cr>
+--     autocmd filetype dart nnoremap <buffer><silent><leader>fl :b __FLUTTER_DEV_LOG__ <cr>
+--     autocmd filetype __FLUTTER_DEV_LOG__ <buffer>c :FlutterLogClear<cr>
+--     autocmd filetype __FLUTTER_DEV_LOG__ <buffer>r :FlutterReload<cr>
+--     autocmd filetype __FLUTTER_DEV_LOG__ <buffer>R :FlutterRestart<cr>
+--     autocmd filetype __FLUTTER_DEV_LOG__ <buffer>q :FlutterQuit<cr>
 
-    autocmd filetype log nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
-    autocmd filetype log nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>flc :FlutterLogClear <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+--     autocmd filetype log nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
 
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>flc :FlutterflutterToolsOutlineClear <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
-    autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
-augroup End
-]]
- )
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fr :FlutterRun <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fR :FlutterRestart <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fe :FlutterEmulators <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>flc :FlutterflutterToolsOutlineClear <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fo :FlutterOutlineToggle <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fcp :FlutterCopyProfilerUrl <cr>
+--     autocmd filetype flutterToolsOutline nnoremap <buffer><silent><leader>fvd :FlutterVisualDebug <cr>
+-- augroup End
+-- ]]
+--  )
 
 -- chezmoi apply
 vim.cmd(

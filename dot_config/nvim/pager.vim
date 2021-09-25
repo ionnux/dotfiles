@@ -13,6 +13,8 @@ colorscheme rose-pine
 " let g:tokyonight_style = "night"
 
 set nonumber
+set ignorecase
+set smartcase
 set cursorline
 set nolist
 set showtabline=0

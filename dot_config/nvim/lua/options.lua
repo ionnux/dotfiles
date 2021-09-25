@@ -17,6 +17,7 @@ vim.opt.grepprg = "rg --vimgrep"
 vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.hidden = true -- Enable modified buffers in background
 vim.opt.ignorecase = true -- Ignore case
+vim.opt.smartcase = true -- Don't ignore case with capitals
 vim.opt.inccommand = "split" -- preview incremental substitute
 vim.opt.joinspaces = false -- No double spaces with join after a dot
 vim.opt.list = false -- Show some invisible characters (tabs...
@@ -28,11 +29,10 @@ vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 vim.opt.scrolloff = 4 -- Lines of context
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = indent -- Size of an indent
-vim.opt.showmode = false -- dont show mode since we have a statusline
-vim.opt.showmatch = true -- When a bracket is inserted, briefly jump to the matching one.
+-- vim.opt.showmode = true -- dont show mode since we have a statusline
+-- vim.opt.showmatch = true -- When a bracket is inserted, briefly jump to the matching one.
 vim.opt.sidescrolloff = 8 -- Columns of context
 vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
-vim.opt.smartcase = true -- Don't ignore case with capitals
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
@@ -99,7 +99,6 @@ augroup numbertoggle
     set number
     autocmd TermOpen * setlocal nonumber norelativenumber
     autocmd BufEnter __FLUTTER_DEV_LOG__ setlocal nonumber norelativenumber
-    setlocal nonumber norelativenumber
 augroup END
 
 augroup RelativeNumbertoggle

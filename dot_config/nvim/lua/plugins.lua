@@ -191,6 +191,13 @@ return require( 'packer' ).startup(
         config = function() require( "config.gitsigns" ) end,
       }
      )
+    -- neogit
+    use {
+      'TimUntersberger/neogit',
+      event = "BufReadPost",
+      wants = "plenary.nvim",
+      config = function() require( "config.neogit" ) end,
+    }
 
     -- hop
     use(
@@ -302,7 +309,34 @@ return require( 'packer' ).startup(
      )
 
     -- bufdelete
-    use 'famiu/bufdelete.nvim'
+    use( 'famiu/bufdelete.nvim' )
+
+    -- bufresize
+    use(
+      {
+        "kwkarlwang/bufresize.nvim",
+        config = function()
+          local opts = { noremap = true, silent = true }
+          require( "bufresize" ).setup(
+            {
+              register = {
+                keys = {
+                  { "n", "<C-w><", "<C-w><", opts },
+                  { "n", "<C-w>>", "<C-w>>", opts },
+                  { "n", "<C-w>+", "<C-w>+", opts },
+                  { "n", "<C-w>-", "<C-w>-", opts },
+                  { "n", "<C-w>_", "<C-w>_", opts },
+                  { "n", "<C-w>=", "<C-w>=", opts },
+                  { "n", "<C-w>|", "<C-w>|", opts },
+                },
+                trigger_events = { "BufWinEnter", "WinEnter" },
+              },
+              resize = { keys = {}, trigger_events = { "VimResized" } },
+            }
+           )
+        end,
+      }
+     )
 
     -- dashboard
     use(
