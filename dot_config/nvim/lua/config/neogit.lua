@@ -2,7 +2,7 @@ local neogit = require( "neogit" )
 
 neogit.setup {
   disable_signs = false,
-  disable_context_highlighting = false,
+  disable_context_highlighting = true,
   disable_commit_confirmation = false,
   auto_refresh = true,
   disable_builtin_notifications = false,
@@ -10,8 +10,8 @@ neogit.setup {
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
+    section = { "", "" },
+    item = { "", "" },
     hunk = { "", "" },
   },
   integrations = {
@@ -64,3 +64,6 @@ neogit.setup {
     },
   },
 }
+
+local wk = require( "which-key" )
+wk.register( { ["<leader>g"] = { name = "Git", n = { "<cmd>Neogit<cr>", "Neogit: open" } } } )

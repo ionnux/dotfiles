@@ -289,7 +289,7 @@ return require( 'packer' ).startup(
     use(
       {
         "NTBBloodbath/galaxyline.nvim",
-        -- event = "bufEnter",
+        event = "bufEnter",
         wants = { "nvim-web-devicons" },
         config = function() require( "galaxyline.my_theme" ) end,
       }

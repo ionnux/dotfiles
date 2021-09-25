@@ -83,12 +83,15 @@ require'diffview'.setup {
 local wk = require( "which-key" )
 wk.register(
   {
-    ["<leader>d"] = {
-      name = "Diffview",
-      o = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
-      c = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
-      h = { "<cmd>DiffviewFileHistory<cr>", "Diffview FileHistory" },
-      f = { "<cmd>DiffviewToggleFiles<cr>", "Diffview ToggleFiles" },
+    ["<leader>g"] = {
+      name = "Git",
+      d = {
+        name = "Diffview",
+        o = { "<cmd>DiffviewOpen<cr>", "Diffview Open" },
+        c = { "<cmd>DiffviewClose<cr>", "Diffview Close" },
+        h = { "<cmd>DiffviewFileHistory<cr>", "Diffview FileHistory" },
+        f = { "<cmd>DiffviewToggleFiles<cr>", "Diffview ToggleFiles" },
+      },
     },
   }
  )
