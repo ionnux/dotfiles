@@ -213,21 +213,21 @@ gls.mid[1] = {
 --     }
 -- }
 
---gls.right[1] = {
-  --flutter = {
-    --provider = function()
-      ---- if (vim.o.paste) then
-      ---- return ' --PASTE-- '
-      ---- else
-      ---- return ''
-      ---- end
-      --return vim.g.flutter_tools_decorations.app_version
-    --end,
-    ---- icon = '▊',
-    --condition = condition.buffer_not_empty,
-    --highlight = { colors.green, colors.bg, 'bold' },
-  --},
---}
+-- gls.right[1] = {
+-- flutter = {
+-- provider = function()
+---- if (vim.o.paste) then
+---- return ' --PASTE-- '
+---- else
+---- return ''
+---- end
+-- return vim.g.flutter_tools_decorations.app_version
+-- end,
+---- icon = '▊',
+-- condition = condition.buffer_not_empty,
+-- highlight = { colors.green, colors.bg, 'bold' },
+-- },
+-- }
 
 gls.right[2] = {
   BufferType = {
