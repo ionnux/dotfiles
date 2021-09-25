@@ -2,7 +2,7 @@ local neogit = require( "neogit" )
 
 neogit.setup {
   disable_signs = false,
-  disable_context_highlighting = true,
+  disable_context_highlighting = false,
   disable_commit_confirmation = false,
   auto_refresh = true,
   disable_builtin_notifications = false,
@@ -38,7 +38,7 @@ neogit.setup {
       ["2"] = "Depth2",
       ["3"] = "Depth3",
       ["4"] = "Depth4",
-      ["<tab>"] = "Toggle",
+      [" "] = "Toggle",
       ["x"] = "Discard",
       ["s"] = "Stage",
       ["S"] = "StageUnstaged",
