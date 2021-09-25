@@ -58,7 +58,7 @@ neogit.setup {
       ["r"] = "RebasePopup",
       ["p"] = "PushPopup",
       ["c"] = "CommitPopup",
-      ["L"] = "LogPopup",
+      ["l"] = "LogPopup",
       ["Z"] = "StashPopup",
       ["b"] = "BranchPopup",
     },
