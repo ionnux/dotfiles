@@ -59,10 +59,19 @@ wk.register(
     ["<leader>"] = {
       f = {
         name = "Flutter",
-        r = { "<cmd>FlutterRun<cr>", "Flutter: Run" },
+        r = {
+          name = "Flutter: Run",
+          r = { "<cmd>FlutterRun<cr>", "Flutter: Run" },
+          d = {
+            "<cmd>FlutterRun --flavor development --target lib/main_development.dart<cr>",
+            "Flutter: Run Development",
+          },
+          s = { "<cmd>FlutterRun --flavor staging --target lib/main_staging.dart<cr>", "Flutter: Run Staging" },
+          p = { "<cmd>FlutterRun --flavor production --target lib/main_production.dart<cr>", "Flutter: Run Production" },
+        },
         R = { "<cmd>FlutterRestart<cr>", "Flutter: Restart" },
         e = { "<cmd>FlutterEmulators<cr>", "Flutter: Emulators" },
-        d = { "<cmd>FlutterDevices", "Flutter: Devices" },
+        d = { "<cmd>FlutterDevices<cr>", "Flutter: Devices" },
         l = { name = "log", c = { "<cmd>FlutterLogClear<cr>", "Flutter: Clear Log" } },
         o = { "<cmd>FlutterOutlineToggle<cr>", "Flutter: Toggle Outline" },
         y = { "<cmd>FlutterCopyProfilerUrl<cr>", "Flutter: Yank Profiler Url" },
@@ -70,7 +79,7 @@ wk.register(
         p = {
           name = "Pub",
           g = { "<cmd>FlutterPubGetd<cr>", "Flutter: Pub Get" },
-          u = { "<cmd>FlutterPubUpgrade", "Flutter: Pub Upgrade" },
+          u = { "<cmd>FlutterPubUpgrade<cr>", "Flutter: Pub Upgrade" },
         },
       },
     },

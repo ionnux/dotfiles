@@ -2,7 +2,7 @@ local neogit = require( "neogit" )
 
 neogit.setup {
   disable_signs = false,
-  disable_context_highlighting = false,
+  disable_context_highlighting = true,
   disable_commit_confirmation = false,
   auto_refresh = true,
   disable_builtin_notifications = false,
@@ -58,7 +58,7 @@ neogit.setup {
       ["r"] = "RebasePopup",
       ["p"] = "PushPopup",
       ["c"] = "CommitPopup",
-      ["l"] = "LogPopup",
+      ["L"] = "LogPopup",
       ["Z"] = "StashPopup",
       ["b"] = "BranchPopup",
     },

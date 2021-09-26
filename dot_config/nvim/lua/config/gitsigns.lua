@@ -1,8 +1,3 @@
--- highlight settings
--- local colors = require( "colors" )
--- vim.cmd( 'highlight GitSignsAdd guifg=' .. colors.green )
--- vim.cmd( 'highlight GitSignsChange guifg=' .. colors.blue )
--- vim.cmd( 'highlight GitSignsDelete guifg=' .. colors.red )
 require( 'gitsigns' ).setup {
   signs = {
     add = { hl = 'GitSignsAdd', text = '▍', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
@@ -19,8 +14,8 @@ require( 'gitsigns' ).setup {
     -- Default keymap options
     noremap = true,
 
-    ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
-    ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
+    ['n ]h'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
+    ['n [h'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
 
     ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
     ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
@@ -58,6 +53,30 @@ require( 'gitsigns' ).setup {
     row = 0,
     col = 1,
   },
-  use_internal_diff = true, -- If vim.diff or luajit is present
   yadm = { enable = false },
 }
+
+local wk = require( "which-key" )
+wk.register(
+  {
+    ["<leader>h"] = {
+      name = "Gitsigns: Hunk",
+      s = 'Stage Hunk',
+      u = 'Undo Stage_hunk',
+      r = 'Reset Hunk',
+      R = 'Reset Buffer',
+      p = 'Preview Hunk',
+      b = 'Blame Line',
+      S = 'Stage Buffer',
+      U = 'Reset Buffer',
+    },
+  }
+ )
+
+wk.register( { ["]h"] = "Next Hunk", ["[h"] = "Previous Hunk" } )
+
+wk.register( { ["<leader>h"] = { name = "Gitsigns: Hunk", s = 'Stage Hunk', r = 'Reset Hunk' } }, { mode = "v" } )
+
+wk.register( { ["ih"] = 'Select Hunk' }, { mode = "o" } )
+
+wk.register( { ["ih"] = 'Select Hunk' }, { mode = "x" } )
