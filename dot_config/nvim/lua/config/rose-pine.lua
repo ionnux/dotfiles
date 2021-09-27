@@ -108,6 +108,9 @@ vim.cmd( "hi NeogitNotificationInfo guifg=" .. palette.foam )
 vim.cmd( "hi NeogitNotificationWarning guifg=" .. palette.gold )
 vim.cmd( "hi NeogitNotificationError guifg=" .. palette.love )
 vim.cmd( "hi def NeogitDiffContextHighlight guibg=" .. palette.surface .. " guifg=" .. palette.text )
+vim.cmd("highlight NeogitStagedchanges gui=bold,italic guifg=" .. palette.gold)
+vim.cmd("highlight NeogitUnstagedchanges gui=bold,italic guifg=" .. palette.gold)
+-- vim.cmd("highlight NeogitStagedchangesRegion guifg=" .. palette.foam)
 
 -- vim.cmd[[
 -- hi def NeogitDiffAddHighlight guibg=#404040 guifg=#859900

@@ -146,7 +146,6 @@ return require( 'packer' ).startup(
       }
      )
 
-    --
     -- nightfly
     use(
       {

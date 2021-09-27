@@ -1,3 +1,5 @@
+local wk = require( "which-key" )
+
 -- keep cursor in center of screen when transversing search
 vim.api.nvim_set_keymap( "n", "n", "nzzzv", { noremap = true } )
 vim.api.nvim_set_keymap( "n", "N", "Nzzzv", { noremap = true } )
@@ -51,6 +53,20 @@ vim.api.nvim_set_keymap( "t", "<c-h>", [[<backspace>]], { noremap = true } )
 vim.api.nvim_set_keymap( "n", "<leader>ww", ":write<cr>", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "<leader>wq", [[:exit<cr>]], { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "<leader>bd", [[:bdelete<cr>]], { noremap = true, silent = true } )
+
+-- previous and next mappings
+wk.register(
+  { [']'] = { name = "Next", t = { "<cmd>tabnext<cr>", "Next Tab" }, b = { "<cmd>bnext<cr>", "Next Buffer" } } }
+ )
+wk.register(
+  {
+    ['['] = {
+      name = "Previous",
+      t = { "<cmd>tabprevious<cr>", "Previous Tab" },
+      b = { "<cmd>bprevious<cr>", "Previous Buffer" },
+    },
+  }
+ )
 
 -- map <leader>ev to edit my vimrc file
 vim.cmd(
