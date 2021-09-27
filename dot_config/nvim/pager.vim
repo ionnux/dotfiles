@@ -10,6 +10,7 @@ nnoremap <silent>gL :HopLineBC<cr>
 vnoremap <silent>gl <cmd> lua require'hop'.hint_lines()<cr>
 
 colorscheme rose-pine
+let g:rose_pine_variant = 'moon'
 " let g:tokyonight_style = "night"
 
 set nonumber

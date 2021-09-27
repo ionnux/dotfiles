@@ -107,7 +107,6 @@ vim.cmd( "highlight DashboardShortCut gui=bold guifg=" .. palette.iris )
 vim.cmd( "hi NeogitNotificationInfo guifg=" .. palette.foam )
 vim.cmd( "hi NeogitNotificationWarning guifg=" .. palette.gold )
 vim.cmd( "hi NeogitNotificationError guifg=" .. palette.love )
-
 vim.cmd( "hi def NeogitDiffContextHighlight guibg=" .. palette.surface .. " guifg=" .. palette.text )
 
 -- vim.cmd[[
@@ -117,3 +116,13 @@ vim.cmd( "hi def NeogitDiffContextHighlight guibg=" .. palette.surface .. " guif
 -- hi def NeogitHunkHeader guifg=#cccccc guibg=#404040
 -- hi def NeogitHunkHeaderHighlight guifg=#cccccc guibg=#4d4d4d
 -- ]]
+
+-- lspsaga
+vim.cmd( "highlight LspSagaCodeActionBorder guifg=" .. palette.pine )
+vim.cmd( "highlight LspSagaCodeActionContent guifg=" .. palette.subtle )
+vim.cmd( "highlight LspSagaCodeActionTitle gui=bold guifg=" .. palette.iris )
+vim.cmd( "highlight LspSagaCodeActionTruncateLine gui=bold guifg=" .. palette.pine )
+
+vim.cmd( "highlight LspSagaDiagnosticBorder guifg=" .. palette.pine )
+vim.cmd( "highlight LspSagaDiagnosticHeader guifg=" .. palette.iris )
+vim.cmd( "highlight LspSagaDiagnosticTruncateLine guifg=" .. palette.pine )

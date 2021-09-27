@@ -39,6 +39,7 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.tabstop = indent -- Number of spaces tabs count for
 vim.opt.termguicolors = true -- True color support
 vim.opt.undofile = true
+vim.opt.hlsearch = false
 vim.opt.undodir = [[/home/og_saaz/.nvim/undo]]
 vim.opt.undolevels = 10000
 vim.opt.updatetime = 200 -- save swap file and trigger CursorHold

@@ -27,7 +27,7 @@ saga.init_lsp_saga {
   },
   definition_preview_icon = '  ',
   -- "single" "double" "round" "plus" "bold"
-  border_style = "single",
+  border_style = "plus",
   rename_prompt_prefix = '➤',
 }
 
@@ -49,7 +49,7 @@ vim.api.nvim_set_keymap( 'n', '[d', ':Lspsaga diagnostic_jump_prev<cr>', { norem
 vim.api.nvim_set_keymap( 'n', ']d', ':Lspsaga diagnostic_jump_next<cr>', { noremap = true, silent = true } )
 
 -- automatically show diagnostics in hover window
--- vim.cmd("autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()")
+vim.cmd( "autocmd CursorHold * lua require'lspsaga.diagnostic'.show_line_diagnostics()" )
 
 -- highlight setting
 vim.cmd( "highlight LspFloatWinNormal guibg=None" )
