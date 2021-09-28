@@ -2,10 +2,9 @@
 local gl = require( 'galaxyline' )
 
 local colors = require( 'galaxyline.themes.colors' )["default"]
--- local colors = require("galaxyline.themes.colors")["rose-pine"]
+-- local colors = require( "galaxyline.themes.colors" )["rose-pine"]
 local theme_colors = require( 'colors' )
 for i, v in pairs( theme_colors ) do colors[i] = v end
--- colors.bg = "None"
 
 local condition = require( 'galaxyline.condition' )
 local gls = gl.section
@@ -93,15 +92,15 @@ gls.left[5] = {
   },
 }
 
-gls.left[6] = {
-  LineInfo = {
-    provider = 'LineColumn',
-    condition = condition.buffer_not_empty,
-    separator = ' ',
-    separator_highlight = { 'NONE', colors.bg },
-    highlight = { colors.fg, colors.bg },
-  },
-}
+-- gls.left[6] = {
+--   LineInfo = {
+--     provider = 'LineColumn',
+--     condition = condition.buffer_not_empty,
+--     separator = ' ',
+--     separator_highlight = { 'NONE', colors.bg },
+--     highlight = { colors.fg, colors.bg },
+--   },
+-- }
 
 -- gls.left[7] = {
 --   PerCent = {

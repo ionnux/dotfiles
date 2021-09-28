@@ -10,9 +10,9 @@ neogit.setup {
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }
-    section = { "", "" },
-    item = { "", "" },
-    hunk = { "", "" },
+    section = { "", "" },
+    item = { '▸', '▾' },
+    hunk = { '樂', '' },
   },
   integrations = {
     -- Neogit only provides inline diffs. If you want a more traditional way to look at diffs, you can use `sindrets/diffview.nvim`.

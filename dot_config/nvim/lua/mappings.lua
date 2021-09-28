@@ -23,6 +23,10 @@ vim.api.nvim_set_keymap( "v", "K", [[:m '<-2<cr>gv=gv]], { noremap = true } )
 vim.api.nvim_set_keymap( "n", "<leader>k", [[ <esc>:m .-2<cr>== ]], { noremap = true } )
 vim.api.nvim_set_keymap( "n", "<leader>j", [[ <esc>:m .+1<cr>== ]], { noremap = true } )
 
+-- Visual shifting (does not exit Visual mode)
+vim.api.nvim_set_keymap( 'v', '<', '<gv', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'v', '>', '>gv', { noremap = true, silent = true } )
+
 -- yank from cursor to eol
 vim.api.nvim_set_keymap( "n", "Y", "y$", { noremap = true } )
 
@@ -42,9 +46,6 @@ vim.api.nvim_set_keymap( "i", "<c-u>", "<up>", { noremap = true } )
 -- press ctrl d to go down in insert mode
 vim.api.nvim_set_keymap( "i", "<c-d>", "<down>", { noremap = true } )
 
--- use jk to go to normal mode from insert mode
-vim.api.nvim_set_keymap( "i", "jk", "<esc>", { noremap = true } )
-
 -- terminal mode mapping
 vim.api.nvim_set_keymap( "t", "jk", [[<c-\><c-n>]], { noremap = true } )
 vim.api.nvim_set_keymap( "t", "<c-h>", [[<backspace>]], { noremap = true } )
@@ -54,19 +55,35 @@ vim.api.nvim_set_keymap( "n", "<leader>ww", ":write<cr>", { noremap = true, sile
 vim.api.nvim_set_keymap( "n", "<leader>wq", [[:exit<cr>]], { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "<leader>bd", [[:bdelete<cr>]], { noremap = true, silent = true } )
 
+-------------------------------------------------------------------------------------------------
+-- Navigation
+-------------------------------------------------------------------------------------------------
+-- Zero should go to the first non-blank character not to the first column (which could be blank)
+-- but if already at the first character then jump to the beginning
+vim.api.nvim_set_keymap( 'n', '0', "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'",
+                         { silent = true, noremap = true, expr = true } )
+vim.api.nvim_set_keymap( 'x', '0', "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'",
+                         { silent = true, noremap = true, expr = true } )
+vim.api.nvim_set_keymap( 'o', '0', "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'",
+                         { silent = true, noremap = true, expr = true } )
+-- when going to the end of the line in visual mode ignore whitespace characters
+vim.api.nvim_set_keymap( 'v', '$', 'g_', { noremap = true, silent = true } )
+
+-- jk is escape, THEN move to the right to preserve the cursor position, unless at the first column.
+vim.api.nvim_set_keymap( 'i', 'jk', [[col('.') == 1 ? '<esc>' : '<esc>l']], { expr = true } )
+
 -- previous and next mappings
 wk.register(
-  { [']'] = { name = "Next", t = { "<cmd>tabnext<cr>", "Next Tab" }, b = { "<cmd>bnext<cr>", "Next Buffer" } } }
- )
-wk.register(
-  {
-    ['['] = {
-      name = "Previous",
-      t = { "<cmd>tabprevious<cr>", "Previous Tab" },
-      b = { "<cmd>bprevious<cr>", "Previous Buffer" },
-    },
-  }
- )
+  { [']'] = { name = "Next", t = { "<cmd>tabnext<cr>", "Next Tab" }, b = { "<cmd>bnext<cr>", "Next Buffer" } } } )
+wk.register( {
+  ['['] = {
+    name = "Previous",
+    t = { "<cmd>tabprevious<cr>", "Previous Tab" },
+    b = { "<cmd>bprevious<cr>", "Previous Buffer" },
+  },
+} )
+-- Switch between the last two files
+vim.api.nvim_set_keymap( 'n', '<leader><leader>', [[<c-^>]], { noremap = true, silent = true } )
 
 -- split mappings
 vim.api.nvim_set_keymap( "n", "<c-l>", "<c-w>l", { noremap = true, silent = true } )
@@ -75,17 +92,21 @@ vim.api.nvim_set_keymap( "n", "<c-j>", "<c-w>j", { noremap = true, silent = true
 vim.api.nvim_set_keymap( "n", "<c-k>", "<c-w>k", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "_", "<c-w>s", { noremap = true, silent = true } )
 vim.api.nvim_set_keymap( "n", "|", "<c-w>v", { noremap = true, silent = true } )
+if vim.fn.bufwinnr( 1 ) then
+  vim.api.nvim_set_keymap( 'n', '<s-l>', '<C-W><', { noremap = true, silent = true } )
+  vim.api.nvim_set_keymap( 'n', '<s-h>', '<C-W>>', { noremap = true, silent = true } )
+  vim.api.nvim_set_keymap( 'n', '-', '<C-W>-', { noremap = true, silent = true } )
+  vim.api.nvim_set_keymap( 'n', '+', '<C-W>+', { noremap = true, silent = true } )
+  vim.api.nvim_set_keymap( 'n', '=', '<C-W>=', { noremap = true, silent = true } )
+end
 
 -- map <leader>ev to edit my vimrc file
-vim.cmd(
-  [[
+vim.cmd( [[
  nnoremap <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.lua<cr>
-]]
- )
+]] )
 
 -- map <leader>; to add delimiter to end of line.
-vim.cmd(
-  [[
+vim.cmd( [[
 "map <leader>; to add delimiter to end of line.
 nnoremap <leader>; :call SemiColonDelimiter()<cr>
 nnoremap <leader>, :call CommaDelimiter()<cr>
@@ -111,8 +132,7 @@ function SemiColonDelimiter()
         call setpos(".", cursor_pos)
     endif
 endfunction
-]]
- )
+]] )
 
 -- flutter and dart mappings
 -- vim.cmd(
@@ -155,11 +175,9 @@ endfunction
 --  )
 
 -- chezmoi apply
-vim.cmd(
-  [[
+vim.cmd( [[
 augroup chezmoiApply
     autocmd!
     autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
 augroup END
- ]]
- )
+ ]] )

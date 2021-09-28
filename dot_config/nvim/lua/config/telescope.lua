@@ -1,5 +1,4 @@
 local trouble = require( "trouble.providers.telescope" )
-require( 'telescope' ).load_extension( 'projects' )
 
 require( 'telescope' ).setup {
   defaults = {
@@ -47,21 +46,24 @@ require( 'telescope' ).setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
     },
+    frecency = { show_scores = false },
   },
 }
+
 require( 'telescope' ).load_extension( 'fzf' )
+require( 'telescope' ).load_extension( 'projects' )
+require"telescope".load_extension( "frecency" )
 
 -- mappings
 local wk = require( "which-key" )
-wk.register(
-  {
-    ["<leader>t"] = {
-      name = "Telescope", -- optional group name
-      f = { "<cmd>Telescope find_files<cr>", "Telescope: Find File" }, -- create a binding with label
-      r = { "<cmd>Telescope oldfiles<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
-      p = { "<cmd>Telescope projects theme=get_dropdown<cr><esc>", "Telescope: Projects" },
-      b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
-      h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
-    },
-  }
- )
+wk.register( {
+  ["<leader>t"] = {
+    name = "Telescope", -- optional group name
+    f = { "<cmd>Telescope find_files<cr>", "Telescope: Find File" }, -- create a binding with label
+    r = { "<cmd>Telescope frecency<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
+    p = { "<cmd>Telescope projects theme=get_dropdown<cr><esc>", "Telescope: Projects" },
+    P = { function() require( 'telescope' ).extensions.packer.plugins( opts ) end, "Telescope: Packer" },
+    b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
+    h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
+  },
+} )

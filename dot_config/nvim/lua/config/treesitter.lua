@@ -2,7 +2,13 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
   incremental_selection = {
     enable = true,
-    keymaps = { init_selection = "gnn", node_incremental = "gnn", scope_incremental = "gnc", node_decremental = "gnN" },
+    keymaps = {
+      -- mappings for incremental selection (visual mappings)
+      init_selection = '<leader>v', -- maps in normal mode to init the node/scope selection
+      node_incremental = '<leader>v', -- increment to the upper named parent
+      node_decremental = '<leader>V', -- decrement to the previous node
+      scope_incremental = 'grc', -- increment to the upper scope (as defined in locals.scm)
+    },
   },
 
   query_linter = { enable = true, use_virtual_text = true, lint_events = { "BufWrite", "CursorHold" } },
