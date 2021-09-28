@@ -291,14 +291,14 @@ return require( 'packer' ).startup(
       {
         "NTBBloodbath/galaxyline.nvim",
         event = "bufEnter",
-        disable = true,
+        -- disable = true,
         wants = { "nvim-web-devicons" },
         config = function() require( "galaxyline.my_theme" ) end,
       }
      )
 
     -- feline
-    use { 'famiu/feline.nvim' }
+    use { 'famiu/feline.nvim', disable = true, config = function() require( "config.feline" ) end }
 
     -- nvim-web-devicons
     use( { "kyazdani42/nvim-web-devicons" } )
