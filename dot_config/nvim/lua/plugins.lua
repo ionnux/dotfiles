@@ -191,6 +191,7 @@ return require( 'packer' ).startup(
         config = function() require( "config.gitsigns" ) end,
       }
      )
+
     -- neogit
     use {
       'TimUntersberger/neogit',
@@ -290,10 +291,14 @@ return require( 'packer' ).startup(
       {
         "NTBBloodbath/galaxyline.nvim",
         event = "bufEnter",
+        disable = true,
         wants = { "nvim-web-devicons" },
         config = function() require( "galaxyline.my_theme" ) end,
       }
      )
+
+    -- feline
+    use { 'famiu/feline.nvim' }
 
     -- nvim-web-devicons
     use( { "kyazdani42/nvim-web-devicons" } )

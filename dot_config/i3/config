@@ -180,7 +180,8 @@ assign [class="Microsoft-edge-beta"] 3
 
 # layout files
 # load android dev layout to workspace 4
-bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_workspace.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
+bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_emulator.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
+bindsym $mod+shift+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_book.json; exec kitty; exec zathura'"
 
 # auto start apps
 # exec --no-startup-id i3-msg 'workspace 4; exec kitty cmus; workspace 1'
