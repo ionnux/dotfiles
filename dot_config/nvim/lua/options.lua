@@ -89,52 +89,10 @@ vim.cmd( [[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]] )
 vim.cmd( [[autocmd FileType markdown setlocal spell]] )
 
 -- Check if we need to reload the file when it changed
-vim.cmd( "au FocusGained * :checktime" )
+-- vim.cmd( "au FocusGained * :checktime" )
 
--- number and relativenumber settings
-vim.cmd(
-  [[
-"show line number
-augroup numbertoggle
-    autocmd!
-    set number
-    autocmd TermOpen * setlocal nonumber norelativenumber
-    autocmd BufEnter __FLUTTER_DEV_LOG__ setlocal nonumber norelativenumber
-augroup END
-
-augroup RelativeNumbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
-augroup END
-]]
- )
-
--- show cursor line only in active window
-vim.cmd(
-  [[
-  autocmd InsertLeave,WinEnter * set cursorline
-  autocmd InsertEnter,WinLeave * set nocursorline
-]]
- )
-
--- go to last loc when opening a buffer
-vim.cmd(
-  [[
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
-]]
- )
-
--- Highlight on yank
-vim.cmd( "au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = IncSearch }" )
 
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
 
--- set filetypes
-vim.cmd( [[autocmd BufRead,BufNewFile *.rasi setfiletype css]] )
-
--- windows to close with "q"
-vim.cmd( [[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]] )
-vim.cmd( [[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]] )

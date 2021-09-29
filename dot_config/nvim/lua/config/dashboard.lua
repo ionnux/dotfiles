@@ -26,7 +26,7 @@ vim.g.dashboard_custom_shortcut = {
   ["book_marks"] = "SPC f b",
 }
 vim.g.dashboard_custom_section = {
-  a = { description = { "  Recents                   SPC t r" }, command = "Telescope oldfiles" },
+  a = { description = { "  Recents                   SPC t r" }, command = "Telescope frecency" },
   b = { description = { "  Projects                  SPC t p" }, command = "Telescope projects theme=get_dropdown" },
   c = {
     description = { "  Load Last Session         SPC q l" },
