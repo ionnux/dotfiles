@@ -61,7 +61,7 @@ wk.register( {
     name = "Telescope", -- optional group name
     f = { "<cmd>Telescope find_files<cr>", "Telescope: Find File" }, -- create a binding with label
     r = { "<cmd>Telescope frecency<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
-    p = { "<cmd>Telescope projects theme=get_dropdown<cr><esc>", "Telescope: Projects" },
+    p = { "<cmd>Telescope projects theme=get_dropdown<cr>", "Telescope: Projects" },
     P = { function() require( 'telescope' ).extensions.packer.plugins( opts ) end, "Telescope: Packer" },
     b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
     h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },

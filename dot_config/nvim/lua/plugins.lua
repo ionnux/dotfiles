@@ -269,6 +269,7 @@ return require( 'packer' ).startup( function( use )
   -- bufresize
   use( {
     "kwkarlwang/bufresize.nvim",
+    disable = true,
     config = function()
       local opts = { noremap = true, silent = true }
       require( "bufresize" ).setup( {
