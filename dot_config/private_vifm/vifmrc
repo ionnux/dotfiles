@@ -125,16 +125,81 @@ mark h ~/
 " %D the other window directory name.
 " %m run the command in a menu window
 
-command! df df -h %m 2> /dev/null
-command! diff vim -d %f %F
-command! zip zip -r %f.zip %f
-command! run !! ./%f
-command! make !!make %a
-command! mkcd :mkdir %a | cd %a
-command! vgrep vim "+grep %a"
-command! reload :write | restart
+
+"send file using kdeconnect
 command! sendFile :!fileLocation=$(echo "%d/%c" | tr -d "\\");qdbus org.kde.kdeconnect /modules/kdeconnect/devices/99c2205bc9b97222/share org.kde.kdeconnect.device.share.shareUrl "file://$fileLocation"
 
+" zoxide, faster way to navigate
+" Use term() instead system() which makes sure
+" external interactive applications won't
+" affect the way terminal is used by vifm
+" This fix weird characters at the beginning of the path
+command! zoxide :execute 'cd "'.term('zoxide query %a').'"'
+
+" rsync command specially useful for partial copies
+command! rsync rsync --archive --compress --info=progress2 --human-readable --update --delete %f %D %s
+
+" cp command always recursive, preserving all attributes and only updating old files
+command! cp cp -avu %f %D %s
+
+" Show report file system disk space usage
+command! df df -h %m 2> /dev/null
+
+" Show the size of the selected element
+command! du du -sh %f %m
+
+" diff with vim
+command! diff nvim -d %f %F
+
+" Get Dropbox urls in the clipboard
+command! dropboxUrls dropbox-urls-extractor.sh %f
+
+" Create symbolic link
+command! link ln -s %f:p %D
+
+" zip selected files/folders
+command! zip zip -r %f.zip %f
+
+" unzip selected zipped files
+command! unzip unzip %c -d $(echo "%c" | tr -d ".zip") &
+
+" untar selected archived files
+command! untar tar xf %f %s
+
+" tar selected files
+command! tar tar cvaf %a %f %s
+
+" use e() zsh function for extracting any compressed file or folder
+command! extract :!e %f %s
+
+" use c() zsh function for compressing any file or folder
+command! compress :!c %a %s
+
+" Repeat last command to the selected files/folders
+command! run !! ./%f
+
+" Run make command
+command! make !!make %a
+
+" Reload vifmrc  file
+command! reload :write | restart
+
+" Find with fd
+command! fd fdfind --exclude node_modules %a %M
+
+" Find files with FZF and fd
+command! fzffile :set noquickview | :execute 'goto "'.term('fdfind --hidden --type f . $HOME | fzf --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+
+" Find folders with FZF and fd
+command! fzffolder :set noquickview | :execute 'goto "'.term('fdfind --hidden --type d . $HOME | fzf --preview "exa --all --sort name --tree --level 1 --classify --git --long --color=always --no-user --no-permissions {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+
+" Create and change to the folder
+command! mc :mkdir! '%a' | cd '%a'
+" Create directory
+command! md :mkdir! '%a'
+"command! mdm :mkdir! %a
+command! sudo :!sudo vifm %d %D
+command! vgrep nvim "+grep %a"
 " ------------------------------------------------------------------------------
 
 " The file type is for the default programs to be used with
@@ -427,7 +492,7 @@ nnoremap sx :!sxiv -t %d & <cr>
 nnoremap gp :!gimp %f & <cr>
 
 " Start shell in current directory
-nnoremap s :shell<cr>
+nnoremap sh :shell<cr>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
@@ -440,15 +505,28 @@ vnoremap w :view<cr>gv
 nnoremap gb :file &<cr>l
 
 " Yank current directory path into the clipboard
-nnoremap yd :!echo %d | xclip %i<cr>
+nnoremap yd :!echo -n %d | xclip -in -selection clipboard %i<cr>:echo expand('%"d') "is yanked to clipboard"<cr>
 
 " Yank current file path into the clipboard
-nnoremap yf :!echo %c:p | xclip %i<cr>
+nnoremap yf :!printf "%%s\n" %f:p | xclip -in -selection clipboard -rmlastnl %i<cr>:echo expand('%"f:p') "is yanked to clipboard"<cr>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
+
+" Mappings for select/unselect
+nnoremap t tj
+nnoremap T tk
+
+" Mapping for visual selection of all files
+nnoremap vv :%select<cr>
+
+" Set the same directory in the other panel
+nnoremap sy :sync<cr>
+
+" Reload config
+nnoremap <silent> rl :reload<cr>
 
 " Open console in current directory
 nnoremap ,t :!xterm &<cr>
@@ -469,8 +547,32 @@ nnoremap <f6> :move<cr>
 nnoremap <f7> :mkdir<space>
 nnoremap <f8> :delete<cr>
 
+"send file using kdeconnect
 nnoremap sf :sendFile<cr>
 
+" mkdir -p directory
+nnoremap md :md<space>
+
+" mkdir && cd to the directory
+nnoremap mc :mc<space>
+
+" Touch file
+"nnoremap to :touch<space>
+
+" Repeat name substitution
+nnoremap su :su<cr>
+
+" zoxide mapping
+nnoremap <silent> <a-x> :zoxide<space>
+
+" FZF mapping
+nnoremap <silent> <a-c> :fzffolder<cr>
+nnoremap <silent> <c-t> :fzffile<cr>
+
+
+" Use < and > without ctrl-w prefix key in normal mode
+nnoremap < <c-w><
+nnoremap > <c-w>>
 " ------------------------------------------------------------------------------
 
 " Various customization examples
@@ -493,5 +595,3 @@ nnoremap sf :sendFile<cr>
 " It can be used in some shell script that gets run from inside vifm, for
 " example, like this:
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
-"
-" let $VIFM_SERVER_NAME = v:servername
