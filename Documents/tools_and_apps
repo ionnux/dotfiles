@@ -16,5 +16,7 @@ dunst
 cpufreqctl
 papirus-icon-theme
 scrcpy
+sndcpy
 chezmoi
 zoxide
+fzf

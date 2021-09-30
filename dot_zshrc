@@ -159,12 +159,11 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ### Launch neofetch when starting shell
 # neofetch 
 
-### FZF settings
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
-
 ### Starship settings
 eval "$(starship init zsh)"
 
 ### zoxide settings
 eval "$(zoxide init zsh)"
+
+### fzf settings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
