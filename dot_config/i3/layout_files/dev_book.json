@@ -1,0 +1,48 @@
+// vim:ts=4:sw=4:et
+        {
+            "border": "normal",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 988,
+               "width": 1880,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "og_saaz@og-saaz:~",
+            "percent": 0.62,
+            "swallows": [
+               {
+                "class": "^kitty$"
+               // "instance": "^kitty$",
+               // "title": "^og_saaz\\@og\\-saaz\\:\\~$"
+               }
+            ],
+            "type": "con"
+        }
+        
+        {
+            "border": "normal",
+            "current_border_width": 0,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "org.pwmt.zathura",
+            "percent": 0.38,
+            "swallows": [
+               {
+                "class": "^Zathura$"
+               // "instance": "^org\\.pwmt\\.zathura$",
+               // "title": "^org\\.pwmt\\.zathura$"
+               }
+            ],
+            "type": "con"
+        }
+
+
