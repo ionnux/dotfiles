@@ -1,8 +1,12 @@
 local trouble = require( "trouble.providers.telescope" )
+local actions = require( "telescope.actions" )
 
 require( 'telescope' ).setup {
   defaults = {
-    mappings = { i = { ["<c-t>"] = trouble.open_with_trouble }, n = { ["<c-t>"] = trouble.open_with_trouble } },
+    mappings = {
+      i = { ["<c-t>"] = trouble.open_with_trouble, ["<esc>"] = actions.close },
+      n = { ["<c-t>"] = trouble.open_with_trouble },
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -18,6 +22,7 @@ require( 'telescope' ).setup {
     initial_mode = "insert",
     selection_strategy = "reset",
     sorting_strategy = "descending",
+    scroll_strategy = "cycle",
     layout_strategy = "flex",
     layout_config = { horizontal = { mirror = false, preview_width = 0.55 }, vertical = { mirror = false }, width = 0.9 },
     file_sorter = require'telescope.sorters'.get_fuzzy_file,

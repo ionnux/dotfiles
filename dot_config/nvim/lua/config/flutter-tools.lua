@@ -57,7 +57,7 @@ local on_attach = function( client, bufnr )
   -- flutter widget_guides highlight color
   vim.cmd( "highlight FlutterWidgetGuides guifg=#ebbcba" )
 
-  vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
+  vim.cmd [[autocmd CursorHold,CursorHoldI * lua Lightbulb()]]
 
   -- flutter keymaps
   local wk = require( "which-key" )

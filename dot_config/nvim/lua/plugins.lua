@@ -395,7 +395,7 @@ return require( 'packer' ).startup( function( use )
     config = function() require( "config.lsp" ) end,
   } )
 
-  use 'kosayoda/nvim-lightbulb'
+  use( { 'kosayoda/nvim-lightbulb', config = function() require( "config.nvim-lightbulb" ) end } )
 
   -- vim unimpaired (vimscript)
   use( { "tpope/vim-unimpaired", event = "bufEnter" } )
