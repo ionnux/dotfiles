@@ -343,6 +343,7 @@ return require( 'packer' ).startup( function( use )
     "jasonrhansen/lspsaga.nvim",
     branch = "finder-preview-fixes",
     event = "bufRead",
+    disable = true,
     wants = { "nvim-lspconfig" },
     config = function() require( "config.lspsaga" ) end,
   } )
@@ -364,7 +365,7 @@ return require( 'packer' ).startup( function( use )
     --   "gR",
     --   "gD",
     -- },
-    event = "BufReadPre",
+    -- event = "BufEnter",
     wants = "nvim-web-devicons",
     config = function() require( "config.trouble" ) end,
   } )
@@ -393,6 +394,8 @@ return require( 'packer' ).startup( function( use )
     requires = { "kabouzeid/nvim-lspinstall", "onsails/lspkind-nvim", { "folke/lua-dev.nvim" } },
     config = function() require( "config.lsp" ) end,
   } )
+
+  use 'kosayoda/nvim-lightbulb'
 
   -- vim unimpaired (vimscript)
   use( { "tpope/vim-unimpaired", event = "bufEnter" } )

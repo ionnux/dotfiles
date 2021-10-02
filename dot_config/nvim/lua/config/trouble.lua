@@ -46,24 +46,22 @@ require( "trouble" ).setup {
 
 -- keymaps
 local wk = require( "which-key" )
-wk.register(
-  {
-    ["<leader>x"] = {
-      name = "Trouble",
-      x = { "<cmd>TroubleToggle<cr>", "Trouble: Toggle" },
-      w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble: Workspace Diagnostics" },
-      d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Trouble: Document Diagnostics" },
-      l = { "<cmd>TroubleToggle loclist<cr>", "Trouble: Location List" },
-      q = { "<cmd>TroubleToggle quickfix<cr>", "Trouble: QuickFix List" },
-    },
-  }
- )
+wk.register( {
+  ["<leader>x"] = {
+    name = "Trouble",
+    x = { "<cmd>TroubleToggle<cr>", "Trouble: Toggle" },
+    w = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble: Workspace Diagnostics" },
+    d = { "<cmd>TroubleToggle lsp_document_diagnostics<cr>", "Trouble: Document Diagnostics" },
+    l = { "<cmd>TroubleToggle loclist<cr>", "Trouble: Location List" },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "Trouble: QuickFix List" },
+  },
+} )
 
-wk.register(
-  {
-    g = {
-      r = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble: Lsp Refrences" },
-      d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Trouble: Lsp Definitions" },
-    },
-  }
- )
+-- wk.register(
+--   {
+--     g = {
+--       r = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble: Lsp Refrences" },
+--       d = { "<cmd>TroubleToggle lsp_definitions<cr>", "Trouble: Lsp Definitions" },
+--     },
+--   }
+--  )

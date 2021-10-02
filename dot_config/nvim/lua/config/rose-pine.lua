@@ -108,8 +108,8 @@ vim.cmd( "hi NeogitNotificationInfo guifg=" .. palette.foam )
 vim.cmd( "hi NeogitNotificationWarning guifg=" .. palette.gold )
 vim.cmd( "hi NeogitNotificationError guifg=" .. palette.love )
 vim.cmd( "hi def NeogitDiffContextHighlight guibg=" .. palette.surface .. " guifg=" .. palette.text )
-vim.cmd("highlight NeogitStagedchanges gui=bold,italic guifg=" .. palette.gold)
-vim.cmd("highlight NeogitUnstagedchanges gui=bold,italic guifg=" .. palette.gold)
+vim.cmd( "highlight NeogitStagedchanges gui=bold,italic guifg=" .. palette.gold )
+vim.cmd( "highlight NeogitUnstagedchanges gui=bold,italic guifg=" .. palette.gold )
 -- vim.cmd("highlight NeogitStagedchangesRegion guifg=" .. palette.foam)
 
 -- vim.cmd[[
@@ -129,3 +129,8 @@ vim.cmd( "highlight LspSagaCodeActionTruncateLine gui=bold guifg=" .. palette.pi
 vim.cmd( "highlight LspSagaDiagnosticBorder guifg=" .. palette.pine )
 vim.cmd( "highlight LspSagaDiagnosticHeader guifg=" .. palette.iris )
 vim.cmd( "highlight LspSagaDiagnosticTruncateLine guifg=" .. palette.pine )
+
+-- lsp
+-- border settings
+vim.cmd( " highlight NormalFloat guibg=" .. palette.surface .. " guifg=" .. palette.subtle )
+vim.cmd( " highlight FloatBorder guifg=" .. palette.pine .. " guibg=" .. palette.base )

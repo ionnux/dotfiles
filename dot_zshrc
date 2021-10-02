@@ -90,10 +90,6 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# use neovim as manpager
-# export MANPAGER='nvim +Man!'
-export MANPAGER='nvim --appimage-extract-and-run --noplugin -u ~/.config/nvim/pager.vim -c "set ft=man"'
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -102,11 +98,21 @@ bindkey -v
 MODE_INDICATOR=""
 
 # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
- else
-   export EDITOR='nvim'
- fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='nvim'
+# else
+#   export EDITOR='nvim'
+# fi
+
+# editor and pager
+if [[ "$(command -v nvim)" ]]; then
+    export EDITOR='nvim'
+    export MANPAGER='nvim +Man!'
+    # export MANWIDTH=999
+else
+   export EDITOR='vim'
+fi
+
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
