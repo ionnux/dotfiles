@@ -100,14 +100,16 @@ return require( 'packer' ).startup( function( use )
   -- tokyonight
   use( {
     'folke/tokyonight.nvim',
-    disable = true, -- event = "bufEnter",
+    disable = true,
+    -- event = "bufEnter",
     -- wants = "nvim-treesitter",
     config = function() require( 'config.tokyonight' ) end,
   } )
 
   -- rose-pine
   use( {
-    'rose-pine/neovim', -- disable = true,
+    'rose-pine/neovim',
+    -- disable = true,
     config = function() require( "config.rose-pine" ) end,
   } )
 
@@ -300,7 +302,7 @@ return require( 'packer' ).startup( function( use )
   } )
 
   -- firenvim
-  use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install']( 0 ) end }
+  use { 'glacambre/firenvim', disable = true, run = function() vim.fn['firenvim#install']( 0 ) end }
 
   -- neoscroll
   use( {
