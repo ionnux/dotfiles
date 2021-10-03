@@ -63,6 +63,7 @@ return require("packer").startup(function(use)
 	-- nvim autopairs
 	use({
 		"windwp/nvim-autopairs",
+		-- disable = true,
 		event = "InsertEnter",
 		config = function()
 			require("config.nvim-autopairs")
@@ -120,7 +121,7 @@ return require("packer").startup(function(use)
 	-- toggleterm
 	use({
 		"akinsho/nvim-toggleterm.lua",
-		keys = "<leader>tt",
+		-- keys = "<leader>tt",
 		config = function()
 			require("config.toggleterm")
 		end,
@@ -402,6 +403,7 @@ return require("packer").startup(function(use)
 	-- which-key
 	use({
 		"folke/which-key.nvim", -- disable = true,
+		-- disable = true,
 		-- event = "VimEnter",
 		config = function()
 			require("config.which-key")
@@ -564,8 +566,8 @@ augroup Plugin
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile
 augroup END
-]]), -- mappings
-		--
+]]),
+		-- mappings
 	-- packer mappings
 require("which-key").register({
 		["<leader>p"] = {

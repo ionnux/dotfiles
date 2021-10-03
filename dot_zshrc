@@ -107,13 +107,17 @@ MODE_INDICATOR=""
 # fi
 
 # editor and pager
-if [[ "$(command -v nvim)" ]]; then
-    export EDITOR='nvim'
-    export MANPAGER='nvim +Man!'
-    # export MANWIDTH=999
+# use neovim-remote if available
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+    alias nvim="nvr --remote-tab +'set bufhidden=wipe'"
+    export VISUAL="nvr --remote-tab +'set bufhidden=wipe'"
+    export EDITOR="nvr --remote-tab +'set bufhidden=wipe'"
 else
-   export EDITOR='vim'
+    export VISUAL="nvim"
+    export EDITOR="nvim"
 fi
+export MANPAGER='nvim +Man!'
+# export MANWIDTH=999
 
 
 # Compilation flags
@@ -165,7 +169,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # export TERMINAL=alacritty
 
 ### Launch neofetch when starting shell
-# neofetch 
+# neofetch
 
 ### Starship settings
 eval "$(starship init zsh)"

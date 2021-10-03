@@ -24,8 +24,11 @@ vim.cmd([[
 
 -- show cursor line only in active window
 vim.cmd([[
+augroup cursorline
+  autocmd!
   autocmd InsertLeave,WinEnter * set cursorline
   autocmd InsertEnter,WinLeave * set nocursorline
+augroup END
 ]])
 
 -- auto toggle number and relativenumber

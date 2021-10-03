@@ -9,20 +9,20 @@ gui:
   theme:
     lightTheme: false # For terminals with a light background
     activeBorderColor:
-      - blue
+      - yellow
       - bold
     inactiveBorderColor:
       - white
     optionsTextColor:
       - blue
     selectedLineBgColor:
-      - default
-      - bold
-      # - reverse
+      # - default
+      # - bold
+      - reverse
     selectedRangeBgColor:
-      - blue
-      - bold
-      # - reverse
+      # - blue
+      # - bold
+      - reverse
     cherryPickedCommitBgColor:
       - blue
     cherryPickedCommitFgColor:
@@ -32,7 +32,7 @@ gui:
   mouseEvents: true
   skipUnstageLineWarning: false
   skipStashWarning: true
-  showFileTree: true # for rendering changes files in a tree format
+  showFileTree: false # for rendering changes files in a tree format
   showListFooter: true # for seeing the '5 of 20' message in list panels
   showRandomTip: true
   showCommandLog: true
@@ -50,7 +50,8 @@ git:
     mode: 'auto' # one of 'auto' | 'merge' | 'rebase' | 'ff-only', auto reads from git configuration
   skipHookPrefix: WIP
   autoFetch: true
-  branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  # branchLogCmd: 'git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --'
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
@@ -82,8 +83,8 @@ keybinding:
     nextItem: '<down>' # go one line down
     prevItem-alt: 'k' # go one line up
     nextItem-alt: 'j' # go one line down
-    prevPage: ',' # go to next page in list
-    nextPage: '.' # go to previous page in list
+    prevPage: 'K' # go to next page in list
+    nextPage: 'J' # go to previous page in list
     gotoTop: '<' # go to top of list
     gotoBottom: '>' # go to bottom of list
     prevBlock: '<left>' # goto the previous block / panel
@@ -105,8 +106,8 @@ keybinding:
     openFile: 'o'
     scrollUpMain: '<pgup>' # main panel scroll up
     scrollDownMain: '<pgdown>' # main panel scroll down
-    scrollUpMain-alt1: 'K' # main panel scroll up
-    scrollDownMain-alt1: 'J' # main panel scroll down
+    # scrollUpMain-alt1: 'K' # main panel scroll up
+    # scrollDownMain-alt1: 'J' # main panel scroll down
     scrollUpMain-alt2: '<c-u>' # main panel scroll up
     scrollDownMain-alt2: '<c-d>' # main panel scroll down
     executeCustomCommand: ':'
