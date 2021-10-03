@@ -8,7 +8,7 @@ vim.g.nightflyItalics = 1
 vim.g.nightflyNormalFloat = 1
 
 -- Lua initialization file
-vim.cmd [[colorscheme nightfly]]
+vim.cmd([[colorscheme nightfly]])
 -- vim.cmd("hi CursorLineNr guibg=None")
 -- vim.cmd("hi normalFloat guibg=None")
 -- vim.cmd("hi pmenu guibg=None")

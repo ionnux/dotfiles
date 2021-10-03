@@ -1,7 +1,7 @@
 local indent = 2
 
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap( "n", "<space>", "<Nop>", { noremap = true } )
+vim.api.nvim_set_keymap("n", "<space>", "<Nop>", { noremap = true })
 -- vim.g.maplocalleader = ","
 vim.opt.autowrite = true -- enable auto write
 -- vim.opt.clipboard = "unnamedplus" -- sync with system clipboard
@@ -63,17 +63,17 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Use proper syntax highlighting in code blocks
 local fences = {
-  "lua",
-  "vim",
-  "json",
-  "typescript",
-  "javascript",
-  "js=javascript",
-  "ts=typescript",
-  "shell=sh",
-  "python",
-  "sh",
-  "console=sh",
+	"lua",
+	"vim",
+	"json",
+	"typescript",
+	"javascript",
+	"js=javascript",
+	"ts=typescript",
+	"shell=sh",
+	"python",
+	"sh",
+	"console=sh",
 }
 vim.g.markdown_fenced_languages = fences
 
@@ -85,14 +85,12 @@ vim.g.vim_markdown_conceal_code_blocks = 0
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 
-vim.cmd( [[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]] )
-vim.cmd( [[autocmd FileType markdown setlocal spell]] )
+vim.cmd([[autocmd FileType markdown nnoremap gO <cmd>Toc<cr>]])
+vim.cmd([[autocmd FileType markdown setlocal spell]])
 
 -- Check if we need to reload the file when it changed
 -- vim.cmd( "au FocusGained * :checktime" )
 
-
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
-
