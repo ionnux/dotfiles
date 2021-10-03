@@ -113,6 +113,7 @@ if vim.fn.bufwinnr(1) then
 	vim.api.nvim_set_keymap("n", "=", "<C-W>=", { noremap = true, silent = true })
 end
 
+--
 -- map <leader>ev to edit my vimrc file
 vim.cmd([[
  nnoremap <silent><leader>ev :edit ~/.local/share/chezmoi/dot_config/nvim/init.lua<cr>
