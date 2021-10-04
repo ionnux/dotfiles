@@ -1,0 +1,43 @@
+[user]
+	email = sadiq_abdulazeez@outlook.com
+	name = Sadiq Abdulazeez
+[init]
+	defaultBranch = main
+[diff]
+  ; colorMoved = default
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  features = decorations
+  line-numbers = true
+  ; side-by-side = true
+
+[delta "interactive"]
+  keep-plus-minus-markers = true
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-style = file line-number syntax
+  hunk-header-file-style = "#e0def4"
+  hunk-header-decoration-style = "#9ccfd8" box
+  hunk-header-line-number-style = "#9ccfd8"
+  zero-style = syntax
+  line-numbers-zero-style = normal
+  keep-plus-minus-markers = true
+  minus-style = "#232136" "#f6c177"
+  minus-emph-style = "#232136" "#eb6f92" 
+  line-numbers-minus-style = "#f6c177"
+  plus-style = "#232136" "#3e8fb0"
+  plus-emph-style = "#232136" "#c4a7e7"
+  line-numbers-plus-style = "#3e8fb0"
+  syntax-theme = Dracula
+  

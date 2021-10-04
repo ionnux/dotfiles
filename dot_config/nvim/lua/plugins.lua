@@ -127,6 +127,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- chezmoi.vim (vimrc)
+	use({ "alker0/chezmoi.vim" })
+
 	-- tokyonight
 	use({
 		"folke/tokyonight.nvim",
@@ -373,6 +376,7 @@ return require("packer").startup(function(use)
 	-- dashboard
 	use({
 		"glepnir/dashboard-nvim", -- disable = true,
+		disable = true,
 		event = "VimEnter",
 		after = "telescope.nvim",
 		config = function()
@@ -571,8 +575,9 @@ augroup END
 	-- packer mappings
 require("which-key").register({
 		["<leader>p"] = {
-			name = "+packer",
-			s = { "<cmd>PackerSync<cr>", "Sync Packer Plugins" },
-			S = { "<cmd>PackerStatus<cr>", "Packer Status" },
+			name = "+Packer",
+			s = { "<cmd>PackerSync<cr>", "Packer: Sync" },
+			S = { "<cmd>PackerStatus<cr>", "Packer: Status" },
+			c = { "<cmd>PackerClean<cr>", "Packer: Clean" },
 		},
 	})

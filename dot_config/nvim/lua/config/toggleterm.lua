@@ -49,6 +49,7 @@ local lazygit = Terminal:new({
 		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
 		-- if vim.fn.maparg("jk", "t") ~= "" then
 		vim.api.nvim_del_keymap("t", "jk")
+		vim.cmd([[ColorizerDetachFromBuffer]])
 		-- end
 		-- vim.api.nvim_buf_set_keymap(term.bufnr, "t", "jk", "<Nop>", { noremap = true, silent = true })
 	end,
