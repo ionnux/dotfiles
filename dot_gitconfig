@@ -25,7 +25,7 @@
 [delta "decorations"]
   commit-decoration-style = blue ol
   commit-style = raw
-  file-style = omit
+  file-style = normal italic bold
   hunk-header-style = file line-number syntax
   hunk-header-file-style = "#e0def4"
   hunk-header-decoration-style = "#9ccfd8" box
@@ -40,4 +40,3 @@
   plus-emph-style = "#232136" "#c4a7e7"
   line-numbers-plus-style = "#3e8fb0"
   syntax-theme = Dracula
-  
