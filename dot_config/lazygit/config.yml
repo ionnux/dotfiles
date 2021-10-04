@@ -2,8 +2,8 @@ gui:
   # stuff relating to the UI
   scrollHeight: 2 # how many lines you scroll by
   scrollPastBottom: true # enable scrolling past the bottom
-  sidePanelWidth: 0.3333 # number from 0 to 1
-  expandFocusedSidePanel: false
+  sidePanelWidth: 0.32
+  expandFocusedSidePanel: true
   mainPanelSplitMode: 'flexible' # one of 'horizontal' | 'flexible' | 'vertical'
   language: 'auto' # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl'
   theme:
@@ -34,8 +34,8 @@ gui:
   skipStashWarning: true
   showFileTree: false # for rendering changes files in a tree format
   showListFooter: true # for seeing the '5 of 20' message in list panels
-  showRandomTip: true
-  showCommandLog: true
+  showRandomTip: false
+  showCommandLog: false
   commandLogSize: 10
 git:
   paging:
@@ -56,7 +56,7 @@ git:
   allBranchesLogCmd: 'git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium'
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
-  parseEmoji: false
+  parseEmoji: true
 os:
   editCommand: '' # see 'Configuring File Editing' section
   editCommandTemplate: '{{editor}} {{filename}}'
@@ -192,3 +192,7 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
+customCommands:
+  - key: '8'
+    command: 'nvr --remote-tab +"set bufhidden=wipe" -c "DiffviewOpen" "{{.SelectedFile.Name}}"'
+    context: 'files'

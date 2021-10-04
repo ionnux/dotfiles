@@ -380,6 +380,7 @@ return require("packer").startup(function(use)
 		event = "VimEnter",
 		after = "telescope.nvim",
 		config = function()
+			--
 			require("config.dashboard")
 		end,
 		requires = "nvim-telescope/telescope.nvim",
@@ -563,9 +564,10 @@ return require("packer").startup(function(use)
 	})
 
 	-- target vim (vimscript)
-	use({ "wellle/targets.vim" })
+	use({ "wellle/targets.vim", disable = true })
 end),
-	vim.cmd([[
+		-- autocommands
+vim.cmd([[
 augroup Plugin 
     autocmd!
     autocmd BufWritePost plugins.lua source <afile> | PackerCompile

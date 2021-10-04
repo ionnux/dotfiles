@@ -25,7 +25,7 @@
 [delta "decorations"]
   commit-decoration-style = blue ol
   commit-style = raw
-  file-style = normal italic bold
+  file-style = omit
   hunk-header-style = file line-number syntax
   hunk-header-file-style = "#e0def4"
   hunk-header-decoration-style = "#9ccfd8" box
