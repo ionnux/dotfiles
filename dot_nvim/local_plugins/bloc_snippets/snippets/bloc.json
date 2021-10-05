@@ -3,9 +3,9 @@
     "prefix": "bloc",
     "body": [
       "class ${1:Subject}Bloc extends Bloc<$1Event, $1State> {",
-      "\t${1:Subject}Bloc() : super(${1:Subject}Initial()) {",
+      "\t${1:Subject}Bloc() : super(${2:${1:Subject}Initial()}) {",
       "\t\ton<$1Event>((event, emit) {",
-      "\t\t\t${2:// TODO: implement event handler}",
+      "\t\t\t${3:// ODO: implement event handler}",
       "\t\t});",
       "\t}",
       "}"

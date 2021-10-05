@@ -1,7 +1,7 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-command_timeout = 2000
+command_timeout = 4000
 
 # Disable the package module, hiding it from the prompt completely
 # [package]
@@ -42,7 +42,7 @@ disabled = false
 
 [[battery.display]]
 threshold = 29
-style = 'bold red'
+style = 'bold yellow'
 
 # [[battery.display]]
 # threshold = 100

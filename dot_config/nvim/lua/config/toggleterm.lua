@@ -54,6 +54,7 @@ local lazygit = Terminal:new({
 		-- vim.api.nvim_buf_set_keymap(term.bufnr, "t", "jk", "<Nop>", { noremap = true, silent = true })
 	end,
 	on_close = function(term)
+		vim.cmd([[checktime]])
 		vim.api.nvim_set_keymap("t", "jk", [[<c-\><c-n>]], { noremap = true })
 	end,
 })
@@ -62,4 +63,10 @@ function _lazygit_toggle()
 	lazygit:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+local wk = require("which-key")
+wk.register({
+	["<leader>g"] = {
+		name = "Diffview",
+		l = { "<cmd>lua _lazygit_toggle()<CR>", "Lazygit Toggle" },
+	},
+})

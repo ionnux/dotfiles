@@ -106,7 +106,7 @@ local on_attach = function(client, bufnr)
 	end
 
 	-- flutter widget_guides highlight color
-	vim.cmd("highlight FlutterWidgetGuides guifg=#ebbcba")
+	vim.cmd("highlight FlutterWidgetGuides guifg=#9ccfd8")
 
 	vim.cmd([[autocmd CursorHold,CursorHoldI * lua Lightbulb()]])
 
@@ -141,7 +141,7 @@ local on_attach = function(client, bufnr)
 				v = { "<cmd>FlutterVisualDebug<cr>", "Flutter: Enable Visual Debug" },
 				p = {
 					name = "Pub",
-					g = { "<cmd>FlutterPubGetd<cr>", "Flutter: Pub Get" },
+					g = { "<cmd>FlutterPubGet<cr>", "Flutter: Pub Get" },
 					u = { "<cmd>FlutterPubUpgrade<cr>", "Flutter: Pub Upgrade" },
 				},
 			},

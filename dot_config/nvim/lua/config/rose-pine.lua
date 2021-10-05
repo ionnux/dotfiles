@@ -133,4 +133,4 @@ vim.cmd("highlight LspSagaDiagnosticTruncateLine guifg=" .. palette.pine)
 -- lsp
 -- border settings
 vim.cmd(" highlight NormalFloat guibg=" .. palette.base .. " guifg=" .. palette.subtle)
-vim.cmd(" highlight FloatBorder guifg=" .. palette.pine .. " guibg=" .. palette.base)
+vim.cmd(" highlight FloatBorder guibg=" .. palette.base .. " guifg=" .. palette.subtle)

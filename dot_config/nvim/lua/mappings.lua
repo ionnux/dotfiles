@@ -113,6 +113,9 @@ if vim.fn.bufwinnr(1) then
 	vim.api.nvim_set_keymap("n", "=", "<C-W>=", { noremap = true, silent = true })
 end
 
+-- select mode mapping for plugins to accept placeholder with enter key
+vim.api.nvim_set_keymap("s", "<cr>", "<esc>a", { noremap = true })
+
 --
 -- map <leader>ev to edit my vimrc file
 vim.cmd([[

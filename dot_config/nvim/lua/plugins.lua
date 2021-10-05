@@ -13,7 +13,7 @@ return require("packer").startup(function(use)
 	-- nvim-cmp
 	use({
 		"hrsh7th/nvim-cmp",
-		disable = false,
+		-- disable = true,
 		event = "InsertEnter",
 		wants = { "vim-vsnip", "LuaSnip", "nvim-autopairs" },
 		config = function()
@@ -32,19 +32,36 @@ return require("packer").startup(function(use)
 	})
 
 	-- coq_nvim
-	use({ "ms-jpq/coq_nvim", branch = "coq", disable = true }) -- main one
-	use({ "ms-jpq/coq.artifacts", branch = "artifacts", disable = true }) -- 9000+ Snippets
+	use({
+		"ms-jpq/coq_nvim",
+		branch = "coq",
+		disable = true,
+		wants = "coq.artifacts",
+		requires = {
+			"ms-jpq/coq.artifacts",
+			branch = "artifacts",
+			opt = true,
+		}, -- 9000+ Snippets
+	}) -- main one
 
 	-- friendly snippet (collection)
-	use({ "rafamadriz/friendly-snippets", opt = true })
+	use({ "rafamadriz/friendly-snippets", opt = true, disable = true })
 
 	-- LuaSnip
-	use({ "L3MON4D3/LuaSnip", opt = true, wants = "friendly-snippets" })
+	use({
+		"L3MON4D3/LuaSnip",
+		opt = true,
+		config = function()
+			require("config.luasnip")
+		end,
+		-- wants = "friendly-snippets"
+	})
 
 	-- vim-vsnip
 	use({
 		"hrsh7th/vim-vsnip",
 		opt = true,
+		disable = true,
 		wants = {
 			"vim-vsnip-integ",
 			"flutter-snippets",
@@ -107,8 +124,8 @@ return require("packer").startup(function(use)
 	-- nvim-tree
 	use({
 		"kyazdani42/nvim-tree.lua",
-		keys = { "<leader>nn", "<leader>nf" },
-		cmd = { "NvimTreeToogle", "NvimTreeFocus" },
+		-- keys = { "<leader>nn", "<leader>nf" },
+		-- cmd = { "NvimTreeToogle", "NvimTreeFocus" },
 		wants = { "nvim-web-devicons" },
 		config = function()
 			require("config.nvim-tree")
@@ -312,7 +329,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- nvim_context_vt
-	use({ "haringsrob/nvim_context_vt", after = "nvim-treesitter" })
+	use({ "haringsrob/nvim_context_vt", after = "nvim-treesitter", disable = true })
 
 	-- galaxyline
 	use({

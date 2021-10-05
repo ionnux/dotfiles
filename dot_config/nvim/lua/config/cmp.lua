@@ -9,17 +9,23 @@ end
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			-- require('luasnip').lsp_expand(args.body)
-			vim.fn["vsnip#anonymous"](args.body)
+			-- For `vsnip` user.
+			vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+
+			-- For `luasnip` user.
+			-- require("luasnip").lsp_expand(args.body)
+
+			-- For `ultisnips` user.
+			-- vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
-		-- ['<C-j>'] = cmp.mapping.scroll_docs( -4 ),
-		-- ['<C-k>'] = cmp.mapping.scroll_docs( 4 ),
+		["<C-k>"] = cmp.mapping.scroll_docs(-4),
+		["<C-j>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
-		-- ['<C-e>'] = cmp.mapping.close(),
+		["<C-e>"] = cmp.mapping.close(),
 		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		["<Tab>"] = function(fallback)
 			-- if vim.fn.pumvisible() == 1 then
@@ -49,9 +55,9 @@ cmp.setup({
 	},
 
 	documentation = {
-		border = "single",
-		winhighlight = "NormalFloat:None,FloatBorder:LspSagaHoverBorder",
-		maxwidth = 150,
+		border = CustomBorders.plus,
+		-- winhighlight = "NormalFloat:NormalFloat,FloatBorder:LspSagaHoverBorder",
+		maxwidth = 70,
 		maxheight = 20,
 	},
 
@@ -72,16 +78,35 @@ cmp.setup({
 			})[entry.source.name]
 			return vim_item
 		end,
+
+		deprecated = true,
+	},
+
+	expremental = {
+		ghost_text = true,
 	},
 
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "nvim_lua" },
-		{ name = "vsnip" },
-		{ name = "buffer" },
-		{ name = "path" },
-		{ name = "calc" },
+		{ name = "nvim_lsp", priority = 2 },
+		{ name = "luasnip", priority = 3 },
+		{ name = "nvim_lua", priority = 3 },
+		{ name = "vsnip", priority = 3 },
+		{ name = "buffer", priority = 1 },
+		{ name = "path", priority = 1 },
+		{ name = "calc", priority = 1 },
+	},
+
+	sorting = {
+		priority_weight = 2,
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.kind,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
 	},
 })
 

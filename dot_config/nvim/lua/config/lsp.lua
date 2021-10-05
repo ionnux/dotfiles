@@ -78,9 +78,9 @@ end
 -- vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]
 
 -- show line diagnostics in automatically in hover window
-vim.cmd([[
-  autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = CustomBorders.plus, focusable = false})
-]])
+-- vim.cmd([[
+-- autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable=false, border = CustomBorders.plus, focusable = false})
+-- ]])
 
 -- goto definition in split window
 -- local function goto_definition( split_cmd )
