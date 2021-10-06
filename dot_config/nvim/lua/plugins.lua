@@ -15,19 +15,17 @@ return require("packer").startup(function(use)
 		"hrsh7th/nvim-cmp",
 		-- disable = true,
 		event = "InsertEnter",
-		wants = { "vim-vsnip", "LuaSnip", "nvim-autopairs" },
+		wants = { "LuaSnip", "nvim-autopairs" },
 		config = function()
 			require("config.cmp")
 		end,
 		requires = {
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-vsnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-vsnip", after = { "nvim-cmp", "vim-vsnip" } },
 			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-calc", after = "nvim-cmp" },
-			{ "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp", "LuaSnip" } },
+			{ "saadparwaiz1/cmp_luasnip", after = { "nvim-cmp" } },
 		},
 	})
 
@@ -295,12 +293,6 @@ return require("packer").startup(function(use)
 			{ "nvim-treesitter/nvim-treesitter-textobjects" },
 			{ "nvim-treesitter/nvim-treesitter-refactor" },
 			{ "JoosepAlviste/nvim-ts-context-commentstring" },
-			{
-				"romgrk/nvim-treesitter-context",
-				config = function()
-					vim.cmd("hi TreesitterContext guibg=#292e42")
-				end,
-			},
 			{ "p00f/nvim-ts-rainbow" },
 		},
 		config = function()
