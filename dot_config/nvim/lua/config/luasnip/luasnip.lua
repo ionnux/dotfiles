@@ -23,6 +23,9 @@ ls.config.setup({
 	},
 })
 
-vim.api.nvim_set_keymap("i", "<c-j>", "<Plug>luasnip-next-choice", {})
-vim.api.nvim_set_keymap("i", "<c-k>", "<Plug>luasnip-prev-choice", {})
+-- activate ChoiceNode popup
+require("config.luasnip.choice_node_popup")
+
+vim.api.nvim_set_keymap("i", "<c-n>", "<Plug>luasnip-next-choice", {})
+vim.api.nvim_set_keymap("i", "<c-p>", "<Plug>luasnip-prev-choice", {})
 require("luasnip.loaders.from_vscode").load({ paths = "./snippets" })

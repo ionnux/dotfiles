@@ -50,7 +50,7 @@ return require("packer").startup(function(use)
 		"L3MON4D3/LuaSnip",
 		opt = true,
 		config = function()
-			require("config.luasnip")
+			require("config.luasnip.luasnip")
 		end,
 		-- wants = "friendly-snippets"
 	})
