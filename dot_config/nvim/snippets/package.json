@@ -1,0 +1,26 @@
+{
+  "contributes": {
+    "snippets": [
+      {
+        "language": "dart",
+        "path": "./dart/dart.json"
+      },
+      {
+        "language": "dart",
+        "path": "./dart/bloc.json"
+      },
+      {
+        "language": "dart",
+        "path": "./dart/bloc_test.json"
+      },
+      {
+        "language": "dart",
+        "path": "./dart/flutter_bloc.json"
+      },
+      {
+        "language": "dart",
+        "path": "./dart/freezed_bloc.json"
+      }
+    ]
+  }
+}
