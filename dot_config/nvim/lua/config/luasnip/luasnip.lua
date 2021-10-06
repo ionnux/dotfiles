@@ -25,6 +25,8 @@ ls.config.setup({
 
 -- activate ChoiceNode popup
 require("config.luasnip.choice_node_popup")
+-- activate vscode placeholder
+require("config.luasnip.vscode_placeholder")
 
 vim.api.nvim_set_keymap("i", "<c-n>", "<Plug>luasnip-next-choice", {})
 vim.api.nvim_set_keymap("i", "<c-p>", "<Plug>luasnip-prev-choice", {})
