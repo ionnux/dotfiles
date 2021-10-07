@@ -3,69 +3,26 @@ local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
+	-- local function buf_set_option(...)
+	-- vim.api.nvim_buf_set_option(bufnr, ...)
+	-- end
 
-	-- border settings
-	local border = {
-		normal = {
-			{ "🭽", "FloatBorder" },
-			{ "▔", "FloatBorder" },
-			{ "🭾", "FloatBorder" },
-			{ "▕", "FloatBorder" },
-			{ "🭿", "FloatBorder" },
-			{ "▁", "FloatBorder" },
-			{ "🭼", "FloatBorder" },
-			{ "▏", "FloatBorder" },
-		},
-		round = {
-			{ "╭", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "╮", "FloatBorder" },
-			{ "│", "FloatBorder" },
-			{ "╯", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "╰", "FloatBorder" },
-			{ "│", "FloatBorder" },
-		},
-		bold = {
-			{ "┏", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "┓", "FloatBorder" },
-			{ "│", "FloatBorder" },
-			{ "┛", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "┗", "FloatBorder" },
-			{ "│", "FloatBorder" },
-		},
-		plus = {
-			{ "+", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "+", "FloatBorder" },
-			{ "│", "FloatBorder" },
-			{ "+", "FloatBorder" },
-			{ "─", "FloatBorder" },
-			{ "+", "FloatBorder" },
-			{ "│", "FloatBorder" },
-		},
-	}
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border.plus })
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = CustomBorders.plus })
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 		vim.lsp.handlers.signature_help,
-		{ border = border.plus }
+		{ border = CustomBorders.plus }
 	)
 
 	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+	-- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- lsp Mappings.
 	local opts = { noremap = true, silent = true }
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	-- buf_set_keymap( 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts )
-	buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
+	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	-- buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
 	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap( 'n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', opts ) -- use trouble
 	-- buf_set_keymap( 'n', 'gd', '<cmd>TroubleToggle lsp_definitions<cr>', opts ) -- use trouble
@@ -75,13 +32,29 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	-- buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
 	buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-	buf_set_keymap("n", "<space>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-	buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-	buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+	-- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	-- buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+	buf_set_keymap("n", "<space>qq", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
+	buf_set_keymap(
+		"n",
+		"<space>d",
+		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"[d",
+		"<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		opts
+	)
+	buf_set_keymap(
+		"n",
+		"]d",
+		"<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		opts
+	)
 	-- buf_set_keymap( 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts )
 
 	-- Set some keybinds conditional on server capabilities

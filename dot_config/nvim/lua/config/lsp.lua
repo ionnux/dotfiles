@@ -1,49 +1,3 @@
--- border settings
--- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
--- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-CustomBorders = {
-	normal = {
-		{ "🭽", "FloatBorder" },
-		{ "▔", "FloatBorder" },
-		{ "🭾", "FloatBorder" },
-		{ "▕", "FloatBorder" },
-		{ "🭿", "FloatBorder" },
-		{ "▁", "FloatBorder" },
-		{ "🭼", "FloatBorder" },
-		{ "▏", "FloatBorder" },
-	},
-	round = {
-		{ "╭", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "╮", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "╯", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "╰", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
-	bold = {
-		{ "┏", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "┓", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "┛", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "┗", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
-	plus = {
-		{ "+", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
-}
-
 -- diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics,
@@ -129,9 +83,11 @@ end
 
 -- keymaps
 local on_attach = function(client, bufnr)
+	--keymap settings
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
 	end
+	--buffer options
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
@@ -144,15 +100,15 @@ local on_attach = function(client, bufnr)
 	)
 
 	-- Enable completion triggered by <c-x><c-o>
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+	-- buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	local opts = { noremap = true, silent = true }
 
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	-- buf_set_keymap( 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts )
-	buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
+	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+	-- buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
 	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap( 'n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', opts ) -- use trouble
 	-- buf_set_keymap( 'n', 'gd', '<cmd>TroubleToggle lsp_definitions<cr>', opts ) -- use trouble
@@ -162,12 +118,13 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<space>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
 	buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-	buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	-- buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+	buf_set_keymap("n", "<space>qq", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
 	buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-	buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	-- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	buf_set_keymap(
 		"n",
-		"<space>e",
+		"<space>d",
 		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
 		opts
 	)
@@ -250,6 +207,8 @@ local function setup_servers()
 	local servers = require("lspinstall").installed_servers()
 	-- ... and add manually installed servers
 	-- table.insert( servers, "dartls" )
+	-- table.insert(servers, "sqls")
+	table.insert(servers, "sqlls")
 
 	for _, server in pairs(servers) do
 		local config = make_config()
@@ -263,6 +222,16 @@ local function setup_servers()
 		end
 		if server == "clangd" then
 			config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
+		end
+		if server == "sqls" then
+			config = {
+				cmd = { "/usr/local/bin/sqls", "-config", "/home/og_saaz/.config/sqls/config.yml" },
+			}
+		end
+		if server == "sqlls" then
+			config = {
+				cmd = { "/usr/local/bin/sql-language-server", "up", "--method", "stdio" },
+			}
 		end
 
 		require("lspconfig")[server].setup(config)

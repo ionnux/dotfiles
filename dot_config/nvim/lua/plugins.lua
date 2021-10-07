@@ -460,6 +460,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- sqls.nvim
+	use({
+		"nanotee/sqls.nvim",
+		disable = true,
+		config = function()
+			require("sqls").setup({
+				picker = "telescope",
+			})
+		end,
+		requires = "nvim-telescope/telescope.nvim",
+	})
+
 	-- lspsaga
 	use({
 		"tami5/lspsaga.nvim",
@@ -469,6 +481,13 @@ return require("packer").startup(function(use)
 		config = function()
 			require("config.lspsaga")
 		end,
+	})
+
+	-- nvim-code-action-menu
+	use({
+		"weilbith/nvim-code-action-menu",
+		-- cmd = "CodeActionMenu",
+		config = function() end,
 	})
 
 	-- lsp signagure

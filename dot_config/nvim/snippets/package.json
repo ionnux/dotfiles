@@ -7,6 +7,10 @@
       },
       {
         "language": "dart",
+        "path": "./dart/sqflite.json"
+      },
+      {
+        "language": "dart",
         "path": "./dart/bloc.json"
       },
       {
