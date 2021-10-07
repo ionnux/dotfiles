@@ -463,7 +463,7 @@ return require("packer").startup(function(use)
 	-- sqls.nvim
 	use({
 		"nanotee/sqls.nvim",
-		disable = true,
+		-- disable = true,
 		config = function()
 			require("sqls").setup({
 				picker = "telescope",
@@ -471,6 +471,9 @@ return require("packer").startup(function(use)
 		end,
 		requires = "nvim-telescope/telescope.nvim",
 	})
+
+	-- vim-dadbod (vimscript)
+	use("tpope/vim-dadbod")
 
 	-- lspsaga
 	use({
