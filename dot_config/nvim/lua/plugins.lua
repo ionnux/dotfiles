@@ -448,7 +448,15 @@ return require("packer").startup(function(use)
 	use({ "b3nj5m1n/kommentary", disable = true })
 
 	-- vim-commentary (vimscript)
-	use("tpope/vim-commentary")
+	use({ "tpope/vim-commentary", disable = true })
+
+	-- comment nvim
+	use({
+		"numToStr/comment.nvim",
+		config = function()
+			require("Comment").setup()
+		end,
+	})
 
 	-- flutter-tools
 	use({
