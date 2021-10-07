@@ -1,4 +1,4 @@
-require("comment").setup({
+require("Comment").setup({
 	---Add a space b/w comment and the line
 	---@type boolean
 	padding = true,
@@ -6,7 +6,7 @@ require("comment").setup({
 	---Line which should be ignored while comment/uncomment
 	---Example: Use '^$' to ignore empty lines
 	---@type string Lua regex
-	ignore = '^$',
+	ignore = "^$",
 
 	---Whether to create basic (operator-pending) and extra mappings for NORMAL/VISUAL mode
 	---@type table
