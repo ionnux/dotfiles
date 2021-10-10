@@ -29,7 +29,7 @@ end
 --   end
 --   vim.api.nvim_echo( { { diagnostic_message, "Normal" } }, false, {} )
 -- end
--- vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]
+-- vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
 -- show line diagnostics in automatically in hover window
 -- vim.cmd([[
@@ -108,7 +108,12 @@ local on_attach = function(client, bufnr)
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	-- buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
+	-- buf_set_keymap(
+	-- 	"n",
+	-- 	"gd",
+	-- 	"<cmd>lua PeekDefinition({popup_opts = {border = CustomBorders.plus, focusable = true}})<CR>",
+	-- 	opts
+	-- ) -- PeekDefinition
 	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap( 'n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', opts ) -- use trouble
 	-- buf_set_keymap( 'n', 'gd', '<cmd>TroubleToggle lsp_definitions<cr>', opts ) -- use trouble
@@ -122,22 +127,23 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
 	buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	-- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+	buf_set_keymap("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
 	buf_set_keymap(
 		"n",
 		"<space>d",
-		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = CustomBorders.plus, focusable = false})<CR>",
 		opts
 	)
 	buf_set_keymap(
 		"n",
 		"[d",
-		"<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = CustomBorders.plus, focusable = false}})<CR>",
 		opts
 	)
 	buf_set_keymap(
 		"n",
 		"]d",
-		"<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = CustomBorders.plus, focusable = false}})<CR>",
 		opts
 	)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)

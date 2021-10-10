@@ -2,7 +2,7 @@ local ls = require("luasnip")
 local types = require("luasnip.util.types")
 
 ls.config.setup({
-	history = true,
+	history = false,
 	-- updateevents = 'InsertLeave',
 	updateevents = "InsertLeave",
 	enable_autosnippets = true,

@@ -27,12 +27,12 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		["<C-k>"] = cmp.mapping.scroll_docs(-4),
-		["<C-j>"] = cmp.mapping.scroll_docs(4),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		-- ["<C-k>"] = cmp.mapping.scroll_docs(-4),
+		-- ["<C-j>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping(function()
-			if vim.fn.pumvisible() == 1 then
+			if cmp.visible() then
 				cmp.close()
 			else
 				cmp.complete()
@@ -88,12 +88,6 @@ cmp.setup({
 			})[entry.source.name]
 			return vim_item
 		end,
-
-		deprecated = true,
-	},
-
-	expremental = {
-		ghost_text = true,
 	},
 
 	sources = {

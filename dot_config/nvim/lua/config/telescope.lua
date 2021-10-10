@@ -4,8 +4,8 @@ local actions = require("telescope.actions")
 require("telescope").setup({
 	defaults = {
 		mappings = {
-			i = { ["<c-t>"] = trouble.open_with_trouble, ["<esc>"] = actions.close },
-			n = { ["<c-t>"] = trouble.open_with_trouble },
+			-- i = { ["<c-t>"] = trouble.open_with_trouble, ["<esc>"] = actions.close },
+			-- n = { ["<c-t>"] = trouble.open_with_trouble },
 		},
 		vimgrep_arguments = {
 			"rg",
@@ -52,6 +52,11 @@ require("telescope").setup({
 		-- Developer configurations: Not meant for general override
 		buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 	},
+	pickers = {
+		lsp_code_actions = {
+			theme = "cursor",
+		},
+	},
 	extensions = {
 		fzf = {
 			fuzzy = true, -- false will only do exact matching
@@ -73,7 +78,8 @@ wk.register({
 	["<leader>t"] = {
 		name = "Telescope", -- optional group name
 		f = { "<cmd>Telescope find_files<cr>", "Telescope: Find File" }, -- create a binding with label
-		r = { "<cmd>Telescope frecency<cr>", "Telescope: Recent Files" }, -- additional options for creating the keymap
+		r = { "<cmd>Telescope frecency<cr>", "Telescope: Recent Files using Frecency" }, -- additional options for creating the keymap
+		o = { "<cmd>Telescope oldfiles<cr>", "Telescope:  Previously Opened Files" }, -- additional options for creating the keymap
 		p = { "<cmd>Telescope projects theme=get_dropdown<cr>", "Telescope: Projects" },
 		P = {
 			function()

@@ -61,7 +61,7 @@ bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
-client.focused #545c7e #ebbcba #1a1b26 #7aa2f7     #7aa2f7
+client.focused #545c7e #ebbcba #1a1b26 #7aa2f7 #c4a7e7
 client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7     #1a1b26
 client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7     #1a1b26
 
@@ -253,17 +253,17 @@ bindsym $mod+bracketright mode "music & brightness"
 # }
 
 # i3-gaps settings
-gaps inner 20
-gaps outer 0
-# smart_gaps on
-smart_gaps inverse_outer
+gaps inner 15
+# gaps outer 10
+smart_gaps on
+# smart_gaps inverse_outer
 # smart_borders on
 
 # Border and window settings
 title_align left
-default_border normal 0
+# default_border normal 0
 hide_edge_borders smart
-# for_window [class=".*"] border normal 0
+for_window [class=".*"] border pixel 3
 
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
 set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)

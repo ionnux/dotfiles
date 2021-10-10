@@ -1,7 +1,7 @@
 set font "JetBrainsMono Nerd Font normal 12"
 
 # Open document in fit-width mode by default
-set adjust-open "best-fit"
+set adjust-open "width"
 
 # One page per row by default
 set pages-per-row 1
@@ -12,7 +12,7 @@ set sandbox "none"
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
 set scroll-step 70
-set scroll-hstep -0.5
+set scroll-hstep 5
 
 set vertical-center true
 
@@ -66,7 +66,7 @@ set index-active-fg "#191724"
 set notification-bg "#9ccfd8" 
 set notification-fg "#151515" 
 
-set recolor "true"
+set recolor "false"
 set recolor-lightcolor "#191724" 
 set recolor-darkcolor "#e0def4" 
 set recolor-reverse-video "false"

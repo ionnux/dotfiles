@@ -22,7 +22,7 @@ local on_attach = function(client, bufnr)
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	buf_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	-- buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition()<CR>", opts) -- PeekDefinition
+	-- buf_set_keymap("n", "gd", "<cmd>lua PeekDefinition({border = CustomBorders.plus, focusable = true})<CR>", opts) -- PeekDefinition
 	buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	-- buf_set_keymap( 'n', 'gr', '<cmd>TroubleToggle lsp_references<cr>', opts ) -- use trouble
 	-- buf_set_keymap( 'n', 'gd', '<cmd>TroubleToggle lsp_definitions<cr>', opts ) -- use trouble
@@ -39,20 +39,20 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
 	buf_set_keymap(
 		"n",
-		"<space>d",
-		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<leader>d",
+		"<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({border = CustomBorders.plus, focusable = false})<CR>",
 		opts
 	)
 	buf_set_keymap(
 		"n",
 		"[d",
-		"<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<cmd>lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = CustomBorders.plus, focusable = false}})<CR>",
 		opts
 	)
 	buf_set_keymap(
 		"n",
 		"]d",
-		"<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = CustomBorders.plus, focusable = false, pad_left = 1}})<CR>",
+		"<cmd>lua vim.lsp.diagnostic.goto_next({popup_opts = {border = CustomBorders.plus, focusable = false}})<CR>",
 		opts
 	)
 	-- buf_set_keymap( 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts )
