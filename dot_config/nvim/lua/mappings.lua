@@ -86,13 +86,13 @@ vim.api.nvim_set_keymap("i", "jk", [[col('.') == 1 ? '<esc>' : '<esc>l']], { exp
 
 -- previous and next mappings
 wk.register({
-	["]"] = { name = "Next", t = { "<cmd>tabnext<cr>", "Next Tab" }, b = { "<cmd>bnext<cr>", "Next Buffer" } },
+	["]"] = { name = "Next", t = { "<cmd>tabnext<cr>", "Next Tab" }, ["]"] = { "<cmd>bnext<cr>", "Next Buffer" } },
 })
 wk.register({
 	["["] = {
 		name = "Previous",
 		t = { "<cmd>tabprevious<cr>", "Previous Tab" },
-		b = { "<cmd>bprevious<cr>", "Previous Buffer" },
+		["["] = { "<cmd>bprevious<cr>", "Previous Buffer" },
 	},
 })
 -- Switch between the last two files

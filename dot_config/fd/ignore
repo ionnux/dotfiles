@@ -1,5 +1,11 @@
 .git
 node_modules
-.*/
+/home/og_saaz/*
+!Downloads/
+!Documents/
+!Videos/
+!Music/
+!Pictures/
+!flutter_dev/
 !.config/
 !.local/

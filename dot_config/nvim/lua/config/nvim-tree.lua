@@ -100,8 +100,6 @@ require("nvim-tree").setup({
 	hijack_cursor = true,
 	-- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
 	update_cwd = true,
-	-- show lsp diagnostics in the signcolumn
-	lsp_diagnostics = true,
 	-- update the focused file on `BufEnter`, un-collapses the folders recursively until it finds the file
 	update_focused_file = {
 		-- enables the feature
@@ -133,6 +131,8 @@ require("nvim-tree").setup({
 	view = {
 		-- width of the window, can be either a number (columns) or a string in `%`
 		width = 25,
+		-- height of the window, can be either a number (columns) or a string in `%`, for top or bottom side placement
+		height = 30,
 		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
 		side = "left",
 		-- if true the tree will resize itself after opening a file
@@ -143,6 +143,16 @@ require("nvim-tree").setup({
 			custom_only = false,
 			-- list of mappings to set on the tree manually
 			list = list,
+		},
+	},
+	-- show lsp diagnostics in the signcolumn
+	diagnostics = {
+		enable = true,
+		icons = {
+			hint = "",
+			info = "",
+			warning = "",
+			error = "",
 		},
 	},
 })

@@ -253,6 +253,7 @@ return require("packer").startup(function(use)
 	-- lightspeed
 	use({
 		"ggandor/lightspeed.nvim", -- disable = true,
+		disable = true,
 		config = function()
 			require("config.lightspeed")
 		end,
@@ -270,7 +271,7 @@ return require("packer").startup(function(use)
 	-- indent-blankline
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		disable = true, -- event = "BufEnter",
+		-- disable = true, -- event = "BufEnter",
 		-- wants = "tokyonight.nvim",
 		config = function()
 			require("config.blankline")
