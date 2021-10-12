@@ -538,6 +538,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- todo-comments
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("config.todo")
+		end,
+	})
+
 	-- formatter
 	use({
 		"mhartington/formatter.nvim",
