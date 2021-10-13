@@ -148,7 +148,7 @@ return require("packer").startup(function(use)
 	-- tokyonight
 	use({
 		"folke/tokyonight.nvim",
-		disable = true,
+		-- disable = true,
 		-- event = "bufEnter",
 		-- wants = "nvim-treesitter",
 		config = function()
@@ -159,7 +159,7 @@ return require("packer").startup(function(use)
 	-- rose-pine
 	use({
 		"rose-pine/neovim",
-		-- disable = true,
+		disable = true,
 		config = function()
 			require("config.rose-pine")
 		end,
@@ -386,7 +386,7 @@ return require("packer").startup(function(use)
 	-- dashboard
 	use({
 		"glepnir/dashboard-nvim", -- disable = true,
-		disable = true,
+		-- disable = true,
 		event = "VimEnter",
 		after = "telescope.nvim",
 		config = function()
@@ -408,7 +408,7 @@ return require("packer").startup(function(use)
 	-- neoscroll
 	use({
 		"karb94/neoscroll.nvim",
-		disable = true,
+		-- disable = true,
 		keys = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
 		config = function()
 			require("config.neoscroll")

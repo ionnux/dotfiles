@@ -6,6 +6,8 @@ vim.g.rose_pine_variant = "moon"
 -- Disable italics
 vim.g.rose_pine_disable_italics = false
 
+vim.g.rose_pine_bold_vertical_split_line = true
+
 -- Use terminal background
 vim.g.rose_pine_disable_background = false
 -- Set colorscheme after options
@@ -134,3 +136,6 @@ vim.cmd("highlight LspSagaDiagnosticTruncateLine guifg=" .. palette.pine)
 -- border settings
 vim.cmd(" highlight NormalFloat guibg=" .. palette.base .. " guifg=" .. palette.subtle)
 vim.cmd(" highlight FloatBorder guibg=" .. palette.base .. " guifg=" .. palette.subtle)
+
+--indent blankline
+vim.cmd(" highlight IndentBlanklineChar guifg=" .. palette.inactive)

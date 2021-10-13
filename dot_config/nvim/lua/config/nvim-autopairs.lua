@@ -1,24 +1,24 @@
 require("nvim-autopairs").setup({
 	map_bs = true, -- map the <BS> key
+	map_c_w = false,
 	disable_filetype = { "TelescopePrompt" },
-	ignored_next_char = "[%w%.]",
+	ignored_next_char = "",
 	enable_moveright = true,
 	enable_afterquote = true, -- add bracket pairs after quote
 	enable_check_bracket_line = true, --- check bracket in same line
 	check_ts = false,
 	fast_wrap = {
 		map = "<c-f>",
-		chars = { "{", "[", "(", '"', "'", ">" },
+		chars = { "{", "[", "(", '"', "'", "<" },
 		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
 		end_key = "$",
 		keys = "qwertyuiopzxcvbnmasdfghjkl",
 		check_comma = true,
 		hightlight = "Search",
 	},
-}
-)
+})
 
--- local cond = require( 'nvim-autopairs.conds' )
+local cond = require("nvim-autopairs.conds")
 local npairs = require("nvim-autopairs")
 local Rule = require("nvim-autopairs.rule")
 
