@@ -66,7 +66,7 @@ cmp.setup({
 	},
 
 	documentation = {
-		border = "single",
+		border = CustomBorders.plus,
 		-- winhighlight = "NormalFloat:NormalFloat,FloatBorder:LspSagaHoverBorder",
 		maxwidth = 70,
 		maxheight = 20,

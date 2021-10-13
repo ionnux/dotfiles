@@ -7,6 +7,7 @@ local theme_colors = require("colors")
 for i, v in pairs(theme_colors) do
 	colors[i] = v
 end
+colors.bg = colors.none
 
 local condition = require("galaxyline.condition")
 local gls = gl.section

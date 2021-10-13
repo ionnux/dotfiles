@@ -9,9 +9,10 @@ nnoremap <silent>gl :HopLineAC<cr>
 nnoremap <silent>gL :HopLineBC<cr>
 vnoremap <silent>gl <cmd> lua require'hop'.hint_lines()<cr>
 
-colorscheme rose-pine
-let g:rose_pine_variant = 'moon'
-" let g:tokyonight_style = "night"
+" colorscheme rose-pine
+colorscheme tokyonight
+" let g:rose_pine_variant = 'moon'
+let g:tokyonight_style = "storm"
 
 set nonumber
 set ignorecase
