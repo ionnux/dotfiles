@@ -65,7 +65,7 @@ vim.cmd("highlight GitSignsDelete guifg=" .. colors.red)
 -- lsp
 -- border settings
 vim.cmd(" highlight NormalFloat guibg=" .. colors.none .. " guifg=" .. colors.fg_dark)
-vim.cmd(" highlight FloatBorder guibg=" .. colors.none .. " guifg=" .. colors.purple)
+vim.cmd(" highlight FloatBorder guibg=" .. colors.none .. " guifg=" .. colors.blue)
 
 -- cmp
 vim.cmd(" highlight CmpItemKind guifg=" .. colors.blue)
