@@ -36,7 +36,8 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 	-- buf_set_keymap("n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 	-- buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-	buf_set_keymap("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
+	-- buf_set_keymap("n", "<leader>ca", "<cmd>CodeActionMenu<cr>", opts) --use CodeActionMenu
+	-- buf_set_keymap("n", "<leader>ca", "<cmd>Telescope lsp_code_actions<cr>", opts) --use telescope
 	buf_set_keymap(
 		"n",
 		"<leader>d",
@@ -131,7 +132,7 @@ require("flutter-tools").setup({
 	ui = {
 		-- the border type to use for all floating windows, the same options/formats
 		-- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
-		border = "shadow",
+		border = "single",
 	},
 	decorations = {
 		statusline = {
@@ -152,7 +153,7 @@ require("flutter-tools").setup({
 	widget_guides = { enabled = true },
 	closing_tags = {
 		highlight = "Comment", -- highlight for the closing tag
-		prefix = "> ", -- character to use for close tag e.g. > Widget
+		prefix = "-> ", -- character to use for close tag e.g. > Widget
 		enabled = true, -- set to false to disable
 	},
 	dev_log = {
@@ -175,7 +176,7 @@ require("flutter-tools").setup({
 		-- return config
 		-- end,
 		settings = {
-			showTodos = true,
+			showTodos = false,
 			completeFunctionCalls = true,
 			-- analysisExcludedFolders = {<path-to-flutter-sdk-packages>}
 		},

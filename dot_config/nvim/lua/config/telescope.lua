@@ -54,7 +54,11 @@ require("telescope").setup({
 	},
 	pickers = {
 		lsp_code_actions = {
-			theme = "cursor",
+			-- theme = "get_custom",
+			layout_config = {
+				width = 65,
+				height = 25,
+			},
 		},
 	},
 	extensions = {
@@ -67,6 +71,48 @@ require("telescope").setup({
 		frecency = { show_scores = false },
 	},
 })
+
+-- local themes = require("telescope.themes")
+-- function themes.get_custom(opts)
+-- 	opts = opts or {}
+
+-- 	local theme_opts = {
+-- 		theme = "vertical",
+
+-- 		results_title = false,
+-- 		preview_title = "Preview",
+
+-- 		sorting_strategy = "ascending",
+-- 		layout_strategy = "cursor",
+-- 		layout_config = {
+-- 			preview_cutoff = 1, -- Preview should always show (unless previewer = false)
+
+-- 			width = function(_, max_columns, _)
+-- 				return math.min(max_columns, 80)
+-- 			end,
+
+-- 			height = function(_, _, max_lines)
+-- 				return math.min(max_lines, 15)
+-- 			end,
+-- 		},
+
+-- 		border = true,
+-- 		borderchars = {
+-- 			prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+-- 			results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+-- 			preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+-- 		},
+-- 	}
+-- 	if opts.layout_config and opts.layout_config.prompt_position == "bottom" then
+-- 		theme_opts.borderchars = {
+-- 			prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
+-- 			results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+-- 			preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+-- 		}
+-- 	end
+
+-- 	return vim.tbl_deep_extend("force", theme_opts, opts)
+-- end
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("projects")
@@ -89,5 +135,9 @@ wk.register({
 		},
 		b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
 		h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
+	},
+	["<leader>c"] = {
+		name = "Telescope Code Action",
+		a = { "<cmd>Telescope lsp_code_actions<cr>", "Telescope: Code Actions" },
 	},
 })

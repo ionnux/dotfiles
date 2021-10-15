@@ -11,7 +11,7 @@ vim.g.tokyonight_hide_inactive_statusline = true
 vim.g.tokyonight_sidebars = { "NvimTree", "Mundo", "MundoDiff" }
 vim.g.tokyonight_transparent_sidebar = false
 vim.g.tokyonight_dark_sidebar = true
-vim.g.tokyonight_dark_float = true
+vim.g.tokyonight_dark_float = false
 vim.g.tokyonight_lualine_bold = true
 
 vim.cmd([[colorscheme tokyonight]])
@@ -64,10 +64,19 @@ vim.cmd("highlight GitSignsDelete guifg=" .. colors.red)
 
 -- lsp
 -- border settings
-vim.cmd(" highlight NormalFloat guibg=" .. colors.none .. " guifg=" .. colors.fg_dark)
-vim.cmd(" highlight FloatBorder guibg=" .. colors.none .. " guifg=" .. colors.blue)
+vim.cmd(" highlight NormalFloat guibg=" .. colors.none .. " guifg=" .. colors.dark5)
+vim.cmd(" highlight FloatBorder guibg=" .. colors.none .. " guifg=" .. colors.dark5)
 
 -- cmp
 vim.cmd(" highlight CmpItemKind guifg=" .. colors.blue)
 vim.cmd(" highlight CmpItemAbbrMatch guifg=" .. colors.magenta)
 vim.cmd(" highlight CmpItemAbbrMatchFuzzy guifg=" .. colors.blue)
+
+-- fluttertoosl
+vim.cmd(" highlight FlutterPopupNormal guibg=" .. colors.bg)
+vim.cmd(" highlight FlutterNotificationNormal guibg=" .. colors.bg)
+
+-- telescope
+vim.cmd("highlight TelescopePromptBorder guifg=" .. colors.magenta)
+vim.cmd("highlight TelescopePreviewBorder guifg=" .. colors.cyan)
+vim.cmd("highlight TelescopeResultsBorder guifg=" .. colors.teal)

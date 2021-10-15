@@ -156,6 +156,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- pinkmare
+	use({
+		"matsuuu/pinkmare",
+		-- disable = true,
+		config = function()
+			-- vim.cmd("colorscheme pinkmare")
+		end,
+	})
+
 	-- rose-pine
 	use({
 		"rose-pine/neovim",
