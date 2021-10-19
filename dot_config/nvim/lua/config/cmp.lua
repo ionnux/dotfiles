@@ -42,22 +42,22 @@ cmp.setup({
 		}),
 		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 
-		["<Tab>"] = cmp.mapping(function(fallback)
+		["<Tab>"] = cmp.mapping(function()
 			if luasnip.jumpable() then
 				luasnip.jump(1)
 			else
-				fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+				vim.cmd("Tabout")
 			end
 		end, {
 			"i",
 			"s",
 		}),
 
-		["<S-Tab>"] = cmp.mapping(function(fallback)
+		["<S-Tab>"] = cmp.mapping(function()
 			if luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
-				fallback()
+				vim.cmd("Tabout")
 			end
 		end, {
 			"i",

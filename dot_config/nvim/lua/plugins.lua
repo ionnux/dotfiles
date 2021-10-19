@@ -42,6 +42,16 @@ return require("packer").startup(function(use)
 		}, -- 9000+ Snippets
 	}) -- main one
 
+	-- Use <Tab> to escape from pairs such as ""|''|() etc.
+	use({
+		"abecodes/tabout.nvim",
+		wants = { "nvim-treesitter" },
+		after = { "nvim-cmp" },
+		config = function()
+			require("config.tabout")
+		end,
+	})
+
 	-- friendly snippet (collection)
 	use({ "rafamadriz/friendly-snippets", opt = true, disable = true })
 
@@ -290,7 +300,8 @@ return require("packer").startup(function(use)
 	-- treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate", -- event = "BufRead",
+		run = ":TSUpdate",
+		event = "BufRead",
 		-- wants = {
 		--   "playground",
 		--   "nvim-treesitter-textobjects",
@@ -299,11 +310,11 @@ return require("packer").startup(function(use)
 		--   "nvim-ts-rainbow",
 		-- },
 		requires = {
-			{ "nvim-treesitter/playground" },
-			{ "nvim-treesitter/nvim-treesitter-textobjects" },
-			{ "nvim-treesitter/nvim-treesitter-refactor" },
-			{ "JoosepAlviste/nvim-ts-context-commentstring" },
-			{ "p00f/nvim-ts-rainbow" },
+			{ "nvim-treesitter/playground", after = "nvim-treesitter" },
+			{ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" },
+			{ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" },
+			{ "JoosepAlviste/nvim-ts-context-commentstring", after = "nvim-treesitter" },
+			{ "p00f/nvim-ts-rainbow", after = "nvim-treesitter" },
 		},
 		config = function()
 			require("config.treesitter")
