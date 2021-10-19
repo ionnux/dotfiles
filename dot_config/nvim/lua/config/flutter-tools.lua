@@ -150,7 +150,7 @@ require("flutter-tools").setup({
 	},
 	-- flutter_path = "<full/path/if/needed>", -- <-- this takes priority over the lookup
 	-- flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
-	widget_guides = { enabled = true },
+	widget_guides = { enabled = true, debug = true },
 	closing_tags = {
 		highlight = "Comment", -- highlight for the closing tag
 		prefix = "-> ", -- character to use for close tag e.g. > Widget

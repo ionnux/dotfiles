@@ -614,7 +614,23 @@ return require("packer").startup(function(use)
 		keys = "<leader>vm",
 		config = function()
 			vim.g.mundo_preview_bottom = 1
+			vim.g.mundo_preview_height = 15
 			vim.api.nvim_set_keymap("n", "<leader>vm", ":MundoToggle<cr>", { noremap = true, silent = true })
+		end,
+	})
+
+	use({
+		"mbbill/undotree",
+		cmd = "UndotreeToggle",
+		keys = "<leader>u",
+		setup = function()
+			require("which-key").register({
+				["<leader>u"] = "undotree: toggle",
+			})
+		end,
+		config = function()
+			vim.g.undotree_TreeNodeShape = "◉" -- Alternative: '◦'
+			vim.g.undotree_SetFocusWhenToggle = 1
 		end,
 	})
 
