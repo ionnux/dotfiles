@@ -136,8 +136,8 @@ wk.register({
 		b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
 		h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
 	},
-	["<leader>c"] = {
-		name = "Telescope Code Action",
-		a = { "<cmd>Telescope lsp_code_actions<cr>", "Telescope: Code Actions" },
-	},
+	-- ["<leader>c"] = {
+	-- 	name = "Telescope Code Action",
+	-- 	a = { "<cmd>Telescope lsp_code_actions<cr>", "Telescope: Code Actions" },
+	-- },
 })

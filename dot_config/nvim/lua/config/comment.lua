@@ -3,37 +3,46 @@ require("Comment").setup({
 	---@type boolean
 	padding = true,
 
-	---Line which should be ignored while comment/uncomment
+	---Whether the cursor should stay at its position
+	---NOTE: This only affects NORMAL mode mappings and doesn't work with dot-repeat
+	---@type boolean
+	sticky = true,
+
+	---Lines to be ignored while comment/uncomment.
+	---Could be a regex string or a function that returns a regex string.
 	---Example: Use '^$' to ignore empty lines
-	---@type string Lua regex
+	---@type string|function
 	ignore = "^$",
 
-	---Whether to create basic (operator-pending) and extra mappings for NORMAL/VISUAL mode
+	---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
 	---@type table
 	mappings = {
 		---operator-pending mapping
 		---Includes `gcc`, `gcb`, `gc[count]{motion}` and `gb[count]{motion}`
 		basic = true,
+		---extra mapping
+		---Includes `gco`, `gcO`, `gcA`
+		extra = true,
 		---extended mapping
 		---Includes `g>`, `g<`, `g>[count]{motion}` and `g<[count]{motion}`
-		extra = false,
+		extended = false,
 	},
 
-	---LHS of line and block comment toggle mapping in NORMAL/VISUAL mode
+	---LHS of toggle mapping in NORMAL + VISUAL mode
 	---@type table
 	toggler = {
-		---line-comment toggle
+		---line-comment keymap
 		line = "gcc",
-		---block-comment toggle
+		---block-comment keymap
 		block = "gbc",
 	},
 
-	---LHS of line and block comment operator-mode mapping in NORMAL/VISUAL mode
+	---LHS of operator-pending mapping in NORMAL + VISUAL mode
 	---@type table
 	opleader = {
-		---line-comment opfunc mapping
+		---line-comment keymap
 		line = "gc",
-		---block-comment opfunc mapping
+		---block-comment keymap
 		block = "gb",
 	},
 
@@ -45,3 +54,7 @@ require("Comment").setup({
 	---@type function|nil
 	post_hook = nil,
 })
+
+local ft = require("Comment.ft")
+
+ft.dart = { "//%s", "/*%s*/" }

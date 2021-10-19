@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:JetBrains Mono Nerd Font bold 10
+font pango:Iosevka Medium 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -66,7 +66,7 @@ client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7     #1a1b26
 client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7     #1a1b26
 
 focus_wrapping no
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -255,7 +255,7 @@ bindsym $mod+bracketright mode "music & brightness"
 # i3-gaps settings
 gaps inner 15
 # gaps outer 10
-smart_gaps on
+# smart_gaps on
 # smart_gaps inverse_outer
 # smart_borders on
 
@@ -411,11 +411,11 @@ exec --no-startup-id "~/.fehbg &"
 exec --no-startup-id "picom --experimental-backends"
 
 # Start polybar
-exec --no-startup-id "~/.config/polybar/launch.sh --forest"
+exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 
 # kitti3 mapping
-exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
-bindsym $mod+c nop cmus
+# exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
+# bindsym $mod+c nop cmus
 
 exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.52 1.0
 bindsym $mod+n nop Terminal

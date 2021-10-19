@@ -100,5 +100,5 @@ require("nvim-treesitter.configs").setup({
 		},
 	},
 
-	context_commentstring = { enable = false, config = { dart = "// %s" } },
+	context_commentstring = { enable = true },
 })

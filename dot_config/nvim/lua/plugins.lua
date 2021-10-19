@@ -159,9 +159,9 @@ return require("packer").startup(function(use)
 	-- pinkmare
 	use({
 		"matsuuu/pinkmare",
-		-- disable = true,
+		disable = true,
 		config = function()
-			-- vim.cmd("colorscheme pinkmare")
+			require("config.pinkmare")
 		end,
 	})
 
@@ -509,6 +509,13 @@ return require("packer").startup(function(use)
 		"weilbith/nvim-code-action-menu",
 		-- cmd = "CodeActionMenu",
 		config = function() end,
+	})
+
+	use({
+		"windwp/lsp-fastaction.nvim",
+		config = function()
+			require("config.fastaction")
+		end,
 	})
 
 	-- lsp signagure
