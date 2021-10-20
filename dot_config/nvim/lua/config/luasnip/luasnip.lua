@@ -8,7 +8,7 @@ ls.config.setup({
 	enable_autosnippets = true,
 	region_check_events = "CursorHold",
 	delete_check_events = "TextChanged",
-	store_selection_keys = "<Tab>",
+	-- store_selection_keys = "<Tab>",
 	ext_opts = {
 		[types.choiceNode] = {
 			active = {

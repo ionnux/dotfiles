@@ -3,11 +3,11 @@ local gl = require("galaxyline")
 
 local colors = require("galaxyline.themes.colors")["default"]
 -- local colors = require( "galaxyline.themes.colors" )["rose-pine"]
-local theme_colors = require("colors")
-for i, v in pairs(theme_colors) do
-	colors[i] = v
-end
-colors.bg = colors.none
+-- local theme_colors = require("colors")
+-- for i, v in pairs(theme_colors) do
+-- 	colors[i] = v
+-- end
+colors.bg = "#1f2335"
 
 local condition = require("galaxyline.condition")
 local gls = gl.section

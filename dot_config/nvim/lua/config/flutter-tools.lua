@@ -157,7 +157,7 @@ require("flutter-tools").setup({
 		enabled = true, -- set to false to disable
 	},
 	dev_log = {
-		open_cmd = "tabedit", -- command to use to open the log buffer
+		open_cmd = "10split", -- command to use to open the log buffer
 	},
 	dev_tools = {
 		autostart = false, -- autostart devtools server if not detected

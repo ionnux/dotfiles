@@ -57,7 +57,7 @@ cmp.setup({
 			if luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
-				vim.cmd("Tabout")
+				vim.cmd("TaboutBack")
 			end
 		end, {
 			"i",
