@@ -166,6 +166,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- nightfox
+	use({
+		"EdenEast/nightfox.nvim",
+		disable = true,
+		config = function()
+			require("config.nightfox")
+		end,
+	})
+
 	-- pinkmare
 	use({
 		"matsuuu/pinkmare",
@@ -377,25 +386,31 @@ return require("packer").startup(function(use)
 	})
 
 	-- bufdelete
-	use("famiu/bufdelete.nvim")
+	use({
+		"famiu/bufdelete.nvim",
+		event = "BufReadPre",
+		config = function()
+			vim.api.nvim_set_keymap("n", "<leader>bd", [[:Bdelete<cr>]], { noremap = true, silent = true })
+		end,
+	})
 
 	-- bufresize
 	use({
 		"kwkarlwang/bufresize.nvim",
-		disable = true,
+		-- disable = true,
 		config = function()
 			local opts = { noremap = true, silent = true }
 			require("bufresize").setup({
 				register = {
-					keys = {
-						{ "n", "<C-w><", "<C-w><", opts },
-						{ "n", "<C-w>>", "<C-w>>", opts },
-						{ "n", "<C-w>+", "<C-w>+", opts },
-						{ "n", "<C-w>-", "<C-w>-", opts },
-						{ "n", "<C-w>_", "<C-w>_", opts },
-						{ "n", "<C-w>=", "<C-w>=", opts },
-						{ "n", "<C-w>|", "<C-w>|", opts },
-					},
+					-- keys = {
+					-- 	{ "n", "<C-w><", "<C-w><", opts },
+					-- 	{ "n", "<C-w>>", "<C-w>>", opts },
+					-- 	{ "n", "<C-w>+", "<C-w>+", opts },
+					-- 	{ "n", "<C-w>-", "<C-w>-", opts },
+					-- 	{ "n", "<C-w>_", "<C-w>_", opts },
+					-- 	{ "n", "<C-w>=", "<C-w>=", opts },
+					-- 	{ "n", "<C-w>|", "<C-w>|", opts },
+					-- },
 					trigger_events = { "BufWinEnter", "WinEnter" },
 				},
 				resize = { keys = {}, trigger_events = { "VimResized" } },
@@ -652,6 +667,14 @@ return require("packer").startup(function(use)
 		config = function()
 			vim.api.nvim_set_keymap("n", "<leader>m", ":MaximizerToggle!<cr>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("v", "<leader>m", ":MaximizerToggle!<cr>gv", { noremap = true, silent = true })
+		end,
+	})
+
+	use({
+		"beauwilliams/focus.nvim",
+		disable = true,
+		config = function()
+			require("focus").setup()
 		end,
 	})
 

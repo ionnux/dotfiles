@@ -180,7 +180,8 @@ assign [class="Microsoft-edge-beta"] 3
 
 # layout files
 # load android dev layout to workspace 4
-bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_emulator.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
+# bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_emulator.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
+bindsym $mod+f       exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_scrcpy.json; exec kitty; exec scrcpy'"
 bindsym $mod+shift+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_book.json; exec kitty; exec zathura'"
 
 # auto start apps
@@ -421,7 +422,11 @@ exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.52 1.0
 bindsym $mod+n nop Terminal
 
 # Android emulator settings 
-for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
-bindsym $mod+comma [title="Android Emulator*"] scratchpad show
+# for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
+# bindsym $mod+comma [title="Android Emulator*"] scratchpad show
+
+# Scrcpy settings -- itel
+for_window [class="scrcpy"] floating enable, move scratchpad, resize set 411 px 885, move absolute position 1490 px 110 px, scratchpad show
+bindsym $mod+comma [class="scrcpy"] scratchpad show
 
 # exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
