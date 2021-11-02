@@ -206,15 +206,13 @@ local function make_config()
 end
 
 -- lsp-install
-local function setup_servers()
-	require("lspinstall").setup()
+--[[ local function setup_servers()
+	-- require("lspinstall").setup()
 
 	-- get all installed servers
-	local servers = require("lspinstall").installed_servers()
+	local servers = lsp_installer.servers
 	-- ... and add manually installed servers
 	-- table.insert( servers, "dartls" )
-	table.insert(servers, "sqls")
-	-- table.insert(servers, "sqlls")
 
 	for _, server in pairs(servers) do
 		local config = make_config()
@@ -222,12 +220,6 @@ local function setup_servers()
 		-- language specific config
 		if server == "lua" then
 			config.settings = lua_settings
-		end
-		if server == "sourcekit" then
-			config.filetypes = { "swift", "objective-c", "objective-cpp" } -- we don't want c and cpp!
-		end
-		if server == "clangd" then
-			config.filetypes = { "c", "cpp" } -- we don't want objective-c and objective-cpp!
 		end
 		if server == "sqls" then
 			config = {
@@ -244,10 +236,12 @@ local function setup_servers()
 	end
 end
 
-setup_servers()
+setup_servers() --]]
 
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require("lspinstall").post_install_hook = function()
-	setup_servers() -- reload installed servers
-	vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
+local lsp_installer = require("nvim-lsp-installer")
+lsp_installer.on_server_ready(function(server)
+	local default_opts = make_config()
+	local server_opts = {}
+	server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
+	vim.cmd([[ do User LspAttachBuffers ]])
+end)

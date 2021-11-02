@@ -76,7 +76,7 @@ bufferline.setup({
 		numbers = function(opts)
 			return string.format("%s", opts.lower(opts.ordinal))
 		end,
-		sort_by = sort_by_mtime,
+		-- sort_by = sort_by_mtime,
 		offsets = {
 			{
 				filetype = "Mundo",
@@ -108,48 +108,48 @@ bufferline.setup({
 				padding = 1,
 			},
 		},
-		groups = {
-			options = {
-				toggle_hidden_on_enter = true,
-			},
-			items = {
-				groups.builtin.ungrouped,
-				{
-					name = "BLoC",
-					highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
-					auto_close = false,
-					matcher = function(buf)
-						-- return buf.filename:match("_spec") or buf.filename:match("test")
-						return buf.path:match("bloc/")
-					end,
-					separator = {
-						style = group_separator,
-					},
-				},
-				{
-					name = "Cubit",
-					highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
-					auto_close = false,
-					matcher = function(buf)
-						return buf.path:match("cubit/")
-					end,
-					separator = {
-						style = group_separator,
-					},
-				},
-				{
-					name = "View",
-					highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
-					auto_close = false,
-					matcher = function(buf)
-						return buf.path:match("view/")
-					end,
-					separator = {
-						style = group_separator,
-					},
-				},
-			},
-		},
+		-- groups = {
+		-- 	options = {
+		-- 		toggle_hidden_on_enter = true,
+		-- 	},
+		-- 	items = {
+		-- 		groups.builtin.ungrouped,
+		-- 		{
+		-- 			name = "BLoC",
+		-- 			highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
+		-- 			auto_close = false,
+		-- 			matcher = function(buf)
+		-- 				-- return buf.filename:match("_spec") or buf.filename:match("test")
+		-- 				return buf.path:match("bloc/")
+		-- 			end,
+		-- 			separator = {
+		-- 				style = group_separator,
+		-- 			},
+		-- 		},
+		-- 		{
+		-- 			name = "Cubit",
+		-- 			highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
+		-- 			auto_close = false,
+		-- 			matcher = function(buf)
+		-- 				return buf.path:match("cubit/")
+		-- 			end,
+		-- 			separator = {
+		-- 				style = group_separator,
+		-- 			},
+		-- 		},
+		-- 		{
+		-- 			name = "View",
+		-- 			highlight = { guisp = colors.vibrant_green, --[[ gui = "undercurl",  --]]guibg = colors.black2 },
+		-- 			auto_close = false,
+		-- 			matcher = function(buf)
+		-- 				return buf.path:match("view/")
+		-- 			end,
+		-- 			separator = {
+		-- 				style = group_separator,
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 		separator_style = "thick",
 		buffer_close_icon = "",
 		modified_icon = "",
@@ -168,7 +168,7 @@ bufferline.setup({
 		diagnostics = "nvim_lsp", -- "or nvim_lsp"
 		diagnostics_indicator = diagnostics_indicator,
 		diagnostics_update_in_insert = false,
-		-- custom_filter = custom_filter,
+		custom_filter = custom_filter,
 	},
 
 	highlights = {

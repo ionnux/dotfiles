@@ -123,6 +123,7 @@ return require("packer").startup(function(use)
 				end,
 				opt = true,
 			},
+			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true },
 			{ "nvim-telescope/telescope-frecency.nvim", requires = { "tami5/sqlite.lua" }, opt = true },
 			{ "nvim-telescope/telescope-packer.nvim", opt = true },
@@ -505,16 +506,16 @@ return require("packer").startup(function(use)
 	})
 
 	-- sqls.nvim
-	use({
-		"nanotee/sqls.nvim",
-		-- disable = true,
-		config = function()
-			require("sqls").setup({
-				picker = "telescope",
-			})
-		end,
-		requires = "nvim-telescope/telescope.nvim",
-	})
+	-- use({
+	-- 	"nanotee/sqls.nvim",
+	-- 	-- disable = true,
+	-- 	config = function()
+	-- 		require("sqls").setup({
+	-- 			picker = "telescope",
+	-- 		})
+	-- 	end,
+	-- 	requires = "nvim-telescope/telescope.nvim",
+	-- })
 
 	-- vim-dadbod (vimscript)
 	use("tpope/vim-dadbod")
@@ -614,10 +615,18 @@ return require("packer").startup(function(use)
 	-- lspconfig
 	use({
 		"neovim/nvim-lspconfig", -- event = "BufReadPre",
-		requires = { "kabouzeid/nvim-lspinstall", "onsails/lspkind-nvim", { "folke/lua-dev.nvim" } },
+		requires = { "onsails/lspkind-nvim", { "folke/lua-dev.nvim" } },
 		config = function()
 			require("config.lsp")
 		end,
+	})
+
+	-- nvim-lsp-installer
+	use({
+		"williamboman/nvim-lsp-installer",
+		-- config = function()
+		-- require("config.lsp-installer")
+		-- end,
 	})
 
 	use({
