@@ -245,3 +245,11 @@ lsp_installer.on_server_ready(function(server)
 	server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
 	vim.cmd([[ do User LspAttachBuffers ]])
 end)
+
+require("lspconfig").sqls.setup({
+	on_attach = function(client)
+		client.resolved_capabilities.execute_command = true
+
+		require("sqls").setup({})
+	end,
+})

@@ -93,6 +93,7 @@ vim.cmd([[autocmd FileType markdown setlocal spell]])
 -- Check if we need to reload the file when it changed
 vim.cmd("au FocusGained * :checktime")
 
+
 -- ftdetect
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.fish setfiletype fish]] )
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )

@@ -300,7 +300,8 @@ return require("packer").startup(function(use)
 	-- indent-blankline
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		-- disable = true, -- event = "BufEnter",
+		disable = true,
+		-- event = "BufEnter",
 		-- wants = "tokyonight.nvim",
 		config = function()
 			require("config.blankline")
@@ -506,16 +507,16 @@ return require("packer").startup(function(use)
 	})
 
 	-- sqls.nvim
-	-- use({
-	-- 	"nanotee/sqls.nvim",
-	-- 	-- disable = true,
-	-- 	config = function()
-	-- 		require("sqls").setup({
-	-- 			picker = "telescope",
-	-- 		})
-	-- 	end,
-	-- 	requires = "nvim-telescope/telescope.nvim",
-	-- })
+	use({
+		"nanotee/sqls.nvim",
+		-- disable = true,
+		config = function()
+			require("sqls").setup({
+				picker = "telescope",
+			})
+		end,
+		requires = "nvim-telescope/telescope.nvim",
+	})
 
 	-- vim-dadbod (vimscript)
 	use("tpope/vim-dadbod")

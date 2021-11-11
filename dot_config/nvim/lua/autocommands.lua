@@ -13,6 +13,7 @@ vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 
 -- set filetypes
 vim.cmd([[autocmd BufRead,BufNewFile *.rasi setfiletype css]])
+vim.cmd([[autocmd BufRead,BufNewFile *.drift setfiletype sql]])
 
 -- Highlight on yank
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = Search }")
