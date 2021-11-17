@@ -27,51 +27,51 @@
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/consumer.json"
+        "path": "./dart/riverpod/consumer.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/change_notifier_provider.json"
+        "path": "./dart/riverpod/change_notifier_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/future_provider.json"
+        "path": "./dart/riverpod/future_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/provider.json"
+        "path": "./dart/riverpod/provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/scoped_provider.json"
+        "path": "./dart/riverpod/scoped_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/state_notifier.json"
+        "path": "./dart/riverpod/state_notifier.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/state_notifier_provider.json"
+        "path": "./dart/riverpod/state_notifier_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/state_provider.json"
+        "path": "./dart/riverpod/state_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/stream_provider.json"
+        "path": "./dart/riverpod/stream_provider.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/consumer_widget.json"
+        "path": "./dart/riverpod/consumer_widget.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/hook_consumer.json"
+        "path": "./dart/riverpod/hook_consumer.json"
       },
       {
         "language": "dart",
-        "path": ".dart/riverpod/provider_listenable.json"
+        "path": "./dart/riverpod/provider_listenable.json"
       },
 
       {

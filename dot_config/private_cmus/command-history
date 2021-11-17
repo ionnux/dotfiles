@@ -1,0 +1,58 @@
+q
+colorscheme blue
+colorscheme gruvbox
+colorscheme 
+colorscheme dracula
+update-cache 
+vol 1 100
+vol 100
+c
+refresh
+a
+colorscheme amazon
+bind -f common n search-next
+search-next
+shell dunstify "fdf"
+shell ls
+bind -f common c player-pause
+bind -f common c player-pause " "
+colorscheme green
+colorscheme night
+colorscheme solarized-dark
+colorscheme jellybeans
+colorscheme zenburn
+colorscheme green-mono-88
+colorscheme gray-88
+colorscheme cyan
+ls
+ff
+colorscheme gruvbox-alt
+colorscheme default
+cmus
+colorscheme gruvbox-warm
+1
+bind  common > player-next
+bind  common < player-prev
+bind -f common [ player-prev
+bind -f common ] player-next
+bind common ] k
+bind -f common M toggle play_library
+bind
+bind  common d win-remove
+bind -f browser space win-activate
+bind d win-remove
+filter 
+h
+Q
+add
+refresh 
+bind -f common + vol +10%
+bind -f common + vol +15%
+bind -f common + vol +1%
+bind -f common  player-prev
+bind -f common ^n player-prev
+bind -f common delete win-remove
+bind -f common ^R toggle repeat_current
+bind -f common z player-prev
+help
+?

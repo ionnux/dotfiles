@@ -1,7 +1,7 @@
 -- local flags = require( 'galaxyline/my_providers/flags' )
 local gl = require("galaxyline")
 
-local colors = require("galaxyline.themes.colors")["default"]
+local colors = require("galaxyline.themes.colors")["rose-pine"]
 -- local colors = require( "galaxyline.themes.colors" )["rose-pine"]
 -- local theme_colors = require("colors")
 -- for i, v in pairs(theme_colors) do

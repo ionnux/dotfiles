@@ -159,7 +159,7 @@ return require("packer").startup(function(use)
 	-- tokyonight
 	use({
 		"folke/tokyonight.nvim",
-		-- disable = true,
+		disable = true,
 		-- event = "bufEnter",
 		-- wants = "nvim-treesitter",
 		config = function()
@@ -188,7 +188,7 @@ return require("packer").startup(function(use)
 	-- rose-pine
 	use({
 		"rose-pine/neovim",
-		disable = true,
+		-- disable = true,
 		config = function()
 			require("config.rose-pine")
 		end,
@@ -358,7 +358,7 @@ return require("packer").startup(function(use)
 	-- galaxyline
 	use({
 		"NTBBloodbath/galaxyline.nvim",
-		event = "bufEnter", -- disable = true,
+		-- event = "bufEnter", -- disable = true,
 		wants = { "nvim-web-devicons" },
 		config = function()
 			require("galaxyline.my_theme")

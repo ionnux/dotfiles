@@ -83,7 +83,7 @@ vim.cmd("highlight LspDiagnosticsVirtualTextInformation guifg=" .. palette.foam)
 vim.cmd("highlight LspDiagnosticsVirtualTextHint guifg=" .. palette.iris)
 
 -- MatchParen
-vim.cmd("highlight MatchParen term=underline cterm=underline gui=underline,bold guifg=" .. palette.text)
+vim.cmd("highlight MatchParen gui=bold guifg=" .. palette.base .. " guibg=" .. palette.gold)
 
 -- visual
 -- vim.cmd( "hi Visual gui=bold " )
@@ -100,7 +100,7 @@ vim.cmd("highlight TelescopeResultsBorder guifg=" .. palette.iris)
 -- vim.cmd( "highlight ScrollView guibg=" .. palette.gold )
 
 -- dashboard
-vim.cmd("highlight DashboardHeader guifg=" .. palette.rose)
+vim.cmd("highlight DashboardHeader guifg=" .. palette.gold)
 vim.cmd("highlight DashboardFooter gui=bold guifg=" .. palette.rose)
 vim.cmd("highlight DashboardCenter gui=bold guifg=" .. palette.foam)
 vim.cmd("highlight DashboardShortCut gui=bold guifg=" .. palette.iris)
