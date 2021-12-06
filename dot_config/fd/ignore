@@ -1,6 +1,7 @@
 .git
 node_modules
 /home/og_saaz/*
+/home/IdeaProjects/
 !Downloads/
 !Documents/
 !Videos/
