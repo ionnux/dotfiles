@@ -1,7 +1,8 @@
 .git
 node_modules
 /home/og_saaz/*
-/home/IdeaProjects/
+!IdeaProjects/
+!AndroidStudioProjects/
 !Downloads/
 !Documents/
 !Videos/
