@@ -147,7 +147,7 @@ local on_attach = function(client, bufnr)
 		opts
 	)
 	buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-	-- buf_set_keymap( 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts )
+	buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 	-- Set some keybinds conditional on server capabilities
 	-- if client.resolved_capabilities.document_formatting then
@@ -193,18 +193,6 @@ local lua_settings = {
 	},
 }
 
--- config that activates keymaps and enables snippet support
-local function make_config()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	return {
-		-- enable snippet support
-		capabilities = capabilities,
-		-- map buffer local keybindings when the language server attaches
-		on_attach = on_attach,
-	}
-end
-
 -- lsp-install
 --[[ local function setup_servers()
 	-- require("lspinstall").setup()
@@ -237,19 +225,38 @@ end
 end
 
 setup_servers() --]]
-
 local lsp_installer = require("nvim-lsp-installer")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 lsp_installer.on_server_ready(function(server)
-	local default_opts = make_config()
-	local server_opts = {}
-	server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
-	vim.cmd([[ do User LspAttachBuffers ]])
+	local default_opts = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
+
+	local server_opts = {
+		["elixirls"] = function()
+			default_opts.cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh" }
+		end,
+
+		["sumneko_lua"] = function()
+			default_opts.cmd = {
+				"/home/og_saaz/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/Linux/lua-language-server",
+			}
+			default_opts.settings = lua_settings
+		end,
+
+		["efm"] = function()
+			default_opts.cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/efm/efm-langserver" }
+			default_opts.filetypes = { "elixir" }
+			default_opts.settings = {
+				elixir = {},
+			}
+		end,
+	}
+
+	-- Use the server's custom settings, if they exist, otherwise default to the default options
+	local server_options = server_opts[server.name] and server_opts[server.name]() or default_opts
+	server:setup(server_options)
 end)
-
-require("lspconfig").sqls.setup({
-	on_attach = function(client)
-		client.resolved_capabilities.execute_command = true
-
-		require("sqls").setup({})
-	end,
-})

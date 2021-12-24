@@ -292,6 +292,9 @@ return require("packer").startup(function(use)
 	use({
 		"sindrets/diffview.nvim",
 		event = "BufEnter",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+		},
 		config = function()
 			require("config.diffview")
 		end,
@@ -358,6 +361,7 @@ return require("packer").startup(function(use)
 	-- galaxyline
 	use({
 		"NTBBloodbath/galaxyline.nvim",
+		disable = true,
 		-- event = "bufEnter", -- disable = true,
 		wants = { "nvim-web-devicons" },
 		config = function()

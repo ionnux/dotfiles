@@ -18,9 +18,14 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "stylua",
-					-- args = {"-"},
 					stdin = false,
 				}
+			end,
+		},
+
+		elixir = {
+			function()
+				return { exe = "mix format", stdin = false }
 			end,
 		},
 	},
@@ -31,7 +36,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.dart,*.lua,*.sh FormatWrite
+  autocmd BufWritePost *.dart,*.lua,*.sh,*.ex,*.exs FormatWrite
 augroup END
 ]],
 	true

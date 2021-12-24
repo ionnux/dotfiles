@@ -177,6 +177,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
 
 # open edge in workspace 3
 assign [class="Microsoft-edge-beta"] 3
+assign [class="jetbrains-studio"] 2
+assign [class="jetbrains-idea-ce"] 2
 
 # layout files
 # load android dev layout to workspace 4

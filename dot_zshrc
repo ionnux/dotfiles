@@ -13,7 +13,9 @@ export PATH="$PATH:$HOME/.pub-cache/bin/"
 # add kitty executable to path
 # export PATH="$PATH:$HOME/.local/kitty.app/bin"
 # add golang to path
-export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/go/bin/"
+# add elixir to path
+export PATH="$PATH:/usr/local/elixir/bin/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/og_saaz/.oh-my-zsh"
