@@ -106,7 +106,6 @@ return require("packer").startup(function(use)
 		event = { "bufEnter" },
 		wants = {
 			"trouble.nvim",
-			"plenary.nvim",
 			"project.nvim",
 			"telescope-fzf-native.nvim",
 			"telescope-frecency.nvim",
@@ -123,7 +122,6 @@ return require("packer").startup(function(use)
 				end,
 				opt = true,
 			},
-			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make", opt = true },
 			{ "nvim-telescope/telescope-frecency.nvim", requires = { "tami5/sqlite.lua" }, opt = true },
 			{ "nvim-telescope/telescope-packer.nvim", opt = true },
@@ -142,7 +140,7 @@ return require("packer").startup(function(use)
 	})
 
 	-- plenary
-	use({ "nvim-lua/plenary.nvim", opt = true })
+	use({ "nvim-lua/plenary.nvim" })
 
 	-- toggleterm
 	use({
@@ -253,7 +251,6 @@ return require("packer").startup(function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		event = "BufReadPre",
-		wants = "plenary.nvim",
 		config = function()
 			require("config.gitsigns")
 		end,
@@ -263,7 +260,6 @@ return require("packer").startup(function(use)
 	use({
 		"TimUntersberger/neogit",
 		event = "BufReadPost",
-		wants = "plenary.nvim",
 		config = function()
 			require("config.neogit")
 		end,
@@ -292,9 +288,6 @@ return require("packer").startup(function(use)
 	use({
 		"sindrets/diffview.nvim",
 		event = "BufEnter",
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-		},
 		config = function()
 			require("config.diffview")
 		end,
@@ -427,7 +420,7 @@ return require("packer").startup(function(use)
 	-- dashboard
 	use({
 		"glepnir/dashboard-nvim", -- disable = true,
-		-- disable = true,
+		disable = true,
 		event = "VimEnter",
 		after = "telescope.nvim",
 		config = function()
@@ -435,6 +428,35 @@ return require("packer").startup(function(use)
 			require("config.dashboard")
 		end,
 		requires = "nvim-telescope/telescope.nvim",
+	})
+
+	-- startup-nvim
+	use({
+		"startup-nvim/startup.nvim",
+		disable = true,
+		requires = "nvim-telescope/telescope.nvim",
+		config = function()
+			require("startup").setup(require("config.startup-nvim"))
+			-- require("startup").setup()
+		end,
+	})
+
+	-- alpha nvim
+	use({
+		"goolord/alpha-nvim",
+		disable = true,
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = function()
+			require("alpha").setup(require("config.alpha-nvim").opts)
+		end,
+	})
+
+	-- startify
+	use({
+		"mhinz/vim-startify",
+		config = function()
+			require("config.startify")
+		end,
 	})
 
 	-- firenvim
@@ -475,17 +497,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- nvim-comment
-	use({
-		"terrortylor/nvim-comment",
-		disable = true,
-		keys = { { "n", "gcc" }, { "v", "gc" }, { "o", "gc" } },
-		wants = { "nvim-treesitter" },
-		config = function()
-			require("config.nvim-comment")
-		end,
-	})
-
 	-- kommentary
 	use({ "b3nj5m1n/kommentary", disable = true })
 
@@ -504,7 +515,6 @@ return require("packer").startup(function(use)
 	use({
 		"akinsho/flutter-tools.nvim",
 		ft = { "flutter", "dart" },
-		wants = "plenary.nvim",
 		config = function()
 			require("config.flutter-tools")
 		end,
@@ -589,7 +599,6 @@ return require("packer").startup(function(use)
 	-- todo-comments
 	use({
 		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
 		config = function()
 			require("config.todo")
 		end,

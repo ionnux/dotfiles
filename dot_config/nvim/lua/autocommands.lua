@@ -14,6 +14,7 @@ vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 -- set filetypes
 vim.cmd([[autocmd BufRead,BufNewFile *.rasi setfiletype css]])
 vim.cmd([[autocmd BufRead,BufNewFile *.drift setfiletype sql]])
+vim.cmd([[autocmd BufRead,BufNewFile *.ex setfiletype elixir]])
 
 -- Highlight on yank
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = Search }")
@@ -54,5 +55,13 @@ vim.cmd([[
 augroup chezmoiApply
     autocmd!
     autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path %
+augroup END
+ ]])
+
+vim.cmd([[
+ augroup elixir
+    autocmd!
+    autocmd InsertLeave *.exs,*.ex :lua vim.lsp.buf.formatting()
+    autocmd BufWritePre *.exs,*.ex :lua vim.lsp.buf.formatting()
 augroup END
  ]])

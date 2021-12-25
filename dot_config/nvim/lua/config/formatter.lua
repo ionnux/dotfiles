@@ -23,11 +23,11 @@ require("formatter").setup({
 			end,
 		},
 
-		elixir = {
-			function()
-				return { exe = "mix format", stdin = false }
-			end,
-		},
+		-- elixir = {
+		-- 	function()
+		-- 		return { exe = "mix format", stdin = false }
+		-- 	end,
+		-- },
 	},
 })
 
@@ -36,7 +36,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.dart,*.lua,*.sh,*.ex,*.exs FormatWrite
+  autocmd BufWritePost *.dart,*.lua,*.sh FormatWrite
 augroup END
 ]],
 	true

@@ -171,60 +171,6 @@ local on_attach = function(client, bufnr)
 	end
 end
 
--- Configure lua language server for neovim development
-local lua_settings = {
-	Lua = {
-		runtime = {
-			-- LuaJIT in the case of Neovim
-			version = "LuaJIT",
-			path = vim.split(package.path, ";"),
-		},
-		diagnostics = {
-			-- Get the language server to recognize the `vim` global
-			globals = { "vim" },
-		},
-		workspace = {
-			-- Make the server aware of Neovim runtime files
-			library = {
-				[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-				[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-			},
-		},
-	},
-}
-
--- lsp-install
---[[ local function setup_servers()
-	-- require("lspinstall").setup()
-
-	-- get all installed servers
-	local servers = lsp_installer.servers
-	-- ... and add manually installed servers
-	-- table.insert( servers, "dartls" )
-
-	for _, server in pairs(servers) do
-		local config = make_config()
-
-		-- language specific config
-		if server == "lua" then
-			config.settings = lua_settings
-		end
-		if server == "sqls" then
-			config = {
-				cmd = { "/usr/local/bin/sqls", "-config", "/home/og_saaz/.config/sqls/config.yml" },
-			}
-		end
-		if server == "sqlls" then
-			config = {
-				cmd = { "/usr/local/bin/sql-language-server", "up", "--method", "stdio" },
-			}
-		end
-
-		require("lspconfig")[server].setup(config)
-	end
-end
-
-setup_servers() --]]
 local lsp_installer = require("nvim-lsp-installer")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -237,22 +183,46 @@ lsp_installer.on_server_ready(function(server)
 
 	local server_opts = {
 		["elixirls"] = function()
-			default_opts.cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh" }
+			return vim.tbl_deep_extend("force", default_opts, {
+				cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh" },
+				settings = {
+					elixirLS = {
+						dialyzerEnabled = true,
+					},
+				},
+			})
 		end,
 
 		["sumneko_lua"] = function()
-			default_opts.cmd = {
-				"/home/og_saaz/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/Linux/lua-language-server",
-			}
-			default_opts.settings = lua_settings
+			return vim.tbl_deep_extend("force", default_opts, {
+				cmd = {
+					"/home/og_saaz/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/Linux/lua-language-server",
+				},
+				settings = {
+					Lua = {
+						runtime = {
+							version = "LuaJIT",
+							path = vim.split(package.path, ";"),
+						},
+						diagnostics = {
+							globals = { "vim" },
+						},
+						workspace = {
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+							},
+						},
+					},
+				},
+			})
 		end,
 
 		["efm"] = function()
-			default_opts.cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/efm/efm-langserver" }
-			default_opts.filetypes = { "elixir" }
-			default_opts.settings = {
-				elixir = {},
-			}
+			return vim.tbl_deep_extend("force", default_opts, {
+				cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/efm/efm-langserver" },
+				filetypes = { "elixir" },
+			})
 		end,
 	}
 

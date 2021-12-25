@@ -14,6 +14,17 @@ require("Comment").setup({
 	---@type string|function
 	ignore = "^$",
 
+	---LHS of extra mappings
+	---@type table
+	extra = {
+		---Add comment on the line above
+		above = "gcO",
+		---Add comment on the line below
+		below = "gco",
+		---Add comment at the end of line
+		eol = "gcA",
+	},
+
 	---Create basic (operator-pending) and extended mappings for NORMAL + VISUAL mode
 	---@type table
 	mappings = {
@@ -34,7 +45,7 @@ require("Comment").setup({
 		---line-comment keymap
 		line = "gcc",
 		---block-comment keymap
-		-- block = "gbc",
+		block = "gbc",
 	},
 
 	---LHS of operator-pending mapping in NORMAL + VISUAL mode

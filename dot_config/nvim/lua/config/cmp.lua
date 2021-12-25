@@ -9,10 +9,44 @@ local has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local kind_icons = {
+	Text = "",
+	Method = "",
+	Function = "",
+	Constructor = "",
+	Field = "",
+	Variable = "",
+	Class = "ﴯ",
+	Interface = "",
+	Module = "",
+	Property = "ﰠ",
+	Unit = "",
+	Value = "",
+	Enum = "",
+	Keyword = "",
+	Snippet = "",
+	Color = "",
+	File = "",
+	Reference = "",
+	Folder = "",
+	EnumMember = "",
+	Constant = "",
+	Struct = "",
+	Event = "",
+	Operator = "",
+	TypeParameter = "",
+}
+
 local feedkey = function(key)
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
 end
-
+local function toggleCmp()
+	if cmp.visible() then
+		cmp.close()
+	else
+		cmp.complete()
+	end
+end
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -31,15 +65,7 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 		-- ["<C-k>"] = cmp.mapping.scroll_docs(-4),
 		-- ["<C-j>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping(function()
-			if cmp.visible() then
-				cmp.close()
-			else
-				cmp.complete()
-			end
-		end, {
-			"i",
-		}),
+		["<C-Space>"] = cmp.mapping(toggleCmp, { "i" }),
 		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 
 		["<Tab>"] = cmp.mapping(function()
@@ -73,9 +99,12 @@ cmp.setup({
 	},
 
 	formatting = {
+		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
 			-- fancy icons and a name of kind
-			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+			-- vim_item.kind "abbr" = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+      vim_item.kind = kind_icons[vim_item.kind] .. " " or ""
+			-- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 
 			-- set a name for each source
 			vim_item.menu = ({

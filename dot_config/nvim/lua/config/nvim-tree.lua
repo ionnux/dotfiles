@@ -1,7 +1,5 @@
-vim.g.nvim_tree_gitignore = 1 -- 0 by default
 vim.g.nvim_tree_quit_on_open = 1 -- 0 by default, closes the tree when you open a file
 vim.g.nvim_tree_indent_markers = 0 -- 0 by default, this option shows indent markers when folders are open
-vim.g.nvim_tree_hide_dotfiles = 0 -- 0 by default, this option hides files and folders starting with a dot `.`
 vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
 vim.g.nvim_tree_root_folder_modifier = ":~" -- This is the default. See :help filename-modifiers for more options
 vim.g.nvim_tree_add_trailing = 0 -- 0 by default, append a trailing slash to folder names
@@ -128,23 +126,6 @@ require("nvim-tree").setup({
 		args = {},
 	},
 
-	view = {
-		-- width of the window, can be either a number (columns) or a string in `%`
-		width = 35,
-		-- height of the window, can be either a number (columns) or a string in `%`, for top or bottom side placement
-		-- height = 30,
-		-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
-		side = "left",
-		-- if true the tree will resize itself after opening a file
-		auto_resize = true,
-		mappings = {
-			-- custom only false will merge the list with the default mappings
-			-- if true, it will only use your list to set the mappings
-			custom_only = false,
-			-- list of mappings to set on the tree manually
-			list = list,
-		},
-	},
 	-- show lsp diagnostics in the signcolumn
 	diagnostics = {
 		enable = true,
@@ -154,5 +135,32 @@ require("nvim-tree").setup({
 			warning = "",
 			error = "",
 		},
+	},
+	filters = {
+		dotfiles = false,
+		custom = {},
+	},
+	git = {
+		enable = true,
+		ignore = true,
+		timeout = 500,
+	},
+	view = {
+		width = 35,
+		height = 30,
+		hide_root_folder = false,
+		side = "left",
+		auto_resize = true,
+		mappings = {
+			custom_only = false,
+			list = list,
+		},
+		number = false,
+		relativenumber = false,
+		signcolumn = "yes",
+	},
+	trash = {
+		cmd = "trash",
+		require_confirm = true,
 	},
 })
