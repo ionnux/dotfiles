@@ -478,6 +478,12 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- yabs
+	use({
+		"pianocomposer321/yabs.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
 	-- which-key
 	use({
 		"folke/which-key.nvim", -- disable = true,
