@@ -99,11 +99,12 @@ cmp.setup({
 	},
 
 	formatting = {
-		fields = { "kind", "abbr", "menu" },
+		-- fields = { "kind", "abbr", "menu" },
+		-- fields = { "abbr", "kind", "menu" },
 		format = function(entry, vim_item)
 			-- fancy icons and a name of kind
-			-- vim_item.kind "abbr" = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-      vim_item.kind = kind_icons[vim_item.kind] .. " " or ""
+			vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+			-- vim_item.kind = kind_icons[vim_item.kind] .. " " or ""
 			-- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 
 			-- set a name for each source

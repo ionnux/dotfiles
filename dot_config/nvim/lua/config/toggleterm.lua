@@ -59,7 +59,7 @@ local lazygit = Terminal:new({
 	end,
 })
 
-function _lazygit_toggle()
+function Lazygit_toggle()
 	lazygit:toggle()
 end
 
@@ -67,6 +67,6 @@ local wk = require("which-key")
 wk.register({
 	["<leader>g"] = {
 		name = "Diffview",
-		l = { "<cmd>lua _lazygit_toggle()<CR>", "Lazygit Toggle" },
+		l = { "<cmd>lua Lazygit_toggle()<CR>", "Lazygit Toggle" },
 	},
 })

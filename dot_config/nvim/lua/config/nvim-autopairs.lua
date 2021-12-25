@@ -16,6 +16,7 @@ require("nvim-autopairs").setup({
 		keys = "qwertyuiopzxcvbnmasdfghjkl",
 		check_comma = true,
 		hightlight = "Search",
+    highlight_grey='Comment'
 	},
 })
 
