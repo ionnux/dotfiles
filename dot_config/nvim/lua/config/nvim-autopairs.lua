@@ -1,6 +1,7 @@
 require("nvim-autopairs").setup({
 	map_bs = true, -- map the <BS> key
-	map_c_w = false,
+	map_c_h = true,
+	map_c_w = true,
 	disable_filetype = { "TelescopePrompt" },
 	ignored_next_char = "",
 	enable_moveright = true,
@@ -9,7 +10,7 @@ require("nvim-autopairs").setup({
 	check_ts = false,
 	fast_wrap = {
 		map = "<c-f>",
-		chars = { "{", "[", "(", '"', "'", "<" },
+		chars = { "{", "[", "(", '"', "'" },
 		pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
 		end_key = "$",
 		keys = "qwertyuiopzxcvbnmasdfghjkl",
@@ -52,7 +53,4 @@ npairs.add_rules({
 			return opts.prev_char:match(".%]") ~= nil
 		end)
 		:use_key("]"),
-	Rule("<", ">"),
 })
-
-vim.api.nvim_set_keymap("i", "<c-h>", "<bs>", { noremap = false })

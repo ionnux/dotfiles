@@ -2,14 +2,6 @@ return require("packer").startup(function(use)
 	-- packer
 	use("wbthomason/packer.nvim")
 
-	-- impatient nvim
-	-- use {
-	-- 'lewis6991/impatient.nvim',
-	-- rocks = 'mpack',
-	-- config = function()
-	-- end,
-	-- }
-
 	-- nvim-cmp
 	use({
 		"hrsh7th/nvim-cmp",
@@ -157,7 +149,7 @@ return require("packer").startup(function(use)
 	-- tokyonight
 	use({
 		"folke/tokyonight.nvim",
-		disable = true,
+		-- disable = true,
 		-- event = "bufEnter",
 		-- wants = "nvim-treesitter",
 		config = function()
@@ -186,7 +178,7 @@ return require("packer").startup(function(use)
 	-- rose-pine
 	use({
 		"rose-pine/neovim",
-		-- disable = true,
+		disable = true,
 		config = function()
 			require("config.rose-pine")
 		end,
@@ -296,7 +288,7 @@ return require("packer").startup(function(use)
 	-- indent-blankline
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		disable = true,
+		-- disable = true,
 		-- event = "BufEnter",
 		-- wants = "tokyonight.nvim",
 		config = function()
@@ -481,7 +473,9 @@ return require("packer").startup(function(use)
 	-- yabs
 	use({
 		"pianocomposer321/yabs.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			require("config.yabs")
+		end,
 	})
 
 	-- which-key

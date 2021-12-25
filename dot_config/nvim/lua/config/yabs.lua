@@ -3,7 +3,11 @@ require("yabs"):setup({
 		elixir = {
 			tasks = {
 				run = {
-					command = "elixir %",
+					command = "elixir %:p",
+					output = "echo", -- `buffer`, `consolation`, `echo`, `quickfix`, `terminal`, or `none`
+					opts = {
+						open_on_run = "always",
+					},
 					type = "shell", -- The type of command (can be `vim`, `lua`, or `shell`, default `shell`)
 				},
 			},
@@ -35,5 +39,13 @@ require("yabs"):setup({
 				open_on_run = "always",
 			},
 		},
+	},
+})
+local wk = require("which-key")
+wk.register({
+	["<leader>y"] = {
+		name = "Yabs", -- optional group name
+		r = { ":YabsTask run<cr>", "Yabs: run" }, -- additional options for creating the keymap
+		b = { ":YabsTask build<cr>", "Yabs: build" },
 	},
 })
