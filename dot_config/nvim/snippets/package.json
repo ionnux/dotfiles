@@ -77,6 +77,11 @@
       {
         "language": "sql",
         "path": "./sql.json"
+      },
+
+      {
+        "language": "elixir",
+        "path": "./elixir/elixir.json"
       }
     ]
   }

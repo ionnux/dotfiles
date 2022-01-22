@@ -159,6 +159,12 @@ lsp_installer.on_server_ready(function(server)
 				filetypes = { "elixir" },
 			})
 		end,
+		["gopls"] = function()
+			return vim.tbl_deep_extend("force", default_opts, {
+				cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/go/gopls" },
+				-- filetypes = { "go" },
+			})
+		end,
 	}
 
 	-- Use the server's custom settings, if they exist, otherwise default to the default options

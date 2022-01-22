@@ -61,7 +61,7 @@ augroup END
 vim.cmd([[
  augroup elixir
     autocmd!
-    autocmd InsertLeave *.exs,*.ex :lua vim.lsp.buf.formatting()
+    "autocmd InsertLeave *.exs,*.ex :lua vim.lsp.buf.formatting()
     autocmd BufWritePre *.exs,*.ex :lua vim.lsp.buf.formatting()
 augroup END
  ]])
