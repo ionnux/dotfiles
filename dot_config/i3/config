@@ -94,7 +94,7 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
+# bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
@@ -183,8 +183,8 @@ assign [class="jetbrains-idea-ce"] 2
 # layout files
 # load android dev layout to workspace 4
 # bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_emulator.json; exec kitty; exec ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
-bindsym $mod+f       exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_scrcpy.json; exec kitty; exec scrcpy'"
-bindsym $mod+shift+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_book.json; exec kitty; exec zathura'"
+# bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_scrcpy.json; exec kitty; exec scrcpy'"
+# bindsym $mod+shift+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_book.json; exec kitty; exec zathura'"
 
 # auto start apps
 # exec --no-startup-id i3-msg 'workspace 4; exec kitty cmus; workspace 1'
@@ -266,6 +266,7 @@ gaps inner 15
 title_align left
 # default_border normal 0
 hide_edge_borders smart
+# for_window [class=".*"] border pixel 3
 for_window [class=".*"] border pixel 3
 
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
@@ -417,18 +418,44 @@ exec --no-startup-id "picom --experimental-backends"
 exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 
 # kitti3 mapping
-# exec_always --no-startup-id kitti3 -n cmus -p cc -s 0.6 0.7 -- cmus
+# exec_always --no-startup-id kitti3 -n cmus -p ct -s 1 0.7 -- cmus
 # bindsym $mod+c nop cmus
 
-exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.52 1.0
-bindsym $mod+n nop Terminal
+# exec_always --no-startup-id kitti3 -n Terminal -p cr -s 0.52 0.8
+# bindsym $mod+n nop Terminal
+
+# exec_always --no-startup-id kitti3 -n Terminal2 -p ct -s 1 0.7
+# bindsym $mod+period nop Terminal2
+
+for_window [class="dropdown_terminal"] floating enable, border pixel 3, \
+move absolute position 15px 47px, resize set 1890px 800px, move scratchpad, scratchpad show
+bindsym $mod+n exec "if ! pgrep -a kitty | grep dropdown_terminal; then kitty --class dropdown_terminal; fi"; \
+[class="dropdown_terminal"] scratchpad show
+
+
+bindsym $mod+Shift+a  move absolute position 15px 47px, resize set 945px 1018px 
+bindsym $mod+Shift+d  move absolute position 960px 47px, resize set 945px 1018px 
+bindsym $mod+Shift+w  move absolute position 15px 47px, resize set 1890px 800px 
+bindsym $mod+Shift+s  move absolute position 15px 365px, resize set 1890px 700px 
+
+
+for_window [class="dropdown_cmus"] floating enable, border pixel 3, \
+move absolute position 15px 47px, resize set 1890px 800px, move scratchpad, scratchpad show
+bindsym $mod+c exec "if ! pgrep -a kitty | grep dropdown_cmus; then kitty --class dropdown_cmus cmus; fi"; \
+[class="dropdown_cmus"] scratchpad show
+
+# bindsym $mod+period [class="Microsoft-edge-beta"] floating enable, border pixel 3, \
+# move absolute position 15px 47px, resize set 1890px 700px, move scratchpad, scratchpad show
+# bindsym $mod+e [class="Microsoft-edge-beta"]scratchpad show
+
 
 # Android emulator settings 
 # for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
 # bindsym $mod+comma [title="Android Emulator*"] scratchpad show
 
 # Scrcpy settings -- itel
-for_window [class="scrcpy"] floating enable, move scratchpad, resize set 411 px 885, move absolute position 1490 px 110 px, scratchpad show
+# for_window [class="scrcpy"] floating enable, move scratchpad, resize set 411 px 885, move absolute position 1490 px 135 px, scratchpad show
+for_window [class="scrcpy"] floating enable, move scratchpad, resize set 369 px 794 px, move absolute position 1080 px 188 px, scratchpad show
 bindsym $mod+comma [class="scrcpy"] scratchpad show
 
 # exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
