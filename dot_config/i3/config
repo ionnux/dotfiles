@@ -176,7 +176,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
 
 # open edge in workspace 3
-assign [class="Microsoft-edge-beta"] 3
+# assign [class="Microsoft-edge-beta"] 3
 assign [class="jetbrains-studio"] 2
 assign [class="jetbrains-idea-ce"] 2
 
@@ -432,11 +432,16 @@ move absolute position 15px 47px, resize set 1890px 800px, move scratchpad, scra
 bindsym $mod+n exec "if ! pgrep -a kitty | grep dropdown_terminal; then kitty --class dropdown_terminal; fi"; \
 [class="dropdown_terminal"] scratchpad show
 
+for_window [class="Microsoft-edge-beta"] floating enable, border pixel 3, \
+move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
+bindsym $mod+e exec "if ! pgrep -a msedge ; then microsoft-edge-beta; fi"; \
+[class="Microsoft-edge-beta"] scratchpad show
 
-bindsym $mod+Shift+a  move absolute position 15px 47px, resize set 945px 1018px 
-bindsym $mod+Shift+d  move absolute position 960px 47px, resize set 945px 1018px 
+bindsym $mod+Shift+a  move absolute position 15px 47px, resize set 935px 1018px 
+bindsym $mod+Shift+d  move absolute position 970px 47px, resize set 935px 1018px 
 bindsym $mod+Shift+w  move absolute position 15px 47px, resize set 1890px 800px 
 bindsym $mod+Shift+s  move absolute position 15px 365px, resize set 1890px 700px 
+bindsym $mod+Shift+f  move absolute position 15px 47px, resize set 1890px 1018px 
 
 
 for_window [class="dropdown_cmus"] floating enable, border pixel 3, \
