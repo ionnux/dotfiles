@@ -288,7 +288,7 @@ return require("packer").startup(function(use)
 	-- indent-blankline
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		-- disable = true,
+		disable = true,
 		-- event = "BufEnter",
 		-- wants = "tokyonight.nvim",
 		config = function()
@@ -341,7 +341,11 @@ return require("packer").startup(function(use)
 	})
 
 	-- nvim_context_vt
-	use({ "haringsrob/nvim_context_vt", after = "nvim-treesitter", disable = true })
+	use({
+		"haringsrob/nvim_context_vt",
+		after = "nvim-treesitter",
+		disable = true,
+	})
 
 	-- galaxyline
 	use({
@@ -514,6 +518,7 @@ return require("packer").startup(function(use)
 	-- flutter-tools
 	use({
 		"akinsho/flutter-tools.nvim",
+		disable = true,
 		ft = { "flutter", "dart" },
 		config = function()
 			require("config.flutter-tools")
@@ -523,7 +528,7 @@ return require("packer").startup(function(use)
 	-- sqls.nvim
 	use({
 		"nanotee/sqls.nvim",
-		-- disable = true,
+		disable = true,
 		config = function()
 			require("sqls").setup({
 				picker = "telescope",
@@ -533,7 +538,10 @@ return require("packer").startup(function(use)
 	})
 
 	-- vim-dadbod (vimscript)
-	use("tpope/vim-dadbod")
+	use({
+		"tpope/vim-dadbod",
+		disable = true,
+	})
 
 	-- lspsaga
 	use({
@@ -550,6 +558,7 @@ return require("packer").startup(function(use)
 	use({
 		"weilbith/nvim-code-action-menu",
 		-- cmd = "CodeActionMenu",
+		disabled = true,
 		config = function() end,
 	})
 
@@ -564,6 +573,7 @@ return require("packer").startup(function(use)
 	use({
 		"ray-x/lsp_signature.nvim",
 		event = "bufRead",
+		disable = true,
 		config = function()
 			require("config.lsp-signature")
 		end,
@@ -698,6 +708,14 @@ return require("packer").startup(function(use)
 		disable = true,
 		config = function()
 			require("focus").setup()
+		end,
+	})
+
+	-- fidget nvim
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
 		end,
 	})
 
