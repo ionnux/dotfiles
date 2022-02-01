@@ -60,10 +60,10 @@ bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
 bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 
 # border color
-# client.focused #555555 #555555 #ffffff #2e9ef4     #7aa2f7
+# client.focused #555555 #555555 #ffffff #2e9ef4 #7aa2f7
 client.focused #545c7e #ebbcba #1a1b26 #7aa2f7 #c4a7e7
-client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7     #1a1b26
-client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7     #1a1b26
+client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7 #1a1b26
+client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7 #1a1b26
 
 focus_wrapping no
 workspace_auto_back_and_forth no
@@ -425,12 +425,12 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # bindsym $mod+period nop Terminal2
 
 for_window [title="dropdown_terminal1"] floating enable, border pixel 3, move absolute position 15 px 47 px, resize set 1890 px 850 px, move scratchpad, scratchpad show
-bindsym $mod+comma exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_terminal1; then kitty --title dropdown_terminal1; fi"; [title="dropdown_terminal."] scratchpad show
+bindsym $mod+comma exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_terminal1; then kitty --title dropdown_terminal1; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/terminal_scratchpad.sh dropdown_terminal1
 
 for_window [title="dropdown_terminal2"] floating enable, border pixel 3, move absolute position 968 px 47 px, resize set 937 px 850 px, move scratchpad, scratchpad show; \
 [title="dropdown_terminal1"] move absolute position 15 px 47 px, resize set 937 px 850 px 
 
-bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_terminal1; then kitty --title dropdown_terminal1; else if ! pgrep -a kitty | grep dropdown_terminal2; then kitty --title dropdown_terminal2; fi; fi"
+bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_terminal1; then kitty --title dropdown_terminal1; else if ! pgrep -a kitty | grep dropdown_terminal2; then kitty --title dropdown_terminal2; fi; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/terminal_scratchpad.sh dropdown_terminal2
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 3, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
