@@ -18,13 +18,13 @@ windowname=$(xdotool getactivewindow getwindowname)
 # then
 
 case "$windowname" in
-    "dropdown_terminal1")
-        i3-msg '[title="dropdown_terminal2"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
-        i3-msg '[title=dropdown_terminal1] kill'
+    "terminal [1]")
+        i3-msg '[title="terminal \[2\]"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
+        i3-msg '[title="terminal \[1\]"] kill'
         ;;
-    "dropdown_terminal2")
-        i3-msg '[title="dropdown_terminal1"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
-        i3-msg '[title=dropdown_terminal2] kill'
+    "terminal [2]")
+        i3-msg '[title="terminal \[1\]"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
+        i3-msg '[title="terminal \[2\]"] kill'
         ;;
     *)
         i3-msg 'kill'
