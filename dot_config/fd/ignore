@@ -2,6 +2,8 @@
 node_modules
 /home/og_saaz/*
 !IdeaProjects/
+!elixir-projects/
+!exercism/
 !AndroidStudioProjects/
 !Downloads/
 !Documents/

@@ -288,7 +288,7 @@ return require("packer").startup(function(use)
 	-- indent-blankline
 	use({
 		"lukas-reineke/indent-blankline.nvim",
-		disable = true,
+		-- disable = true,
 		-- event = "BufEnter",
 		-- wants = "tokyonight.nvim",
 		config = function()

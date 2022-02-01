@@ -19,11 +19,11 @@ windowname=$(xdotool getactivewindow getwindowname)
 
 case "$windowname" in
     "terminal [1]")
-        i3-msg '[title="terminal \[2\]"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
+        i3-msg '[title="terminal \[2\]"] move absolute position 14 px 47 px, resize set 1892 px 900 px'
         i3-msg '[title="terminal \[1\]"] kill'
         ;;
     "terminal [2]")
-        i3-msg '[title="terminal \[1\]"] move absolute position 15 px 47 px, resize set 1890 px 850 px'
+        i3-msg '[title="terminal \[1\]"] move absolute position 14 px 47 px, resize set 1892 px 900 px'
         i3-msg '[title="terminal \[2\]"] kill'
         ;;
     *)
