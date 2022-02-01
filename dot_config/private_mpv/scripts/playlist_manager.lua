@@ -159,11 +159,11 @@ local settings = {
 	-- playing_hovered_file = "  %name",
 	-- playing_selected_file = "➤  %name",
 	normal_file = "○ %name",
-	hovered_file = "{\\1c&HH46CFFF}● %name {\\1c&Hbebebe}",
-	selected_file = "{\\1c&HH46CFFF}➔ %name {\\1c&Hbebebe}",
+	hovered_file = "{\\1c&H46CFFF}● %name {\\1c&Hbebebe}",
+	selected_file = "{\\1c&H46CFFF}➔ %name {\\1c&Hbebebe}",
 	playing_file = "▷ %name",
-	playing_hovered_file = "{\\1c&HH46CFFF}▶ %name {\\1c&Hbebebe}",
-	playing_selected_file = "{\\1c&HH46CFFF}➤ %name {\\1c&Hbebebe}",
+	playing_hovered_file = "{\\1c&H46CFFF}▶ %name {\\1c&Hbebebe}",
+	playing_selected_file = "{\\1c&H46CFFF}➤ %name {\\1c&Hbebebe}",
 
 	-- what to show when playlist is truncated
 	playlist_sliced_prefix = "...",

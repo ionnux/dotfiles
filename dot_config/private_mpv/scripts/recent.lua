@@ -31,7 +31,7 @@ local settings = {
 	font_bold = false,
 	border_size = 3,
 	-- Highlight color in BGR hexadecimal
-	hi_color = "H46CFFF",
+	hi_color = "46CFFF",
 	-- Draw ellipsis at start/end denoting ommited entries
 	ellipsis = false,
 };

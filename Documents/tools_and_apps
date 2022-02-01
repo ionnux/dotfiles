@@ -29,3 +29,7 @@ neovim-remote
 procs
 litecli
 mpv
+tr
+cut
+grep
+egrep
