@@ -107,6 +107,7 @@ local on_attach = function(client, bufnr)
 end
 
 local lsp_installer = require("nvim-lsp-installer")
+local util = require("lspconfig/util")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -159,10 +160,12 @@ lsp_installer.on_server_ready(function(server)
 				filetypes = { "elixir" },
 			})
 		end,
+
 		["gopls"] = function()
 			return vim.tbl_deep_extend("force", default_opts, {
 				cmd = { "/home/og_saaz/.local/share/nvim/lsp_servers/go/gopls" },
-				-- filetypes = { "go" },
+				filetypes = { "go", "gomod", "gotmpl" },
+				root_dir = util.root_pattern("go.mod", ".git"),
 			})
 		end,
 	}
