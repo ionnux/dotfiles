@@ -153,6 +153,7 @@ alias nvim='nvim-n'
 alias neofetch='neofetch --kitty'
 alias ce='chezmoi edit'
 alias ca='chezmoi add'
+alias cp='cp -i'
 
 ### colorize man pages
 # export LESS_TERMCAP_mb=$'\e[1;32m'
@@ -199,5 +200,5 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 '
 
 ### exa settings
-alias l='exa -lah --icons --sort name --group-directories-first --git --no-user'
+alias l='exa -lah --sort name --group-directories-first --git --no-user'
 alias ls='exa'
