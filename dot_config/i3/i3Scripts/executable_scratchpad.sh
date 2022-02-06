@@ -45,7 +45,9 @@ case "$1" in
     "dropdown_terminal [1]")
 
         i3-msg '[title="dropdown_terminal \[1\]"] scratchpad show'
-        i3-msg '[title="cmus"] move scratchpad'
+        i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_vifm"] move scratchpad'
+        i3-msg '[title="dropdown_scrcpy"] move scratchpad'
 
         sleep 0.1
         current_window=$(xdotool getactivewindow getwindowname)
@@ -93,7 +95,9 @@ case "$1" in
 
     "dropdown_terminal [2]")
         i3-msg '[title="dropdown_terminal \[2\]"] scratchpad show'
-        i3-msg '[title="cmus"] move scratchpad'
+        i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_vifm"] move scratchpad'
+        i3-msg '[title="dropdown_scrcpy"] move scratchpad'
 
         sleep 0.1
         current_window=$(xdotool getactivewindow getwindowname)
@@ -139,8 +143,24 @@ case "$1" in
         fi
         ;;
 
-    "cmus")
-        i3-msg '[title="cmus"] scratchpad show'
-        i3-msg '[title="terminal*"] move scratchpad'
+    "dropdown_cmus")
+        i3-msg '[title="dropdown_cmus"] scratchpad show'
+        i3-msg '[title="dropdown_terminal*"] move scratchpad'
+        i3-msg '[title="dropdown_vifm"] move scratchpad'
+        i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+        ;;
+
+    "dropdown_vifm")
+        i3-msg '[title="dropdown_vifm"] scratchpad show'
+        i3-msg '[title="dropdown_terminal*"] move scratchpad'
+        i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+        ;;
+
+    "dropdown_scrcpy")
+        i3-msg '[title="dropdown_scrcpy"] scratchpad show'
+        i3-msg '[title="dropdown_terminal*"] move scratchpad'
+        i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_vifm"] move scratchpad'
         ;;
 esac

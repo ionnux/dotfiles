@@ -445,8 +445,12 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 
 
 # cmus settings
-for_window [title="cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
-bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep cmus; then kitty --title cmus cmus; fi" exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "cmus"
+for_window [title="dropdown_cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
+bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
+
+# vifm settings
+for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
+bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then kitty --title dropdown_vifm vifm ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
 # bindsym $mod+period [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 700px, move scratchpad, scratchpad show
@@ -463,8 +467,8 @@ bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwi
 
 # Scrcpy settings
 # move absolute position 1489px 120px, resize set 416px 894px
-for_window [title="scrcpy"] floating enable, move scratchpad, move absolute position 1530 px 170 px, resize set 369 px 794 px, scratchpad show
-bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy; then nohup scrcpy --tcpip -Sw & disown; fi"; [title="scrcpy"]  scratchpad show
+for_window [title="dropdown_scrcpy"] floating enable, border normal 2, move absolute position 1515 px 130 px, resize set 389 px 860 px, move scratchpad, scratchpad show
+bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdown_scrcpy; then nohup scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw & disown; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_scrcpy"
 
 # android studio settings
 # move absolute position 15px 47px, resize set 1460px 1018px
