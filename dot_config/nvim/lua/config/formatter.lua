@@ -14,6 +14,12 @@ require("formatter").setup({
 			end,
 		},
 
+		zsh = {
+			function()
+				return { exe = "beautysh", stdin = false }
+			end,
+		},
+
 		lua = {
 			function()
 				return {
@@ -36,7 +42,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.dart,*.lua,*.sh FormatWrite
+  autocmd BufWritePost *.dart,*.lua,*.sh,*zshrc FormatWrite
 augroup END
 ]],
 	true

@@ -55,13 +55,13 @@ set norunexec
 " Selected color scheme
 " The following line will cause issues if using vifm.vim with regular vim.
 " Either use neovim or comment out the following line.
-colorscheme dark
+colorscheme palenight
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
 
-set timefmt=%m/%d\ %H:%M
+set timefmt='%d %b %Y'
 
 " Show list of matches on tab completion in command-line mode
 
@@ -82,9 +82,22 @@ set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 set ignorecase
 set smartcase
 
-" Don't highlight search results automatically
+" Controls how size of directories is displayed in file views.
+set dirsize=size
 
+" highlight search results automatically
 set hlsearch
+
+" Use KiB, MiB, ... suffixes instead of K, M, ... when printing size  in  human-friendly format
+ set iec
+
+" Configures the way size is formatted in human-friendly way.
+set sizefmt=units:iec,precision:0,nospace
+
+" perform fast file cloning (copy-on-write), when available
+set iooptions=fastfilecloning
+
+set tuioptions=psu
 
 " Use increment searching (search while typing)
 set incsearch
@@ -92,12 +105,6 @@ set incsearch
 " Try to leave some space from cursor to upper/lower border in lists
 
 set scrolloff=4
-
-" Don't do too many requests to slow file systems
-
-if !has('win')
-    set slowfs=curlftpfs
-endif
 
 " Set custom status line look
 
@@ -188,10 +195,10 @@ command! reload :write | restart
 command! fd fdfind --exclude node_modules %a %M
 
 " Find files with FZF and fd
-command! fzffile :set noquickview | :execute 'goto "'.term('fdfind --hidden --type f . $HOME | fzf --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+command! fzffile :set noquickview | :execute 'goto "'.term('fdfind --hidden --type f . $HOME | fzf --bind "?:toggle-preview" --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
 
 " Find folders with FZF and fd
-command! fzffolder :set noquickview | :execute 'goto "'.term('fdfind --hidden --type d . $HOME | fzf --preview "exa --all --sort name --tree --level 1 --classify --git --long --color=always --no-user --no-permissions {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+command! fzffolder :set noquickview | :execute 'goto "'.term('fdfind --hidden --type d . $HOME | fzf --bind "?:toggle-preview" --preview "exa --all --sort name --tree --level 1 --classify --git --long --color=always --no-user --no-permissions {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
 
 " Create and change to the folder
 command! mc :mkdir! '%a' | cd '%a'
@@ -444,24 +451,6 @@ filextype */
 " For Windows:
 " filetype * start, explorer
 
-" GETTING ICONS TO DISPLAY IN VIFM
-" You need the next 14 lines!
-
-" file types
-""set classify='  :dir:/,  :exe:,  :reg:,  :link:'
-" various file names
-""set classify+='  ::../::,  ::*.sh::,  ::*.[hc]pp::,  ::*.[hc]::,  ::/^copying|license$/::,  ::.git/,,*.git/::,  ::*.epub,,*.fb2,,*.djvu::,  ::*.pdf::,  ::*.htm,,*.html,,**.[sx]html,,*.xml::'
-" archives
-""set classify+='  ::*.7z,,*.ace,,*.arj,,*.bz2,,*.cpio,,*.deb,,*.dz,,*.gz,,*.jar,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.rz,,*.tar,,*.taz,,*.tb2,,*.tbz,,*.tbz2,,*.tgz,,*.tlz,,*.trz,,*.txz,,*.tz,,*.tz2,,*.xz,,*.z,,*.zip,,*.zoo::'
-" images
-""set classify+='  ::*.bmp,,*.gif,,*.jpeg,,*.jpg,,*.ico,,*.png,,*.ppm,,*.svg,,*.svgz,,*.tga,,*.tif,,*.tiff,,*.xbm,,*.xcf,,*.xpm,,*.xspf,,*.xwd::'
-" audio
-""set classify+='  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra,,*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
-" media
-""set classify+='  ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
-" office files
-""set classify+='  ::*.doc,,*.docx::,  ::*.xls,,*.xls[mx]::,  ::*.pptx,,*.ppt::'
-
 " ------------------------------------------------------------------------------
 
 " What should be saved automatically between vifm runs
@@ -477,7 +466,7 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 
 " Customize view columns a bit (enable ellipsis for truncated file names)
 "
- set viewcolumns=-{name}..,6{}.
+windo set viewcolumns=-{name}..,-12{size},10{mtime}
 
 " Filter-out build and temporary files
 "
@@ -529,6 +518,9 @@ nnoremap sy :sync<cr>
 
 " Reload config
 nnoremap <silent> rl :reload<cr>
+
+" goto history
+nnoremap <silent> o :history<cr>
 
 " Open console in current directory
 nnoremap ,t :!xterm &<cr>

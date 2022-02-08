@@ -72,7 +72,7 @@ workspace_auto_back_and_forth no
 bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
 
 # start rofi
-bindsym Control+Return exec --no-startup-id "rofi -show combi"
+bindsym $mod+g exec --no-startup-id "rofi -show combi"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -425,12 +425,15 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # bindsym $mod+period nop Terminal2
 
 for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+comma exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then kitty --title 'dropdown_terminal [1]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" right
+bindsym $mod+comma exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then kitty --title 'dropdown_terminal [1]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" top
 
 for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move absolute position 967 px 47 px, resize set 939 px 900 px, move scratchpad, scratchpad show; \
 [title="dropdown_terminal \[1\]"] move absolute position 14 px 47 px, resize set 939 px 900 px 
 
-bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'; then kitty --title 'dropdown_terminal [2]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" right
+bindsym Control+Return exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_menu'; then kitty --title 'dropdown_menu' i3-dmenu-desktop --dmenu='fzf --reverse --ansi --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7 '; fi"; [title="dropdown_menu"] scratchpad show
+for_window [title="dropdown_menu"] floating enable, border normal 2, move absolute position center, resize set 400 px 300 px, move scratchpad, scratchpad show
+
+bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'; then kitty --title 'dropdown_terminal [2]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
