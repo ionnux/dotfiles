@@ -192,13 +192,13 @@ command! make !!make %a
 command! reload :write | restart
 
 " Find with fd
-command! fd fdfind --exclude node_modules %a %M
+command! fd fd --exclude node_modules %a %M
 
 " Find files with FZF and fd
-command! fzffile :set noquickview | :execute 'goto "'.term('fdfind --hidden --type f . $HOME | fzf --bind "?:toggle-preview" --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+command! fzffile :set noquickview | :execute 'goto "'.term('fd --hidden --type f . $HOME | fzf --bind "?:toggle-preview" --preview "bat --style=numbers --color=always --line-range :500 {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
 
 " Find folders with FZF and fd
-command! fzffolder :set noquickview | :execute 'goto "'.term('fdfind --hidden --type d . $HOME | fzf --bind "?:toggle-preview" --preview "exa --all --sort name --tree --level 1 --classify --git --long --color=always --no-user --no-permissions {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
+command! fzffolder :set noquickview | :execute 'goto "'.term('fd --hidden --type d . $HOME | fzf --bind "?:toggle-preview" --preview "exa --all --sort name --tree --level 1 --classify --git --long --color=always --no-user --no-permissions {}" --preview-window wrap 2>/dev/tty ').'"%IU' | redraw
 
 " Create and change to the folder
 command! mc :mkdir! '%a' | cd '%a'
