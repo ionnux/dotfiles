@@ -179,6 +179,7 @@ bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
 
 # open edge in workspace 3
 # assign [class="Microsoft-edge-beta"] 3
+# assign [class="Vivaldi-stable"] 3
 # assign [class="jetbrains-studio"] 2
 assign [class="jetbrains-idea-ce"] 2
 
@@ -256,7 +257,7 @@ bindsym $mod+bracketright mode "music & brightness"
 # i3-gaps settings
 gaps inner 15
 # gaps outer 10
-# smart_gaps on
+smart_gaps on
 # smart_gaps inverse_outer
 # smart_borders on
 
@@ -431,7 +432,7 @@ for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, m
 [title="dropdown_terminal \[1\]"] move absolute position 14 px 47 px, resize set 939 px 900 px 
 
 bindsym Control+Return exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_menu'; then kitty --title 'dropdown_menu' i3-dmenu-desktop --dmenu='fzf --reverse --ansi --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7 '; fi"; [title="dropdown_menu"] scratchpad show
-for_window [title="dropdown_menu"] floating enable, border normal 2, move absolute position center, resize set 400 px 300 px, move scratchpad, scratchpad show
+for_window [title="dropdown_menu"] floating enable, border normal 2, move absolute position center, resize set 400 px 200 px, move scratchpad, scratchpad show
 
 bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'; then kitty --title 'dropdown_terminal [2]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
 
@@ -455,12 +456,15 @@ bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; t
 for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
 bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then kitty --title dropdown_vifm vifm ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
+for_window [class="Kazam"] floating enable
+
 # bindsym $mod+period [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 700px, move scratchpad, scratchpad show
 # bindsym $mod+e [class="Microsoft-edge-beta"]scratchpad show
 
 # microsoft edge settings
 for_window [class="Microsoft-edge-beta"] move to workspace 3; workspace 3
+for_window [class="Vivaldi-stable"] move to workspace 3; workspace 3
 
 bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwindowname)"
 
