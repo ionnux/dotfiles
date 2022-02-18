@@ -108,7 +108,7 @@ set scrolloff=4
 
 " Set custom status line look
 
-set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
+set statusline="  Hint: %z%= %A %10u:%-7g %15E %20d  "
 
 " Set line numbers to show
 
@@ -264,7 +264,7 @@ filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
        \ ffplay -nodisp -autoexit %c,
        \ {Play using MPlayer}
        \ mplayer %f,
-fileviewer *.mp3 mp3info
+fileviewer *.mp3 mediainfo
 fileviewer *.flac soxi
 
 " Video
@@ -317,9 +317,9 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in feh}
         \ feh %d &,
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ kitty +icat --place %pwx%ph@%pxx%py  --silent %c
+        \ vifmimg draw %px %py %pw %ph %c
         \ %pc
-        \ kitty icat --clear --silent %pd
+        \ vifmimg clear
         
 " OpenRaster
 filextype *.ora
@@ -419,6 +419,8 @@ filextype *.pro qtcreator %f &
 filextype */
         \ {View in thunar}
         \ Thunar %f &,
+fileviewer */
+        \ tree
 
 " Syntax highlighting in preview
 "
@@ -591,3 +593,4 @@ nnoremap > <c-w>>
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
 
 source ~/.config/vifm/favicon.txt
+set previewoptions+=graphicsdelay:0

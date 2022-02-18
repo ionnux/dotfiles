@@ -11,12 +11,13 @@ export PATH="$PATH:$HOME/Android/Sdk/emulator/"
 # add pub executables to path
 export PATH="$PATH:$HOME/.pub-cache/bin/"
 # add kitty executable to path
-# export PATH="$PATH:$HOME/.local/kitty.app/bin"
+export PATH="$PATH:$HOME/.local/kitty.app/bin"
 # add golang to path
 export PATH="$PATH:/usr/local/go/bin/"
 # add elixir to path
 export PATH="$PATH:/usr/local/elixir/bin/"
-export PATH="$PATH:$HOME/og_saaz/.fzf/bin/"
+export PATH="$PATH:$HOME/.fzf/bin/"
+export PATH="$PATH:$HOME/.config/vifm/scripts/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/og_saaz/.oh-my-zsh"
@@ -139,6 +140,9 @@ export MANPAGER='nvim --appimage-extract-and-run +Man!'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias studio="studio.sh"
+
+# because i'm using vifmimg
+alias vifm="~/.config/vifm/scripts/vifmrun"
 # alias emulator="~/Android/Sdk/emulator/emulator"
 alias bl='xbacklight -set'
 alias cpu='sudo cpupower frequency-set --max'
@@ -158,6 +162,10 @@ alias neofetch='neofetch --kitty'
 alias ce='chezmoi edit'
 alias ca='chezmoi add'
 alias cp='cp -i'
+
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 ### colorize man pages
 # export LESS_TERMCAP_mb=$'\e[1;32m'
