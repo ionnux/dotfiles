@@ -46,6 +46,7 @@ case "$1" in
 
         i3-msg '[title="dropdown_terminal \[1\]"] scratchpad show'
         i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
         i3-msg '[title="dropdown_vifm"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
 
@@ -96,6 +97,7 @@ case "$1" in
     "dropdown_terminal [2]")
         i3-msg '[title="dropdown_terminal \[2\]"] scratchpad show'
         i3-msg '[title="dropdown_cmus"] move scratchpad'
+        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
         i3-msg '[title="dropdown_vifm"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
 
@@ -148,6 +150,15 @@ case "$1" in
         i3-msg '[title="dropdown_terminal*"] move scratchpad'
         i3-msg '[title="dropdown_vifm"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
+        ;;
+
+    "dropdown_ncmpcpp")
+        i3-msg '[title="dropdown_ncmpcpp"] scratchpad show'
+        i3-msg '[title="dropdown_terminal*"] move scratchpad'
+        i3-msg '[title="dropdown_vifm"] move scratchpad'
+        i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+        i3-msg '[title="dropdown_cmus"] move scratchpad'
         ;;
 
     "dropdown_vifm")
@@ -155,6 +166,7 @@ case "$1" in
         i3-msg '[title="dropdown_terminal*"] move scratchpad'
         i3-msg '[title="dropdown_cmus"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
         ;;
 
     "dropdown_scrcpy")
@@ -162,5 +174,6 @@ case "$1" in
         i3-msg '[title="dropdown_terminal*"] move scratchpad'
         i3-msg '[title="dropdown_cmus"] move scratchpad'
         i3-msg '[title="dropdown_vifm"] move scratchpad'
+        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
         ;;
 esac

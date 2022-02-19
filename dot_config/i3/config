@@ -453,6 +453,9 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 for_window [title="dropdown_cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
 bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then $kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
 
+for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move absolute position 14 px 47 px, resize set 1892 px 700 px, move scratchpad, scratchpad show
+bindsym $mod+n exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_ncmpcpp; then $kitty --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
+
 # vifm settings
 for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
 bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then $kitty --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
