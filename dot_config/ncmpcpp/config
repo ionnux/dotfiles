@@ -369,7 +369,8 @@ mpd_music_dir = ~/Music/
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-#progressbar_look = =>
+progressbar_look = "___"
+# progressbar_look = "⠒⠒⠐"
 #
 ## Available values: database, playlist.
 ##
@@ -377,13 +378,13 @@ mpd_music_dir = ~/Music/
 #
 ## Available values: classic, alternative.
 ##
-#user_interface = classic
+user_interface = classic
 #
 #data_fetching_delay = yes
 #
 ## Available values: artist, album_artist, date, genre, composer, performer.
 ##
-#media_library_primary_tag = artist
+media_library_primary_tag = album_artist
 #
 #media_library_albums_split_by_date = yes
 #
@@ -412,9 +413,9 @@ mpd_music_dir = ~/Music/
 #
 #follow_now_playing_lyrics = no
 #
-#fetch_lyrics_for_current_song_in_background = no
+fetch_lyrics_for_current_song_in_background = no
 #
-#store_lyrics_in_song_dir = no
+store_lyrics_in_song_dir = no
 #
 #generate_win32_compatible_filenames = yes
 #
