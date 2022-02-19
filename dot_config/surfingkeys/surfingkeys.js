@@ -1,13 +1,35 @@
+const {
+    aceVimMap,
+    mapkey,
+    imap,
+    imapkey,
+    getClickableElements,
+    vmapkey,
+    map,
+    unmap,
+    vunmap,
+    cmap,
+    addSearchAlias,
+    removeSearchAlias,
+    tabOpenLink,
+    readText,
+    Clipboard,
+    Front,
+    Hints,
+    Visual,
+    RUNTIME
+} = api;
+
 map("K", "R");
 map("J", "E");
 map("H", "S");
 map("L", "D");
 vmapkey("gs", "sg")
 imap('jk', "<Esc>");
-imap('jk', "<Bs>");
+imap('<Ctrl-i>', "<Bs>");
 
 aceVimMap('jk', '<Esc>', 'insert');
-// aceVimMap('<Alt-h>', '<Bs>', 'insert');
+aceVimMap('<Ctrl-h>', '<Bs>', 'insert');
 // aceVimMap('<Alt-w>', '<Ctrl-Bs>', 'insert');
 
 // omnibar mappings
