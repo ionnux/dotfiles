@@ -2,14 +2,14 @@
 # Cover art script for ncmpcpp-ueberzug
 
 # SETTINGS
-music_library="$HOME/Music"
+music_library="$HOME/Music/Albums/"
 fallback_image="$HOME/.config/ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=3
 padding_bottom=1
 padding_right=1
 max_width=40
 reserved_playlist_cols=70
-reserved_cols_in_percent="false"
+reserved_cols_in_percent="true"
 force_square="true"
 square_alignment="top"
 

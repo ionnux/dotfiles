@@ -33,7 +33,7 @@ mpd_port = 6600
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = ~/Music/
+mpd_music_dir = ~/Music/Albums/
 #
 #mpd_crossfade_time = 5
 #
@@ -103,12 +103,12 @@ visualizer_in_stereo = no
 ##
 visualizer_type = spectrum
 #
-# visualizer_fps = 60
+visualizer_fps = 60
 #
-#visualizer_autoscale = no
+visualizer_autoscale = yes
 
 #options ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ▀ ▉ ▋
-# visualizer_look = "┇┇"
+# visualizer_look = "●▋"
 
 #
 visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
