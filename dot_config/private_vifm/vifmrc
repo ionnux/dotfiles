@@ -20,6 +20,7 @@ set syscalls
 " This probably shouldn't be an option.
 
 set trash
+command! trashList :lstrash "list items in trash directory
 
 " This is how many directories to store in the directory history.
 
@@ -132,6 +133,9 @@ mark h ~/
 " %D the other window directory name.
 " %m run the command in a menu window
 
+"mount android devices
+command! mountMtp !aft-mtp-mount ~/mnt ; cd ~/mnt
+command! unmountMtp !fusermount -uz ~/mnt
 
 "send file using kdeconnect
 command! sendFile :!fileLocation=$(echo "%d/%c" | tr -d "\\");qdbus org.kde.kdeconnect /modules/kdeconnect/devices/99c2205bc9b97222/share org.kde.kdeconnect.device.share.shareUrl "file://$fileLocation"
@@ -480,6 +484,10 @@ windo set viewcolumns=-{name}..,-12{size},10{mtime}
 
 "Open all images in current directory in sxiv thumbnail mode
 nnoremap sx :!sxiv -t %d & <cr>
+
+nnoremap mm :mountMtp | unmountMtp | mountMtp | cd ~/mnt<cr>
+nnoremap mu :unmountMtp<cr>
+nnoremap mg :cd ~/mnt<cr>"goto mount directory
 
 "Open selected images in gimp
 nnoremap gp :!gimp %f & <cr>
