@@ -23,7 +23,7 @@ mpd_port = 6600
 # mpd_password = ""
 mpd_connection_timeout = 5
 ## Needed for tag editor and file operations to work.
-mpd_music_dir = ~/Music/Albums/
+mpd_music_dir = ~/Music/
 # mpd_crossfade_time = 5
 # Exclude pattern for random song action
 # http://www.boost.org/doc/libs/1_46_1/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html
@@ -79,8 +79,8 @@ visualizer_fps = 60
 #visualizer_autoscale = no
 
 # ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ▀ ▉ ▋
-visualizer_look = "●▋"
-# visualizer_look = "  "
+# visualizer_look = "●▋"
+visualizer_look = "  "
 visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
 ## Alternative subset of 256 colors for terminals that support it.
 #visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
@@ -464,4 +464,4 @@ window_border_color = green
 active_window_border = blue
 
 #ueberzug settings
-# execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
+execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
