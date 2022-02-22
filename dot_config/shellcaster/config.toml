@@ -7,14 +7,14 @@
 # $HOME/Library/Application Support/shellcaster/ on Mac
 # C:\Users\<User>\AppData\Local\shellcaster\ on Windows
 
-#download_path = "~/.local/share/shellcaster/"
+download_path = "~/Music/Podcasts/"
 
 
 # Command to use to play episodes. Use "%s" to indicate where file/URL
 # will be entered to the command.
 # Default: vlc %s
 
-#play_command = "vlc %s"
+play_command = "/home/og_saaz/.config/ncmpcpp/podcast_player %s"
 
 
 # Configures what happens when new episodes are found as podcasts are
@@ -27,7 +27,7 @@
 #  - "never" will never automatically download new episodes.
 # Default: "ask-unselected"
 
-#download_new_episodes = "ask-unselected"
+download_new_episodes = "never"
 
 
 # Maximum number of files to download simultaneously. Setting this too
@@ -36,14 +36,14 @@
 # computer.
 # Default: 3
 
-#simultaneous_downloads = 3
+simultaneous_downloads = 3
 
 
 # Maximum number of times to retry connecting to a URL to sync a
 # podcast or download an episode.
 # Default: 3
 
-#max_retries = 3
+max_retries = 3
 
 
 [keybindings]
@@ -114,7 +114,7 @@ quit = [ "q" ]
 
 # all regular text
 normal_foreground = "white"
-normal_background = "black"
+normal_background = "terminal"
 
 # colors for the currently selected podcast/episode
 highlighted_active_foreground = "rgb(85, 85, 85)"
