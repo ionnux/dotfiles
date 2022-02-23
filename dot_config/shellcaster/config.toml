@@ -14,7 +14,8 @@ download_path = "~/Music/Podcasts/"
 # will be entered to the command.
 # Default: vlc %s
 
-play_command = "/home/og_saaz/.config/ncmpcpp/podcast_player %s"
+play_command = "mpc insert %s"
+# play_command = ""
 
 
 # Configures what happens when new episodes are found as podcasts are
