@@ -293,7 +293,7 @@ def_key "?"
 #
 def_key "4"
  show_media_library
- toggle_media_library_columns_mode
+#  toggle_media_library_columns_mode
 #
 #def_key "4"
 #  toggle_media_library_columns_mode
