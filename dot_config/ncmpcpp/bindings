@@ -225,11 +225,20 @@ def_key "G"
 #def_key "delete"
 #  delete_playlist_items
 #
+def_key "x"
+ delete_playlist_items
+#
 #def_key "delete"
 #  delete_browser_items
 #
+def_key "x"
+ delete_browser_items
+#
 #def_key "delete"
 #  delete_stored_playlist
+#
+def_key "x"
+ delete_stored_playlist
 #
 def_key "l"
  next_column
@@ -240,8 +249,8 @@ def_key "l"
 #def_key "right"
 #  volume_up
 #
-#def_key "+"
-#  volume_up
+def_key "+"
+ volume_up
 #
 def_key "h"
  previous_column
@@ -282,8 +291,9 @@ def_key "?"
 #def_key "3"
 #  reset_search_engine
 #
-#def_key "4"
-#  show_media_library
+def_key "4"
+ show_media_library
+ toggle_media_library_columns_mode
 #
 #def_key "4"
 #  toggle_media_library_columns_mode
