@@ -163,7 +163,10 @@ def_key "k"
 #def_key "shift-up"
 #  select_item
 #  scroll_up
-#
+
+def_key "t"
+ select_item
+
 def_key "j"
  scroll_down
 #
@@ -447,8 +450,8 @@ def_key "N"
 def_key "."
  show_lyrics
 #
-#def_key "ctrl-v"
-#  select_range
+def_key "ctrl-v"
+ select_range
 #
 #def_key "v"
 #  reverse_selection
@@ -474,6 +477,13 @@ def_key "."
 #def_key "C"
 #  crop_main_playlist
 #
+
+def_key "K"
+ move_selected_items_up
+
+def_key "J"
+ move_selected_items_down
+
 #def_key "m"
 #  move_sort_order_up
 #
