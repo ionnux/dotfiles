@@ -34,3 +34,5 @@ cut
 grep
 egrep
 dunst
+fontpreview
+feh
