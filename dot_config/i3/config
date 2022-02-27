@@ -469,6 +469,7 @@ for_window [class="Kazam"] floating enable
 # microsoft edge settings
 for_window [class="Microsoft-edge-beta"] move to workspace 3; workspace 3
 for_window [class="Vivaldi-stable"] move to workspace 3; workspace 3
+for_window [class="qBittorrent"] move to workspace 4; workspace 4
 
 bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwindowname)"
 
