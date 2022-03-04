@@ -111,7 +111,6 @@ CustomBorders = {
 	},
 	round = {
 		{ "╭", "FloatBorder" },
-		{ "─", "FloatBorder" },
 		{ "╮", "FloatBorder" },
 		{ "│", "FloatBorder" },
 		{ "╯", "FloatBorder" },

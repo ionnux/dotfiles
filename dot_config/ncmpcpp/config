@@ -195,14 +195,14 @@ alternative_header_first_line_format = $b$2$aqqu$/a$9 {%t}|{%f} $2$atqq$/a$9$/b
 alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 # alternative_header_first_line_format = $6$b» {%f} «$/b
 # alternative_header_second_line_format = $4{%b}|{/%D/}
-current_item_prefix = "$(blue_black)$b"
-current_item_suffix = "$(end)$/b"
-current_item_inactive_column_prefix = $(magenta_black)
+current_item_prefix = "$(blue_black)"
+current_item_suffix = "$(end)"
+current_item_inactive_column_prefix = "$(magenta_black)▶▷ "
 current_item_inactive_column_suffix = $(end)
-now_playing_prefix = "$(blue)$b ▶▷▶ "
+now_playing_prefix = "$(red)$b▶▷▶ "
 now_playing_suffix = "$(end)$/b"
 #browser_playlist_prefix = "$2playlist$9 "
-selected_item_prefix = "$(cyan)  "
+selected_item_prefix = "$(magenta)  "
 selected_item_suffix = $(end)
 #
 #modified_item_prefix = $3> $9
@@ -218,9 +218,9 @@ selected_item_suffix = $(end)
 ## browser_sort_mode are "type", "name", "mtime", "format" and "none".
 ##
 #
-#browser_sort_mode = type
+browser_sort_mode = format
 #
-#browser_sort_format = {%a - }{%t}|{%f} {%l}
+browser_sort_format = {%a - }{%t}|{%f} {%l}
 #
 ##### columns settings #####
 ##
@@ -257,9 +257,10 @@ selected_item_suffix = $(end)
 ##   available.
 ##
 #
-#song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
+# song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[blue]{a} (40f)[cyan]{b} (5f)[magenta]{l}
-song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
+# song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
+song_columns_list_format = (15)[blue]{b} (72f)[magenta]{t|f:Title} (5f)[blue]{l}
 #
 ##### various settings #####
 #
@@ -277,7 +278,7 @@ song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]
 #
 #execute_on_player_state_change = ""
 #
-#playlist_show_mpd_host = no
+playlist_show_mpd_host = no
 #
 playlist_show_remaining_time = yes
 #
@@ -288,16 +289,16 @@ playlist_separate_albums = no
 ##
 ## Note: Possible display modes: classic, columns.
 ##
-playlist_display_mode = classic
+playlist_display_mode = columns
 browser_display_mode = columns
 search_engine_display_mode = columns
 playlist_editor_display_mode = columns
-discard_colors_if_item_is_selected = yes
+discard_colors_if_item_is_selected = no
 show_duplicate_tags = yes
 incremental_seeking = yes
 seek_time = 1
 volume_change_step = 2
-autocenter_mode = no
+autocenter_mode = yes
 centered_cursor = yes
 #
 ##
@@ -310,7 +311,7 @@ progressbar_look  = ▃▃▃
 default_place_to_search_in = database
 ## Available values: classic, alternative.
 user_interface = alternative
-data_fetching_delay = yes
+data_fetching_delay = no
 ## Available values: artist, album_artist, date, genre, composer, performer.
 media_library_primary_tag = album_artist
 media_library_albums_split_by_date = no
@@ -319,17 +320,17 @@ media_library_hide_album_dates = no
 default_find_mode = wrapped
 default_tag_editor_pattern = %n - %t
 header_visibility = no
-statusbar_visibility = no
+statusbar_visibility = yes
 ## Show the "Connected to ..." message on startup
 connected_message_on_startup = no
-titles_visibility = no
+titles_visibility = yes
 header_text_scrolling = yes
 cyclic_scrolling = no
 lyrics_fetchers = azlyrics, genius, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = yes
 store_lyrics_in_song_dir = no
-generate_win32_compatible_filenames = yes
+generate_win32_compatible_filenames = no
 allow_for_physical_item_deletion = no
 
 ## Note: If you set this variable, ncmpcpp will try to get info from last.fm in
@@ -393,8 +394,8 @@ ignore_leading_the = no
 ## filtering lists. This takes an effect only if boost was compiled with ICU
 ## support.
 ignore_diacritics = no
-block_search_constraints_change_if_items_found = yes
-mouse_support = yes
+block_search_constraints_change_if_items_found = no
+mouse_support = no
 mouse_list_scroll_whole_page = no
 lines_scrolled = 1
 empty_tag_marker = <empty>

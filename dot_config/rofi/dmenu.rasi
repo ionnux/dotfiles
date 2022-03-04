@@ -1,0 +1,75 @@
+
+* {
+  bg: #24283b;
+  bg2: #1a1b26;
+  fg: #c0caf5;
+  red: #f7768e;
+  green: #9ece6a;
+  orange: #e0af68;
+  blue: #7aa2f7;
+  purple: #bb9af7;
+  cyan: #7dcfff;
+  grey: #a9b1d6;
+  font: "Iosevka 13";
+}
+
+ window {
+     anchor:     north;
+     location:   north;
+     width:      100%;
+     children:   [ horibox ];
+     background-color: @bg;
+     transparency: "real";
+     border: 2px;
+     border-radius: 0px;
+     border-color: @grey;
+     padding: 3px;
+ }
+
+ horibox {
+     orientation: horizontal;
+     children:   [ prompt, entry, listview ];
+     background-color: @bg;
+ }
+
+ listview {
+     layout:     horizontal;
+     spacing:    5px;
+     lines:      10;
+     background-color: @bg;
+     text-color: @fg;
+ }
+
+ entry {
+     expand:     false;
+     width:      10em;
+     background-color: @bg;
+     padding: 0px 0px 0px 2px;
+     text-color: @fg;
+     blink: true;
+     placeholder: " Search...";
+     /* border: 2px 2px 2px 2px; */
+     /* border-color: @blue; */
+ }
+
+ element {
+     background-color: @bg;
+     text-color: @fg;
+     padding: 0px 8px 0px 8px;
+ }
+
+ element selected {
+     background-color: @purple;
+     text-color: @bg;
+     /* border: 2px 2px 2px 2px; */
+     /* border-color: @blue; */
+ }
+
+ prompt {
+   enabled: false;
+   background-color: @purple; 
+   text-color: @bg;
+   /* padding: 0px 5px 0px 5px; */
+ }
+
+

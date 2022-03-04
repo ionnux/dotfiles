@@ -56,9 +56,9 @@ bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/i3Scripts/brightne
 bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -s 5
 
 # Media control
-bindsym XF86AudioNext exec --no-startup-id "playerctl next"
-bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
-bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+bindsym XF86AudioNext exec --no-startup-id "mpc next"
+bindsym XF86AudioPrev exec --no-startup-id "mpc prev"
+bindsym XF86AudioPlay exec --no-startup-id "mpc toggle"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4 #7aa2f7
@@ -230,15 +230,18 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # music and volume control mode
-mode "music & brightness" {
-        # volume
+mode "control" {
+        # audio
         bindsym k exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
         bindsym j exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
+        bindsym m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
         # music
-        bindsym n exec --no-startup-id "playerctl next"
-        bindsym p exec --no-startup-id "playerctl previous"
-        bindsym space exec --no-startup-id "playerctl play-pause"
+        bindsym shift+period exec --no-startup-id "mpc next"
+        bindsym shift+comma exec --no-startup-id "mpc prev"
+        bindsym p exec --no-startup-id "mpc toggle"
+        bindsym l exec --no-startup-id "mpc seek +5"
+        bindsym h exec --no-startup-id "mpc seek -5"
 
         #brightness
         bindsym bracketright exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
@@ -251,14 +254,14 @@ mode "music & brightness" {
         bindsym $mod+bracketright mode "default"
 }
 
-bindsym $mod+bracketleft mode "music & brightness"
-bindsym $mod+bracketright mode "music & brightness"
+bindsym $mod+bracketleft mode "control"
+bindsym $mod+bracketright mode "control"
 
 
 # i3-gaps settings
 gaps inner 15
 # gaps outer 10
-# smart_gaps on
+smart_gaps on
 # smart_gaps inverse_outer
 # smart_borders on
 
@@ -426,16 +429,15 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # exec_always --no-startup-id kitti3 -n Terminal2 -p ct -s 1 0.7
 # bindsym $mod+period nop Terminal2
 
-for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+comma exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then $kitty --title 'dropdown_terminal [1]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" top
 
-for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move absolute position 967 px 47 px, resize set 939 px 900 px, move scratchpad, scratchpad show; \
-[title="dropdown_terminal \[1\]"] move absolute position 14 px 47 px, resize set 939 px 900 px 
-
-bindsym Control+Return exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_menu'; then $kitty --title 'dropdown_menu' i3-dmenu-desktop --dmenu='fzf --reverse --ansi --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7 '; fi"; [title="dropdown_menu"] scratchpad show
+for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
+for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
 for_window [title="dropdown_menu"] floating enable, border normal 2, move absolute position center, resize set 400 px 200 px, move scratchpad, scratchpad show
 
-bindsym $mod+period exec --no-startup-id "if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'; then $kitty --title 'dropdown_terminal [2]'; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
+
+bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_menu"
+bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" top
+bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
@@ -450,14 +452,14 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 
 
 # cmus settings
-for_window [title="dropdown_cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
-bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then $kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
+# for_window [title="dropdown_cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
+# bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then $kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
 
 for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
 bindsym $mod+n exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_ncmpcpp; then $kitty --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
 
 # vifm settings
-for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
+for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
 bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then $kitty --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
 for_window [class="Kazam"] floating enable

@@ -492,6 +492,8 @@ windo set viewcolumns=-{name}..,-12{size},10{mtime}
 "Open all images in current directory in sxiv thumbnail mode
 nnoremap sx :!sxiv -t %d & <cr>
 
+nnoremap i <c-g>
+
 nnoremap mm :mountMtp | unmountMtp | mountMtp | cd ~/mnt<cr>
 nnoremap mu :unmountMtp<cr>
 nnoremap mg :cd ~/mnt<cr>"goto mount directory

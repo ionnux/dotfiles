@@ -40,24 +40,15 @@ aceVimMap('<Ctrl-h>', '<Bs>', 'insert');
 settings.smoothScroll = true;
 settings.scrollStepSize = 140;
 
-// settings.tabsThreshold = 0;
+settings.tabsThreshold = 20;
 // settings.tabsMRUOrder = false;
-
-mapkey('<Ctrl-z>', 'fill in login form', function() {
- const origin = window.location.origin
-    if(origin === "http://192.168.0.1"){          
-   window.document.getElementById("txtPwd").value = "Qetuo0112"
-   window.document.getElementById("btnLogin").click()
-   return
- }
-});
 
 settings.hintAlign = "left";
 settings.useNeovim = false
 
 
 // toggle fullscreen, mainly because of YouTube
-mapkey('<Alt-u>', 'Fullscreen', function() {
+mapkey('<Alt-f>', 'Fullscreen', function() {
     if (window.fullScreen) {
         document.exitFullscreen();
     }
@@ -401,7 +392,7 @@ input {
 /* ---------- Search ---------- */
 #sk_status,
 #sk_find {
-  font-size: 12;
+  font-size: 14;
   border-color: var(--fg_gutter);
   bottom: 5;
   right: 0;
