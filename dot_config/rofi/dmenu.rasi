@@ -1,35 +1,49 @@
 configuration {
-  font:	"monospace 11";
-  modi:  "window,drun,run,ssh,combi";
-	combi-modi: "drun,run,ssh";
+  font: "Iosevka 13";
+  /* modi:  "window,drun,run,ssh,combi"; */
+  modi:  "run,window";
+	combi-modi: "drun,run";
+  matching: "regex";
 	kb-row-up: "Up,Control+j,Control+p";
 	kb-row-down: "Down,Control+k,Control+n";
 	kb-remove-to-eol: "Control+l";
-	kb-accept-entry: "Control+m,Return,KP_Enter";
-  show-icons: false;
-	icon-theme:	"Papirus";
-  display-combi:" |";
+  kb-mode-next: "Control+m";
+	kb-accept-entry: "Return,KP_Enter";
+	/* icon-theme:	"Papirus"; */
+  /* display-combi:""; */
   drun-display-format: "{name}";
 	/* window-format:                  "{w}    {c}   {t}"; */
-	window-format: "{w}    {c}";
-  disable-history: false;
+	window-format: "[{w}]-{t}";
+  show-icons: false;
+  disable-history: true;
   fullscreen: false;
 	hide-scrollbar: true;
 	sidebar-mode: false;
+  show-match: true;
 }
 
 * {
   bg: #24283b;
-  bg2: #1a1b26;
+  bg2: #292e42;
   fg: #c0caf5;
   red: #f7768e;
+  red1: #db4b4b;
+  red2: #ff007c;
   green: #9ece6a;
+  green1: #73daca;
+  green2: #41a6b5;
   orange: #e0af68;
   blue: #7aa2f7;
+  blue1: #2ac3de;
+  blue2: #0db9d7;
+  blue3: #89ddff;
+  blue4: #B4F9F8;
+  blue5: #394b70;
   purple: #bb9af7;
   cyan: #7dcfff;
   grey: #a9b1d6;
-  font: "Iosevka 13";
+  grey2: #5c5f89;
+  grey3: #3b4261;
 }
 
  window {
@@ -39,22 +53,28 @@ configuration {
      children:   [ horibox ];
      background-color: @bg;
      transparency: "real";
-     border: 2px;
-     border-radius: 0px;
-     border-color: @grey;
-     padding: 3px;
+     /* border: 2px; */
+     /* border-radius: 0px; */
+     /* border-color: @blue; */
+     /* padding: 4px; */
+     /* margin: 0px 0px 4px 0px; */
  }
 
  horibox {
-     orientation: horizontal;
-     children:   [ prompt, entry, listview ];
-     background-color: @bg;
+    orientation: horizontal;
+    children:   [ prompt, entry, listview ];
+    background-color: @bg;
+    margin: 0px 500px 2px 500px;
+     border: 2px;
+     border-radius: 0px;
+     border-color: @grey3;
+     padding: 2px;
  }
 
  listview {
      layout:     horizontal;
      spacing:    5px;
-     lines:      10;
+     lines:      20;
      background-color: @bg;
      text-color: @fg;
  }
@@ -62,26 +82,29 @@ configuration {
  entry {
      expand:     false;
      width:      10em;
-     background-color: @bg;
+     background-color: @bg2;
      padding: 0px 0px 0px 2px;
      text-color: @fg;
      blink: true;
      placeholder: " Search...";
+     /* placeholder-color: @grey2; */
      /* border: 2px 2px 2px 2px; */
-     /* border-color: @blue; */
+     /* border-color: @grey3; */
  }
 
  element {
      background-color: @bg;
      text-color: @fg;
      padding: 0px 8px 0px 8px;
+     border: 2px;
+     border-color: @grey3;
  }
 
  element selected {
-     background-color: @purple;
-     text-color: @bg;
-     /* border: 2px 2px 2px 2px; */
-     /* border-color: @blue; */
+     background-color: @bg;
+     text-color: @fg;
+     border: 2px 2px 2px 2px;
+     border-color: @blue;
  }
 
  prompt {
@@ -91,9 +114,10 @@ configuration {
    padding: 4px 0px 0px 2px;
    font: "feather 12";
  }
+
 element-icon {
-    size:                           24px;
-    border:                         0px;
+    size: 24px;
+    border: 0px;
 }
 
 

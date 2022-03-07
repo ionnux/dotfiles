@@ -179,9 +179,9 @@ case "$1" in
         i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
         ;;
 
-    "dropdown_menu")
+    "dropdown_search")
         # i3-dmenu-desktop --dmenu="rofi -config ~/.config/rofi/dmenu.rasi -i -p 'Launcher' -dmenu"
-        rofi -show combi -config ~/.config/rofi/dmenu.rasi
+        rofi -show run -p launcher -config ~/.config/rofi/dmenu.rasi
         # i3-dmenu-desktop --dmenu='dmenu -i -f -nb #24283b -nf #c0caf5 -sb #bb9af7 -p Launcher -sf #24283b -fn Iosevka'
         # $kitty --title 'dropdown_menu' i3-dmenu-desktop --dmenu='fzf --reverse --ansi --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7 '
 

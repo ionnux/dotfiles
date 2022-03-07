@@ -73,7 +73,7 @@ workspace_auto_back_and_forth no
 bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
 
 # start rofi
-bindsym $mod+g exec --no-startup-id "rofi -show combi"
+bindsym control+backslash exec --no-startup-id "rofi -show window -config ~/.config/rofi/dmenu.rasi"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -432,10 +432,10 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 
 for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
 for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-for_window [title="dropdown_menu"] floating enable, border normal 2, move absolute position center, resize set 400 px 200 px, move scratchpad, scratchpad show
+for_window [title="dropdown_search"] floating enable, border normal 2, move absolute position center, resize set 400 px 200 px, move scratchpad, scratchpad show
 
 
-bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_menu"
+bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_search"
 bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" top
 bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
 
