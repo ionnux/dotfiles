@@ -312,6 +312,9 @@ def_key "4"
 #
 #def_key "="
 #  show_clock
+
+def_key "="
+ dummy
 #
 #def_key "@"
 #  show_server_info

@@ -88,7 +88,7 @@ configuration {
      blink: true;
      placeholder: " Search...";
      /* placeholder-color: @grey2; */
-     /* border: 2px 2px 2px 2px; */
+     border: 2px 2px 2px 2px;
      /* border-color: @grey3; */
  }
 
@@ -108,11 +108,12 @@ configuration {
  }
 
  prompt {
-   enabled: false;
-   background-color: @bg; 
-   text-color: @purple;
-   padding: 4px 0px 0px 2px;
-   font: "feather 12";
+   enabled: true;
+   background-color: @grey3; 
+   text-color: @grey;
+   padding: 0px 4px 0px 4px;
+  border: 2px 2px 2px 2px;
+     /* border-color: @blue; */
  }
 
 element-icon {

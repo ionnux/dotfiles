@@ -25,7 +25,7 @@ TXHourCharacter   "t"
 # 0 = IEC standard prefixes (KiB/MiB/GiB...)
 # 1 = old style binary prefixes (KB/MB/GB...)
 # 2 = SI decimal prefixes (kB/MB/GB...)
-UnitMode 2
+UnitMode 0
 
 # used rate unit (0 = bytes, 1 = bits)
 RateUnit 0
@@ -33,7 +33,7 @@ RateUnit 0
 # how units are prefixed when traffic rate is shown in bits
 # 0 = IEC binary prefixes (Kibit/s...)
 # 1 = SI decimal prefixes (kbit/s...)
-RateUnitMode 1
+RateUnitMode 0
 
 # output style
 # 0 = minimal & narrow, 1 = bar column visible
