@@ -138,7 +138,7 @@ command! mountMtp !aft-mtp-mount ~/mnt ; cd ~/mnt
 command! unmountMtp !fusermount -uz ~/mnt
 
 "send file using kdeconnect
-command! sendFile :!fileLocation=$(echo "%d/%c" | tr -d "\\");qdbus org.kde.kdeconnect /modules/kdeconnect/devices/99c2205bc9b97222/share org.kde.kdeconnect.device.share.shareUrl "file://$fileLocation"
+command! sendFile :!~/.config/rofi/scripts/vifm-sendfile.sh "$(echo "%d/%c" | tr -d "\\\\")" &
 
 " zoxide, faster way to navigate
 " Use term() instead system() which makes sure
@@ -276,7 +276,7 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
          \*.as[fx]
         \ {Play using mpv}
-        \ nohup mpv %f >> /dev/null & ; disown,
+        \ nohup mpv %f >> /dev/null &,
         \ {Play using vlc}
         \ vlc %f,
         \ {View using ffplay}
