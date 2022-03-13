@@ -13,31 +13,31 @@ start () {
     for device in $(qdbus --literal org.kde.kdeconnect /modules/kdeconnect org.kde.kdeconnect.daemon.devices); do
         deviceid=$(echo "$device" | awk -F'["|"]' '{print $2}')
         devicename=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.name)
-        isreach="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isReachable)"
-        istrust="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isTrusted)"
-        ischarging="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid/battery" org.kde.kdeconnect.device.battery.isCharging)"
 
         check_pairing "$devicename" "$deviceid"
         add_device_name "$devicename" "$deviceid"
     done
-    show_devices
+    if [ "$DEVICE_NAMES" = "" ]; then
+        show_empty
+    else
+        show_devices
+    fi
 }
 
 add_device_name() {
     device_name="$1"
     is_paired=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$2" org.kde.kdeconnect.device.isTrusted)
+    is_reachable="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$2" org.kde.kdeconnect.device.isReachable)"
 
-    if [ $is_paired = false ]; then
-        devicename="$1 [ pair ]"
+    if [ "$is_reachable" = "true" ] && [ "$is_paired" = "true" ]; then
+        if [ $counter -gt 0 ]; then
+            DEVICE_NAMES="$DEVICE_NAMES|$devicename"
+        else
+            DEVICE_NAMES="$devicename"
+        fi
+
+        counter=$((counter + 1))
     fi
-
-    if [ $counter -gt 0 ]; then
-        DEVICE_NAMES="$DEVICE_NAMES|$devicename"
-    else
-        DEVICE_NAMES="$devicename"
-    fi
-
-    counter=$((counter + 1))
 }
 
 check_pairing() {
@@ -53,9 +53,6 @@ select_device (){
     for device in $(qdbus --literal org.kde.kdeconnect /modules/kdeconnect org.kde.kdeconnect.daemon.devices); do
         deviceid=$(echo "$device" | awk -F'["|"]' '{print $2}')
         devicename=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.name)
-        isreach="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isReachable)"
-        istrust="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isTrusted)"
-        ischarging="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid/battery" org.kde.kdeconnect.device.battery.isCharging)"
 
         if [ "$1" = "$devicename" ] || [ "$1" = "$devicename [ pair ]" ]; then
             SELECTED_DEVICE_ID="$deviceid"
@@ -96,17 +93,19 @@ request_pair() {
 }
 
 show_devices () {
-    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "kdeconnect" <<< "$DEVICE_NAMES")"
+    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "send_file" <<< "$DEVICE_NAMES")"
     case "$menu" in
         *)
             select_device "$menu"
             if [ "$SELECTED_DEVICE_ID" != "" ]; then
-                if [[ $menu != *pair* ]]; then
-                    qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$SELECTED_DEVICE_ID/share" org.kde.kdeconnect.device.share.shareUrl "file://$FILE_TO_SEND"
-                fi
+                qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$SELECTED_DEVICE_ID/share" org.kde.kdeconnect.device.share.shareUrl "file://$FILE_TO_SEND"
             fi
             ;;
     esac
+}
+
+show_empty () {
+    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "send_file" <<< "No device connected.")"
 }
 
 start

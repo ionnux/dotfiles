@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 PAIRING_DEVICE_NAME=""
 PAIRING_DEVICE_ID=""
 SELECTED_DEVICE_NAME=""
@@ -12,16 +13,26 @@ start () {
     for device in $(qdbus --literal org.kde.kdeconnect /modules/kdeconnect org.kde.kdeconnect.daemon.devices); do
         deviceid=$(echo "$device" | awk -F'["|"]' '{print $2}')
         devicename=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.name)
-        isreach="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isReachable)"
-        istrust="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isTrusted)"
-        ischarging="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid/battery" org.kde.kdeconnect.device.battery.isCharging)"
 
         check_pairing "$devicename" "$deviceid"
         add_device_name "$devicename" "$deviceid"
     done
     if [ $HAS_PAIRING = false ]; then
-        show_devices
-    else
+        if [ "$DEVICE_NAMES" = "" ]; then #if there are no devices to show
+            show_empty
+        else
+            if [[ $DEVICE_NAMES = *\|* ]]; then #if there are multiple devices
+                show_devices
+            else #if there is only one device
+                if [[ $DEVICE_NAMES = *pair* ]]; then #if the available device isn't already paired show device menu
+                    show_devices
+                else # select the device and show it's sub menu
+                    select_device "$DEVICE_NAMES"
+                    show_device_list_menu
+                fi
+            fi
+        fi
+    else #if one of the device is asking to pair.
         show_pair_action_menu "$PAIRING_DEVICE_NAME" "$PAIRING_DEVICE_ID"
     fi
 
@@ -30,18 +41,22 @@ start () {
 add_device_name() {
     device_name="$1"
     is_paired=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$2" org.kde.kdeconnect.device.isTrusted)
+    is_reachable="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$2" org.kde.kdeconnect.device.isReachable)"
 
     if [ $is_paired = false ]; then
         devicename="$1 [ pair ]"
     fi
 
-    if [ $counter -gt 0 ]; then
-        DEVICE_NAMES="$DEVICE_NAMES|$devicename"
-    else
-        DEVICE_NAMES="$devicename"
+    if [ $is_reachable = true ]; then
+        if [ $counter -gt 0 ]; then
+            DEVICE_NAMES="$DEVICE_NAMES|$devicename"
+        else
+            DEVICE_NAMES="$devicename"
+        fi
+
+        counter=$((counter + 1))
     fi
 
-    counter=$((counter + 1))
 }
 
 check_pairing() {
@@ -57,9 +72,6 @@ select_device (){
     for device in $(qdbus --literal org.kde.kdeconnect /modules/kdeconnect org.kde.kdeconnect.daemon.devices); do
         deviceid=$(echo "$device" | awk -F'["|"]' '{print $2}')
         devicename=$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.name)
-        isreach="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isReachable)"
-        istrust="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid" org.kde.kdeconnect.device.isTrusted)"
-        ischarging="$(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$deviceid/battery" org.kde.kdeconnect.device.battery.isCharging)"
 
         if [ "$1" = "$devicename" ] || [ "$1" = "$devicename [ pair ]" ]; then
             SELECTED_DEVICE_ID="$deviceid"
@@ -113,6 +125,10 @@ show_devices () {
             fi
             ;;
     esac
+}
+
+show_empty () {
+    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "kdeconnect" <<< "No device connected.")"
 }
 
 start

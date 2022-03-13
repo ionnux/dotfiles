@@ -66,7 +66,7 @@ visualizer_data_source = "/tmp/mpd.fifo"
 ## to synchronize with audio.
 visualizer_output_name = "my_fifo"
 ## If you set format to 44100:16:2, make it 'yes'.
-visualizer_in_stereo = no
+visualizer_in_stereo = yes
 ## Note: set below to >=10 only if you have synchronization issues with
 ## visualization and audio.
 # visualizer_sync_interval = 0
@@ -78,9 +78,9 @@ visualizer_type = spectrum
 visualizer_fps = 60
 #visualizer_autoscale = no
 
-# ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ▀ ▉ ▋
-# visualizer_look = "●▋"
-visualizer_look = "  "
+# ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ╋ ╬ ▚ ╏ ▀ ▉ ▋
+visualizer_look = "●╬"
+# visualizer_look = "  "
 visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
 ## Alternative subset of 256 colors for terminals that support it.
 #visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
@@ -114,7 +114,7 @@ visualizer_spectrum_dft_size = 2
 ## Note: Since MPD uses UTF-8 by default, setting this option makes sense only
 ## if your encoding is different.
 ##
-#system_encoding = ""
+# system_encoding = "UTF-8"
 
 ##### delays #####
 ## Time of inactivity (in seconds) after playlist highlighting will be disabled
@@ -465,4 +465,4 @@ window_border_color = green
 active_window_border = blue
 
 #ueberzug settings
-execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
+# execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"

@@ -77,6 +77,7 @@ configuration {
      lines:      20;
      background-color: @bg;
      text-color: @fg;
+     dynamic: true;
  }
 
  entry {
@@ -87,7 +88,7 @@ configuration {
      text-color: @fg;
      blink: true;
      placeholder: " Search...";
-     /* placeholder-color: @grey2; */
+     placeholder-color: @grey2;
      border: 2px 2px 2px 2px;
      /* border-color: @grey3; */
  }
@@ -117,8 +118,9 @@ configuration {
  }
 
 element-icon {
-    size: 24px;
+    size: 20px;
     border: 0px;
+   padding: 0px 4px 0px 0px;
 }
 
 
