@@ -79,8 +79,8 @@ visualizer_fps = 60
 #visualizer_autoscale = no
 
 # ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ╋ ╬ ▚ ╏ ▀ ▉ ▋
-visualizer_look = "●╬"
-# visualizer_look = "  "
+# visualizer_look = "●╬"
+visualizer_look = "  "
 visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
 ## Alternative subset of 256 colors for terminals that support it.
 #visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
@@ -465,4 +465,4 @@ window_border_color = green
 active_window_border = blue
 
 #ueberzug settings
-# execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
+execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
