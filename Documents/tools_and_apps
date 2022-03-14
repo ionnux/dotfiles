@@ -1,10 +1,9 @@
 linux-tools-common
 tlp
 cpufrequtils
-kitty
-kitti3
-i3-gaps
-polybar
+kitty - terminal
+i3-gaps - window manager
+polybar - 
 xmodmap
 cmus
 vifm
@@ -38,4 +37,4 @@ fontpreview
 feh
 jq
 vnstat
-beets
+beets - media library management system
