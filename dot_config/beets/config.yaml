@@ -1,0 +1,29 @@
+directory: ~/Music/Albums
+library: ~/.config/beets/musiclibrary.db
+plugins:
+    - fetchart
+    - embedart
+    - lyrics
+    - deezer
+    - spotify
+deezer:
+    source_weight: 0.0
+spotify:
+    source_weight: 0.0
+lyrics:
+    auto: no
+fetchart: 
+    auto: yes
+    cautious: no
+    sources:
+        - coverart: release 
+        - itunes
+        - coverart: releasegroup
+        - lastfm
+        - '*'
+    lastfm_key: 2554f89b2ab419b74ed9c18f4a2b78fb
+embedart:
+    auto: yes
+import:
+    move: no
+    copy: no

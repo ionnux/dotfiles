@@ -148,6 +148,7 @@ alias bl='xbacklight -set'
 alias cpu='sudo cpupower frequency-set --max'
 alias scrcpy-w='nohup scrcpy --tcpip -Sw & disown'
 alias nvim='nvim-n'
+alias bit='beet import -t'
 # alias scpb='scrcpy --tcpip -Sw &'
 
 ### colorize commands
