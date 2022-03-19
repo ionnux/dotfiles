@@ -34,7 +34,7 @@ exec --no-startup-id nm-applet
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -m 0
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use flamechot to capture screenshot
@@ -75,6 +75,7 @@ bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
 # start rofi
 bindsym control+backslash exec --no-startup-id "rofi -show window -config ~/.config/rofi/dmenu.rasi"
 bindsym control+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/menu.sh"
+bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi.sh"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -235,7 +236,7 @@ mode "control" {
         # audio
         bindsym k exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
         bindsym j exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
-        bindsym m exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+        bindsym m exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -m 0
 
         # music
         bindsym shift+period exec --no-startup-id "mpc next"
@@ -490,3 +491,6 @@ bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdow
 for_window [class="jetbrains-studio"] floating enable, border pixel 2, move absolute position 15 px 47 px, resize set 1500 px 1018 px, move to workspace 2; workspace 2
 
 # exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
+
+exec --no-startup-id xrandr --output VIRTUAL1 --mode 1920x1200_60.00 --right-of eDP1
+workspace 5 output VIRTUAL1

@@ -71,6 +71,10 @@ configuration {
      padding: 2px;
  }
 
+ /* dummy { */
+ /*   expand: true; */
+ /* } */
+
  listview {
      layout:     horizontal;
      spacing:    5px;

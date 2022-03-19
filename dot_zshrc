@@ -91,7 +91,7 @@ ZSH_THEME=""
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting vi-mode)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting vi-mode globalias)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -146,7 +146,7 @@ alias vifm="~/.config/vifm/scripts/vifmrun"
 # alias emulator="~/Android/Sdk/emulator/emulator"
 alias bl='xbacklight -set'
 alias cpu='sudo cpupower frequency-set --max'
-alias scrcpy-w='nohup scrcpy --tcpip -Sw & disown'
+alias scrcpy-w='nohup scrcpy -b 16M --tcpip -Sw & disown'
 alias nvim='nvim-n'
 alias bit='beet import -t'
 # alias scpb='scrcpy --tcpip -Sw &'

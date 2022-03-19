@@ -1,38 +1,48 @@
 #!/bin/bash
 
-while getopts :a:s:n opt
+while getopts :a:s:m:n opt
 do
 
-    volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
+    volume=$(pactl list sinks | grep -m1 Volume | awk -F '/' '{print $2}' | tr -d ' ' | tr -d '%')
     case "${opt}" in
-        a)
-            if [[ $volume -ge 150 ]]
+        a) if [[ $volume -gt 150 ]]
             then
-                pactl set-sink-volume @DEFAULT_SINK@ 150%
+                volume=150
             else
-                pactl set-sink-volume @DEFAULT_SINK@ +$OPTARG%
+                volume=$((volume + OPTARG))
             fi
             ;;
 
-        s)
-            if [[ $volume -gt 0 ]]; then
-                pactl set-sink-volume @DEFAULT_SINK@ -$OPTARG%
+        s) if [[ $volume -gt 0 ]]; then
+                volume=$((volume - OPTARG))
             fi
             ;;
+
+        m) pactl set-sink-mute @DEFAULT_SINK@ toggle ;;
 
         n) notify='on' ;;
+
     esac
 
-    volume=$(pactl list sinks | tr ' ' '\n' | grep -m1 '%' | tr -d '%')
-    if [[ $notify == "on" ]]; then
-        if [ $volume -le 30 ]; then
-            dunstify -h string:x-canonical-private-synchronous:control "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-low
-        elif [ $volume -le 70 ]; then
-            dunstify -h string:x-canonical-private-synchronous:control "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-medium
-        else
-            dunstify -h string:x-canonical-private-synchronous:control "Volume: " -h int:value:"$volume" -t 1500 --icon audio-volume-high
-        fi
+    pactl set-sink-volume @DEFAULT_SINK@ ${volume}%
+    mute=$(pactl list sinks | grep Mute | awk -F ' ' '{print $2}')
 
+    if [[ $volume == 0 || "$mute" == "yes" ]]; then
+        volume_icon="audio-volume-muted-symbolic"
+    else
+        if [ $volume -lt 30 ]; then
+            volume_icon="audio-volume-low-symbolic"
+        elif [ $volume -lt 70 ]; then
+            volume_icon="audio-volume-medium-symbolic"
+        elif [ $volume -le 100 ]; then
+            volume_icon="audio-volume-high-symbolic"
+        else
+            volume_icon="audio-volume-overamplified-symbolic"
+        fi
+    fi
+
+    if [[ $notify == "on" ]]; then
+        dunstify -h string:x-dunst-stack-tag:control "Volume" -h int:value:"$volume" -t 1500 --icon "$volume_icon"
     fi
 done
 

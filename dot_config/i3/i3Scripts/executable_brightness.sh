@@ -3,33 +3,24 @@
 while getopts :a:s:n opt
 do
 
-    brightness=$(xbacklight -get | tr '\.' '\n' | grep -m1 .)
+    brightness=$(xbacklight -get | awk -F '.' '{print $1}')
     case "${opt}" in
-        a)
-            if [[ $brightness -lt 100 ]]; then
-                xbacklight -time 0 -steps 1 -inc $OPTARG
-            fi
-            ;;
-        s)
-            if [[ $brightness -gt 0 ]]; then
-                xbacklight -time 0  -steps 1 -dec $OPTARG
-            fi
-            ;;
+        a) brightness=$((brightness + OPTARG)) ;;
+        s) brightness=$((brightness - OPTARG)) ;;
         n)  notify="on" ;;
     esac
 
+    xbacklight -time 0  -steps 1 -set $brightness
+
+    if [ $brightness -lt 30 ]; then
+        brightness_icon="display-brightness-low-symbolic"
+    elif [ $brightness -lt 60 ]; then
+        brightness_icon="display-brightness-medium-symbolic"
+    else
+        brightness_icon="display-brightness-high-symbolic"
+    fi
+
     if [[ $notify == "on" ]]; then
-
-        brightness=$(xbacklight -get | tr '\.' '\n' | grep -m1 .)
-        if [ $brightness -eq 0 ]; then
-            dunstify -h string:x-canonical-private-synchronous:control "Brightness:" -h int:value:"$brightness" -t 1500 --icon display-brightness-off-symbolic
-        elif [ $brightness -le 30 ]; then
-            dunstify -h string:x-canonical-private-synchronous:control "Brightness:" -h int:value:"$brightness" -t 1500 --icon display-brightness-low-symbolic
-        elif [ $brightness -le 70 ]; then
-            dunstify -h string:x-canonical-private-synchronous:control "Brightness:" -h int:value:"$brightness" -t 1500 --icon display-brightness-medium-symbolic
-        else
-            dunstify -h string:x-canonical-private-synchronous:control "Brightness:" -h int:value:"$brightness" -t 1500 --icon display-brightness-high-symbolic
-        fi
-
+        dunstify -h string:x-dunst-stack-tag:control "Brightness" -h int:value:"$brightness" --icon "$brightness_icon"
     fi
 done

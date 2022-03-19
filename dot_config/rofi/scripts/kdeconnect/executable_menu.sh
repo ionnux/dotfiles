@@ -21,16 +21,7 @@ start () {
         if [ "$DEVICE_NAMES" = "" ]; then #if there are no devices to show
             show_empty
         else
-            if [[ $DEVICE_NAMES = *\|* ]]; then #if there are multiple devices
-                show_devices
-            else #if there is only one device
-                if [[ $DEVICE_NAMES = *pair* ]]; then #if the available device isn't already paired show device menu
-                    show_devices
-                else # select the device and show it's sub menu
-                    select_device "$DEVICE_NAMES"
-                    show_device_list_menu
-                fi
-            fi
+            show_devices
         fi
     else #if one of the device is asking to pair.
         show_pair_action_menu "$PAIRING_DEVICE_NAME" "$PAIRING_DEVICE_ID"
@@ -91,7 +82,7 @@ show_device_list_menu () {
             then
                 qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$SELECTED_DEVICE_ID/sftp" org.kde.kdeconnect.device.sftp.mount
             fi
-            delay 0.5
+            sleep 0.5
             i3-msg '[title="dropdown_vifm"] kill'
             ~/.local/kitty.app/bin/kitty --title dropdown_vifm ~/.config/vifm/scripts/vifmrun $(qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$SELECTED_DEVICE_ID/sftp" org.kde.kdeconnect.device.sftp.mountPoint) ;;
         *'Unpair' ) qdbus org.kde.kdeconnect "/modules/kdeconnect/devices/$SELECTED_DEVICE_ID" org.kde.kdeconnect.device.unpair ;;
@@ -112,7 +103,7 @@ request_pair() {
 }
 
 show_devices () {
-    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "kdeconnect" <<< "$DEVICE_NAMES")"
+    menu="$(rofi -sep "|" -auto-select -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "kdeconnect" <<< "$DEVICE_NAMES")"
     case "$menu" in
         *)
             select_device "$menu"
