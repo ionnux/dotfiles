@@ -45,11 +45,13 @@ bindsym Shift+Print exec --no-startup-id "flameshot gui -p ~/Pictures/Screenshot
 floating_modifier $mod
 
 # start a terminal
-set $myTerm ~/.local/kitty.app/bin/kitty
+set $myTerm ~/.config/i3/i3Scripts/open_terminal.sh
 set $kitty ~/.local/kitty.app/bin/kitty
+# set $kitty ~/.config/i3/i3Scripts/open_terminal.sh
 
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id $myTerm
+# bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/open_terminal.sh
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
@@ -67,7 +69,7 @@ client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7 #1a1b26
 client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7 #1a1b26
 
 focus_wrapping no
-workspace_auto_back_and_forth no
+workspace_auto_back_and_forth yes
 
 # kill focused window
 bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
@@ -108,11 +110,11 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+shift+backslash split h
+bindsym $mod+Shift+backslash split h
 
 # split in vertical orientation
 # bindsym $mod+semicolon split v
-bindsym $mod+shift+minus split v
+bindsym $mod+Shift+minus split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+m fullscreen toggle
@@ -167,6 +169,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+# bindsym $mod+x workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1; workspace $ws1
@@ -179,6 +182,7 @@ bindsym $mod+Shift+7 move container to workspace number $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
+# bindsym $mod+Shift+x move container to workspace number $ws10; workspace $ws10
 
 # open edge in workspace 3
 # assign [class="Microsoft-edge-beta"] 3
@@ -458,13 +462,11 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 # bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then $kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
 
 for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+n exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_ncmpcpp; then $kitty --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
+bindsym $mod+n exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_ncmpcpp; then $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
 
 # vifm settings
 for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then $kitty --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
-
-for_window [class="Kazam"] floating enable
+bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
 # bindsym $mod+period [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 700px, move scratchpad, scratchpad show
@@ -493,4 +495,7 @@ for_window [class="jetbrains-studio"] floating enable, border pixel 2, move abso
 # exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
 
 exec --no-startup-id xrandr --output VIRTUAL1 --mode 1920x1200_60.00 --right-of eDP1
-workspace 5 output VIRTUAL1
+# workspace 10 output VIRTUAL1
+# exec --no-startup-id "xrandr --output VIRTUAL1 --auto --right-of eDP1"
+bindsym $mod+x move workspace to output right
+# bindsym $mod+shift+i exec --no-startup-id "kitty @ --to unix:@dropdown_ncmpcpp set-font-size 18"

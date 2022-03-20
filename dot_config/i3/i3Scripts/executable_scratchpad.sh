@@ -2,6 +2,7 @@
 
 previous_window=$(xdotool getactivewindow getwindowname)
 kitty=~/.local/kitty.app/bin/kitty
+desktop=$(xdotool get_desktop)
 
 split_screen_between_terminals () {
     case "$1" in
@@ -53,7 +54,7 @@ case "$1" in
         # if terminal 1 does not exist
         if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'
         then
-            $kitty --title 'dropdown_terminal [1]' &
+            $kitty --listen-on=unix:@dropdown_terminal1 --title 'dropdown_terminal [1]' &
             sleep 0.4
         fi
 
@@ -99,6 +100,13 @@ case "$1" in
             esac
         fi
 
+        sleep 0.2
+        if [[ "$desktop" == 0 ]]; then
+            $kitty @ --to unix:@dropdown_terminal2 set-font-size 14
+        else
+            $kitty @ --to unix:@dropdown_terminal2 set-font-size 16
+        fi
+
         ;;
 
     "dropdown_terminal [2]")
@@ -110,7 +118,7 @@ case "$1" in
         # if terminal 2 does not exist
         if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'
         then
-            $kitty --title 'dropdown_terminal [2]' &
+            $kitty --listen-on=unix:@dropdown_terminal2 --title 'dropdown_terminal [2]' &
             sleep 0.4
         fi
 
@@ -156,6 +164,14 @@ case "$1" in
                     ;;
             esac
         fi
+
+        sleep 0.2
+        if [[ "$desktop" == 0 ]]; then
+            $kitty @ --to unix:@dropdown_terminal2 set-font-size 14
+        else
+            $kitty @ --to unix:@dropdown_terminal2 set-font-size 16
+        fi
+
         ;;
 
     "dropdown_ncmpcpp")
@@ -163,6 +179,14 @@ case "$1" in
         i3-msg '[title="dropdown_terminal*"] move scratchpad'
         i3-msg '[title="dropdown_vifm"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
+
+        sleep 0.2
+        if [[ "$desktop" == 0 ]]; then
+            $kitty @ --to unix:@dropdown_ncmpcpp set-font-size 14
+        else
+            $kitty @ --to unix:@dropdown_ncmpcpp set-font-size 16
+        fi
+
         ;;
 
     "dropdown_vifm")
@@ -170,6 +194,14 @@ case "$1" in
         i3-msg '[title="dropdown_terminal*"] move scratchpad'
         i3-msg '[title="dropdown_scrcpy"] move scratchpad'
         i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
+
+        sleep 0.2
+        if [[ "$desktop" == 0 ]]; then
+            $kitty @ --to unix:@dropdown_vifm set-font-size 14
+        else
+            $kitty @ --to unix:@dropdown_vifm set-font-size 16
+        fi
+
         ;;
 
     "dropdown_scrcpy")
