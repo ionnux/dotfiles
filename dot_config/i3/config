@@ -50,7 +50,8 @@ set $kitty ~/.local/kitty.app/bin/kitty
 # set $kitty ~/.config/i3/i3Scripts/open_terminal.sh
 
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec --no-startup-id $myTerm
+# bindsym $mod+Return exec --no-startup-id $myTerm
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "full_terminal"
 # bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/open_terminal.sh
 
 # Screen brightness controls
@@ -78,6 +79,7 @@ bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
 bindsym control+backslash exec --no-startup-id "rofi -show window -config ~/.config/rofi/dmenu.rasi"
 bindsym control+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/menu.sh"
 bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi.sh"
+bindsym $mod+v exec --no-startup-id "~/MyScripts/vnc.sh -s"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -172,16 +174,16 @@ bindsym $mod+0 workspace number $ws10
 # bindsym $mod+x workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1; workspace $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2; workspace $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3; workspace $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5; workspace $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6; workspace $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7; workspace $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace $ws1; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace $ws2; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace $ws3; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace $ws4; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace $ws5; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+6 move container to workspace number $ws6; workspace $ws6; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+7 move container to workspace number $ws7; workspace $ws7; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
+bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
 # bindsym $mod+Shift+x move container to workspace number $ws10; workspace $ws10
 
 # open edge in workspace 3
@@ -435,15 +437,23 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # exec_always --no-startup-id kitti3 -n Terminal2 -p ct -s 1 0.7
 # bindsym $mod+period nop Terminal2
 
+# dropdown_terminal [1]
+for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]"
+bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]"
 
-for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-for_window [title="dropdown_search"] floating enable, border normal 2, move absolute position center, resize set 400 px 200 px, move scratchpad, scratchpad show
-
+# dropdown_terminal [2]
+for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]"
+bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]"
 
 bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_search"
-bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]" top
-bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]" top
+
+# dropdown_ncmpcpp
+for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
+bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
+
+# dropdown_vifm
+for_window [title="dropdown_vifm"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
+bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
@@ -455,18 +465,6 @@ bindsym $mod+Shift+d  move absolute position 967 px 47 px, resize set 939 px 101
 bindsym $mod+Shift+w  move absolute position 14 px 47 px, resize set 1892 px 800 px 
 bindsym $mod+Shift+s  move absolute position 14 px 265 px, resize set 1892 px 800 px 
 bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 1018 px 
-
-
-# cmus settings
-# for_window [title="dropdown_cmus"] floating enable, border normal 2, move absolute position 14 px 47 px, resize set 1892 px 800 px, move scratchpad, scratchpad show
-# bindsym $mod+c exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_cmus; then $kitty --title dropdown_cmus cmus; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_cmus"
-
-for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+n exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_ncmpcpp; then $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
-
-# vifm settings
-for_window [title="dropdown_vifm"] floating enable, border normal 2, move absolute position 0 px 34 px, resize set 1920 px 900 px, move scratchpad, scratchpad show
-bindsym $mod+f exec --no-startup-id "if ! pgrep -a kitty | grep dropdown_vifm; then $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
 
 # bindsym $mod+period [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 700px, move scratchpad, scratchpad show
@@ -497,5 +495,4 @@ for_window [class="jetbrains-studio"] floating enable, border pixel 2, move abso
 exec --no-startup-id xrandr --output VIRTUAL1 --mode 1920x1200_60.00 --right-of eDP1
 # workspace 10 output VIRTUAL1
 # exec --no-startup-id "xrandr --output VIRTUAL1 --auto --right-of eDP1"
-bindsym $mod+x move workspace to output right
-# bindsym $mod+shift+i exec --no-startup-id "kitty @ --to unix:@dropdown_ncmpcpp set-font-size 18"
+bindsym $mod+x move workspace to output right; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a

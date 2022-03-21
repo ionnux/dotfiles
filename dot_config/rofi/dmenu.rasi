@@ -3,6 +3,7 @@ configuration {
   /* modi:  "window,drun,run,ssh,combi"; */
   modi:  "run,window";
 	combi-modi: "drun,run";
+  monitor: "-1";
   matching: "regex";
 	kb-row-up: "Up,Control+j,Control+p";
 	kb-row-down: "Down,Control+k,Control+n";
@@ -109,13 +110,13 @@ configuration {
      background-color: @bg;
      text-color: @fg;
      border: 2px 2px 2px 2px;
-     border-color: @blue;
+     border-color: @green2;
  }
 
  prompt {
    enabled: true;
-   background-color: @grey3; 
-   text-color: @grey;
+   background-color: @green2; 
+   text-color: @bg;
    padding: 0px 4px 0px 4px;
   border: 2px 2px 2px 2px;
      /* border-color: @blue; */
