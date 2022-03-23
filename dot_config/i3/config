@@ -79,7 +79,7 @@ bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill.sh
 bindsym control+backslash exec --no-startup-id "rofi -show window -config ~/.config/rofi/dmenu.rasi"
 bindsym control+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/menu.sh"
 bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi.sh"
-bindsym $mod+v exec --no-startup-id "~/MyScripts/vnc.sh -s"
+bindsym $mod+v exec --no-startup-id "~/MyScripts/dual_monitor.sh -m"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -490,7 +490,8 @@ bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdow
 # move absolute position 15px 47px, resize set 1460px 1018px
 for_window [class="jetbrains-studio"] floating enable, border pixel 2, move absolute position 15 px 47 px, resize set 1500 px 1018 px, move to workspace 2; workspace 2
 
-# exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1"
+exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 0"
+exec --no-startup-id "xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Accel Speed' 0.8"
 
 exec --no-startup-id xrandr --output VIRTUAL1 --mode 1920x1200_60.00 --right-of eDP1
 # workspace 10 output VIRTUAL1

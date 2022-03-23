@@ -395,7 +395,7 @@ ignore_leading_the = no
 ## support.
 ignore_diacritics = no
 block_search_constraints_change_if_items_found = no
-mouse_support = no
+mouse_support = yes
 mouse_list_scroll_whole_page = no
 lines_scrolled = 1
 empty_tag_marker = <empty>

@@ -39,3 +39,5 @@ jq
 vnstat
 beets - media library management system
 spek - acoustic spectrum analyser 
+AudioRelay - Audio server and client
+pavucontrol - PulseAudio volume control

@@ -17,7 +17,6 @@ move_to_scratchpad () {
     done
 }
 
-
 case "$1" in
     "dropdown_terminal [1]")
         if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then
@@ -39,7 +38,7 @@ case "$1" in
 
     "dropdown_ncmpcpp")
         if ! pgrep -a kitty | grep dropdown_ncmpcpp; then
-            $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug
+            $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
         fi
 
         move_to_scratchpad "dropdown_ncmpcpp"
@@ -49,7 +48,7 @@ case "$1" in
 
     "dropdown_vifm")
         if ! pgrep -a kitty | grep dropdown_vifm; then
-            $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~
+            $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~ &
         fi
 
         move_to_scratchpad "dropdown_vifm"
