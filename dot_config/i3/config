@@ -55,8 +55,8 @@ bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "
 # bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/open_terminal.sh
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
-bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -s 5
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/i3Scripts/change_brightness.sh -n -a 5
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/i3Scripts/change_brightness.sh -n -s 5
 
 # Media control
 bindsym XF86AudioNext exec --no-startup-id "mpc next"
@@ -252,8 +252,8 @@ mode "control" {
         bindsym h exec --no-startup-id "mpc seek -5"
 
         #brightness
-        bindsym bracketright exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -a 5
-        bindsym bracketleft exec --no-startup-id ~/.config/i3/i3Scripts/brightness.sh -n -s 5
+        bindsym bracketright exec --no-startup-id ~/.config/i3/i3Scripts/change_brightness.sh -n -a 5
+        bindsym bracketleft exec --no-startup-id ~/.config/i3/i3Scripts/change_brightness.sh -n -s 5
 
         # back to normal: Enter or Escape or $mod+bracketleft or $mod+bracketright
         bindsym Return mode "default"
