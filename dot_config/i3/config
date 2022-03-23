@@ -51,7 +51,7 @@ set $kitty ~/.local/kitty.app/bin/kitty
 
 # bindsym $mod+Return exec i3-sensible-terminal
 # bindsym $mod+Return exec --no-startup-id $myTerm
-bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "full_terminal"
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "full_terminal"
 # bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/open_terminal.sh
 
 # Screen brightness controls
@@ -438,22 +438,22 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # bindsym $mod+period nop Terminal2
 
 # dropdown_terminal [1]
-for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]"
-bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [1]"
+for_window [title="dropdown_terminal \[1\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal [1]"
+bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal [1]"
 
 # dropdown_terminal [2]
-for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]"
-bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_terminal [2]"
+for_window [title="dropdown_terminal \[2\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal [2]"
+bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal [2]"
 
-bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_search"
+bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_search"
 
 # dropdown_ncmpcpp
-for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
-bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_ncmpcpp"
+for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_ncmpcpp"
+bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_ncmpcpp"
 
 # dropdown_vifm
-for_window [title="dropdown_vifm"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
-bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_vifm"
+for_window [title="dropdown_vifm"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
+bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
@@ -484,7 +484,7 @@ bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwi
 # Scrcpy settings
 # move absolute position 1489px 120px, resize set 416px 894px
 for_window [title="dropdown_scrcpy"] floating enable, border normal 2, move absolute position 1515 px 130 px, resize set 389 px 860 px, move scratchpad, scratchpad show
-bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdown_scrcpy; then nohup scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw & disown; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/scratchpad.sh "dropdown_scrcpy"
+bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdown_scrcpy; then nohup scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw & disown; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
 
 # android studio settings
 # move absolute position 15px 47px, resize set 1460px 1018px
