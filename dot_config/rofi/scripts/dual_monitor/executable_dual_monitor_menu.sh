@@ -58,7 +58,7 @@ stop () {
     # ~/.config/i3/i3Scripts/change_display_properties.sh -a
 }
 
-show_dmenu () {
+show_menu () {
     if pgrep -a x11vnc; then
         is_vnc_server_active="yes"
         vnc_server_option="Stop vnc server"
@@ -93,7 +93,7 @@ show_dmenu () {
     esac
 }
 
-while getopts ':r:h:s:p:m' opt; do
+while getopts ':r:h:s:p:' opt; do
     case "$opt" in
         r)
             if [[ $OPTARG =~ ^[0-9]{4}x[0-9]{4}$ ]]; then
@@ -107,10 +107,11 @@ while getopts ':r:h:s:p:m' opt; do
             ;;
         s) secondary_name="$OPTARG" ;;
         p) secondary_position="--${OPTARG}-of $primary_name" ;;
-        m) show_dmenu ;;
         ?)
             echo "Usage: $(basename $0) [-a] [-b argument] [-c argument]"
             exit 1
             ;;
     esac
 done
+
+show_menu
