@@ -32,9 +32,9 @@ exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
-bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
-bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -m 0
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -a 5
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -s 5
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -m 0
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
 # Use flamechot to capture screenshot
@@ -186,12 +186,6 @@ bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9; ex
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
 # bindsym $mod+Shift+x move container to workspace number $ws10; workspace $ws10
 
-# open edge in workspace 3
-# assign [class="Microsoft-edge-beta"] 3
-# assign [class="Vivaldi-stable"] 3
-# assign [class="jetbrains-studio"] 2
-assign [class="jetbrains-idea-ce"] 2
-
 # layout files
 # load android dev layout to workspace 4
 # bindsym $mod+f exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_files/dev_emulator.json; exec --no-startup-id kitty; exec --no-startup-id ~/Android/Sdk/emulator/emulator @Pixel_2_API_30&'"
@@ -204,9 +198,9 @@ assign [class="jetbrains-idea-ce"] 2
 # exec --no-startup-id i3-msg 'workspace 5; exec --no-startup-id kitty vifm; workspace 1'
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c reload; exec --no-startup-id dunstify -h string:x-dunst-stack-tag:i3wm "i3wm" -h string:x-dunst-stack-tag:i3wm "configuration reloaded"
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart; exec --no-startup-id dunstify -h string:x-dunst-stack-tag:i3wm "i3wm" -h string:x-dunst-stack-tag:i3wm "configuration restarted"
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -240,9 +234,9 @@ bindsym $mod+r mode "resize"
 # music and volume control mode
 mode "control" {
         # audio
-        bindsym k exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -a 5
-        bindsym j exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -s 5
-        bindsym m exec --no-startup-id ~/.config/i3/i3Scripts/volume.sh -n -m 0
+        bindsym k exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -a 5
+        bindsym j exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -s 5
+        bindsym m exec --no-startup-id ~/.config/i3/i3Scripts/change_volume.sh -n -m 0
 
         # music
         bindsym shift+period exec --no-startup-id "mpc next"
@@ -471,9 +465,9 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 # bindsym $mod+e [class="Microsoft-edge-beta"]scratchpad show
 
 # microsoft edge settings
-for_window [class="Microsoft-edge-beta"] move to workspace 3; workspace 3
 for_window [class="Vivaldi-stable"] move to workspace 3; workspace 3
 for_window [class="qBittorrent"] move to workspace 4; workspace 4
+for_window [class="jetbrains-idea-ce"] move to workspace 2; workspace 2
 
 bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwindowname)"
 
