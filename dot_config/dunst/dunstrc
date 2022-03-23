@@ -209,7 +209,7 @@
     ### Misc/Advanced ###
 
     # dmenu path.
-    dmenu = /usr/bin/rofi -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str 'horibox { children: [ prompt, listview ]; margin: 0px 620px 0px 620px; } prompt { margin: 0px 10px 0px 0px;}' -p "Select Action"
+    dmenu = /usr/bin/rofi -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str 'horibox { children: [ prompt, listview ];} prompt { margin: 0px 10px 0px 0px;}' -p "Select Action"
 
     # Browser for opening urls in context menu.
     browser = /usr/bin/xdg-open
