@@ -16,8 +16,8 @@ fetchart:
     auto: yes
     cautious: no
     sources:
-        - coverart: release 
         - itunes
+        - coverart: release 
         - coverart: releasegroup
         - lastfm
         - '*'
