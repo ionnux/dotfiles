@@ -77,8 +77,8 @@ bindsym $mod+Shift+q exec --no-startup-id ~/.config/i3/i3Scripts/kill_apps.sh
 
 # start rofi
 bindsym control+backslash exec --no-startup-id "rofi -show window -config ~/.config/rofi/dmenu.rasi"
-bindsym control+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/menu.sh"
-bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi.sh"
+bindsym control+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/kdeconnect_menu.sh"
+bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi_menu.sh"
 bindsym $mod+v exec --no-startup-id "~/MyScripts/dual_monitor.sh -m"
 
 # Toggle polybar
