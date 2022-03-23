@@ -10,7 +10,8 @@ display_0_start_pos=$(xrandr | grep $display_0 | grep -E -o '[[:digit:]]{4}x[[:d
 display_1_start_pos=$(xrandr | grep $display_1 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}\+[[:digit:]]*' | awk -F '+' '{print $2}')
 
 kitty=~/.local/kitty.app/bin/kitty
-desktop=$(xdotool get_desktop)
+total_desktops=$(xdotool get_num_desktops)
+focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
 windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
 
 vifm_position="top"
@@ -136,7 +137,7 @@ change_position_primary_auto () {
 
 change_size_and_position_auto () {
     if [[ "$1" != "" ]]; then
-        if [ "$desktop" = "0" ]; then
+        if [ "$focused_output" = "eDP1" ]; then
             start_pos="$display_0_start_pos"
             change_size_primary_auto "$1" "$2"
             change_position_primary_auto "$1" "$2"
@@ -150,7 +151,7 @@ change_size_and_position_auto () {
 
 change_size_and_position_manual () {
     if [[ "$1" != "" ]]; then
-        if [ "$desktop" = "0" ]; then
+        if [ "$focused_output" = "eDP1" ]; then
             start_pos="$display_0_start_pos"
             change_size_desktop_primary "$1" "$2"
         else
@@ -188,13 +189,23 @@ change_font_desktop_others () {
 
 change_font () {
     if [[ "$1" != "" ]]; then
-        if [ "$desktop" = "0" ]; then
+        if [ "$focused_output" = "eDP1" ]; then
             change_font_desktop_primary "$1"
         else
             change_font_desktop_others "$1"
         fi
     fi
 }
+
+# change_font () {
+#     if [[ "$1" != "" ]]; then
+#         if [ "$desktop" -lt "$total_desktops" ]; then
+#             change_font_desktop_primary "$1"
+#         else
+#             change_font_desktop_others "$1"
+#         fi
+#     fi
+# }
 
 
 while getopts ':n:am' opt; do

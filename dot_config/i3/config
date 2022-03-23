@@ -163,7 +163,6 @@ set $ws10 "10"
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
-# bindsym $mod+3 workspace number $ws3; 
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
@@ -171,7 +170,6 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
-# bindsym $mod+x workspace number $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1; workspace $ws1; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh -a
