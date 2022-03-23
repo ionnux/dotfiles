@@ -1,7 +1,6 @@
 #!/bin/bash
 
 kitty=~/.local/kitty.app/bin/kitty
-desktop=$(xdotool get_desktop)
 
 move_to_scratchpad () {
     windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
@@ -17,6 +16,15 @@ move_to_scratchpad () {
     done
 }
 
+scratchpad_show () {
+    case $1 in
+        'dropdown_vifm') i3-msg '[title="dropdown_vifm"] scratchpad show' ;;
+        'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] scratchpad show' ;;
+        'dropdown_terminal [1]') i3-msg '[title="dropdown_terminal \[1\]"] scratchpad show' ;;
+        'dropdown_terminal [2]') i3-msg '[title="dropdown_terminal \[2\]"] scratchpad show' ;;
+    esac
+}
+
 case "$1" in
     "dropdown_terminal [1]")
         if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then
@@ -24,7 +32,8 @@ case "$1" in
         fi
 
         move_to_scratchpad "dropdown_terminal [1]"
-        ~/.config/i3/i3Scripts/change_display_properties.sh -n "dropdown_terminal [1]" -m
+        scratchpad_show "dropdown_terminal [1]"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "dropdown_terminal [2]")
@@ -33,7 +42,8 @@ case "$1" in
         fi
 
         move_to_scratchpad "dropdown_terminal [2]"
-        ~/.config/i3/i3Scripts/change_display_properties.sh -n "dropdown_terminal [2]" -m
+        scratchpad_show "dropdown_terminal [2]"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "dropdown_ncmpcpp")
@@ -42,7 +52,8 @@ case "$1" in
         fi
 
         move_to_scratchpad "dropdown_ncmpcpp"
-        ~/.config/i3/i3Scripts/change_display_properties.sh -n "dropdown_ncmpcpp" -m
+        scratchpad_show "dropdown_ncmpcpp"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
 
         ;;
 
@@ -52,14 +63,16 @@ case "$1" in
         fi
 
         move_to_scratchpad "dropdown_vifm"
-        ~/.config/i3/i3Scripts/change_display_properties.sh -n "dropdown_vifm" -m
+        scratchpad_show "dropdown_vifm"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "full_terminal")
         $kitty --listen-on=unix:/tmp/kitty_remote --title full_terminal &
         disown
         move_to_scratchpad "full_terminal"
-        ~/.config/i3/i3Scripts/change_display_properties.sh -n "full_terminal" -m
+        scratchpad_show "full_terminal"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "dropdown_scrcpy")

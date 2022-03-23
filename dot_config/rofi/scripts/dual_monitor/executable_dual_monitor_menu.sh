@@ -29,6 +29,7 @@ remove_secondary_monitor() {
         ~/.config/polybar/launch.sh --blocks
     fi
     ~/.fehbg
+    ~/.config/i3/i3Scripts/change_display_properties.sh -a
 }
 
 start_vnc_server() {
@@ -107,10 +108,6 @@ while getopts ':r:h:s:p:' opt; do
             ;;
         s) secondary_name="$OPTARG" ;;
         p) secondary_position="--${OPTARG}-of $primary_name" ;;
-        ?)
-            echo "Usage: $(basename $0) [-a] [-b argument] [-c argument]"
-            exit 1
-            ;;
     esac
 done
 
