@@ -8,6 +8,7 @@ move_to_scratchpad () {
         if [[ "$line" != "$1" ]]; then
             case $line in
                 'dropdown_vifm') i3-msg '[title="dropdown_vifm"] move scratchpad' ;;
+                'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] move scratchpad' ;;
                 'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] move scratchpad' ;;
                 'dropdown_terminal [1]') i3-msg '[title="dropdown_terminal \[1\]"] move scratchpad' ;;
                 'dropdown_terminal [2]') i3-msg '[title="dropdown_terminal \[2\]"] move scratchpad' ;;
@@ -19,6 +20,7 @@ move_to_scratchpad () {
 scratchpad_show () {
     case $1 in
         'dropdown_vifm') i3-msg '[title="dropdown_vifm"] scratchpad show' ;;
+        'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] scratchpad show' ;;
         'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] scratchpad show' ;;
         'dropdown_terminal [1]') i3-msg '[title="dropdown_terminal \[1\]"] scratchpad show' ;;
         'dropdown_terminal [2]') i3-msg '[title="dropdown_terminal \[2\]"] scratchpad show' ;;
@@ -76,10 +78,12 @@ case "$1" in
         ;;
 
     "dropdown_scrcpy")
-        i3-msg '[title="dropdown_scrcpy"] scratchpad show'
-        i3-msg '[title="dropdown_terminal*"] move scratchpad'
-        i3-msg '[title="dropdown_vifm"] move scratchpad'
-        i3-msg '[title="dropdown_ncmpcpp"] move scratchpad'
+        if ! pgrep -a scrcpy | grep dropdown_scrcpy; then
+            scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw &
+        fi
+
+        scratchpad_show "dropdown_scrcpy"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "dropdown_search")

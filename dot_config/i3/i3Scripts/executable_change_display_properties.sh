@@ -1,23 +1,23 @@
 #!/bin/bash
 
-display_0=$(xrandr --listactivemonitors | awk 'FNR == 2 {print $4}')
-display_1=$(xrandr --listactivemonitors | awk 'FNR == 3 {print $4}')
-display_0_x=$(xrandr | grep $display_0 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $1}')
-display_0_y=$(xrandr | grep $display_0 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $2}')
-display_1_x=$(xrandr | grep $display_1 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $1}')
-display_1_y=$(xrandr | grep $display_1 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $2}')
-display_0_start_pos=$(xrandr | grep $display_0 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}\+[[:digit:]]*' | awk -F '+' '{print $2}')
-display_1_start_pos=$(xrandr | grep $display_1 | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}\+[[:digit:]]*' | awk -F '+' '{print $2}')
-
-kitty=~/.local/kitty.app/bin/kitty
-total_desktops=$(xdotool get_num_desktops)
-focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
-windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
+display_primary=$(xrandr --listactivemonitors | awk 'FNR == 2 {print $4}')
+display_other=$(xrandr --listactivemonitors | awk 'FNR == 3 {print $4}')
+display_primary_x=$(xrandr | grep $display_primary | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $1}')
+display_primary_y=$(xrandr | grep $display_primary | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $2}')
+display_other_x=$(xrandr | grep $display_other | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $1}')
+display_other_y=$(xrandr | grep $display_other | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}' | awk -F 'x' '{print $2}')
+display_primary_start_position=$(xrandr | grep $display_primary | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}\+[[:digit:]]*' | awk -F '+' '{print $2}')
+display_other_start_position=$(xrandr | grep $display_other | grep -E -o '[[:digit:]]{4}x[[:digit:]]{4}\+[[:digit:]]*' | awk -F '+' '{print $2}')
 
 vifm_position="top"
 ncmpcpp_position="top"
 terminal1_position="top"
 terminal2_position="top"
+scrcpy_position="right"
+
+kitty=~/.local/kitty.app/bin/kitty
+focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
 
 find_position () {
     case $1 in
@@ -25,172 +25,91 @@ find_position () {
         'dropdown_ncmpcpp') position="$ncmpcpp_position" ;;
         'dropdown_terminal [1]') position="$terminal1_position" ;;
         'dropdown_terminal [2]') position="$terminal2_position" ;;
+        'dropdown_scrcpy') position="$scrcpy_position" ;;
     esac
 }
-
-# change_size_desktop_primary () {
-#     if [[ "$position" == "top" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] scratchpad show, move absolute position $start_pos px 34 px, resize set $display_0_x px 900 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] scratchpad show, move absolute position $start_pos px 34 px, resize set $display_0_x px 880 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] scratchpad show, move absolute position $start_pos px 34 px, resize set $display_0_x px 900 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] scratchpad show, move absolute position $start_pos px 34 px, resize set $display_0_x px 900 px'" ;;
-#         esac
-#     elif [[ "$position" == "right" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] scratchpad show, move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px, resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] scratchpad show, move absolute position $start_pos px 34 px, resize set $display_0_x px 880 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] scratchpad show, move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px, resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] scratchpad show, move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px, resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px'" ;;
-#         esac
-#     fi
-# }
-
-# change_size_desktop_others () {
-#     if [[ "$2" == "top" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] scratchpad show, move absolute position $start_pos px 38 px, resize set $display_1_x px 1000 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] scratchpad show, move absolute position $start_pos px 38 px, resize set $display_1_x px 920 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] scratchpad show, move absolute position $start_pos px 38 px, resize set $display_1_x px 1000 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] scratchpad show, move absolute position $start_pos px 38 px, resize set $display_1_x px 1000 px'" ;;
-#         esac
-#     elif [[ "$2" == "right" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] scratchpad show, move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px, resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] scratchpad show, move absolute position $start_pos px 38 px, resize set $display_1_x px 920 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] scratchpad show, move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px, resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] scratchpad show, move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px, resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px'" ;;
-#         esac
-#     fi
-# }
 
 change_size_and_position_other () {
     if [[ "$2" == "top" ]]; then
         case $1 in
-            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $display_1_x px 1000 px, \
+            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $display_other_x px 1000 px, \
               move absolute position $start_pos px 38 px'" ;;
 
-            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_1_x px 920 px, \
+            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_other_x px 920 px, \
               move absolute position $start_pos px 38 px'" ;;
 
-            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $display_1_x px 1000 px, \
+            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $display_other_x px 1000 px, \
               move absolute position $start_pos px 38 px'" ;;
 
-            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $display_1_x px 1000 px, \
+            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $display_other_x px 1000 px, \
               move absolute position $start_pos px 38 px'" ;;
         esac
 
     elif [[ "$2" == "right" ]]; then
         case $1 in
-            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px, \
-              move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
+            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $(( display_other_x / 2 )) px $(( display_other_y - 38 )) px, \
+              move absolute position $(( start_pos + (display_other_x / 2) )) px 38 px'" ;;
 
-            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_1_x px 920 px, \
+            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_other_x px 920 px, \
               move absolute position $start_pos px 38 px'" ;;
 
-            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px, \
-              move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
+            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $(( display_other_x / 2 )) px $(( display_other_y - 38 )) px, \
+              move absolute position $(( start_pos + (display_other_x / 2) )) px 38 px'" ;;
 
-            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $(( display_1_x / 2 )) px $(( display_1_y - 38 )) px, \
-              move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
+            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $(( display_other_x / 2 )) px $(( display_other_y - 38 )) px, \
+              move absolute position $(( start_pos + (display_other_x / 2) )) px 38 px'" ;;
         esac
     fi
 }
-
-# change_position_other_auto () {
-#     if [[ "$2" == "top" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] move absolute position $start_pos px 38 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] move absolute position $start_pos px 38 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] move absolute position $start_pos px 38 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] move absolute position $start_pos px 38 px'" ;;
-#         esac
-#     elif [[ "$2" == "right" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] move absolute position $start_pos px 38 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] move absolute position $(( start_pos + (display_1_x / 2) )) px 38 px'" ;;
-#         esac
-#     fi
-# }
 
 change_size_and_position_primary () {
     if [[ "$2" == "top" ]]; then
         case $1 in
-            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $display_0_x px 900 px, \
+            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $display_primary_x px 900 px, \
               move absolute position $start_pos px 34 px'" ;;
 
-            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_0_x px 910 px, \
+            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_primary_x px 910 px, \
               move absolute position $start_pos px 34 px'" ;;
 
-            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $display_0_x px 900 px, \
+            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $display_primary_x px 900 px, \
               move absolute position $start_pos px 34 px'" ;;
 
-            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $display_0_x px 900 px, \
+            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $display_primary_x px 900 px, \
               move absolute position $start_pos px 34 px'" ;;
         esac
+
     elif [[ "$2" == "right" ]]; then
         case $1 in
-            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px, \
-              move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
+            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $(( display_primary_x / 2 )) px $(( display_primary_y - 34 )) px, \
+              move absolute position $(( start_pos + (display_primary_x / 2) )) px 34 px'" ;;
 
-            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_0_x px 910 px, \
+            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_primary_x px 910 px, \
               move absolute position $start_pos px 34 px'" ;;
 
-            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px, \
-              move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
+            'dropdown_scrcpy') eval "i3-msg '[title=\"dropdown_scrcpy\"] resize set 389 px 860 px, \
+              move absolute position 1515 px 860 px'" ;;
 
-            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $(( display_0_x / 2 )) px $(( display_0_y - 34 )) px, \
-              move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
+            'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] resize set $(( display_primary_x / 2 )) px $(( display_primary_y - 34 )) px, \
+              move absolute position $(( start_pos + (display_primary_x / 2) )) px 34 px'" ;;
+
+            'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] resize set $(( display_primary_x / 2 )) px $(( display_primary_y - 34 )) px, \
+              move absolute position $(( start_pos + (display_primary_x / 2) )) px 34 px'" ;;
         esac
     fi
 }
-
-# change_position_primary_auto () {
-#     if [[ "$2" == "top" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] move absolute position $start_pos px 34 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] move absolute position $start_pos px 34 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] move absolute position $start_pos px 34 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] move absolute position $start_pos px 34 px'" ;;
-#         esac
-#     elif [[ "$2" == "right" ]]; then
-#         case $1 in
-#             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
-#             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] move absolute position $start_pos px 34 px'" ;;
-#             'dropdown_terminal [1]') eval "i3-msg '[title=\"dropdown_terminal \[1\]\"] move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
-#             'dropdown_terminal [2]') eval "i3-msg '[title=\"dropdown_terminal \[2\]\"] move absolute position $(( start_pos + (display_0_x / 2) )) px 34 px'" ;;
-#         esac
-#     fi
-# }
 
 
 change_size_and_position () {
     if [[ "$1" != "" ]]; then
         if [ "$focused_output" = "eDP1" ]; then
-            start_pos="$display_0_start_pos"
+            start_pos="$display_primary_start_position"
             change_size_and_position_primary "$1" "$2"
-            # change_position_primary_auto "$1" "$2"
         else
-            start_pos="$display_1_start_pos"
+            start_pos="$display_other_start_position"
             change_size_and_position_other "$1" "$2"
-            # change_position_other_auto "$1" "$2"
         fi
     fi
 }
-
-# change_size_and_position_manual () {
-#     if [[ "$1" != "" ]]; then
-#         if [ "$focused_output" = "eDP1" ]; then
-#             start_pos="$display_0_start_pos"
-#             change_size_desktop_primary "$1" "$2"
-#         else
-#             start_pos="$display_1_start_pos"
-#             change_size_desktop_others "$1" "$2"
-#         fi
-#     fi
-# }
 
 change_font_desktop_primary () {
     case $1 in
@@ -227,36 +146,6 @@ change_font () {
         fi
     fi
 }
-
-# change_font () {
-#     if [[ "$1" != "" ]]; then
-#         if [ "$desktop" -lt "$total_desktops" ]; then
-#             change_font_desktop_primary "$1"
-#         else
-#             change_font_desktop_others "$1"
-#         fi
-#     fi
-# }
-
-
-# while getopts ':n:am' opt; do
-#     case "$opt" in
-#         n) name="$OPTARG" ;;
-#         a)
-#             echo "$windows" | while read -r line; do
-#                 find_position "$line"
-#                 change_font "$line"
-#                 change_size_and_position "$line" "$position"
-#             done
-#             ;;
-#         m)
-#             find_position "$name"
-#             change_font "$name"
-#             change_size_and_position "$line" "$position"
-#             # change_size_and_position_manual "$name" "$position"
-#             ;;
-#     esac
-# done
 
 echo "$windows" | while read -r line; do
     find_position "$line"

@@ -447,6 +447,10 @@ bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropd
 for_window [title="dropdown_vifm"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
 bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
 
+# Scrcpy settings
+for_window [title="dropdown_scrcpy"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
+bindsym $mod+semicolon exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
+
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
 # bindsym $mod+e exec --no-startup-id "if ! pgrep -a msedge ; then microsoft-edge-beta; fi"; \
@@ -472,11 +476,6 @@ bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwi
 # Android emulator settings 
 # for_window [title="Android Emulator*"] floating enable, move scratchpad, move absolute position 1365 px 90 px, scratchpad show
 # bindsym $mod+comma [title="Android Emulator*"] scratchpad show
-
-# Scrcpy settings
-# move absolute position 1489px 120px, resize set 416px 894px
-for_window [title="dropdown_scrcpy"] floating enable, border normal 2, move absolute position 1515 px 130 px, resize set 389 px 860 px, move scratchpad, scratchpad show
-bindsym $mod+semicolon exec --no-startup-id "if ! pgrep -a scrcpy | grep dropdown_scrcpy; then nohup scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw & disown; fi"; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
 
 # android studio settings
 # move absolute position 15px 47px, resize set 1460px 1018px
