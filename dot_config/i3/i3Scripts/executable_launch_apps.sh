@@ -1,6 +1,7 @@
 #!/bin/bash
 
 kitty=~/.local/kitty.app/bin/kitty
+split="no"
 
 move_to_scratchpad () {
     windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
@@ -10,8 +11,8 @@ move_to_scratchpad () {
                 'dropdown_vifm') i3-msg '[title="dropdown_vifm"] move scratchpad' ;;
                 'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] move scratchpad' ;;
                 'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] move scratchpad' ;;
-                'dropdown_terminal [1]') i3-msg '[title="dropdown_terminal \[1\]"] move scratchpad' ;;
-                'dropdown_terminal [2]') i3-msg '[title="dropdown_terminal \[2\]"] move scratchpad' ;;
+                'dropdown_terminal[1]') i3-msg '[title="dropdown_terminal\[1\]"] move scratchpad' ;;
+                'dropdown_terminal[2]') i3-msg '[title="dropdown_terminal\[2\]"] move scratchpad' ;;
             esac
         fi
     done
@@ -22,29 +23,33 @@ scratchpad_show () {
         'dropdown_vifm') i3-msg '[title="dropdown_vifm"] scratchpad show' ;;
         'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] scratchpad show' ;;
         'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] scratchpad show' ;;
-        'dropdown_terminal [1]') i3-msg '[title="dropdown_terminal \[1\]"] scratchpad show' ;;
-        'dropdown_terminal [2]') i3-msg '[title="dropdown_terminal \[2\]"] scratchpad show' ;;
+        'dropdown_terminal[1]') i3-msg '[title="dropdown_terminal\[1\]"] scratchpad show' ;;
+        'dropdown_terminal[2]') i3-msg '[title="dropdown_terminal\[2\]"] scratchpad show' ;;
     esac
 }
 
 case "$1" in
-    "dropdown_terminal [1]")
-        if ! pgrep -a kitty | grep -F 'dropdown_terminal [1]'; then
-            $kitty --listen-on=unix:@"dropdown_terminal [1]" --title 'dropdown_terminal [1]'
+    "dropdown_terminal[1]")
+        if ! pgrep -a kitty | grep -F 'dropdown_terminal[1]'; then
+            $kitty --listen-on=unix:@"dropdown_terminal[1]" --title 'dropdown_terminal[1]'
         fi
 
-        move_to_scratchpad "dropdown_terminal [1]"
-        scratchpad_show "dropdown_terminal [1]"
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad "dropdown_terminal[1]"
+        fi
+        scratchpad_show "dropdown_terminal[1]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
-    "dropdown_terminal [2]")
-        if ! pgrep -a kitty | grep -F 'dropdown_terminal [2]'; then
-            $kitty --listen-on=unix:@"dropdown_terminal [2]" --title 'dropdown_terminal [2]'
+    "dropdown_terminal[2]")
+        if ! pgrep -a kitty | grep -F 'dropdown_terminal[2]'; then
+            $kitty --listen-on=unix:@"dropdown_terminal[2]" --title 'dropdown_terminal[2]'
         fi
 
-        move_to_scratchpad "dropdown_terminal [2]"
-        scratchpad_show "dropdown_terminal [2]"
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad "dropdown_terminal[2]"
+        fi
+        scratchpad_show "dropdown_terminal[2]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
@@ -53,7 +58,9 @@ case "$1" in
             $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
         fi
 
-        move_to_scratchpad "dropdown_ncmpcpp"
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad "dropdown_ncmpcpp"
+        fi
         scratchpad_show "dropdown_ncmpcpp"
         ~/.config/i3/i3Scripts/change_display_properties.sh
 
@@ -64,7 +71,9 @@ case "$1" in
             $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~ &
         fi
 
-        move_to_scratchpad "dropdown_vifm"
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad "dropdown_vifm"
+        fi
         scratchpad_show "dropdown_vifm"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;

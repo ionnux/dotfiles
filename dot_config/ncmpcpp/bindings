@@ -210,8 +210,8 @@ def_key "G"
 #def_key "enter"
 #  run_action
 #
-#def_key "enter"
-#  play_item
+def_key "enter"
+ play_item
 #
 #def_key "space"
 #  add_item_to_playlist
@@ -295,8 +295,8 @@ def_key "4"
  show_media_library
 #  toggle_media_library_columns_mode
 #
-#def_key "4"
-#  toggle_media_library_columns_mode
+def_key "4"
+ toggle_media_library_columns_mode
 #
 #def_key "5"
 #  show_playlist_editor
