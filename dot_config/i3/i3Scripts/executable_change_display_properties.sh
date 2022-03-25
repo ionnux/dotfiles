@@ -24,6 +24,12 @@ ncmpcpp_position="top"
 terminal1_position="top"
 terminal2_position="top"
 scrcpy_position="right"
+
+primary_top_y_size=950
+primary_top_x_size=$display_primary_x
+primary_top_y_position=0
+primary_top_x_position=$start_pos
+
 primary_right_left_gap=10
 primary_right_left_y_size=$((  display_primary_y - 134 ))
 primary_right_left_x_size=$(( (display_primary_x / 2) - (primary_right_left_gap / 2) ))
@@ -65,22 +71,22 @@ change_size_and_position_other () {
 
     else
         case $2 in
-            'right') other_x_position=$other_right_x_position ;;
-            'left') other_x_position=$other_left_x_position ;;
+            'right') other_right_left_x_position=$other_right_x_position ;;
+            'left') other_right_left_x_position=$other_left_x_position ;;
         esac
 
         case $1 in
             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $other_right_left_x_size px $other_right_left_y_size px, \
-              move absolute position $other_x_position px $other_right_left_y_position px'" ;;
+              move absolute position $other_right_left_x_position px $other_right_left_y_position px'" ;;
 
             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_other_x px 920 px, \
               move absolute position $start_pos px $other_right_left_y_position px'" ;;
 
             'dropdown_terminal[1]') eval "i3-msg '[title=\"dropdown_terminal\[1\]\"] resize set $other_right_left_x_size px $other_right_left_y_size px, \
-              move absolute position $other_x_position px $other_right_left_y_position px'" ;;
+              move absolute position $other_right_left_x_position px $other_right_left_y_position px'" ;;
 
             'dropdown_terminal[2]') eval "i3-msg '[title=\"dropdown_terminal\[2\]\"] resize set $other_right_left_x_size px $other_right_left_y_size px, \
-              move absolute position $other_x_position px $other_right_left_y_position px'" ;;
+              move absolute position $other_right_left_x_position px $other_right_left_y_position px'" ;;
         esac
     fi
 }
@@ -88,32 +94,32 @@ change_size_and_position_other () {
 change_size_and_position_primary () {
     if [[ "$2" == "top" ]]; then
         case $1 in
-            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $display_primary_x px 900 px, \
-              move absolute position $start_pos px 34 px'" ;;
+            'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $primary_top_x_size px $primary_top_y_size px, \
+              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
 
-            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_primary_x px 910 px, \
-              move absolute position $start_pos px 34 px'" ;;
+            'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $primary_top_x_size px 910 px, \
+              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
 
-            'dropdown_terminal[1]') eval "i3-msg '[title=\"dropdown_terminal\[1\]\"] resize set $display_primary_x px 900 px, \
-              move absolute position $start_pos px 34 px'" ;;
+            'dropdown_terminal[1]') eval "i3-msg '[title=\"dropdown_terminal\[1\]\"] resize set $primary_top_x_size px $primary_top_y_size px, \
+              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
 
-            'dropdown_terminal[2]') eval "i3-msg '[title=\"dropdown_terminal\[2\]\"] resize set $display_primary_x px 900 px, \
-              move absolute position $start_pos px 34 px'" ;;
+            'dropdown_terminal[2]') eval "i3-msg '[title=\"dropdown_terminal\[2\]\"] resize set $primary_top_x_size px $primary_top_y_size px, \
+              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
         esac
 
     else
 
         case $2 in
-            'right') primary_x_position=$primary_right_x_position ;;
-            'left') primary_x_position=$primary_left_x_position ;;
+            'right') primary_right_left_x_position=$primary_right_x_position ;;
+            'left') primary_right_left_x_position=$primary_left_x_position ;;
         esac
 
         case $1 in
             'dropdown_vifm') eval "i3-msg '[title=\"dropdown_vifm\"] resize set $primary_right_left_x_size px $primary_right_left_y_size px, \
-              move absolute position $primary_x_position px $primary_right_left_y_position px'" ;;
+              move absolute position $primary_right_left_x_position px $primary_right_left_y_position px'" ;;
 
             'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $primary_right_left_x_size px $primary_right_left_y_size px, \
-              move absolute position $primary_x_position px $primary_right_left_y_position px'" ;;
+              move absolute position $primary_right_left_x_position px $primary_right_left_y_position px'" ;;
                 # 'dropdown_ncmpcpp') eval "i3-msg '[title=\"dropdown_ncmpcpp\"] resize set $display_primary_x px 910 px, \
                     # move absolute position $start_pos px $primary_right_left_y_position px'" ;;
 
@@ -121,10 +127,10 @@ change_size_and_position_primary () {
               move absolute position 1515 px 860 px'" ;;
 
             'dropdown_terminal[1]') eval "i3-msg '[title=\"dropdown_terminal\[1\]\"] resize set $primary_right_left_x_size px $primary_right_left_y_size px, \
-              move absolute position $primary_x_position px $primary_right_left_y_position px'" ;;
+              move absolute position $primary_right_left_x_position px $primary_right_left_y_position px'" ;;
 
             'dropdown_terminal[2]') eval "i3-msg '[title=\"dropdown_terminal\[2\]\"] resize set $primary_right_left_x_size px $primary_right_left_y_size px, \
-              move absolute position $primary_x_position px $primary_right_left_y_position px'" ;;
+              move absolute position $primary_right_left_x_position px $primary_right_left_y_position px'" ;;
         esac
     fi
 }
@@ -133,10 +139,8 @@ change_size_and_position_primary () {
 change_size_and_position () {
     if [[ "$1" != "" ]]; then
         if [ "$focused_output" = "eDP1" ]; then
-            start_pos="$display_primary_start_position"
             change_size_and_position_primary "$1" "$2"
         else
-            start_pos="$display_other_start_position"
             change_size_and_position_other "$1" "$2"
         fi
     fi

@@ -4,7 +4,9 @@ configuration {
   modi:  "run,window";
 	combi-modi: "drun,run";
   monitor: "-1";
-  matching: "regex";
+  sort: true;
+  sorting-method: "fzf";
+  matching: "fuzzy";
 	kb-row-up: "Up,Control+j,Control+p";
 	kb-row-down: "Down,Control+k,Control+n";
 	kb-remove-to-eol: "Control+l";
@@ -48,8 +50,8 @@ configuration {
 }
 
  window {
-     anchor:     north;
-     location:   north;
+     anchor:     south;
+     location:   south;
      width:      100%;
      children:   [ horibox ];
      background-color: @bg;

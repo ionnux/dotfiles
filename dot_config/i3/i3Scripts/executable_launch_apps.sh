@@ -3,7 +3,7 @@
 kitty=~/.local/kitty.app/bin/kitty
 split="no"
 
-move_to_scratchpad () {
+move_to_scratchpad_except () {
     windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
     echo "$windows" | while read -r line; do
         if [[ "$line" != "$1" ]]; then
@@ -35,7 +35,7 @@ case "$1" in
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad "dropdown_terminal[1]"
+            move_to_scratchpad_except "dropdown_terminal[1]"
         fi
         scratchpad_show "dropdown_terminal[1]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
@@ -47,7 +47,7 @@ case "$1" in
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad "dropdown_terminal[2]"
+            move_to_scratchpad_except "dropdown_terminal[2]"
         fi
         scratchpad_show "dropdown_terminal[2]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
@@ -59,7 +59,7 @@ case "$1" in
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad "dropdown_ncmpcpp"
+            move_to_scratchpad_except "dropdown_ncmpcpp"
         fi
         scratchpad_show "dropdown_ncmpcpp"
         ~/.config/i3/i3Scripts/change_display_properties.sh
@@ -72,7 +72,7 @@ case "$1" in
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad "dropdown_vifm"
+            move_to_scratchpad_except "dropdown_vifm"
         fi
         scratchpad_show "dropdown_vifm"
         ~/.config/i3/i3Scripts/change_display_properties.sh
@@ -81,7 +81,7 @@ case "$1" in
     "full_terminal")
         $kitty --listen-on=unix:/tmp/kitty_remote --title full_terminal &
         disown
-        move_to_scratchpad "full_terminal"
+        move_to_scratchpad_except "full_terminal"
         scratchpad_show "full_terminal"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
@@ -96,6 +96,7 @@ case "$1" in
         ;;
 
     "dropdown_search")
-        rofi -show drun -p launcher -config ~/.config/rofi/dmenu.rasi
+        rofi -show drun -display-drun launcher -config ~/.config/rofi/dmenu.rasi
+        # rofi -modi "calc:~/.config/rofi/scripts/official/rofi-calc.sh" -show calc
         ;;
 esac
