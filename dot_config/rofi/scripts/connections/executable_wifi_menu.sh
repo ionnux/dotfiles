@@ -10,7 +10,7 @@ add_network_name() {
     name="$1"
 
     if [ "$CONNECTED_NETWORK" = "$name" ]; then
-        name="$1 [ connected ]"
+        name="$1 [connected]"
     fi
 
     if [ $counter -gt 0 ]; then
@@ -43,7 +43,7 @@ show_available_networks () {
         if [ "$NETWORK_DISPLAY_NAMES" = "" ]; then
             show_empty
         else
-            menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "Select Network" <<< "$NETWORK_DISPLAY_NAMES|Rescan")"
+            menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -i -p "Select Network" <<< "$NETWORK_DISPLAY_NAMES|Rescan")"
             case "$menu" in
                 'Rescan')
                     nmcli device wifi rescan
@@ -67,7 +67,7 @@ show_available_networks () {
     }
 }
 show_password_prompt () {
-    password="$(rofi -password -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -theme-str 'entry { placeholder: "   Password..."; }' -p "Enter password")"
+    password="$(rofi -password -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -theme-str "configuration { font: \"$font\"; }" -theme-str 'entry { placeholder: "   Password..."; }' -p "Enter password")"
     case "$password" in
         '') nmcli device wifi connect "$1" ;;
         *) nmcli device wifi connect "$1" password $password ;;
@@ -75,11 +75,18 @@ show_password_prompt () {
 }
 
 show_wifi_menu () {
+    focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+    if [ "$focused_output" = "eDP1" ]; then
+        font="Iosevka 13"
+    else
+        font="Iosevka 16"
+    fi
+
     menu=""
     if wifi | grep -q "= on"; then
-        menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "wifi" <<< "Select Network|Turn Off")"
+        menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration { font: \"$font\"; }" -i -p "wifi" <<< "Select Network|Turn Off")"
     else
-        menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -p "wifi" <<< "turn on")"
+        menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration { font: \"$font\"; }" -i -p "wifi" <<< "turn on")"
     fi
     case "$menu" in
         'Select Network') show_available_networks ;;
@@ -89,7 +96,7 @@ show_wifi_menu () {
 }
 
 show_empty () {
-    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str 'horibox { children: [ prompt, listview ]; margin: 0px 830px 0px 830px; } prompt { margin: 0px 10px 0px 0px;}' -p "No wifi availbale" -i <<< "Rescan")"
+    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration { font: \"$font\"; }" -theme-str ' horibox { children: [ prompt, listview ]; margin: 0px 830px 0px 830px; } prompt { margin: 0px 10px 0px 0px;}' -p "No wifi availbale" -i <<< "Rescan")"
     case "$menu" in
         'Rescan')
             nmcli device wifi rescan

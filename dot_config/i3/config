@@ -40,7 +40,7 @@ set $kitty ~/.local/kitty.app/bin/kitty
 
 # bindsym $mod+Return exec i3-sensible-terminal
 # bindsym $mod+Return exec --no-startup-id $myTerm
-bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "full_terminal"
+bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_fullterm"
 # bindsym $mod+Return exec --no-startup-id ~/.config/i3/i3Scripts/open_terminal.sh
 
 # Screen brightness controls
@@ -54,9 +54,9 @@ bindsym XF86AudioPlay exec --no-startup-id "mpc toggle"
 
 # border color
 # client.focused #555555 #555555 #ffffff #2e9ef4 #7aa2f7
-client.focused #5e81ac #5e81ac #2e3440 #7aa2f7 #5e81ac
-client.focused_inactive #1a1b26 #24283b #545c7e #7aa2f7 #1a1b26
-client.unfocused #1a1b26 #1a1b26 #545c7e #7aa2f7 #1a1b26
+client.focused #b48ead #b48ead #2e3440 #b48ead #b48ead
+client.focused_inactive #1a1b26 #24283b #545c7e #7dcfff #1a1b26
+client.unfocused #1a1b26 #1a1b26 #545c7e #1a1b26 #1a1b26
 
 focus_wrapping no
 workspace_auto_back_and_forth yes
@@ -249,16 +249,16 @@ bindsym $mod+bracketright mode "control"
 
 
 # i3-gaps settings
-gaps inner 15
+gaps inner 8
 # gaps outer 10
 smart_gaps on
 # smart_gaps inverse_outer
 # smart_borders on
 
 # Border and window settings
-title_align center
+title_align left
 default_border pixel 2
-hide_edge_borders smart
+hide_edge_borders none
 # for_window [class=".*"] border pixel 2
 
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
@@ -419,27 +419,27 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # exec_always --no-startup-id kitti3 -n Terminal2 -p ct -s 1 0.7
 # bindsym $mod+period nop Terminal2
 
-# dropdown_terminal[1]
-for_window [title="dropdown_terminal\[1\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal[1]"
-bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal[1]"
+# auto_terminal[1]
+for_window [title="auto_terminal\[1\]"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[1]"
+bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[1]"
 
-# dropdown_terminal[2]
-for_window [title="dropdown_terminal\[2\]"] floating enable, border normal 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal[2]"
-bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_terminal[2]"
+# auto_terminal[2]
+for_window [title="auto_terminal\[2\]"] floating enable, border pixel 6, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[2]"
+bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[2]"
 
-bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_search"
+bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "launcher"
 
-# dropdown_ncmpcpp
-for_window [title="dropdown_ncmpcpp"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_ncmpcpp"
-bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_ncmpcpp"
+# auto_ncmpcpp
+for_window [title="auto_ncmpcpp"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_ncmpcpp"
+bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_ncmpcpp"
 
-# dropdown_vifm
-for_window [title="dropdown_vifm"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
-bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_vifm"
+# auto_vifm
+for_window [title="auto_vifm"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_vifm"
+bindsym $mod+f exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_vifm"
 
 # Scrcpy settings
-for_window [title="dropdown_scrcpy"] floating enable, border pixel 3, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
-bindsym $mod+semicolon exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "dropdown_scrcpy"
+for_window [title="auto_scrcpy"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_scrcpy"
+bindsym $mod+semicolon exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_scrcpy"
 
 # for_window [class="Microsoft-edge-beta"] floating enable, border pixel 2, \
 # move absolute position 15px 47px, resize set 1890px 950px, move scratchpad, scratchpad show
@@ -457,9 +457,9 @@ bindsym $mod+Shift+f  move absolute position 14 px 47 px, resize set 1892 px 101
 # bindsym $mod+e [class="Microsoft-edge-beta"]scratchpad show
 
 # microsoft edge settings
-for_window [class="Vivaldi-stable"] move to workspace 3; workspace 3
-for_window [class="qBittorrent"] move to workspace 4; workspace 4
-for_window [class="jetbrains-idea-ce"] move to workspace 2; workspace 2
+# for_window [class="Vivaldi-stable"] move to workspace 3; workspace 3
+# for_window [class="qBittorrent"] move to workspace 4; workspace 4
+# for_window [class="jetbrains-idea-ce"] move to workspace 2; workspace 2
 
 bindsym $mod+u exec --no-startup-id notify-send "$(xdotool getactivewindow getwindowname)"
 

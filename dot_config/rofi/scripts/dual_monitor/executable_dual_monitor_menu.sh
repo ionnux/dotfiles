@@ -15,9 +15,15 @@ add_secondary_monitor() {
     eval "xrandr --newmode $xrandr_mode"
     eval "xrandr --addmode "$secondary_name" "${secondary_resolution}_${refresh_rate}.00""
     eval "xrandr --output $secondary_name --mode "${secondary_resolution}_${refresh_rate}.00" $secondary_position"
-    if ! pgrep -a polybar | grep VIRTUAL1; then
-        ~/.config/polybar/launch.sh --blocks
+
+    if ! pgrep -f -a "polybar -q $secondary_name"; then
+        polybar -q $secondary_name -c "~/.config/polybar/blocks/config.ini" &
     fi
+
+    if ! pgrep -f -a "polybar -q $primary_name"; then
+        polybar -q $primary_name -c "~/.config/polybar/blocks/config.ini" &
+    fi
+
     ~/.fehbg
 }
 
@@ -25,9 +31,15 @@ remove_secondary_monitor() {
     eval "xrandr --output $secondary_name --off"
     eval "xrandr --delmode "$secondary_name" "${secondary_resolution}_${refresh_rate}.00""
     eval "xrandr --rmmode "${secondary_resolution}_${refresh_rate}.00""
-    if pgrep -a polybar | grep VIRTUAL1; then
-        ~/.config/polybar/launch.sh --blocks
+
+    if pgrep -f -a "polybar -q $secondary_name"; then
+        pkill -f "polybar -q $secondary_name"
     fi
+
+    if ! pgrep -f -a "polybar -q $primary_name"; then
+        polybar -q $primary_name -c "~/.config/polybar/blocks/config.ini" &
+    fi
+
     ~/.fehbg
     ~/.config/i3/i3Scripts/change_display_properties.sh -a
 }
@@ -48,6 +60,7 @@ stop_vnc_server() {
 
 start () {
     add_secondary_monitor
+    sleep 0.2
     if ! pgrep -a x11vnc; then
         start_vnc_server
     fi
@@ -55,8 +68,8 @@ start () {
 
 stop () {
     stop_vnc_server
+    sleep 0.2
     remove_secondary_monitor
-    # ~/.config/i3/i3Scripts/change_display_properties.sh -a
 }
 
 show_menu () {
@@ -82,7 +95,14 @@ show_menu () {
         start_option="Launch dual monitor mode|"
     fi
 
-    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -p "Dual Monitor" -i <<< "${start_option}Adb|$vnc_server_option|$monitor_option")"
+        focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+        if [ "$focused_output" = "eDP1" ]; then
+            font="Iosevka 13"
+        else
+            font="Iosevka 16"
+        fi
+
+    menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -p "Dual Monitor" -i <<< "${start_option}Adb|$vnc_server_option|$monitor_option")"
     case "$menu" in
         'Launch dual monitor mode') start ;;
         'Stop dual monitor mode') stop ;;

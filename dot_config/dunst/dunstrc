@@ -17,7 +17,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = mouse
+    follow = keyboard
     enable_posix_regex = true
 
     # geometry = "500x1+710+58"
@@ -25,7 +25,7 @@
     height = 120
     origin = top-center
     notification_limit = 1
-    offset = 0x30
+    offset = 0x10
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -71,7 +71,7 @@
     padding = 8
 
     # Horizontal padding.
-    horizontal_padding = 8
+    horizontal_padding = 12
 
     # Padding between text and icon.
     text_icon_padding = 0
@@ -228,7 +228,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 0
+    corner_radius = 12
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this

@@ -4,15 +4,15 @@ kitty=~/.local/kitty.app/bin/kitty
 split="no"
 
 move_to_scratchpad_except () {
-    windows=$(xdotool search --desktop $(xdotool get_desktop) --class kitty getwindowname %@)
+    windows=$(xdotool search --desktop $(xdotool get_desktop) --name auto getwindowname %@)
     echo "$windows" | while read -r line; do
         if [[ "$line" != "$1" ]]; then
             case $line in
-                'dropdown_vifm') i3-msg '[title="dropdown_vifm"] move scratchpad' ;;
-                'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] move scratchpad' ;;
-                'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] move scratchpad' ;;
-                'dropdown_terminal[1]') i3-msg '[title="dropdown_terminal\[1\]"] move scratchpad' ;;
-                'dropdown_terminal[2]') i3-msg '[title="dropdown_terminal\[2\]"] move scratchpad' ;;
+                'auto_vifm') i3-msg '[title="auto_vifm"] move scratchpad' ;;
+                'auto_scrcpy') i3-msg '[title="auto_scrcpy"] move scratchpad' ;;
+                'auto_ncmpcpp') i3-msg '[title="auto_ncmpcpp"] move scratchpad' ;;
+                'auto_terminal[1]') i3-msg '[title="auto_terminal\[1\]"] move scratchpad' ;;
+                'auto_terminal[2]') i3-msg '[title="auto_terminal\[2\]"] move scratchpad' ;;
             esac
         fi
     done
@@ -20,83 +20,95 @@ move_to_scratchpad_except () {
 
 scratchpad_show () {
     case $1 in
-        'dropdown_vifm') i3-msg '[title="dropdown_vifm"] scratchpad show' ;;
-        'dropdown_scrcpy') i3-msg '[title="dropdown_scrcpy"] scratchpad show' ;;
-        'dropdown_ncmpcpp') i3-msg '[title="dropdown_ncmpcpp"] scratchpad show' ;;
-        'dropdown_terminal[1]') i3-msg '[title="dropdown_terminal\[1\]"] scratchpad show' ;;
-        'dropdown_terminal[2]') i3-msg '[title="dropdown_terminal\[2\]"] scratchpad show' ;;
+        'auto_vifm') i3-msg '[title="auto_vifm"] scratchpad show' ;;
+        'auto_scrcpy') i3-msg '[title="auto_scrcpy"] scratchpad show' ;;
+        'auto_ncmpcpp') i3-msg '[title="auto_ncmpcpp"] scratchpad show' ;;
+        'auto_terminal[1]') i3-msg '[title="auto_terminal\[1\]"] scratchpad show' ;;
+        'auto_terminal[2]') i3-msg '[title="auto_terminal\[2\]"] scratchpad show' ;;
     esac
 }
 
 case "$1" in
-    "dropdown_terminal[1]")
-        if ! pgrep -a kitty | grep -F 'dropdown_terminal[1]'; then
-            $kitty --listen-on=unix:@"dropdown_terminal[1]" --title 'dropdown_terminal[1]'
+    "auto_terminal[1]")
+        if ! pgrep -a kitty | grep -F 'auto_terminal[1]'; then
+            $kitty --listen-on=unix:@"auto_terminal[1]" --title 'auto_terminal[1]'
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "dropdown_terminal[1]"
+            move_to_scratchpad_except "auto_terminal[1]"
         fi
-        scratchpad_show "dropdown_terminal[1]"
+        scratchpad_show "auto_terminal[1]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
-    "dropdown_terminal[2]")
-        if ! pgrep -a kitty | grep -F 'dropdown_terminal[2]'; then
-            $kitty --listen-on=unix:@"dropdown_terminal[2]" --title 'dropdown_terminal[2]'
+    "auto_terminal[2]")
+        if ! pgrep -a kitty | grep -F 'auto_terminal[2]'; then
+            $kitty --listen-on=unix:@"auto_terminal[2]" --title 'auto_terminal[2]'
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "dropdown_terminal[2]"
+            move_to_scratchpad_except "auto_terminal[2]"
         fi
-        scratchpad_show "dropdown_terminal[2]"
+        scratchpad_show "auto_terminal[2]"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
-    "dropdown_ncmpcpp")
-        if ! pgrep -a kitty | grep dropdown_ncmpcpp; then
-            $kitty --listen-on=unix:@dropdown_ncmpcpp --title dropdown_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
+    "auto_ncmpcpp")
+        if ! pgrep -a kitty | grep auto_ncmpcpp; then
+            $kitty --listen-on=unix:@auto_ncmpcpp --title auto_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "dropdown_ncmpcpp"
+            move_to_scratchpad_except "auto_ncmpcpp"
         fi
-        scratchpad_show "dropdown_ncmpcpp"
+
+        scratchpad_show "auto_ncmpcpp"
         ~/.config/i3/i3Scripts/change_display_properties.sh
 
         ;;
 
-    "dropdown_vifm")
-        if ! pgrep -a kitty | grep dropdown_vifm; then
-            $kitty --listen-on=unix:@dropdown_vifm --title dropdown_vifm ~/.config/vifm/scripts/vifmrun ~ &
+    "auto_vifm")
+        if ! pgrep -a kitty | grep auto_vifm; then
+            $kitty --listen-on=unix:@auto_vifm --title auto_vifm ~/.config/vifm/scripts/vifmrun ~ &
         fi
 
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "dropdown_vifm"
+            move_to_scratchpad_except "auto_vifm"
         fi
-        scratchpad_show "dropdown_vifm"
+        scratchpad_show "auto_vifm"
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
-    "full_terminal")
-        $kitty --listen-on=unix:/tmp/kitty_remote --title full_terminal &
+    "auto_fullterm")
+        $kitty --listen-on=unix:/tmp/kitty_remote --title auto_fullterm &
         disown
-        move_to_scratchpad_except "full_terminal"
-        scratchpad_show "full_terminal"
+        move_to_scratchpad_except "auto_fullterm"
+        sleep 0.2
         ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
-    "dropdown_scrcpy")
-        if ! pgrep -a scrcpy | grep dropdown_scrcpy; then
-            scrcpy --window-title 'dropdown_scrcpy' --tcpip -Sw &
+    "auto_scrcpy")
+        if ! pgrep -a scrcpy | grep auto_scrcpy; then
+            scrcpy --window-title 'auto_scrcpy' --tcpip -Sw &
         fi
 
-        scratchpad_show "dropdown_scrcpy"
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad_except "auto_scrcpy"
+        fi
+        scratchpad_show "auto_scrcpy"
         ~/.config/i3/i3Scripts/change_display_properties.sh
+        # i3-msg '[title="auto_scrcpy"] scratchpad show, resize set 408 px 880 px, move absolute position 1490 px 83 px'
         ;;
 
-    "dropdown_search")
-        rofi -show drun -display-drun launcher -config ~/.config/rofi/dmenu.rasi
+    "launcher")
+        focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+        if [ "$focused_output" = "eDP1" ]; then
+            font="Iosevka 13"
+        else
+            font="Iosevka 16"
+        fi
+
+        rofi -show drun -display-drun launcher -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}"
         # rofi -modi "calc:~/.config/rofi/scripts/official/rofi-calc.sh" -show calc
         ;;
 esac
