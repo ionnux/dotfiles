@@ -25,10 +25,28 @@ terminal1_position="top"
 terminal2_position="top"
 scrcpy_position="top"
 
-primary_top_y_size=950
-primary_top_x_size=$display_primary_x
-primary_top_y_position=0
-primary_top_x_position=$start_pos
+vifm_border=2
+ncmpcpp_border=2
+terminal1_border=2
+terminal2_border=6
+scrcpy_border=2
+
+primary_top_y_size() {
+    echo 950
+}
+
+primary_top_x_size() {
+    echo $(( display_primary_x - (border * 2) ))
+}
+
+# primary_top_y_position=0
+# primary_top_x_position=$start_pos
+primary_top_y_position() {
+    echo $((  0 + border ))
+}
+primary_top_x_position() {
+    echo $((  start_pos + border ))
+}
 
 primary_right_left_gap=10
 primary_right_left_y_size=$((  display_primary_y - 134 ))
@@ -48,16 +66,6 @@ other_right_left_x_size=$(( (display_other_x / 2) - (other_right_left_gap / 2) )
 other_right_x_position=$(( start_pos + (display_other_x / 2) + (other_right_left_gap / 2) ))
 other_left_x_position=$start_pos
 other_right_left_y_position=0
-
-find_position () {
-    case $1 in
-        'auto_vifm') position="$vifm_position" ;;
-        'auto_ncmpcpp') position="$ncmpcpp_position" ;;
-        'auto_terminal[1]') position="$terminal1_position" ;;
-        'auto_terminal[2]') position="$terminal2_position" ;;
-        'auto_scrcpy') position="$scrcpy_position" ;;
-    esac
-}
 
 change_size_and_position_other () {
     if [[ "$2" == "top" ]]; then
@@ -109,14 +117,24 @@ change_size_and_position_primary () {
             'auto_scrcpy') eval "i3-msg '[title=\"auto_scrcpy\"] resize set 408 px 880 px, \
               move absolute position 1490 px 83 px'" ;;
 
-            'auto_ncmpcpp') eval "i3-msg '[title=\"auto_ncmpcpp\"] resize set $primary_top_x_size px 910 px, \
-              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
+            'auto_ncmpcpp')
+                # eval "i3-msg '[title=\"auto_ncmpcpp\"] resize set $primary_top_x_size px 910 px, \
+                    # move absolute position $primary_top_x_position px $primary_top_y_position px'"
+                xdo resize -w $(primary_top_x_size) -h $(primary_top_y_size) -a 'auto_ncmpcpp'
+                xdo move -x $(primary_top_x_position) -y $(primary_top_y_position) -a 'auto_ncmpcpp'
+                ;;
 
-            'auto_terminal[1]') eval "i3-msg '[title=\"auto_terminal\[1\]\"] resize set $primary_top_x_size px $primary_top_y_size px, \
-              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
+            'auto_terminal[1]')
+                # eval "i3-msg '[title=\"auto_terminal\[1\]\"] resize set $(primary_top_x_size) px $(primary_top_y_size) px, \
+                    #   move absolute position $(primary_top_x_position) px $(primary_top_y_position) px'"
+                xdo move -x $(primary_top_x_position) -y $(primary_top_y_position) -a 'auto_terminal[1]'
+                xdo resize -w $(primary_top_x_size) -h $(primary_top_y_size) -a 'auto_terminal[1]'
+                ;;
 
-            'auto_terminal[2]') eval "i3-msg '[title=\"auto_terminal\[2\]\"] resize set $primary_top_x_size px $primary_top_y_size px, \
-              move absolute position $primary_top_x_position px $primary_top_y_position px'" ;;
+            'auto_terminal[2]')
+                xdo move -x $(primary_top_x_position) -y $(primary_top_y_position) -a 'auto_terminal[2]'
+                xdo resize -w $(primary_top_x_size) -h $(primary_top_y_size) -a 'auto_terminal[2]'
+                ;;
         esac
 
     else
@@ -147,6 +165,26 @@ change_size_and_position_primary () {
     fi
 }
 
+
+find_position () {
+    case $1 in
+        'auto_vifm') position="$vifm_position" ;;
+        'auto_ncmpcpp') position="$ncmpcpp_position" ;;
+        'auto_terminal[1]') position="$terminal1_position" ;;
+        'auto_terminal[2]') position="$terminal2_position" ;;
+        'auto_scrcpy') position="$scrcpy_position" ;;
+    esac
+}
+
+find_border () {
+    case $1 in
+        'auto_vifm') border="$vifm_border" ;;
+        'auto_ncmpcpp') border="$ncmpcpp_border" ;;
+        'auto_terminal[1]') border="$terminal1_border" ;;
+        'auto_terminal[2]') border="$terminal2_border" ;;
+        'auto_scrcpy') border="$scrcpy_border" ;;
+    esac
+}
 
 change_size_and_position () {
     if [[ "$1" != "" ]]; then
@@ -198,20 +236,6 @@ move_to_scratchpad () {
     esac
 }
 
-move_all_to_scratchpad () {
-    while read -r line; do
-        if [[ "$line" != "$1" ]]; then
-            case $line in
-                'auto_vifm') i3-msg '[title="auto_vifm"] move scratchpad' ;;
-                'auto_scrcpy') i3-msg '[title="auto_scrcpy"] move scratchpad' ;;
-                'auto_ncmpcpp') i3-msg '[title="auto_ncmpcpp"] move scratchpad' ;;
-                'auto_terminal[1]') i3-msg '[title="auto_terminal\[1\]"] move scratchpad' ;;
-                'auto_terminal[2]') i3-msg '[title="auto_terminal\[2\]"] move scratchpad' ;;
-            esac
-        fi
-    done <<< "$windows"
-}
-
 while read -r line; do
     case $line in
         'auto_vifm')
@@ -219,6 +243,7 @@ while read -r line; do
             ;;
         'auto_scrcpy')
             find_position "auto_scrcpy"
+            find_border "auto_scrcpy"
             change_font "auto_scrcpy"
             change_size_and_position "auto_scrcpy" "$position"
             ;;
@@ -241,6 +266,7 @@ case ${#window_array[@]} in
     '1')
         window_name="${window_array[0]}"
         find_position "$window_name"
+        find_border "$window_name"
         change_font "$window_name"
         change_size_and_position "$window_name" "$position"
         ;;
@@ -252,6 +278,8 @@ case ${#window_array[@]} in
 
         change_font "${window_array[-1]}"
         change_font "${window_array[-2]}"
+        find_border "${window_array[-1]}"
+        find_border "${window_array[-2]}"
         change_size_and_position "${window_array[-1]}" "right"
         change_size_and_position "${window_array[-2]}" "left"
         ;;

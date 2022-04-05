@@ -17,6 +17,20 @@ move_to_scratchpad_except () {
         fi
     done
 }
+hide_except () {
+    windows=$(xdotool search --desktop $(xdotool get_desktop) --name auto getwindowname %@)
+    echo "$windows" | while read -r line; do
+        if [[ "$line" != "$1" ]]; then
+            case $line in
+                'auto_vifm') xdo hide -a 'auto_vifm' ;;
+                'auto_scrcpy') xdo hide -a 'auto_scrcpy' ;;
+                'auto_ncmpcpp') xdo hide -a 'auto_ncmpcpp' ;;
+                'auto_terminal[1]') xdo hide -a 'auto_terminal[1]' ;;
+                'auto_terminal[2]') xdo hide -a 'auto_terminal[2]' ;;
+            esac
+        fi
+    done
+}
 
 scratchpad_show () {
     case $1 in
@@ -30,40 +44,68 @@ scratchpad_show () {
 
 case "$1" in
     "auto_terminal[1]")
-        if ! pgrep -a kitty | grep -F 'auto_terminal[1]'; then
+        if [[ "$split" == "no" ]]; then
+            hide_except "auto_terminal[1]"
+        fi
+        id=$(xdo id -a 'auto_terminal[1]');
+        if [ -z "$id" ]; then
             $kitty --listen-on=unix:@"auto_terminal[1]" --title 'auto_terminal[1]'
+        else
+            action='hide';
+            if [[ $(xprop -id $id | awk '/window state: / {print $3}') == 'Withdrawn' ]]; then
+                action='show';
+            fi
+            ~/.config/i3/i3Scripts/change_display_properties.sh
+            xdo $action -a 'auto_terminal[1]'
         fi
 
-        if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "auto_terminal[1]"
-        fi
-        scratchpad_show "auto_terminal[1]"
-        ~/.config/i3/i3Scripts/change_display_properties.sh
         ;;
 
     "auto_terminal[2]")
-        if ! pgrep -a kitty | grep -F 'auto_terminal[2]'; then
-            $kitty --listen-on=unix:@"auto_terminal[2]" --title 'auto_terminal[2]'
+        if [[ "$split" == "no" ]]; then
+            hide_except "auto_terminal[2]"
         fi
 
-        if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "auto_terminal[2]"
+        id=$(xdo id -a 'auto_terminal[2]');
+        if [ -z "$id" ]; then
+            $kitty --listen-on=unix:@"auto_terminal[2]" --title 'auto_terminal[2]'
+        else
+            action='hide';
+            if [[ $(xprop -id $id | awk '/window state: / {print $3}') == 'Withdrawn' ]]; then
+                action='show';
+            fi
+            ~/.config/i3/i3Scripts/change_display_properties.sh
+            xdo $action -a 'auto_terminal[2]'
         fi
-        scratchpad_show "auto_terminal[2]"
-        ~/.config/i3/i3Scripts/change_display_properties.sh
+
         ;;
 
     "auto_ncmpcpp")
-        if ! pgrep -a kitty | grep auto_ncmpcpp; then
-            $kitty --listen-on=unix:@auto_ncmpcpp --title auto_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
-        fi
-
         if [[ "$split" == "no" ]]; then
-            move_to_scratchpad_except "auto_ncmpcpp"
+            hide_except "auto_ncmpcpp"
         fi
 
-        scratchpad_show "auto_ncmpcpp"
-        ~/.config/i3/i3Scripts/change_display_properties.sh
+        id=$(xdo id -a 'auto_ncmpcpp');
+        if [ -z "$id" ]; then
+            $kitty --listen-on=unix:@"auto_ncmpcpp" --title 'auto_ncmpcpp' ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug
+        else
+            action='hide';
+            if [[ $(xprop -id $id | awk '/window state: / {print $3}') == 'Withdrawn' ]]; then
+                action='show';
+            fi
+            ~/.config/i3/i3Scripts/change_display_properties.sh
+            xdo $action -a 'auto_ncmpcpp'
+        fi
+        # if ! pgrep -a kitty | grep auto_ncmpcpp; then
+        #     $kitty --listen-on=unix:@auto_ncmpcpp --title auto_ncmpcpp ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
+        # fi
+
+        # if [[ "$split" == "no" ]]; then
+        #     move_to_scratchpad_except "auto_ncmpcpp"
+        # fi
+
+        # scratchpad_show "auto_ncmpcpp"
+        # ~/.config/i3/i3Scripts/change_display_properties.sh
 
         ;;
 
@@ -102,10 +144,11 @@ case "$1" in
 
     "launcher")
         focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+        # focused_output=$(~/MyScripts/get_monitor_name.sh)
         if [ "$focused_output" = "eDP1" ]; then
             font="Iosevka 13"
         else
-            font="Iosevka 16"
+            font="Iosevka 28"
         fi
 
         rofi -show drun -display-drun launcher -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}"

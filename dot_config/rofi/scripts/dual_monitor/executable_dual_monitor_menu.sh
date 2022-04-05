@@ -95,12 +95,12 @@ show_menu () {
         start_option="Launch dual monitor mode|"
     fi
 
-        focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
-        if [ "$focused_output" = "eDP1" ]; then
-            font="Iosevka 13"
-        else
-            font="Iosevka 16"
-        fi
+    focused_output=$(bspc query --monitors -m focused --names)
+    if [ "$focused_output" = "eDP1" ]; then
+        font="Iosevka 13"
+    else
+        font="Iosevka 16"
+    fi
 
     menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -p "Dual Monitor" -i <<< "${start_option}Adb|$vnc_server_option|$monitor_option")"
     case "$menu" in

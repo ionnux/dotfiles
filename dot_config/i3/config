@@ -70,6 +70,7 @@ bindsym $mod+backslash exec --no-startup-id "rofi -show window -config ~/.config
 bindsym $mod+slash exec --no-startup-id "~/.config/rofi/scripts/kdeconnect/kdeconnect_menu.sh"
 bindsym $mod+w exec --no-startup-id "~/.config/rofi/scripts/connections/wifi_menu.sh"
 bindsym $mod+v exec --no-startup-id "~/.config/rofi/scripts/dual_monitor/dual_monitor_menu.sh"
+bindsym $mod+z exec --no-startup-id "~/MyScripts/get_monitor_name.sh"
 
 # Toggle polybar
 bindsym $mod+p exec --no-startup-id "polybar-msg cmd toggle"
@@ -420,17 +421,18 @@ exec --no-startup-id "~/.config/polybar/launch.sh --blocks"
 # bindsym $mod+period nop Terminal2
 
 # auto_terminal[1]
-for_window [title="auto_terminal\[1\]"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[1]"
+for_window [title="auto_terminal\[1\]"] floating enable, border pixel 2; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh
 bindsym $mod+comma exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[1]"
 
 # auto_terminal[2]
-for_window [title="auto_terminal\[2\]"] floating enable, border pixel 6, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[2]"
+for_window [title="auto_terminal\[2\]"] floating enable, border pixel 6, move up 42 px,; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh
 bindsym $mod+period exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_terminal[2]"
+
 
 bindsym Control+Return exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "launcher"
 
 # auto_ncmpcpp
-for_window [title="auto_ncmpcpp"] floating enable, border pixel 2, move scratchpad; exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_ncmpcpp"
+for_window [title="auto_ncmpcpp"] floating enable, border pixel 2; exec --no-startup-id ~/.config/i3/i3Scripts/change_display_properties.sh
 bindsym $mod+n exec --no-startup-id ~/.config/i3/i3Scripts/launch_apps.sh "auto_ncmpcpp"
 
 # auto_vifm
