@@ -1,5 +1,5 @@
 #!/bin/bash
-secondary_resolution="1200x1920"
+secondary_resolution="1920x1200"
 secondary_resolution_x="$( awk -F 'x' '{print $1}' <<< "$secondary_resolution")"
 secondary_resolution_y="$( awk -F 'x' '{print $2}' <<< "$secondary_resolution")"
 refresh_rate="60"
