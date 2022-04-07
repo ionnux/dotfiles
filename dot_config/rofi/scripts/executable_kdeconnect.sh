@@ -7,7 +7,7 @@ selected_device_id=""
 has_pairing="false"
 device_names=""
 
-focused_output=$(i3-msg -t get_workspaces | jq -r '.[] | select(.focused==true).output')
+focused_output=$(bspc query --monitors -m focused --names)
 if [ "$focused_output" = "eDP1" ]; then
     font="Iosevka 13"
 else

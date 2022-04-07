@@ -138,7 +138,7 @@ command! mountMtp !aft-mtp-mount ~/mnt ; cd ~/mnt
 command! unmountMtp !fusermount -uz ~/mnt
 
 "send file using kdeconnect
-command! sendFile :!~/.config/rofi/scripts/vifm/kdeconnect_sendfile_menu.sh "$(echo "%d/%c" | tr -d "\\\\")" &
+command! sendFile :!~/.config/rofi/scripts/kdeconnect_sendfile.sh "$(echo "%d/%c" | tr -d "\\\\")" &
 
 "open file with spek
 command! spek :!spek %c &>/dev/null &

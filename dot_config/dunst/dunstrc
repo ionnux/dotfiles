@@ -25,7 +25,7 @@
     height = 120
     origin = top-center
     notification_limit = 1
-    offset = 0x10
+    offset = 0x15
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
