@@ -1,5 +1,5 @@
 linux-tools-common
-tlp
+tlp - power management tool
 cpufrequtils
 kitty - terminal
 i3-gaps - window manager
@@ -27,7 +27,7 @@ lazygit
 neovim-remote
 procs
 litecli
-mpv
+mpv - video player
 tr
 cut
 grep
@@ -37,7 +37,19 @@ fontpreview
 feh
 jq
 vnstat
+flameshot - screenshot app
 beets - media library management system
 spek - acoustic spectrum analyser 
 AudioRelay - Audio server and client
 pavucontrol - PulseAudio volume control
+zathura - pdf reader
+foliate - ebook reader
+pop-theme - gtk theme
+Nordic - gtk theme
+lxappearance - gtk theme switcher
+pipes.sh - screensaver app
+toipe - terminal type tester
+tt - terminal type tester
+gtypist - terminal type tester
+gpick - color picker
+go-mtpfs - mount mtp devices

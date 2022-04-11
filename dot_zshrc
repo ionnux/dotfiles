@@ -140,6 +140,7 @@ export MANPAGER='nvim --appimage-extract-and-run +Man!'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias studio="studio.sh"
+alias foliate="com.github.johnfactotum.Foliate"
 
 # because i'm using vifmimg
 alias vifm="~/.config/vifm/scripts/vifmrun"

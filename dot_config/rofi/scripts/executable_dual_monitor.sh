@@ -16,12 +16,12 @@ add_secondary_monitor() {
     eval "xrandr --addmode "$secondary_name" "${secondary_resolution}_${refresh_rate}.00""
     eval "xrandr --output $secondary_name --mode "${secondary_resolution}_${refresh_rate}.00" $secondary_position"
 
-    if ! pgrep -f -a "polybar -q $secondary_name"; then
-        polybar -q $secondary_name -c "~/.config/polybar/blocks/config.ini" &
+    if ! pgrep -f -a "polybar -q secondary"; then
+        polybar -q secondary -c "~/.config/polybar/custom/config.ini" &
     fi
 
-    if ! pgrep -f -a "polybar -q $primary_name"; then
-        polybar -q $primary_name -c "~/.config/polybar/blocks/config.ini" &
+    if ! pgrep -f -a "polybar -q primary"; then
+        polybar -q primary -c "~/.config/polybar/custom/config.ini" &
     fi
 
     ~/.fehbg
@@ -32,12 +32,12 @@ remove_secondary_monitor() {
     eval "xrandr --delmode "$secondary_name" "${secondary_resolution}_${refresh_rate}.00""
     eval "xrandr --rmmode "${secondary_resolution}_${refresh_rate}.00""
 
-    if pgrep -f -a "polybar -q $secondary_name"; then
-        pkill -f "polybar -q $secondary_name"
+    if pgrep -f -a "polybar -q secondary"; then
+        pkill --signal=9 -f "polybar -q secondary"
     fi
 
-    if ! pgrep -f -a "polybar -q $primary_name"; then
-        polybar -q $primary_name -c "~/.config/polybar/blocks/config.ini" &
+    if ! pgrep -f -a "polybar -q primary"; then
+        polybar -q primary -c "~/.config/polybar/custom/config.ini" &
     fi
 
     ~/.fehbg
@@ -46,16 +46,22 @@ remove_secondary_monitor() {
 
 start_vnc_server() {
     eval 'x11vnc -nocursorshape -nocursorpos -solid "#4c566a" -forever -rfbport 5901 -fs 0 -bg -noprimary -repeat -xdamage -display :0 -wireframe -clip ${secondary_resolution}+${primary_resolution_x}+0'
-    pkill picom
+    pkill --signal=9 picom
     dunstify -h string:x-dunst-stack-tag:Vnc "Vnc" -h string:x-dunst-stack-tag:Vnc "server started"
+
+    # reload bspwm config
+    bspc wm -r
 }
 
 stop_vnc_server() {
-    pkill x11vnc
+    pkill --signal=9 x11vnc
     dunstify -h string:x-dunst-stack-tag:Vnc "Vnc" -h string:x-dunst-stack-tag:Vnc "server stopped"
     if ! pgrep -a picom; then
         picom --experimental-backends &
     fi
+
+    # reload bspwm config
+    bspc wm -r
 }
 
 start () {

@@ -54,7 +54,7 @@ configuration {
      location:   south;
      width:      100%;
      children:   [ horibox ];
-     background-color: @bg;
+     background-color: #fabd2f;
      transparency: "real";
      /* border: 2px; */
      /* border-radius: 0px; */
@@ -65,9 +65,8 @@ configuration {
 
  horibox {
     orientation: horizontal;
-    children:   [ prompt, entry, listview ];
+    children:   [ entry, listview ];
     background-color: @bg;
-    margin: 0px 0px 2px 0px;
      border: 2px;
      border-radius: 0px;
      border-color: @grey3;

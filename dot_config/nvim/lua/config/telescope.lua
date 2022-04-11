@@ -127,12 +127,12 @@ wk.register({
 		r = { "<cmd>Telescope frecency<cr>", "Telescope: Recent Files using Frecency" }, -- additional options for creating the keymap
 		o = { "<cmd>Telescope oldfiles<cr>", "Telescope:  Previously Opened Files" }, -- additional options for creating the keymap
 		p = { "<cmd>Telescope projects theme=get_dropdown<cr>", "Telescope: Projects" },
-		P = {
-			function()
-				require("telescope").extensions.packer.plugins(opts)
-			end,
-			"Telescope: Packer",
-		},
+		-- P = {
+		-- 	function()
+		-- 		require("telescope").extensions.packer.plugins(opts)
+		-- 	end,
+		-- 	"Telescope: Packer",
+		-- },
 		b = { "<cmd>Telescope buffers<cr>", "Telescope: Buffers" },
 		h = { "<cmd>Telescope help_tags<cr>", "Telescope: Help Tags" },
 	},

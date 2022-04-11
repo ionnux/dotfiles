@@ -134,8 +134,10 @@ mark h ~/
 " %m run the command in a menu window
 
 "mount android devices
-command! mountMtp !aft-mtp-mount ~/mnt ; cd ~/mnt
-command! unmountMtp !fusermount -uz ~/mnt
+"command! mountMtp !go-mtpfs ~/mnt &>/dev/null &; cd ~/mnt
+"command! mountMtp !jmtpfs ~/mnt ; cd ~/mnt
+command! mountMtp !~/MyScripts/mount_phone.sh &>/dev/null &
+command! unmountMtp !fusermount -uzq ~/mnt
 
 "send file using kdeconnect
 command! sendFile :!~/.config/rofi/scripts/kdeconnect_sendfile.sh "$(echo "%d/%c" | tr -d "\\\\")" &
@@ -256,6 +258,11 @@ filextype *.ps,*.eps,*.ps.gz
         \ {View in gv}
         \ gv %c %i &,
 
+" Epub
+filextype *.epub
+        \ {View in zathura}
+        \  com.github.johnfactotum.Foliate %c %i &,
+
 " Djvu
 filextype *.djvu
         \ {View in zathura}
@@ -371,7 +378,7 @@ filetype *.asc
        \ !!gpg --verify %c,
 
 " Torrent
-filetype *.torrent ktorrent %f &
+filetype *.torrent qbittorrent %f &
 fileviewer *.torrent dumptorrent -v %c
 
 " FuseZipMount
@@ -497,7 +504,7 @@ nnoremap sx :!sxiv -t %d & <cr>
 
 nnoremap i <c-g>
 
-nnoremap mm :mountMtp | unmountMtp | mountMtp | cd ~/mnt<cr>
+nnoremap mm :mountMtp | cd ~/mnt<cr>
 nnoremap mu :unmountMtp<cr>
 nnoremap mg :cd ~/mnt<cr>"goto mount directory
 
