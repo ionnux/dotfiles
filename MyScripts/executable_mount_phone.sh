@@ -2,10 +2,8 @@
 
 count=1
 fusermount -uzq ~/mnt
-while [[ -z $(ls ~/mnt) && count -le 2 ]]; do
+while [[ -z $(ls ~/mnt) && $count -le 4 ]]; do
     go-mtpfs ~/mnt
+    sleep 3
     count=$(( count + 1 ))
-    echo count
-    sleep 4
 done
-echo done
