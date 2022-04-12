@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 CONNECTED_NETWORK=""
 NETWORK_NAMES=""
 NETWORK_DISPLAY_NAMES=""
+error_message="Error: Connection activation failed: (7) Secrets were required, but not provided."
 
 
 
@@ -55,8 +56,8 @@ show_available_networks () {
                         if [[ $menu = $CONNECTED_NETWORK*connected* ]]; then
                             nmcli device disconnect wlo1
                         else
-                            prompt=$(nmcli -a device wifi connect "$menu")
-                            if [ "$prompt" = "Password: " ]; then
+                            prompt=$(nmcli device wifi connect "$menu")
+                            if [[ "$prompt" == "$error_message" ]]; then
                                 show_password_prompt "$menu"
                             fi
                         fi
@@ -69,7 +70,6 @@ show_available_networks () {
 show_password_prompt () {
     password="$(rofi -password -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i -theme-str "configuration { font: \"$font\"; }" -theme-str 'entry { placeholder: "   Password..."; }' -p "Enter password")"
     case "$password" in
-        '') nmcli device wifi connect "$1" ;;
         *) nmcli device wifi connect "$1" password $password ;;
     esac
 }
@@ -77,7 +77,7 @@ show_password_prompt () {
 show_wifi_menu () {
     focused_output=$(bspc query --monitors -m focused --names)
     if [ "$focused_output" = "eDP1" ]; then
-        font="Iosevka 13"
+        font="Iosevka 12"
     else
         font="Iosevka 16"
     fi

@@ -1,0 +1,181 @@
+#!/bin/bash
+
+kitty=~/.local/kitty.app/bin/kitty
+split="no"
+focused_output=$(bspc query --monitors -m focused --names)
+windows=$(xdotool search --desktop $(xdotool get_desktop) --name auto getwindowname %@)
+display_primary_x=1920
+display_primary_y=1080
+display_other_x=1920
+display_other_y=1200
+display_primary_start_position=0
+display_other_start_position=1920
+
+if [ "$focused_output" = "eDP1" ]; then
+    start_position=$display_primary_start_position
+    width=$(( display_primary_x - 6 ))
+    height=950
+    x=$((  start_position + 1 ))
+    y=0
+    font=14
+else
+    start_position=$display_other_start_position
+    width=$(( display_other_x - 6 ))
+    height=1050
+    x=$((  start_position + 1 ))
+    y=0
+    font=18
+fi
+
+change_font() {
+    case $1 in
+        'auto_vifm') $kitty @ --to unix:@auto_vifm set-font-size $font ;;
+        'auto_ncmpcpp') $kitty @ --to unix:@auto_ncmpcpp set-font-size $font ;;
+        'auto_terminal1') $kitty @ --to unix:@"auto_terminal1" set-font-size $font ;;
+        'auto_terminal2') $kitty @ --to unix:@"auto_terminal2" set-font-size $font ;;
+        'auto_fullterm') $kitty @ --to unix:/tmp/kitty_remote set-font-size $font ;;
+    esac
+}
+
+# hide_except () {
+#     windows=$(xdotool search --desktop $(xdotool get_desktop) --name auto getwindowname %@)
+#     echo "$windows" | while read -r line; do
+#         if [[ "$line" != "$1" ]]; then
+#             case $line in
+#                 'auto_vifm') xdo hide -a 'auto_vifm' ;;
+#                 'auto_scrcpy') xdo hide -a 'auto_scrcpy' ;;
+#                 'auto_ncmpcpp') xdo hide -a 'auto_ncmpcpp' ;;
+#                 'auto_terminal1') xdo hide -a 'auto_terminal1' ;;
+#                 'auto_terminal2') xdo hide -a 'auto_terminal2' ;;
+#             esac
+#         fi
+#     done
+# }
+hide_except () {
+    ids=$(xdotool search --desktop $(xdotool get_desktop) --name auto)
+    echo "$ids" | while read -r id; do
+        if [[ "$id" != "$1" ]]; then
+            bspc node $id --flag hidden=on
+        fi
+    done
+}
+
+scratchpad_show () {
+    case $1 in
+        'auto_vifm') i3-msg '[title="auto_vifm"] scratchpad show' ;;
+        'auto_scrcpy') i3-msg '[title="auto_scrcpy"] scratchpad show' ;;
+        'auto_ncmpcpp') i3-msg '[title="auto_ncmpcpp"] scratchpad show' ;;
+        'auto_terminal1') i3-msg '[title="auto_terminal1"] scratchpad show' ;;
+        'auto_terminal2') i3-msg '[title="auto_terminal2"] scratchpad show' ;;
+    esac
+}
+
+case "$1" in
+    "auto_terminal1")
+        id=$(xdotool search --name auto_terminal1)
+        if [ -z "$id" ]; then
+            bspc rule -a kitty:kitty:auto_terminal1 sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            $kitty --listen-on=unix:@"auto_terminal1" --title 'auto_terminal1' &
+        else
+            bspc rule -a kitty:kitty:auto_terminal1 sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            bspc node $id --flag hidden -m $focused_output -f
+        fi
+
+        if [[ "$split" == "no" ]]; then
+            hide_except "$id"
+        fi
+
+        sleep 0.2
+        change_font "$1"
+        ;;
+
+    "auto_terminal2")
+        id=$(xdotool search --name auto_terminal2)
+        if [ -z "$id" ]; then
+            bspc rule -r kitty:kitty:auto_terminal2
+            bspc rule -a kitty:kitty:auto_terminal2 sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            $kitty --listen-on=unix:@"auto_terminal2" --title 'auto_terminal2' &
+        else
+            bspc rule -r kitty:kitty:auto_terminal2
+            bspc rule -a kitty:kitty:auto_terminal2 sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            bspc node $id --flag hidden -m $focused_output -f
+        fi
+
+        if [[ "$split" == "no" ]]; then
+            hide_except "$id"
+        fi
+
+        sleep 0.2
+        change_font "$1"
+        ;;
+
+    "auto_ncmpcpp")
+        id=$(xdotool search --name auto_ncmpcpp)
+        if [ -z "$id" ]; then
+            bspc rule -r kitty:kitty:auto_ncmpcpp
+            bspc rule -a kitty:kitty:auto_ncmpcpp sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            $kitty --listen-on=unix:@"auto_ncmpcpp" --title 'auto_ncmpcpp' ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &
+        else
+            bspc rule -r kitty:kitty:auto_ncmpcpp
+            bspc rule -a kitty:kitty:auto_ncmpcpp sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            bspc node $id --flag hidden -f
+        fi
+
+        if [[ "$split" == "no" ]]; then
+            hide_except "$id"
+        fi
+
+        sleep 0.2
+        change_font "$1"
+        ;;
+
+    "auto_vifm")
+        id=$(xdotool search --name auto_vifm)
+        if [ -z "$id" ]; then
+            bspc rule -a kitty:kitty:auto_vifm sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            $kitty --listen-on=unix:@auto_vifm --title auto_vifm ~/.config/vifm/scripts/vifmrun ~ &
+        else
+            bspc rule -a kitty:kitty:auto_vifm sticky=on state=floating rectangle=${width}x${height}+${x}+${y}
+            bspc node $id --flag hidden -f
+        fi
+
+        if [[ "$split" == "no" ]]; then
+            hide_except "$id"
+        fi
+
+        sleep 0.2
+        change_font "$1"
+        ;;
+
+    "auto_fullterm")
+        $kitty --listen-on=unix:/tmp/kitty_remote --title auto_fullterm &
+        disown
+        move_to_scratchpad_except "auto_fullterm"
+        sleep 0.2
+        ~/.config/i3/i3Scripts/change_display_properties.sh
+        ;;
+
+    "auto_scrcpy")
+        if ! pgrep -a scrcpy | grep auto_scrcpy; then
+            scrcpy --window-title 'auto_scrcpy' --tcpip -Sw &
+        fi
+
+        if [[ "$split" == "no" ]]; then
+            move_to_scratchpad_except "auto_scrcpy"
+        fi
+        scratchpad_show "auto_scrcpy"
+        ~/.config/i3/i3Scripts/change_display_properties.sh
+        # i3-msg '[title="auto_scrcpy"] scratchpad show, resize set 408 px 880 px, move absolute position 1490 px 83 px'
+        ;;
+
+    "launcher")
+        focused_output=$(bspc query --monitors -m focused --names)
+        if [ "$focused_output" = "eDP1" ]; then
+            font="Iosevka 13"
+        else
+            font="Iosevka 16"
+        fi
+
+        rofi -show drun -display-drun launcher -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}"
+        ;;
+esac
