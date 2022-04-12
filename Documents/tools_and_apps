@@ -53,3 +53,7 @@ tt - terminal type tester
 gtypist - terminal type tester
 gpick - color picker
 go-mtpfs - mount mtp devices
+mpd - music player daemon
+ncmpcpp - mpd client
+mpc - commandline mpd client
+mpDris2 - MPRIS2 bridge for mpd
