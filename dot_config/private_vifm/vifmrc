@@ -599,6 +599,8 @@ nnoremap > <c-w>>
 " ------------------------------------------------------------------------------
 
 " Various customization examples
+set number
+set relativenumber
 
 " Use ag (the silver searcher) instead of grep
 "
