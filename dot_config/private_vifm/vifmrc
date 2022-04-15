@@ -56,7 +56,7 @@ set norunexec
 " Selected color scheme
 " The following line will cause issues if using vifm.vim with regular vim.
 " Either use neovim or comment out the following line.
-colorscheme palenight
+colorscheme tokyonight
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -98,7 +98,7 @@ set sizefmt=units:iec,precision:0,nospace
 " perform fast file cloning (copy-on-write), when available
 set iooptions=fastfilecloning
 
-set tuioptions=psu
+set tuioptions=psr
 
 " Use increment searching (search while typing)
 set incsearch
@@ -133,9 +133,7 @@ mark h ~/
 " %D the other window directory name.
 " %m run the command in a menu window
 
-"mount android devices
-"command! mountMtp !go-mtpfs ~/mnt &>/dev/null &; cd ~/mnt
-"command! mountMtp !jmtpfs ~/mnt ; cd ~/mnt
+"mount mtp devices
 command! mountMtp !~/MyScripts/mount_phone.sh &>/dev/null &
 command! unmountMtp !fusermount -uzq ~/mnt
 

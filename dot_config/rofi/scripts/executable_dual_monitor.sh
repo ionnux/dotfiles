@@ -79,12 +79,12 @@ stop () {
 }
 
 show_menu () {
-    if pgrep -a x11vnc; then
-        is_vnc_server_active="yes"
-        vnc_server_option="Stop vnc server"
-    else
+  if [[ -z $(pgrep -a x11vnc) ]]; then
         is_vnc_server_active="no"
         vnc_server_option="Start vnc server"
+    else
+        is_vnc_server_active="yes"
+        vnc_server_option="Stop vnc server"
     fi
 
     if [[ "$(xrandr --listactivemonitors | grep Monitors | awk -F': ' '{print $2}')" -gt "1" ]]; then

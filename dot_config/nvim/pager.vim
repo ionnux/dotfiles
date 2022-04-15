@@ -1,13 +1,14 @@
 
 packadd hop.nvim
 " packadd rose-pine.nvim
-" lua require'hop'.setup()
-nnoremap <silent>s :HopChar1AC<cr>
-nnoremap <silent>S :HopChar1BC<cr>
+lua require'hop'.setup()
+nnoremap <silent>s :HopChar1<cr>
 vnoremap <silent>s <cmd> lua require'hop'.hint_char1()<cr>
-nnoremap <silent>gl :HopLineAC<cr>
-nnoremap <silent>gL :HopLineBC<cr>
+nnoremap <silent>gl :HopLine<cr>
 vnoremap <silent>gl <cmd> lua require'hop'.hint_lines()<cr>
+
+" highlight on yank
+au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = Search }
 
 colorscheme tokyonight
 let g:tokyonight_style = "storm"

@@ -1,8 +1,10 @@
 #! /bin/bash
 
-if [[ -z $(pgrep -a sxhkd) ]]; then
-    sxhkd -a Return &
-fi
+# if [[ -z $(pgrep -a sxhkd) ]]; then
+
+pkill --signal=9 sxhkd
+sxhkd -a Return &
+# fi
 
 bspc monitor eDP1 -d 1 2 3
 bspc monitor VIRTUAL1 -d 4 5 6
@@ -14,7 +16,6 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc rule -a kitty:kitty:scratchpad_terminal1 sticky=on state=floating
 xsetroot -cursor_name left_ptr
 
 # launch polybar on primary monitor if it has not been started
