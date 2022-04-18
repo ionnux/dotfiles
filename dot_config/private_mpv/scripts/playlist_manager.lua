@@ -11,10 +11,10 @@ local settings = {
 	key_movedown = "j",
 	key_movepageup = "PGUP",
 	key_movepagedown = "PGDWN",
-	key_movebegin = "0",
-	key_moveend = "$",
-	key_selectfile = "l h",
-	key_unselectfile = "",
+	key_movebegin = "g",
+	key_moveend = "G",
+	key_selectfile = "l",
+	key_unselectfile = "h",
 	key_playfile = "ENTER",
 	key_removefile = "x",
 	key_closeplaylist = "q",
@@ -65,13 +65,13 @@ local settings = {
   ]],
 
 	--loadfiles at startup if there is 0 or 1 items in playlist, if 0 uses worḱing dir for files
-	loadfiles_on_start = false,
+	loadfiles_on_start = true,
 
 	--sort playlist on mpv start
-	sortplaylist_on_start = false,
+	sortplaylist_on_start = true,
 
 	--sort playlist when files are added to playlist
-	sortplaylist_on_file_add = false,
+	sortplaylist_on_file_add = true,
 
 	--use alphanumerical sort
 	alphanumsort = true,
@@ -111,10 +111,10 @@ local settings = {
 	resolve_titles = false,
 
 	--osd timeout on inactivity, with high value on this open_toggles is good to be true
-	playlist_display_timeout = 5,
+	playlist_display_timeout = 50,
 
 	--amount of entries to show before slicing. Optimal value depends on font/video size etc.
-	showamount = 16,
+	showamount = 30,
 
 	--font size scales by window, if false requires larger font and padding sizes
 	scale_playlist_by_window = false,
@@ -143,7 +143,7 @@ local settings = {
 	--%cursor = position of navigation
 	--%plen = playlist length
 	--%N = newline
-	playlist_header = "%N%N[%pos/%plen]%N",
+	playlist_header = "%N%N[%cursor/%plen]%N",
 
 	--Playlist file templates
 	--%pos = position of file with leading zeros

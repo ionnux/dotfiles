@@ -1,11 +1,6 @@
 #
 # wm independent hotkeys
 #
-
-# terminal emulator
-super + Return
-	~/.local/kitty.app/bin/kitty
-
 # move desktop to next monitor
 super + x
   bspc desktop focused -m next --follow && \
@@ -18,8 +13,13 @@ Print
   flameshot full -p ~/Pictures/Screenshots
 
 # scratchpad apps
-super + {comma,period,n,f}
-  ~/.config/bspwm/scripts/launch_apps.sh scratchpad_{terminal1,terminal2,ncmpcpp,vifm}
+super + {comma,period,n,f,semicolon}
+  ~/.config/bspwm/scripts/launch_apps.sh scratchpad_{terminal1,terminal2,ncmpcpp,vifm,vivaldi}
+
+# terminal emulator
+super + Return
+  ~/.config/bspwm/scripts/launch_apps.sh kitty_term
+
 
 # rofi scripts
 super + {v,slash,w,space}
@@ -51,9 +51,8 @@ super + backslash
   rofi -show window -config ~/.config/rofi/dmenu.rasi
 
 # make sxhkd reload its configuration files:
-# super + shift + r
-# 	pkill -USR1 -x sxhkd &&\
-#   dunstify -h string:x-dunst-stack-tag:control "sxhkd" -h string:x-dunst-stack-tag:control "Settings Reloaded"
+super + shift + r
+  ~/.config/bspwm/scripts/launch_apps.sh "sxhkd"
 
 #
 # bspwm hotkeys
@@ -64,10 +63,9 @@ super + b ; {q,r}
 	bspc {quit,wm -r} &&\
   dunstify -h string:x-dunst-stack-tag:control "bspwm" -h string:x-dunst-stack-tag:control "Settings Reloaded"
 
-
 # close and kill
-super + {_,shift + }q
-	bspc node -{c,k}
+super + shift + q
+	bspc node -c
 
 # alternate between the tiled and monocle layout
 # super + m

@@ -177,6 +177,9 @@ command! zip zip -r %f.zip %f
 " unzip selected zipped files
 command! unzip unzip %c -d $(echo "%c" | tr -d ".zip") &
 
+" unrar selected rar files
+command! unrar unrar x %c &
+
 " untar selected archived files
 command! untar tar xf %f %s
 

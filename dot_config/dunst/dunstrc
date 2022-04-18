@@ -22,7 +22,7 @@
 
     # geometry = "500x1+710+58"
     width = 400
-    height = 120
+    height = 520
     origin = top-center
     notification_limit = 1
     offset = 0x15
