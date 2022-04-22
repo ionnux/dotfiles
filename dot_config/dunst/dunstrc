@@ -71,7 +71,7 @@
     padding = 8
 
     # Horizontal padding.
-    horizontal_padding = 12
+    horizontal_padding = 8
 
     # Padding between text and icon.
     text_icon_padding = 0
@@ -228,7 +228,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 12
+    corner_radius = 8
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this

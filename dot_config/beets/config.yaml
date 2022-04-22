@@ -1,4 +1,6 @@
 directory: ~/Music/Albums
+paths:
+    default: $albumartist/$album%aunique{}/$track $artist - $title
 library: ~/.config/beets/musiclibrary.db
 plugins:
     - fetchart
