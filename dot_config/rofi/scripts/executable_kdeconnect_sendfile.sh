@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+source ~/MyScripts/rofi_font_size.sh
+
 PAIRING_DEVICE_NAME=""
 PAIRING_DEVICE_ID=""
 SELECTED_DEVICE_NAME=""

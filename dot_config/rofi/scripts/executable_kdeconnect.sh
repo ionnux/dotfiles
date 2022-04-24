@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source ~/MyScripts/rofi_font_size.sh
 
 pairing_device_name=""
 pairing_device_id=""
@@ -6,13 +7,6 @@ selected_device_name=""
 selected_device_id=""
 has_pairing="false"
 device_names=""
-
-focused_output=$(bspc query --monitors -m focused --names)
-if [ "$focused_output" = "eDP1" ]; then
-    font="Iosevka 13"
-else
-    font="Iosevka 16"
-fi
 
 start () {
     counter=0

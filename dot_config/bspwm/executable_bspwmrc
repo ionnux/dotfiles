@@ -52,8 +52,8 @@ bspc subscribe node_focus | while read node; do
     focused_node=$(echo "$node" | awk '{print $4}')
     current_window_name=$(xdotool getwindowname "$focused_node")
     if [[ $current_window_name == scratchpad_terminal2 ]]; then
-        bspc config focused_border_color "#ebcb8b"
+        bspc config focused_border_color "#ebbcba"
     else
-        bspc config focused_border_color "#b48ead"
+        bspc config focused_border_color "#6e6a86"
     fi
 done

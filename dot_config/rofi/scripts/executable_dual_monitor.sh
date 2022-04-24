@@ -1,4 +1,6 @@
 #!/bin/bash
+source ~/MyScripts/rofi_font_size.sh
+
 secondary_resolution="1920x1200"
 secondary_resolution_x="$( awk -F 'x' '{print $1}' <<< "$secondary_resolution")"
 secondary_resolution_y="$( awk -F 'x' '{print $2}' <<< "$secondary_resolution")"
@@ -17,11 +19,11 @@ add_secondary_monitor() {
     eval "xrandr --output $secondary_name --mode "${secondary_resolution}_${refresh_rate}.00" $secondary_position"
 
     if ! pgrep -f -a "polybar -q secondary"; then
-        polybar -q secondary -c "~/.config/polybar/custom/config.ini" &
+       polybar -r -q secondary -c "~/.config/polybar/custom/config.ini" &
     fi
 
     if ! pgrep -f -a "polybar -q primary"; then
-        polybar -q primary -c "~/.config/polybar/custom/config.ini" &
+        polybar -r -q primary -c "~/.config/polybar/custom/config.ini" &
     fi
 
     ~/.fehbg
@@ -37,7 +39,7 @@ remove_secondary_monitor() {
     fi
 
     if ! pgrep -f -a "polybar -q primary"; then
-        polybar -q primary -c "~/.config/polybar/custom/config.ini" &
+        polybar -r -q primary -c "~/.config/polybar/custom/config.ini" &
     fi
 
     ~/.fehbg
@@ -79,7 +81,7 @@ stop () {
 }
 
 show_menu () {
-  if [[ -z $(pgrep -a x11vnc) ]]; then
+    if [[ -z $(pgrep -a x11vnc) ]]; then
         is_vnc_server_active="no"
         vnc_server_option="Start vnc server"
     else
@@ -99,13 +101,6 @@ show_menu () {
         start_option="Stop dual monitor mode|"
     elif [[ "$is_dual_monitor_active" == "no" ]] && [[ "$is_vnc_server_active" == "no" ]]; then
         start_option="Launch dual monitor mode|"
-    fi
-
-    focused_output=$(bspc query --monitors -m focused --names)
-    if [ "$focused_output" = "eDP1" ]; then
-        font="Iosevka 13"
-    else
-        font="Iosevka 16"
     fi
 
     menu="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -p "Dual Monitor" -i <<< "${start_option}Adb|$vnc_server_option|$monitor_option")"
