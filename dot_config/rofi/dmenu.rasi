@@ -65,7 +65,7 @@ configuration {
 
  horibox {
     orientation: horizontal;
-    children:   [ entry, listview ];
+    children:   [ prompt, entry, listview ];
     background-color: @bg;
      border: 2px;
      border-radius: 0px;
