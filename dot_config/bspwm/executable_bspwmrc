@@ -20,9 +20,12 @@ xsetroot -cursor_name left_ptr
 
 # launch polybar on primary monitor if it has not been started
 if [[ -z $(pgrep -f -a "polybar -q primary") ]]; then
-    polybar -q primary -c "~/.config/polybar/custom/config.ini" &
+    polybar -r -q primary -c "~/.config/polybar/custom/config.ini" &
 fi
-
+if [[ -z $(pgrep -f -a "polybar -q secondary") ]]; then
+    polybar -r -q secondary -c "~/.config/polybar/custom/config.ini" &
+fi
+  
 # set wallpaper if x11vnc is not running
 if [[ -z $(pgrep -a x11vnc) ]]; then
     ~/.fehbg
@@ -52,8 +55,11 @@ bspc subscribe node_focus | while read node; do
     focused_node=$(echo "$node" | awk '{print $4}')
     current_window_name=$(xdotool getwindowname "$focused_node")
     if [[ $current_window_name == scratchpad_terminal2 ]]; then
-        bspc config focused_border_color "#ebbcba"
+        # bspc config focused_border_color "#ebbcba"
+        bspc config focused_border_color "#f7768e"
     else
-        bspc config focused_border_color "#6e6a86"
+        # bspc config focused_border_color "#6e6a86"
+        bspc config focused_border_color "#ebbcba"
+        # bspc config focused_border_color "#30c3ef"
     fi
 done

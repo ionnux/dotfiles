@@ -1,12 +1,34 @@
 #!/usr/bin/bash
 source ~/MyScripts/rofi_font_size.sh
+source ~/MyScripts/tasker_variables.sh
+rofi_config='-sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i'
 
 show_device_menu() {
-    local selected_command="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -i -p "wifi" <<< "Bluetooth [Toggle]|Flash [Toggle]")"
-    case "$selected_command" in
-        'Bluetooth [Toggle]') kdeconnect-cli --ping-msg "$selected_command" --name "$1" ;;
-        'Flash [Toggle]') kdeconnect-cli --ping-msg "$selected_command" --name "$1" ;;
-    esac
+    local selected_command="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -i\
+      -p "Kdeconnect Remote Command" <<< "Mobile Data [$mobile_data]|Bluetooth [$bluetooth]|Flash [$flash]|Open Link")"
+
+    if [[ $selected_command == Bluetooth* ]]; then
+        kdeconnect-cli --ping-msg "Remote Command:$selected_command" --name "$1"
+    elif [[ $selected_command == "Mobile Data"* ]]; then
+        kdeconnect-cli --ping-msg "Remote Command:$selected_command" --name "$1"
+    elif [[ $selected_command == Flash* ]]; then
+        kdeconnect-cli --ping-msg "Remote Command:$selected_command" --name "$1"
+    elif [[ $selected_command == "Open Link" ]]; then
+        local clipboard="$(xclip -o)"
+        local regex='^(https?|ftp|file)://[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]\.[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]$'
+        if [[ $clipboard =~ $regex ]]; then
+            local link="$clipboard"
+        else
+            local input="$(eval "rofi $rofi_config -theme-str 'configuration { font: \"$font\"; }' -theme-str 'entry { placeholder: \"   Link...\"; }' -p 'Enter Link'")"
+            if [[ $input =~ $regex ]]; then
+                local link="$input"
+            else
+                if [[ ! -z $input ]]; then local link="https://www.google.com/search?q=$input"; fi
+            fi
+        fi
+
+        if [[ ! -z $link ]]; then kdeconnect-cli --ping-msg "Remote Command:${selected_command}:${link}" --name "$1"; fi
+    fi
 }
 
 show_available_devices() {

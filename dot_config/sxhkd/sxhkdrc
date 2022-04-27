@@ -22,8 +22,8 @@ super + Return
 
 
 # rofi scripts
-super + {v,slash,w,space}
-  ~/.config/rofi/scripts/{dual_monitor,kdeconnect,wifi,launcher}.sh
+super + {v,slash,shift + slash,w,space}
+  ~/.config/rofi/scripts/{dual_monitor,kdeconnect,kdeconnect_remote_control,wifi,launcher}.sh
 
 # super + {_,shift + } p
 super + p
