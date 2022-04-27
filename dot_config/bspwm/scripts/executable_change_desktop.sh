@@ -1,22 +1,34 @@
 #!/bin/bash
 
-toggle="off"
-while getopts :t opt; do
+toggle="no"
+while getopts :tfd opt; do
     case "${opt}" in
-        t)  toggle="on" ;;
+        t)  toggle="yes" ;;
+        f)
+            command="desktop -f"
+            move="no"
+            ;;
+        d)
+            command="node -d"
+            move="yes"
+            ;;
     esac
 done
 
 shift "$(($OPTIND -1))"
-echo "toggle: $toggle"
 
-if [[ $toggle == on ]]; then
-    if [[ "$(bspc query --desktops --node focused --names)" == "$1" ]]; then
-        bspc desktop last.local -f
+current_desktop="$(bspc query --desktops --desktop focused --names)"
+if [[ $toggle == yes ]]; then
+    if [[ $current_desktop == $1 ]]; then
+        if [[ $move == yes ]]; then
+            bspc node -d last.local -f
+        else
+            bspc desktop last -f
+        fi
     else
-        bspc desktop -f "$1"
+        eval "bspc "$command" "$1" "$2""
     fi
 else
-    bspc desktop -f "$1"
+    eval "bspc "$command" "$1" "$2""
 fi
 
