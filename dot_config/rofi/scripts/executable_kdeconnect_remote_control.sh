@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 source ~/MyScripts/rofi_font_size.sh
-source ~/MyScripts/tasker_variables.sh
+source ~/.config/dunst/scripts/remote_command_variables.sh
 rofi_config='-sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i'
 
 show_device_menu() {
