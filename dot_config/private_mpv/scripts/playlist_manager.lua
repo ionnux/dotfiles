@@ -58,11 +58,11 @@ local settings = {
 	--json array of filetypes to search from directory
 	loadfiles_filetypes = [[
     [
-      "jpg", "jpeg", "png", "tif", "tiff", "gif", "webp", "svg", "bmp",
-      "mp3", "wav", "ogm", "flac", "m4a", "wma", "ogg", "opus",
-      "mkv", "avi", "mp4", "ogv", "webm", "rmvb", "flv", "wmv", "mpeg", "mpg", "m4v", "3gp"
+      "mkv", "avi", "mp4", "ogv", "webm", "rmvb", "flv", "wmv", "mpeg", "mpg", "m4v", "3gp",
     ]
   ]],
+	-- "mp3", "wav", "ogm", "flac", "m4a", "wma", "ogg", "opus",
+	-- "jpg", "jpeg", "png", "tif", "tiff", "gif", "webp", "svg", "bmp",
 
 	--loadfiles at startup if there is 0 or 1 items in playlist, if 0 uses worḱing dir for files
 	loadfiles_on_start = true,
@@ -123,7 +123,7 @@ local settings = {
 	--read http://docs.aegisub.org/3.2/ASS_Tags/ for reference of tags
 	--undeclared tags will use default osd settings
 	--these styles will be used for the whole playlist
-	style_ass_tags = "{\\fnIosevka\\fs30\\b0\\bord3}",
+	style_ass_tags = "{\\fnIosevka\\fs25\\b1\\bord3}",
 	--paddings from top left corner
 	text_padding_x = 10,
 	text_padding_y = 30,
@@ -143,7 +143,7 @@ local settings = {
 	--%cursor = position of navigation
 	--%plen = playlist length
 	--%N = newline
-	playlist_header = "%N%N[%cursor/%plen]%N",
+	playlist_header = "\\N\\N[%cursor/%plen]: Playlist\\N",
 
 	--Playlist file templates
 	--%pos = position of file with leading zeros
@@ -159,11 +159,11 @@ local settings = {
 	-- playing_hovered_file = "  %name",
 	-- playing_selected_file = "➤  %name",
 	normal_file = "○ %name",
-	hovered_file = "{\\1c&H46CFFF}● %name {\\1c&Hbebebe}",
-	selected_file = "{\\1c&H46CFFF}➔ %name {\\1c&Hbebebe}",
+	hovered_file = "{\\1c&H46CFFF}● %name {\\1c&Hffffff}",
+	selected_file = "{\\1c&H46CFFF}➔ %name {\\1c&Hffffff}",
 	playing_file = "▷ %name",
-	playing_hovered_file = "{\\1c&H46CFFF}▶ %name {\\1c&Hbebebe}",
-	playing_selected_file = "{\\1c&H46CFFF}➤ %name {\\1c&Hbebebe}",
+	playing_hovered_file = "{\\1c&H46CFFF}▶ %name {\\1c&Hffffff}",
+	playing_selected_file = "{\\1c&H46CFFF}➤ %name {\\1c&Hffffff}",
 
 	-- what to show when playlist is truncated
 	playlist_sliced_prefix = "...",

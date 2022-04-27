@@ -1,7 +1,7 @@
-local settings = {
+local o = {
 	-- Automatically save to log, otherwise only saves when requested
 	-- you need to bind a save key if you disable it
-	header = "[Recent Media]",
+	header = "[Recent Videos]",
 	auto_save = true,
 	save_bind = "",
 	-- When automatically saving, skip entries with playback positions
@@ -13,7 +13,7 @@ local settings = {
 	-- Write watch later for current file when switching
 	write_watch_later = true,
 	-- Display menu bind
-	display_bind = "`",
+	display_bind = "r",
 	-- Middle click: Select; Right click: Exit;
 	-- Scroll wheel: Up/Down
 	mouse_controls = false,
@@ -27,17 +27,18 @@ local settings = {
 	split_paths = true,
 	-- Font settings
 	font = "Iosevka",
-	font_size = 30,
-	font_bold = false,
+	font_size = 25,
+	font_bold = true,
 	border_size = 3,
 	-- Highlight color in BGR hexadecimal
 	hi_color = "46CFFF",
+	bg_color = "ffffff",
 	-- Draw ellipsis at start/end denoting ommited entries
-	ellipsis = false,
+	ellipsis = true,
 };
-(require("mp.options")).read_options(settings)
+(require("mp.options")).read_options(o)
 local utils = require("mp.utils")
-settings.log_path = utils.join_path(mp.find_config_file("."), settings.log_path)
+o.log_path = utils.join_path(mp.find_config_file("."), o.log_path)
 
 local cur_title, cur_path
 local list_drawn = false
@@ -60,7 +61,7 @@ function get_path()
 end
 
 function unbind()
-	if settings.mouse_controls then
+	if o.mouse_controls then
 		mp.remove_key_binding("recent-WUP")
 		mp.remove_key_binding("recent-WDOWN")
 		mp.remove_key_binding("recent-MMID")
@@ -86,7 +87,7 @@ function unbind()
 end
 
 function read_log(func)
-	local f = io.open(settings.log_path, "r")
+	local f = io.open(o.log_path, "r")
 	if not f then
 		return
 	end
@@ -119,14 +120,14 @@ function write_log(delete)
 			return line
 		end
 	end)
-	f = io.open(settings.log_path, "w+")
+	f = io.open(o.log_path, "w+")
 	if content then
 		for i = 1, #content do
 			f:write(("%s\n"):format(content[i]))
 		end
 	end
 	if not delete then
-		f:write(('[%s] "%s" | %s\n'):format(os.date(settings.date_format), cur_title, cur_path))
+		f:write(('[%s] "%s" | %s\n'):format(os.date(o.date_format), cur_title, cur_path))
 	end
 	f:close()
 end
@@ -141,24 +142,18 @@ end
 
 -- Display list on OSD and terminal
 function draw_list(list, start, choice)
-	local bold = get_bold_in_number(settings.font_bold)
-	local hi_start = string.format("{\\1c&H%s}", settings.hi_color)
-	local hi_end = "{\\1c&Hbebebe}"
+	local bold = get_bold_in_number(o.font_bold)
+	local hi_start = string.format("{\\1c&H%s}", o.hi_color)
+	local hi_end = string.format("{\\1c&H%s}", o.bg_color)
 
-	local msg = string.format(
-		"{\\fn%s\\fs%d\\b%d\\bord%f}",
-		settings.font,
-		settings.font_size,
-		bold,
-		settings.border_size
-	)
+	local msg = string.format("{\\fn%s\\fs%d\\b%d\\bord%f}", o.font, o.font_size, bold, o.border_size)
 
-	if settings.header ~= "" then
-		msg = msg .. settings.header .. "\\N\\N"
+	if o.header ~= "" then
+		msg = "\\N" .. msg .. hi_end .. o.header .. hi_end
 	end
-	if settings.ellipsis then
+	if o.ellipsis then
 		if start ~= 0 then
-			msg = msg .. "..."
+			msg = msg .. "\\N" .. "..."
 		end
 		msg = msg .. "\\h\\N\\N"
 	end
@@ -166,11 +161,11 @@ function draw_list(list, start, choice)
 	for i = 1, math.min(10, size - start), 1 do
 		local key = i % 10
 		local p
-		if settings.show_paths then
-			if settings.split_paths and not list[size - start - i + 1].path:find("^http.?://") then
+		if o.show_paths then
+			if o.split_paths and not list[size - start - i + 1].path:find("^http.?://") then
 				_, p = utils.split_path(list[size - start - i + 1].path)
 			else
-				p = list[size - start - i + 1].path or ""
+				p = list[size - start - i + 1].title or ""
 			end
 		else
 			p = list[size - start - i + 1].title or list[size - start - i + 1].path or ""
@@ -179,14 +174,15 @@ function draw_list(list, start, choice)
 			msg = msg .. hi_start .. "● " .. key .. ". " .. p .. "\\N" .. hi_end
 			-- msg = msg .. hi_start .. "(" .. key .. ")  " .. p .. "\\N\\N" .. hi_end
 		else
-			msg = msg .. "○ " .. key .. ". " .. p .. "\\N"
+			msg = msg .. hi_end .. "● " .. key .. ". " .. p .. "\\N" .. hi_end
+			-- msg = msg .. "○ " .. key .. ". " .. p .. "\\N"
 			-- msg = msg .. "(" .. key .. ")  " .. p .. "\\N\\N"
 		end
 		if not list_drawn then
 			print("(" .. key .. ") " .. p)
 		end
 	end
-	if settings.ellipsis and start + 10 < size then
+	if o.ellipsis and start + 10 < size then
 		msg = msg .. "..."
 	end
 	local w, h = mp.get_osd_size()
@@ -231,7 +227,7 @@ function load(list, start, choice)
 	if start + choice >= #list then
 		return
 	end
-	if settings.write_watch_later then
+	if o.write_watch_later then
 		mp.command("write-watch-later-config")
 	end
 	mp.commandv("loadfile", list[#list - start - choice].path, "replace")
@@ -278,7 +274,7 @@ function display_list()
 		end
 		start, choice = select(list, start, choice, 0)
 	end)
-	if settings.mouse_controls then
+	if o.mouse_controls then
 		mp.add_forced_key_binding("WHEEL_UP", "recent-WUP", function()
 			start, choice = select(list, start, choice, -1)
 		end)
@@ -328,27 +324,27 @@ function display_list()
 	end)
 end
 
-if settings.auto_save then
+if o.auto_save then
 	-- Using hook, as at the "end-file" event the playback position info is already unset.
 	mp.add_hook("on_unload", 9, function()
 		local pos = mp.get_property("percent-pos")
 		if not pos then
 			return
 		end
-		if tonumber(pos) <= settings.auto_save_skip_past then
+		if tonumber(pos) <= o.auto_save_skip_past then
 			write_log(false)
 		else
 			write_log(true)
 		end
 	end)
 else
-	mp.add_key_binding(settings.save_bind, "recent-save", function()
+	mp.add_key_binding(o.save_bind, "recent-save", function()
 		write_log(false)
 		mp.osd_message("Saved entry to log")
 	end)
 end
 
-if settings.auto_run_idle then
+if o.auto_run_idle then
 	mp.observe_property("idle-active", "bool", function(_, v)
 		if v then
 			display_list()
@@ -361,4 +357,4 @@ mp.register_event("file-loaded", function()
 	cur_title, cur_path = get_path()
 end)
 
-mp.add_key_binding(settings.display_bind, "display-recent", display_list)
+mp.add_key_binding(o.display_bind, "display-recent", display_list)
