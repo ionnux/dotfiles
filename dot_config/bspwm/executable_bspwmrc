@@ -37,7 +37,7 @@ if [[ -z $(pgrep -a x11vnc) && -z $(pgrep -a picom) ]]; then
 fi
 
 # touchpad
-xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 0
+xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
 xinput --set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Accel Speed' 0.8
 
 # move sticky window across monitors
@@ -58,8 +58,8 @@ bspc subscribe node_focus | while read node; do
         # bspc config focused_border_color "#ebbcba"
         bspc config focused_border_color "#f7768e"
     else
-        # bspc config focused_border_color "#6e6a86"
-        bspc config focused_border_color "#ebbcba"
+        bspc config focused_border_color "#6e6a86"
+        # bspc config focused_border_color "#ebbcba"
         # bspc config focused_border_color "#30c3ef"
     fi
 done

@@ -54,7 +54,7 @@ delete_wifi_connection () {
 }
 
 show_wifi_menu () {
-    if wifi | grep on; then
+  if [[ $(nmcli radio wifi) == "enabled" ]]; then
         local counter=0
         nmcli -f ACTIVE,SSID,SECURITY -t device wifi list | { while IFS= read -r line; do
                 if [ "$(echo "$line" | awk -F: '{print $1}')" = "yes" ]; then

@@ -6,21 +6,21 @@ configuration {
   monitor: "-1";
   sort: true;
   sorting-method: "fzf";
-  matching: "fuzzy";
+  matching: "regex";
+  threads: 0;
+  markup: true;
 	kb-row-up: "Up,Control+j,Control+p";
 	kb-row-down: "Down,Control+k,Control+n";
 	kb-remove-to-eol: "Control+l";
   kb-mode-next: "Control+m";
 	kb-accept-entry: "Return,KP_Enter";
 	/* icon-theme:	"Papirus"; */
-  /* display-combi:""; */
   drun-display-format: "{name}";
-	/* window-format:                  "{w}    {c}   {t}"; */
 	window-format: "[{w}]-{t}";
   show-icons: false;
   disable-history: true;
   fullscreen: false;
-	hide-scrollbar: true;
+	hide-scrollbar: false;
 	sidebar-mode: false;
   show-match: true;
 }

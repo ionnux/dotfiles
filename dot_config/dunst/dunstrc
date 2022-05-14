@@ -21,7 +21,7 @@
     enable_posix_regex = true
 
     # geometry = "500x1+710+58"
-    width = 400
+    width = 450
     height = 520
     origin = top-center
     notification_limit = 1
@@ -411,8 +411,19 @@ icon_size = 32
 #    set_stack_tag = "volume"
 #
 [remote-command]
-  desktop-entry = org.kde.kdeconnect.daemon
-  summary = "AutoNotification"
-  body = "Remote Command:*"
-  script = ~/.config/dunst/scripts/change_remote_command_variables.sh
+    appname = KDE Connect
+    summary = "AutoNotification"
+    body = "Remote Command:*"
+    script = ~/.config/dunst/scripts/change_remote_command_variables.sh
+    skip_display = yes
+    history_ignore = yes
+    format = ""
+
+[data-sms]
+    appname = KDE Connect
+    summary = "Messages"
+    skip_display = yes
+    history_ignore = yes
+    format = ""
+
 # vim: ft=cfg

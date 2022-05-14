@@ -36,6 +36,8 @@ dunst
 fontpreview
 feh
 jq
+bottom [btm]- a graphical process/system monitor
+dust - disk usage statistics
 vnstat - network trafic monitor
 flameshot - screenshot app
 beets - media library management system
