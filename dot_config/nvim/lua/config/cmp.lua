@@ -47,6 +47,7 @@ local function toggleCmp()
 		cmp.complete()
 	end
 end
+
 cmp.setup({
 	snippet = {
 		expand = function(args)
@@ -91,11 +92,21 @@ cmp.setup({
 		}),
 	},
 
-	documentation = {
-		border = "single",
-		-- winhighlight = "NormalFloat:NormalFloat,FloatBorder:LspSagaHoverBorder",
-		maxwidth = 70,
-		maxheight = 20,
+	-- documentation = {
+	-- 	border = "single",
+	-- 	-- winhighlight = "NormalFloat:NormalFloat,FloatBorder:LspSagaHoverBorder",
+	-- 	maxwidth = 70,
+	-- 	maxheight = 20,
+	-- },
+	window = {
+		completion = {
+			border = "rounded",
+			scrollbar = "║",
+		},
+		documentation = {
+			border = "rounded",
+			scrollbar = "║",
+		},
 	},
 
 	formatting = {

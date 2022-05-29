@@ -13,8 +13,8 @@ Print
   flameshot full -p ~/Pictures/Screenshots
 
 # scratchpad apps
-super + {comma,period,n,f}
-  ~/.config/bspwm/scripts/launch_apps.sh scratchpad_{terminal1,terminal2,ncmpcpp,vifm}
+super + {comma,period,n,f,r}
+  ~/.config/bspwm/scripts/launch_apps.sh scratchpad_{terminal1,terminal2,ncmpcpp,vifm,btop}
 
 # terminal emulator
 super + Return

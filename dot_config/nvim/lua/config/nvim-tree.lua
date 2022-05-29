@@ -1,47 +1,5 @@
-vim.g.nvim_tree_quit_on_open = 1 -- 0 by default, closes the tree when you open a file
-vim.g.nvim_tree_indent_markers = 0 -- 0 by default, this option shows indent markers when folders are open
-vim.g.nvim_tree_git_hl = 1 -- 0 by default, will enable file highlight for git attributes (can be used without the icons).
-vim.g.nvim_tree_root_folder_modifier = ":~" -- This is the default. See :help filename-modifiers for more options
-vim.g.nvim_tree_add_trailing = 0 -- 0 by default, append a trailing slash to folder names
-vim.g.nvim_tree_group_empty = 0 -- 0 by default, compact folders that only contain a single folder into one node in the file tree
-vim.g.nvim_tree_disable_window_picker = 0 -- 0 by default, will disable the window picker.
-vim.g.nvim_tree_icon_padding = " " -- one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
--- vim.g.nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
--- vim.g.nvim_tree_respect_buf_cwd = 1 -- 0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
-vim.g.nvim_tree_window_picker_exclude = { filetype = { "packer", "qf" }, buftype = { "terminal" } }
--- Dictionary of buffer option names mapped to a list of option values that
--- indicates to the window picker that the buffer's window should not be
--- selectable.
-vim.g.nvim_tree_special_files = { README = 1, Makefile = 1, MAKEFILE = 1 } -- List of filenames that gets highlighted with NvimTreeSpecialFile
-vim.g.nvim_tree_show_icons = { git = 1, folders = 1, files = 1, folder_arrows = 0 }
-vim.g.nvim_tree_icons = {
-	default = "",
-	symlink = "",
-	git = {
-		unstaged = "✗",
-		staged = "✓",
-		unmerged = "",
-		renamed = "➜",
-		untracked = "★",
-		deleted = "",
-		ignored = "◌",
-	},
-	folder = {
-		arrow_open = "",
-		arrow_closed = "",
-		default = "",
-		open = "",
-		empty = "",
-		empty_open = "",
-		symlink = "",
-		symlink_open = "",
-	},
-	lsp = { hint = "", info = "", warning = "", error = "" },
-}
-
 vim.api.nvim_set_keymap("n", "<leader>nn", ":NvimTreeToggle<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>nf", ":NvimTreeFocus<cr>", { noremap = true, silent = true })
--- NvimTreeOpen, NvimTreeClose and NvimTreeFocus are also available if you need them
 
 -- vim.cmd([[ NvimTreeFolderIcon guibg=red]])
 local tree_cb = require("nvim-tree.config").nvim_tree_callback
@@ -121,7 +79,7 @@ require("nvim-tree").setup({
 	-- configuration options for the system open command (`s` in the tree by default)
 	system_open = {
 		-- the command to run this, leaving nil should work in most cases
-		cmd = nil,
+		cmd = "",
 		-- the command arguments as a list
 		args = {},
 	},
@@ -129,6 +87,7 @@ require("nvim-tree").setup({
 	-- show lsp diagnostics in the signcolumn
 	diagnostics = {
 		enable = true,
+		show_on_dirs = true,
 		icons = {
 			hint = "",
 			info = "",
@@ -139,6 +98,7 @@ require("nvim-tree").setup({
 	filters = {
 		dotfiles = false,
 		custom = {},
+		exclude = {},
 	},
 	git = {
 		enable = true,
@@ -149,6 +109,7 @@ require("nvim-tree").setup({
 		width = 35,
 		height = 30,
 		hide_root_folder = false,
+		preserve_window_proportions = false,
 		side = "left",
 		auto_resize = true,
 		mappings = {
@@ -162,5 +123,104 @@ require("nvim-tree").setup({
 	trash = {
 		cmd = "trash",
 		require_confirm = true,
+	},
+	auto_reload_on_write = true,
+	create_in_closed_folder = false,
+	hijack_unnamed_buffer_when_opening = false,
+	ignore_buffer_on_setup = false,
+	open_on_setup_file = false,
+	sort_by = "name",
+	reload_on_bufenter = false,
+	respect_buf_cwd = false,
+	renderer = {
+		add_trailing = false,
+		group_empty = false,
+		highlight_git = true,
+		highlight_opened_files = "none",
+		root_folder_modifier = ":~",
+		indent_markers = {
+			enable = false,
+			icons = {
+				corner = "└ ",
+				edge = "│ ",
+				none = "  ",
+			},
+		},
+		icons = {
+			webdev_colors = true,
+			git_placement = "before",
+			padding = " ",
+			symlink_arrow = " ➛ ",
+			show = {
+				file = true,
+				folder = true,
+				folder_arrow = true,
+				git = true,
+			},
+			glyphs = {
+				default = "",
+				symlink = "",
+				folder = {
+					arrow_closed = "",
+					arrow_open = "",
+					default = "",
+					open = "",
+					empty = "",
+					empty_open = "",
+					symlink = "",
+					symlink_open = "",
+				},
+				git = {
+					unstaged = "✗",
+					staged = "✓",
+					unmerged = "",
+					renamed = "➜",
+					untracked = "★",
+					deleted = "",
+					ignored = "◌",
+				},
+			},
+		},
+		special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+	},
+	hijack_directories = {
+		enable = true,
+		auto_open = true,
+	},
+	actions = {
+		use_system_clipboard = true,
+		change_dir = {
+			enable = true,
+			global = false,
+			restrict_above_cwd = false,
+		},
+		open_file = {
+			quit_on_open = true,
+			resize_window = true,
+			window_picker = {
+				enable = true,
+				chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+				exclude = {
+					filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+					buftype = { "nofile", "terminal", "help" },
+				},
+			},
+		},
+	},
+	live_filter = {
+		prefix = "[FILTER]: ",
+		always_show_folders = true,
+	},
+	log = {
+		enable = false,
+		truncate = false,
+		types = {
+			all = false,
+			config = false,
+			copy_paste = false,
+			diagnostics = false,
+			git = false,
+			profile = false,
+		},
 	},
 })

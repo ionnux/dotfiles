@@ -195,7 +195,7 @@ alternative_header_first_line_format = $b$2$aqqu$/a$9 {%t}|{%f} $2$atqq$/a$9$/b
 alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 # alternative_header_first_line_format = $6$b» {%f} «$/b
 # alternative_header_second_line_format = $4{%b}|{/%D/}
-current_item_prefix = "$(blue_black)"
+current_item_prefix = "$(red_black)"
 current_item_suffix = "$(end)"
 current_item_inactive_column_prefix = "$(magenta_black)▶▷ "
 current_item_inactive_column_suffix = $(end)
@@ -211,7 +211,7 @@ selected_item_suffix = $(end)
 ## Note: attributes are not supported for the following variables.
 ##
 #song_window_title_format = {%a - }{%t}|{%f}
-##
+#
 ## Note: Below variables are used for sorting songs in browser.  The sort mode
 ## determines how songs are sorted, and can be used in combination with a sort
 ## format to specify a custom sorting format.  Available values for
@@ -260,7 +260,8 @@ browser_sort_format = {%a - }{%t}|{%f} {%l}
 # song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[blue]{a} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
-song_columns_list_format = (15)[blue]{b} (62f)[magenta]{t|f:Title} (5f)[blue]{l}
+# song_columns_list_format = (15)[blue]{b} (55f)[magenta]{t|f:Title} (5f)[blue]{l}
+song_columns_list_format = (15)[white]{b} (55f)[white]{t|f:Title} (5f)[blue]{l}
 #
 ##### various settings #####
 #
@@ -326,7 +327,8 @@ connected_message_on_startup = no
 titles_visibility = no
 header_text_scrolling = yes
 cyclic_scrolling = no
-lyrics_fetchers = azlyrics, genius, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
+lyrics_fetchers = musixmatch, azlyrics, genius, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
+# lyrics_fetchers = musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = yes
 store_lyrics_in_song_dir = no
@@ -449,18 +451,20 @@ use_console_editor = yes
 colors_enabled = yes
 empty_tag_color = magenta
 header_window_color = magenta
+# header_window_color = white
 volume_color = blue
 state_line_color = blue
 state_flags_color = magenta:b
-main_window_color = magenta
+# main_window_color = magenta
+main_window_color = white
 color1 = white
 color2 = green
 progressbar_color = black:b
-progressbar_elapsed_color = blue:b
+progressbar_elapsed_color = magenta:b
 statusbar_color = blue
 statusbar_time_color = blue:b
 player_state_color = default:b
-alternative_ui_separator_color = blue:b
+alternative_ui_separator_color = white:b
 window_border_color = green
 active_window_border = blue
 

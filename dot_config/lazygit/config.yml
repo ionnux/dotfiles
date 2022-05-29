@@ -73,6 +73,7 @@ confirmOnQuit: false
 quitOnTopLevelReturn: false
 disableStartupPopups: false
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip'
+promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
 keybinding:
   universal:
     quit: 'q'
@@ -192,7 +193,3 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
-customCommands:
-  - key: '8'
-    command: 'nvr --remote-tab +"set bufhidden=wipe" -c "DiffviewOpen" "{{.SelectedFile.Name}}"'
-    context: 'files'

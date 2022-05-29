@@ -6,8 +6,8 @@ plugins:
     - fetchart
     - embedart
     - lyrics
-    - deezer
     - spotify
+    - deezer
 deezer:
     source_weight: 0.0
 spotify:

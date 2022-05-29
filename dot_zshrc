@@ -14,6 +14,7 @@ export PATH="$PATH:$HOME/.pub-cache/bin/"
 export PATH="$PATH:$HOME/.local/kitty.app/bin"
 # add golang to path
 export PATH="$PATH:/usr/local/go/bin/"
+export PATH="$PATH:/home/og_saaz/go/bin"
 # add elixir to path
 export PATH="$PATH:/usr/local/elixir/bin/"
 export PATH="$PATH:$HOME/.fzf/bin/"
@@ -114,17 +115,9 @@ MODE_INDICATOR=""
 # fi
 
 # editor and pager
-# use neovim-remote if available
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-    alias nvim="nvr --remote-tab +'set bufhidden=wipe'"
-    export VISUAL="nvr --remote-tab +'set bufhidden=wipe'"
-    export EDITOR="nvr --remote-tab +'set bufhidden=wipe'"
-else
-    export VISUAL="nvim"
-    export EDITOR="nvim"
-fi
-# export MANPAGER='nvim +Man!'
-export MANPAGER='nvim --appimage-extract-and-run +Man!'
+export VISUAL="nvim --listen /tmp/nvim.sock"
+export EDITOR="nvim --listen /tmp/nvim.sock"
+export MANPAGER='nvim +Man!'
 # export MANWIDTH=999
 
 
@@ -148,7 +141,6 @@ alias vifm="~/.config/vifm/scripts/vifmrun"
 alias bl='xbacklight -set'
 alias cpu='sudo cpupower frequency-set --max'
 alias scrcpy-w='nohup scrcpy -b 16M --tcpip -Sw & disown'
-alias nvim='nvim-n'
 alias bit='beet import -t'
 # alias scpb='scrcpy --tcpip -Sw &'
 

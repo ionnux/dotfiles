@@ -37,6 +37,7 @@ fontpreview
 feh
 jq
 bottom [btm]- a graphical process/system monitor
+btop - a graphical process/system monitor
 dust - disk usage statistics
 vnstat - network trafic monitor
 flameshot - screenshot app

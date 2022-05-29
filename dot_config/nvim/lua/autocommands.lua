@@ -20,9 +20,9 @@ vim.cmd([[autocmd BufRead,BufNewFile *.ex setfiletype elixir]])
 vim.cmd("au TextYankPost * lua vim.highlight.on_yank { timeout = 300, higroup = Search }")
 
 -- go to last loc when opening a buffer
-vim.cmd([[
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
-]])
+-- vim.cmd([[
+--   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif
+-- ]])
 
 -- show cursor line only in active window
 vim.cmd([[
