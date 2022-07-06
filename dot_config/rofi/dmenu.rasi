@@ -6,7 +6,7 @@ configuration {
   monitor: "-1";
   sort: true;
   sorting-method: "fzf";
-  matching: "regex";
+  matching: "fuzzy";
   threads: 0;
   markup: true;
 	kb-row-up: "Up,Control+j,Control+p";

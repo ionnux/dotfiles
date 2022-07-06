@@ -115,10 +115,10 @@ toggle_scratchpad() {
     if [ -z "$id" ]; then
         if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm) ]]; then
             bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x${height}+${x}+${y}
-        elif [[ $1 =~ scratchpad_(btop|lazygit) ]]; then
-            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - (4 + 85) ))+${x}+${y}
-        elif [[ $1 == scratchpad_ncmpcpp ]]; then
-            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x1000+${x}+${y}
+        elif [[ $1 =~ scratchpad_(btop|lazygit|ncmpcpp) ]]; then
+            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - (4 + 70) ))+${x}+${y}
+        # elif [[ $1 == scratchpad_ncmpcpp ]]; then
+        #     bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x1000+${x}+${y}
             # elif [[ $1 == scratchpad_vivaldi ]]; then
             #   bspc rule -a $3 sticky=on state=floating rectangle=$(( width - 4 ))x${vivaldi_height}+${x}+${y}
         fi
@@ -139,7 +139,8 @@ case "$1" in
         # toggle_scratchpad [identifier][name|class][actual name|class][launch command]
     "scratchpad_terminal1") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
     "scratchpad_terminal2") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
-    "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &" ;;
+    # "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &" ;;
+    "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ncmpcpp &" ;;
     "scratchpad_vifm") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_vifm --title "$1" env TERM=kitty-direct ~/.config/vifm/scripts/vifmrun ~ &" ;;
     "scratchpad_btop") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_btop --title "$1" btop &" ;;
     "scratchpad_lazygit") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_lazygit --title "$1" ~/go/bin/lazygit &" ;;

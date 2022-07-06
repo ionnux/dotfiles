@@ -66,7 +66,7 @@ visualizer_data_source = "/tmp/mpd.fifo"
 ## to synchronize with audio.
 visualizer_output_name = "my_fifo"
 ## If you set format to 44100:16:2, make it 'yes'.
-visualizer_in_stereo = yes
+visualizer_in_stereo = no
 ## Note: set below to >=10 only if you have synchronization issues with
 ## visualization and audio.
 # visualizer_sync_interval = 0
@@ -76,12 +76,13 @@ visualizer_in_stereo = yes
 ## Available values: spectrum, wave, wave_filled, ellipse.
 visualizer_type = spectrum
 visualizer_fps = 60
-#visualizer_autoscale = no
+visualizer_autoscale = no
 
 # ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ╋ ╬ ▚ ╏ ▀ ▉ ▋
-# visualizer_look = "●╬"
-visualizer_look = "  "
-visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
+visualizer_look = "+┃"
+#visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
+#visualizer_color = "magenta,blue,cyan,yellow,red,magenta,blue,cyan,yellow,red"
+visualizer_color = "magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan"
 ## Alternative subset of 256 colors for terminals that support it.
 #visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
 
@@ -261,7 +262,7 @@ browser_sort_format = {%a - }{%t}|{%f} {%l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[blue]{a} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (15)[blue]{b} (55f)[magenta]{t|f:Title} (5f)[blue]{l}
-song_columns_list_format = (15)[white]{b} (55f)[white]{t|f:Title} (5f)[blue]{l}
+song_columns_list_format = (15)[white]{b} (4f)[white]{:...} (70f)[white]{t|f:Title} (4f)[white]{:...} (70f)[white]{a} (4f)[white]{:...} (5f)[blue]{l}
 #
 ##### various settings #####
 #
@@ -327,8 +328,8 @@ connected_message_on_startup = no
 titles_visibility = no
 header_text_scrolling = yes
 cyclic_scrolling = no
-lyrics_fetchers = musixmatch, azlyrics, genius, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
-# lyrics_fetchers = musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
+lyrics_fetchers = musixmatch, genius, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
+# lyrics_fetchers = musixmatch, azlyrics, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
 follow_now_playing_lyrics = yes
 fetch_lyrics_for_current_song_in_background = yes
 store_lyrics_in_song_dir = no
@@ -353,16 +354,16 @@ show_hidden_files_in_local_browser = no
 ## Screens available for use: help, playlist, browser, search_engine,
 ## media_library, playlist_editor, tag_editor, outputs, visualizer, clock,
 ## lyrics, last_fm.
-screen_switcher_mode = playlist, media_library
+screen_switcher_mode = previous
 ## Note: You can define startup screen by choosing screen from the list above.
-startup_screen = visualizer
+startup_screen = playlist
 ## Note: You can define startup slave screen by choosing screen from the list
 ## above or an empty value for no slave screen.
-startup_slave_screen = playlist
-startup_slave_screen_focus = yes
+#startup_slave_screen = playlist
+#startup_slave_screen_focus = yes
 ## Default width of locked screen (in %).  Acceptable values are from 20 to 80.
-locked_screen_width_part = 47.5
-#ask_for_locked_screen_width_part = yes
+#locked_screen_width_part = 35
+#ask_for_locked_screen_width_part = no
 #
 ##
 ## Width of media_library screen columns
@@ -395,7 +396,7 @@ ignore_leading_the = no
 ## Note: if below is enabled, ncmpcpp will ignore diacritics while searching and
 ## filtering lists. This takes an effect only if boost was compiled with ICU
 ## support.
-ignore_diacritics = no
+ignore_diacritics = yes
 block_search_constraints_change_if_items_found = no
 mouse_support = yes
 mouse_list_scroll_whole_page = no
@@ -404,7 +405,7 @@ empty_tag_marker = <empty>
 tags_separator = " | "
 tag_editor_extended_numeration = yes
 media_library_sort_by_mtime = no
-enable_window_title = yes
+enable_window_title = no
 
 ## Note: You can choose default search mode for search engine. Available modes
 ## are:
@@ -469,4 +470,4 @@ window_border_color = green
 active_window_border = blue
 
 #ueberzug settings
-execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
+#execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
