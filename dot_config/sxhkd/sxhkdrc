@@ -38,7 +38,8 @@ super + p
 
 # volume keys
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-  ~/MyScripts/change_volume.sh -n {-a 5,-s 5,-m 0}
+  amixer -D pulse sset Master {5%+,5%-,toggle};\
+  ~/.config/dunst/scripts/volume.sh
 
 # media control
 XF86Audio{Next,Prev,Play}
@@ -46,8 +47,8 @@ XF86Audio{Next,Prev,Play}
 
 # brightness keys
 XF86MonBrightness{Up,Down}
-  xbacklight -time 0  -steps 1 {-inc 1, -dec 1};\
-  ~/MyScripts/change_brightness.sh 
+  xbacklight -time 0  -steps 1 {-inc 1,-dec 1};\
+  ~/.config/dunst/scripts/brightness.sh
 
 super + {Tab, shift + Tab, Escape}
   dunstctl {close,history-pop,close-all}
