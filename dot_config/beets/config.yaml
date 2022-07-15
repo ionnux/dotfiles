@@ -5,8 +5,8 @@ library: ~/.config/beets/musiclibrary.db
 plugins:
     - embedart
     - lyrics
-    - spotify
     - deezer
+    # - spotify
     # - fetchart
 deezer:
     source_weight: 0.0

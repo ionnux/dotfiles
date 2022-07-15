@@ -196,11 +196,12 @@ alternative_header_first_line_format = $b$2$aqqu$/a$9 {%t}|{%f} $2$atqq$/a$9$/b
 alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 # alternative_header_first_line_format = $6$b» {%f} «$/b
 # alternative_header_second_line_format = $4{%b}|{/%D/}
-current_item_prefix = "$(red_black)"
-current_item_suffix = "$(end)"
-current_item_inactive_column_prefix = "$(magenta_black)▶▷ "
+#current_item_prefix = "$(yellow_black)▶▷ "
+current_item_prefix = "$(yellow_black)$b"
+current_item_suffix = "$(end)$/b"
+current_item_inactive_column_prefix = "$(magenta)"
 current_item_inactive_column_suffix = $(end)
-now_playing_prefix = "$(red)$b▶▷▶ "
+now_playing_prefix = "$(red)$b ▶▷▶"
 now_playing_suffix = "$(end)$/b"
 #browser_playlist_prefix = "$2playlist$9 "
 selected_item_prefix = "$(magenta)  "
@@ -262,7 +263,7 @@ browser_sort_format = {%a - }{%t}|{%f} {%l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[blue]{a} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (15)[blue]{b} (55f)[magenta]{t|f:Title} (5f)[blue]{l}
-song_columns_list_format = (15)[white]{b} (4f)[white]{:...} (70f)[white]{t|f:Title} (4f)[white]{:...} (70f)[white]{a} (4f)[white]{:...} (5f)[blue]{l}
+song_columns_list_format = (1f)[white]{:...} (15)[magenta]{b} (4f)[white]{:...} (70f)[white]{t|f:Title} (4f)[white]{:...} (70f)[white]{a} (4f)[white]{:...} (5f)[blue]{l}
 #
 ##### various settings #####
 #

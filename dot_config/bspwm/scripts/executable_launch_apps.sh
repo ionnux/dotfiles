@@ -115,10 +115,10 @@ toggle_scratchpad() {
     if [ -z "$id" ]; then
         if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm) ]]; then
             bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x${height}+${x}+${y}
-        elif [[ $1 =~ scratchpad_(btop|lazygit|ncmpcpp) ]]; then
+        elif [[ $1 =~ scratchpad_(btop|lazygit) ]]; then
             bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - (4 + 70) ))+${x}+${y}
-        # elif [[ $1 == scratchpad_ncmpcpp ]]; then
-        #     bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x1000+${x}+${y}
+        elif [[ $1 == scratchpad_ncmpcpp ]]; then
+          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - 200 ))+$(( x ))+$(( y ))
             # elif [[ $1 == scratchpad_vivaldi ]]; then
             #   bspc rule -a $3 sticky=on state=floating rectangle=$(( width - 4 ))x${vivaldi_height}+${x}+${y}
         fi

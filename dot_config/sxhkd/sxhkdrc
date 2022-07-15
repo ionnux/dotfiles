@@ -20,6 +20,9 @@ super + {comma,period,n,f,r,g}
 super + Return
   ~/.config/bspwm/scripts/launch_apps.sh kitty_term
 
+super + i
+  ~/.config/bspwm/scripts/cvr_automation.sh
+
 
 # rofi scripts
 super + {v,slash,shift + slash,w,space}
@@ -43,7 +46,8 @@ XF86Audio{Next,Prev,Play}
 
 # brightness keys
 XF86MonBrightness{Up,Down}
-  ~/MyScripts/change_brightness.sh -n {-a 1,-s 1}
+  xbacklight -time 0  -steps 1 {-inc 1, -dec 1};\
+  ~/MyScripts/change_brightness.sh 
 
 super + {Tab, shift + Tab, Escape}
   dunstctl {close,history-pop,close-all}
