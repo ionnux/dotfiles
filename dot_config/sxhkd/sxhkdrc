@@ -161,7 +161,8 @@ super + ctrl + shift + space
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
-	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+	~/.config/bspwm/scripts/resize.sh {left,down,up,right} 20
+
 
 # contract a window by moving one of its side inward
 super + alt + shift + {h,j,k,l}

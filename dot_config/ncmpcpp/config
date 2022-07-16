@@ -1,97 +1,28 @@
-##############################################################
-## This is an example configuration file. Copy it to        ##
-## $XDG_CONFIG_HOME/ncmpcpp/config or $HOME/.ncmpcpp/config ##
-## and set up your preferences.                             ##
-##############################################################
-#
-##### directories ######
-##
-## Directory for storing ncmpcpp related files.  Changing it is useful if you
-## want to store everything somewhere else and provide command line setting for
-## alternative location to config file which defines that while launching
-## ncmpcpp.
-##
 ncmpcpp_directory = ~/.config/ncmpcpp
-
-## Directory for storing downloaded lyrics. It defaults to ~/.lyrics since other
-## MPD clients (eg. ncmpc) also use that location.
 lyrics_directory = ~/.lyrics
 
-##### connection settings #####
 mpd_host = 127.0.0.1
 mpd_port = 6600
 # mpd_password = ""
 mpd_connection_timeout = 5
-## Needed for tag editor and file operations to work.
 mpd_music_dir = ~/Music/
 # mpd_crossfade_time = 5
-# Exclude pattern for random song action
-# http://www.boost.org/doc/libs/1_46_1/libs/regex/doc/html/boost_regex/syntax/perl_syntax.html
-#random_exclude_pattern = "^(temp|midi_songs).*"
-
-##### music visualizer #####
-##
-## In order to make music visualizer work with MPD you need to use the fifo
-## output. Its format parameter has to be set to 44100:16:1 for mono
-## visualization or 44100:16:2 for stereo visualization. As an example here is
-## the relevant section for mpd.conf:
-##
-# audio_output {
-#        type            "fifo"
-#        name            "my_fifo"
-#        path            "/tmp/mpd.fifo"
-#        format          "44100:16:2"
-# }
-##### visualizer settins #####
-##
-## If the visualization on occasion diverges from the audio output, please set
-## 'buffer_time' parameter of your audio output in mpd.conf to '100000' (100ms)
-## or less to prevent that from happening.
-##
-## Note: If you're using Mopidy, an address of a udpsink gstreamer's output is
-## also accepted. For example, the following section in mopidy.conf:
-##
-## [audio]
-## output = tee name=t ! queue ! autoaudiosink t.
-##        ! queue ! audio/x-raw,rate=44100,channels=2,format=S16LE
-##        ! udpsink host=localhost port=5555
-##
-## will make localhost:5555 available as a source of data for the stereo
-## visualizer.
-##
 visualizer_data_source = "/tmp/mpd.fifo"
-
-## Note: Below parameter is needed for ncmpcpp to determine which output
-## provides data for visualizer and reset it at the beginning of visualization
-## to synchronize with audio.
 visualizer_output_name = "my_fifo"
 ## If you set format to 44100:16:2, make it 'yes'.
 visualizer_in_stereo = no
-## Note: set below to >=10 only if you have synchronization issues with
-## visualization and audio.
+## Note: set below to >=10 only if you have synchronization issues with visualization and audio.
 # visualizer_sync_interval = 0
-
-## Note: To enable spectrum frequency visualization you need to compile ncmpcpp
-## with fftw3 support.
 ## Available values: spectrum, wave, wave_filled, ellipse.
 visualizer_type = spectrum
 visualizer_fps = 60
 visualizer_autoscale = no
 
 # ▒ ░ ┃ │ ﱡ ● ○ ☰ ┇ ▮ ╋ ╬ ▚ ╏ ▀ ▉ ▋
-visualizer_look = "+┃"
-#visualizer_color = "red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red,yellow,green,cyan,blue,red"
-#visualizer_color = "magenta,blue,cyan,yellow,red,magenta,blue,cyan,yellow,red"
+visualizer_look = "◆┃"
 visualizer_color = "magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan,magenta,blue,cyan"
-## Alternative subset of 256 colors for terminals that support it.
-#visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
 
 ## Note: The next few visualization options apply to the spectrum visualizer.
-#
-## Use unicode block characters for a smoother, more continuous look.
-## This will override the visualizer_look option. With transparent terminals
-## and visualizer_in_stereo set, artifacts may be visible on the bottom half of
-## the visualization.
 visualizer_spectrum_smooth_look = no
 
 ## A value between 1 and 5 inclusive. Specifying a larger value makes the
@@ -189,7 +120,8 @@ playlist_disable_highlight_delay = 0
 ##
 ## Note: colors can be nested.
 ##
-song_list_format = {%a - }{%t}|{$8%f$9}$R{$7%l$9}
+#song_list_format = {%a - }{%t}|{$8%f$9}$R{$7%l$9}
+song_list_format = "{$7%a - $9}{$5%t$9}|{$5%f$9}$R{$6%b $9}{$3%l$9}"
 #song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
 song_library_format = {%n - }{%t}|{%f}
 alternative_header_first_line_format = $b$2$aqqu$/a$9 {%t}|{%f} $2$atqq$/a$9$/b
@@ -197,15 +129,15 @@ alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%
 # alternative_header_first_line_format = $6$b» {%f} «$/b
 # alternative_header_second_line_format = $4{%b}|{/%D/}
 #current_item_prefix = "$(yellow_black)▶▷ "
-current_item_prefix = "$(yellow_black)$b"
+current_item_prefix = "$(magenta_black)$b"
 current_item_suffix = "$(end)$/b"
 current_item_inactive_column_prefix = "$(magenta)"
 current_item_inactive_column_suffix = $(end)
-now_playing_prefix = "$(red)$b ▶▷▶"
-now_playing_suffix = "$(end)$/b"
+now_playing_prefix = "$(red_black)$b"
+now_playing_suffix = "◀◁$(end)$/b"
 #browser_playlist_prefix = "$2playlist$9 "
-selected_item_prefix = "$(magenta)  "
-selected_item_suffix = $(end)
+selected_item_prefix = "$(red)"
+selected_item_suffix = " $(end)"
 #
 #modified_item_prefix = $3> $9
 #
@@ -263,7 +195,7 @@ browser_sort_format = {%a - }{%t}|{%f} {%l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[blue]{a} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (50)[magenta]{t|f:Title} (40f)[cyan]{b} (5f)[magenta]{l}
 # song_columns_list_format = (15)[blue]{b} (55f)[magenta]{t|f:Title} (5f)[blue]{l}
-song_columns_list_format = (1f)[white]{:...} (15)[magenta]{b} (4f)[white]{:...} (70f)[white]{t|f:Title} (4f)[white]{:...} (70f)[white]{a} (4f)[white]{:...} (5f)[blue]{l}
+song_columns_list_format = (1f)[magenta]{:...} (30)[magenta]{b} (4f)[white]{:...} (33)[]{t|f:Title} (4f)[white]{:...} (30)[]{a} (1f)[blue]{:...} (10)[blue]{l}
 #
 ##### various settings #####
 #
@@ -459,14 +391,14 @@ state_line_color = blue
 state_flags_color = magenta:b
 # main_window_color = magenta
 main_window_color = white
-color1 = white
+color1 = red
 color2 = green
 progressbar_color = black:b
 progressbar_elapsed_color = magenta:b
 statusbar_color = blue
 statusbar_time_color = blue:b
 player_state_color = default:b
-alternative_ui_separator_color = white:b
+alternative_ui_separator_color = magenta:b
 window_border_color = green
 active_window_border = blue
 
