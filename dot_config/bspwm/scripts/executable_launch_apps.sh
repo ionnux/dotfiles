@@ -113,14 +113,10 @@ toggle_scratchpad() {
     fi
 
     if [ -z "$id" ]; then
-        if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm) ]]; then
-            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x${height}+${x}+${y}
-        elif [[ $1 =~ scratchpad_(btop|lazygit) ]]; then
-            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - (4 + 70) ))+${x}+${y}
+        if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm|btop|lazygit) ]]; then
+          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 - 40 ))x${height}+$(( x + 20 ))+$(( y + 20 ))
         elif [[ $1 == scratchpad_ncmpcpp ]]; then
-          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 ))x$(( display_y - 200 ))+$(( x ))+$(( y ))
-            # elif [[ $1 == scratchpad_vivaldi ]]; then
-            #   bspc rule -a $3 sticky=on state=floating rectangle=$(( width - 4 ))x${vivaldi_height}+${x}+${y}
+          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( 1000 ))x$(( 400 ))+$(( (display_x - 1000 - 8)/2 ))+$(( 30 ))
         fi
 
         eval "$4"
@@ -128,10 +124,10 @@ toggle_scratchpad() {
         bspc node "$id" --flag hidden --focus
     fi
 
-    if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm|ncmpcpp) ]]; then
-        sleep 0.4
-        $kitty @ --to unix:@"$3" set-font-size $font_size
-    fi
+    # if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm|ncmpcpp) ]]; then
+    #     sleep 0.4
+    #     $kitty @ --to unix:@"$3" set-font-size $font_size
+    # fi
 
 }
 
@@ -139,18 +135,19 @@ case "$1" in
         # toggle_scratchpad [identifier][name|class][actual name|class][launch command]
     "scratchpad_terminal1") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
     "scratchpad_terminal2") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
-    # "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &" ;;
-    "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ncmpcpp &" ;;
+    "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &" ;;
+    # "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ncmpcpp &" ;;
     "scratchpad_vifm") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_vifm --title "$1" env TERM=kitty-direct ~/.config/vifm/scripts/vifmrun ~ &" ;;
     "scratchpad_btop") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_btop --title "$1" btop &" ;;
     "scratchpad_lazygit") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_lazygit --title "$1" ~/go/bin/lazygit &" ;;
         # "scratchpad_vivaldi") toggle_scratchpad "$1" "class" "Vivaldi-stable" 'vivaldi' ;;
     "kitty_term")
-        $kitty --listen-on=unix:/tmp/kitty_remote --title kitty_term &
+        # $kitty --listen-on=unix:/tmp/kitty_remote --title kitty_term &
+        $kitty
         local id=$(eval 'xdotool search --name $1')
         hide_all_windows_except "$id"
         sleep 0.4
-        $kitty @ --to unix:@"$1" set-font-size $font_size
+        # $kitty @ --to unix:@"$1" set-font-size $font_size
         ;;
     "sxhkd")
         pkill --signal=9 sxhkd

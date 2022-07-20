@@ -24,6 +24,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "stylua",
+					args = { "--config-path ~/.config/stylua/stylua.toml" },
 					stdin = false,
 				}
 			end,

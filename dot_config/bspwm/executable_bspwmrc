@@ -7,7 +7,6 @@ bspc monitor eDP1 -d 1 2 3
 bspc monitor VIRTUAL1 -d 4 5 6
 
 
-bspc config border_width         2
 bspc config window_gap          10
 
 bspc config split_ratio          0.52
@@ -32,9 +31,9 @@ if [[ -z $(pgrep -a x11vnc) ]]; then
 fi
 
 # launch picom if x11vnc and picom is not running
-# if [[ -z $(pgrep -a x11vnc) && -z $(pgrep -a picom) ]]; then
-#     picom --experimental-backends &
-# fi
+if [[ -z $(pgrep -a x11vnc) && -z $(pgrep -a picom) ]]; then
+    picom --experimental-backends &
+fi
 
 # touchpad
 
