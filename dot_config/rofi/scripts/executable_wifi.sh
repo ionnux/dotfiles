@@ -14,7 +14,6 @@ add_network_name() {
 connect_using_password () {
     local wrong_password_error_message='Error: .* property is invalid'
     local password="$(rofi -password -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -i\
-      -theme-str "configuration { font: \"$font\"; }"\
       -theme-str 'entry { placeholder: "   Password..."; }' -p "Enter password")"
 
     if [[ ! -z $password ]]; then
@@ -37,7 +36,8 @@ delete_wifi_connection () {
             fi
             counter=$((counter + 1))
         done
-        local selected_option=$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration {font: \"$font\";}" -i -p "Delete Connection" <<< "${saved_connections}|<")
+        local selected_option=$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi\
+          -i -p "Delete Connection" <<< "${saved_connections}|<")
         case $selected_option in
             '<') show_wifi_menu ;;
             *)
@@ -73,7 +73,6 @@ show_wifi_menu () {
             fi
 
             local selected_option="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi\
-              -theme-str "configuration {font: \"$font\";}" -i\
               -p "wifi" <<< "${network_display_names}Rescan|Delete Connection|Connection Manager|Turn Off")"
 
             case "$selected_option" in
@@ -105,7 +104,8 @@ show_wifi_menu () {
             esac
         }
     else
-        local selected_option="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi -theme-str "configuration { font: \"$font\"; }" -i -p "wifi" <<< "Connection Manager|Delete Connection|Turn On")"
+        local selected_option="$(rofi -sep "|" -dmenu -config ~/.config/rofi/dmenu.rasi\
+          -i -p "wifi" <<< "Connection Manager|Delete Connection|Turn On")"
         case "$selected_option" in
             'Delete Connection') delete_wifi_connection ;;
             'Connection Manager') nm-connection-editor & ;;

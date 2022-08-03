@@ -7,7 +7,7 @@ fallback_image="$HOME/.config/ncmpcpp/ncmpcpp-ueberzug/img/fallback.png"
 padding_top=0
 padding_bottom=1
 padding_right=0
-max_width=35
+max_width=20
 reserved_playlist_cols=70
 reserved_cols_in_percent="false"
 force_square="false"
@@ -17,7 +17,7 @@ left_aligned="true"
 padding_left=0
 
 # Only set this if the geometries are wrong or ncmpcpp shouts at you to do it.
-# Visually select/highlight a character on your terminal, zoom in an image 
+# Visually select/highlight a character on your terminal, zoom in an image
 # editor and count how many pixels a character's width and height are.
 font_height=
 font_width=
@@ -36,7 +36,7 @@ kill_previous_instances() {
     for pid in $(pidof -x "$script_name"); do
         if [ "$pid" != $$ ]; then
             kill -15 "$pid"
-        fi 
+        fi
     done
 }
 
@@ -48,11 +48,11 @@ find_cover_image() {
         # since FFMPEG cannot export embedded FLAC art we use metaflac
         metaflac --export-picture-to=/tmp/mpd_cover.jpg \
             "$(mpc --format "$music_library"/%file% current)" &&
-            cover_path="/tmp/mpd_cover.jpg" && return
+        cover_path="/tmp/mpd_cover.jpg" && return
     else
         ffmpeg -y -i "$(mpc --format "$music_library"/%file% | head -n 1)" \
             /tmp/mpd_cover.jpg &&
-            cover_path="/tmp/mpd_cover.jpg" && return
+        cover_path="/tmp/mpd_cover.jpg" && return
     fi
 
     # If no embedded art was found we look inside the music file's directory
@@ -127,7 +127,7 @@ compute_geometry_left_aligned() {
     ueber_left=$padding_left
     max_width_chars=$(( term_cols * max_width / 100 ))
     if [ "$max_width" != 0 ] &&
-        [ $(( ueber_width + padding_right + padding_left )) -gt "$max_width_chars" ]; then
+    [ $(( ueber_width + padding_right + padding_left )) -gt "$max_width_chars" ]; then
         ueber_width=$(( max_width_chars - padding_left - padding_right ))
     fi
 }
@@ -222,7 +222,7 @@ END
 
 is_font_size_successfully_computed() {
     [ -n "$term_height" ] && [ -n "$term_width" ] &&
-        [ "$term_height" != "0" ] && [ "$term_width" != "0" ]
+    [ "$term_height" != "0" ] && [ "$term_width" != "0" ]
 }
 
 

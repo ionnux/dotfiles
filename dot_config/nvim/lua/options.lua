@@ -26,7 +26,7 @@ vim.opt.mouse = "a" -- enable mouse mode
 -- vim.opt.pumblend = 10 -- Popup blend
 vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 -- vim.opt.relativenumber = true -- Relative line numbers
-vim.opt.scrolloff = 4 -- Lines of context
+vim.opt.scrolloff = 7 -- Lines of context
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = indent -- Size of an indent
 -- vim.opt.showmode = true -- dont show mode since we have a statusline
@@ -65,17 +65,17 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Use proper syntax highlighting in code blocks
 local fences = {
-	"lua",
-	"vim",
-	"json",
-	"typescript",
-	"javascript",
-	"js=javascript",
-	"ts=typescript",
-	"shell=sh",
-	"python",
-	"sh",
-	"console=sh",
+  "lua",
+  "vim",
+  "json",
+  "typescript",
+  "javascript",
+  "js=javascript",
+  "ts=typescript",
+  "shell=sh",
+  "python",
+  "sh",
+  "console=sh",
 }
 vim.g.markdown_fenced_languages = fences
 
@@ -98,43 +98,43 @@ vim.cmd("au FocusGained * :checktime")
 -- vim.cmd( [[autocmd BufRead,BufNewFile *.nix setfiletype nix]] )
 
 CustomBorders = {
-	normal = {
-		{ "🭽", "FloatBorder" },
-		{ "▔", "FloatBorder" },
-		{ "🭾", "FloatBorder" },
-		{ "▕", "FloatBorder" },
-		{ "🭿", "FloatBorder" },
-		{ "▁", "FloatBorder" },
-		{ "🭼", "FloatBorder" },
-		{ "▏", "FloatBorder" },
-	},
-	round = {
-		{ "╭", "FloatBorder" },
-		{ "╮", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "╯", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "╰", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
-	bold = {
-		{ "┏", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "┓", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "┛", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "┗", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
-	plus = {
-		{ "+", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "│", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "─", "FloatBorder" },
-		{ "+", "FloatBorder" },
-		{ "│", "FloatBorder" },
-	},
+  normal = {
+    { "🭽", "FloatBorder" },
+    { "▔", "FloatBorder" },
+    { "🭾", "FloatBorder" },
+    { "▕", "FloatBorder" },
+    { "🭿", "FloatBorder" },
+    { "▁", "FloatBorder" },
+    { "🭼", "FloatBorder" },
+    { "▏", "FloatBorder" },
+  },
+  round = {
+    { "╭", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+  },
+  bold = {
+    { "┏", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "┓", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "┛", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "┗", "FloatBorder" },
+    { "│", "FloatBorder" },
+  },
+  plus = {
+    { "+", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "+", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "+", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "+", "FloatBorder" },
+    { "│", "FloatBorder" },
+  },
 }
