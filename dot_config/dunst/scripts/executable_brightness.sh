@@ -1,6 +1,8 @@
 #!/bin/bash
 
-brightness=$(xbacklight -get | awk -F '.' '{print $1}')
+# brightness=$(xbacklight -get | awk -F '.' '{print $1}')
+# brightness=$(brightnessctl -d "intel_backlight" | grep -Eom1 "[[:digit:]]+%" | tr -d "%")
+brightness=$(light -G | awk -F '.' '{print $1}')
 
 if [ $brightness -lt 30 ]; then
     brightness_icon="display-brightness-low-symbolic"
