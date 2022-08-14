@@ -114,9 +114,9 @@ toggle_scratchpad() {
 
     if [ -z "$id" ]; then
         if [[ $1 =~ scratchpad_(terminal1|terminal2|vifm|btop|lazygit) ]]; then
-          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 - 40 ))x${height}+$(( x + 20 ))+$(( y + 20 ))
+            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( width - 4 - 40 ))x${height}+$(( x + 20 ))+$(( y + 20 ))
         elif [[ $1 == scratchpad_ncmpcpp ]]; then
-          bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( 700 ))x$(( 300 ))+$(( (display_x - 700 - 8)/2 ))+$(( 30 ))
+            bspc rule -a kitty:kitty:$3 sticky=on state=floating rectangle=$(( 700 ))x$(( 300 ))+$(( (display_x - 700 - 8)/2 ))+$(( 30 ))
         fi
 
         eval "$4"
@@ -136,7 +136,7 @@ case "$1" in
     "scratchpad_terminal1") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
     "scratchpad_terminal2") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title  "$1" &" ;;
     "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp-ueberzug &" ;;
-    # "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ncmpcpp &" ;;
+        # "scratchpad_ncmpcpp") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@"$1" --title "$1" ncmpcpp &" ;;
     "scratchpad_vifm") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_vifm --title "$1" env TERM=kitty-direct ~/.config/vifm/scripts/vifmrun ~ &" ;;
     "scratchpad_btop") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_btop --title "$1" btop &" ;;
     "scratchpad_lazygit") toggle_scratchpad "$1" "name" "$1" "$kitty --listen-on=unix:@scratchpad_lazygit --title "$1" ~/go/bin/lazygit &" ;;

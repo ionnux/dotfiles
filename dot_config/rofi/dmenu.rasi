@@ -8,7 +8,6 @@ configuration {
   sorting-method: "fzf";
   matching: "fuzzy";
   threads: 0;
-  markup: true;
 	kb-row-up: "Up,Control+j,Control+p";
 	kb-row-down: "Down,Control+k,Control+n";
 	kb-remove-to-eol: "Control+l";
