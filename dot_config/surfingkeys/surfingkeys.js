@@ -8,6 +8,7 @@ const {
     map,
     unmap,
     vunmap,
+    iunmap,
     cmap,
     addSearchAlias,
     removeSearchAlias,
@@ -20,6 +21,10 @@ const {
     RUNTIME
 } = api;
 
+unmap("/")
+unmap("x")
+unmap("n")
+unmap("p")
 map("K", "R");
 map("J", "E");
 map("H", "S");

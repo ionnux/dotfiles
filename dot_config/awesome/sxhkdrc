@@ -3,8 +3,10 @@ Print
   flameshot full -p ~/Pictures/Screenshots
 
 # rofi scripts
-super + {v,slash,shift + slash,w,space}
-  ~/.config/rofi/scripts/{dual_monitor,kdeconnect,kdeconnect_remote_control,wifi,launcher}.sh
+super + space
+  ~/.config/rofi/scripts/launcher.sh
+super + w
+  ~/.config/rofi/scripts/rofi.sh
 
 # super + bracketleft : bracket{left,right}
 #   ~/MyScripts/change_brightness.sh -n {-s,-a} 5
@@ -13,6 +15,7 @@ super + {v,slash,shift + slash,w,space}
 XF86Audio{RaiseVolume,LowerVolume,Mute}
   amixer -D pulse sset Master {5%+,5%-,toggle};\
   ~/.config/dunst/scripts/volume.sh
+
 
 # media control
 XF86Audio{Next,Prev,Play}

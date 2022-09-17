@@ -92,7 +92,6 @@ configuration {
      padding: 0px 0px 0px 2px;
      text-color: @fg;
      blink: true;
-     placeholder: " Search...";
      placeholder-color: @grey2;
      border: 2px 2px 2px 2px;
      /* border-color: @grey3; */

@@ -1,4 +1,5 @@
 set number
+set confirm=permdelete
 set relativenumber
 set vicmd=nvim
 set syscalls
@@ -27,17 +28,6 @@ set incsearch
 set scrolloff=1
 set statusline="  %A %15E %20d  "
 " ------------------------------------------------------------------------------
-" :com[mand][!] command_name action
-" The following macros can be used in a command
-" %a is replaced with the user arguments.
-" %c the current file under the cursor.
-" %C the current file under the cursor in the other directory.
-" %f the current selected file, or files.
-" %F the current selected file, or files in the other directory.
-" %b same as %f %F.
-" %d the current directory name.
-" %D the other window directory name.
-" %m run the command in a menu window
 
 command! trashList :lstrash "list items in trash directory
 
@@ -330,7 +320,7 @@ nnoremap i <c-g>
 
 nnoremap mm :mountMtp | cd ~/mnt<cr>
 nnoremap mu :unmountMtp<cr>
-nnoremap mg :cd ~/mnt<cr>"goto mount directory
+nnoremap gm :cd ~/mnt<cr> "goto mount directory
 
 "Open selected images in gimp
 nnoremap gp :!gimp %f & <cr>

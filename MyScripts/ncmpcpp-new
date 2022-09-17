@@ -13,10 +13,9 @@ playlist_disable_highlight_delay = 2
 autocenter_mode                  = "yes"
 centered_cursor                  = "yes"
 ignore_leading_the               = "yes"
-ignore_diacritics = yes
-cyclic_scrolling = no
 allow_for_physical_item_deletion = "no"
 connected_message_on_startup = no
+cyclic_scrolling = "yes"
 mouse_support = "yes"
 mouse_list_scroll_whole_page = "yes"
 lines_scrolled = "1"
@@ -27,15 +26,13 @@ search_engine_display_mode = "columns"
 playlist_editor_display_mode = "columns"
 user_interface = "classic"
 follow_now_playing_lyrics = "yes"
-fetch_lyrics_for_current_song_in_background = yes
-# startup_screen = "playlist"
+startup_screen = "visualizer"
 media_library_primary_tag = album_artist
 browser_sort_mode = format
 playlist_separate_albums = no
 media_library_albums_split_by_date = no
 header_text_scrolling = yes
 header_window_color = magenta
-screen_switcher_mode = previous
 
 # VISUALIZER
 # ---
@@ -71,18 +68,16 @@ display_remaining_time = no
 
 # UI APPEARANCE
 # ---
-now_playing_prefix = "$(white_black) ●$b"
+now_playing_prefix = "$(red_black) ●$b"
 now_playing_suffix = "● $(end)$/b"
 #now_playing_prefix = "$b$8$7 "
 #now_playing_suffix = "  $/b$8"
 #current_item_prefix = "$b$7$/b$3 "
-current_item_prefix = "$b$7 »» $6"
-current_item_suffix = "$7 «« $/b$9$9$9"
-current_item_inactive_column_prefix = "$(blue)"
-current_item_inactive_column_suffix = $(end)
+current_item_prefix = "$b$4 »» $6"
+current_item_suffix = "$4 «« $/b$9$9$9"
 song_status_format= "$7%t"
 song_list_format = "$8%a - %t$R  %l"
-song_columns_list_format = "(1)[white]{} (50)[]{tr} (50)[blue]{b}"
+song_columns_list_format = "(1)[white]{} (50)[white]{tr} (50)[blue]{a}"
 song_library_format = {$6%n$9 - }{%t}|{%f}
 song_window_title_format = "Music"
 browser_sort_format = {%a - }{%t}|{%f} {%l}
@@ -109,12 +104,3 @@ alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%
 ## - r - reverse colors
 ## - a - use alternative character set
 
-#reserved_playlist_cols=75
-#reserved_cols_in_percent="true"
-# visualizer_look = "  "          
-#startup_screen = outputs     
-startup_screen = playlist
-#startup_slave_screen = playlist 
-#startup_slave_screen_focus = yes
-#locked_screen_width_part = 20   
-#execute_on_song_change="~/.config/ncmpcpp/ncmpcpp-ueberzug/ncmpcpp_cover_art.sh"
