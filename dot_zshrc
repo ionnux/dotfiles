@@ -16,13 +16,13 @@ export PATH="$PATH:/home/og_saaz/go/bin"
 # add elixir to path
 export PATH="$PATH:/usr/local/elixir/bin/"
 export PATH="$PATH:$HOME/.fzf/bin/"
-export PATH="$PATH:$HOME/.config/vifm/scripts/"
+# export PATH="$PATH:$HOME/.config/vifm/scripts/"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/og_saaz/.oh-my-zsh"
 
 # vivid must be installed
-export LS_COLORS="$(vivid generate snazzy)"
+export LS_COLORS="$(vivid generate molokai)"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -134,7 +134,7 @@ alias studio="studio.sh"
 alias foliate="com.github.johnfactotum.Foliate"
 
 # because i'm using vifmimg
-alias vifm="~/.config/vifm/scripts/vifmrun"
+alias vifm="vifmrun"
 # alias emulator="~/Android/Sdk/emulator/emulator"
 alias bl='xbacklight -set'
 alias cpu='sudo cpupower frequency-set --max'
@@ -192,7 +192,7 @@ eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Setting fd as the default source for fzf
 # export FZF_DEFAULT_COMMAND='fdfind --type f'
-export FZF_DEFAULT_COMMAND="fd --hidden --type f --follow --color=always . $HOME"
+export FZF_DEFAULT_COMMAND="fd --hidden --type f --follow --color always . $HOME"
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
 --no-height
 --keep-right
