@@ -5,43 +5,43 @@ return require('packer').startup(function(use)
   -- nvim-cmp
   use({
     'hrsh7th/nvim-cmp',
-    -- disable = true,
-    event = 'InsertEnter',
-    wants = { 'LuaSnip', 'nvim-autopairs' },
     config = function()
       require('config.cmp')
     end,
+    after = { 'nvim-autopairs', 'LuaSnip', 'lspkind-nvim' },
     requires = {
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
-      { 'saadparwaiz1/cmp_luasnip', after = { 'nvim-cmp' } },
+      { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      { 'mtoohey31/cmp-fish', ft = 'fish', after = 'nvim-cmp' },
+      { 'onsails/lspkind-nvim' },
     },
   })
 
   -- Use <Tab> to escape from pairs such as ""|''|() etc.
-  use({
-    'abecodes/tabout.nvim',
-    wants = { 'nvim-treesitter' },
-    after = { 'nvim-cmp' },
-    config = function()
-      require('config.tabout')
-    end,
-  })
-
-  -- friendly snippet (collection)
-  use({ 'rafamadriz/friendly-snippets', opt = true, disable = true })
+  -- use({
+  --   'abecodes/tabout.nvim',
+  --   wants = { 'nvim-treesitter' },
+  --   -- after = { 'nvim-cmp' },
+  --   config = function()
+  --     require('config.tabout')
+  --   end,
+  -- })
 
   -- LuaSnip
   use({
     'L3MON4D3/LuaSnip',
-    opt = true,
+    tag = 'v<CurrentMajor>.*',
     config = function()
-      require('config.luasnip.luasnip')
+      require('config.luasnip')
     end,
-    -- wants = "friendly-snippets"
+    requires = { 'rafamadriz/friendly-snippets', opts = true },
   })
 
   -- vim-vsnip
@@ -67,8 +67,6 @@ return require('packer').startup(function(use)
   -- nvim autopairs
   use({
     'windwp/nvim-autopairs',
-    -- disable = true,
-    event = 'InsertEnter',
     config = function()
       require('config.nvim-autopairs')
     end,
@@ -114,9 +112,10 @@ return require('packer').startup(function(use)
   -- nvim-tree
   use({
     'kyazdani42/nvim-tree.lua',
-    -- keys = { "<leader>nn", "<leader>nf" },
-    -- cmd = { "NvimTreeToogle", "NvimTreeFocus" },
-    wants = { 'nvim-web-devicons' },
+    requires = {
+      { 'kyazdani42/nvim-web-devicons', opts = true }, -- optional, for file icons
+    },
+    tag = 'nightly',
     config = function()
       require('config.nvim-tree')
     end,
@@ -291,14 +290,6 @@ return require('packer').startup(function(use)
   use({
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    event = 'BufRead',
-    -- wants = {
-    --   "playground",
-    --   "nvim-treesitter-textobjects",
-    --   "nvim-treesitter-refactor",
-    --   "nvim-ts-context-commentstring",
-    --   "nvim-ts-rainbow",
-    -- },
     requires = {
       { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
       { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
@@ -629,8 +620,9 @@ return require('packer').startup(function(use)
 
   -- lspconfig
   use({
-    'neovim/nvim-lspconfig', -- event = "BufReadPre",
-    requires = { 'onsails/lspkind-nvim', { 'folke/lua-dev.nvim' } },
+    'neovim/nvim-lspconfig',
+    -- requires = { 'onsails/lspkind-nvim' },
+    after = { 'cmp-nvim-lsp', 'mason-lspconfig.nvim' },
     config = function()
       require('config.lsp')
     end,
@@ -638,9 +630,17 @@ return require('packer').startup(function(use)
 
   use({
     'williamboman/mason.nvim',
-  }) -- nvim-lsp-installer
+    config = function()
+      require('mason').setup()
+    end,
+  })
+
   use({
     'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup()
+    end,
+    after = 'mason.nvim',
   })
 
   use({
@@ -662,6 +662,10 @@ return require('packer').startup(function(use)
     'simnalamburt/vim-mundo',
     keys = '<leader>vm',
     config = function()
+      vim.g.mundo_width = 30
+      -- vim.g.mundo_preview_statusline = 0
+      -- vim.g.mundo_tree_statusline = 0
+      -- vim.g.mundo_auto_preview = 0
       vim.g.mundo_preview_bottom = 1
       vim.g.mundo_preview_height = 15
       vim.api.nvim_set_keymap('n', '<leader>vm', ':MundoToggle<cr>', { noremap = true, silent = true })
@@ -672,14 +676,19 @@ return require('packer').startup(function(use)
     'mbbill/undotree',
     cmd = 'UndotreeToggle',
     keys = '<leader>u',
-    setup = function()
-      require('which-key').register({
-        ['<leader>u'] = 'undotree: toggle',
-      })
-    end,
+    -- setup = function()
+    --   require("which-key").register({
+    --     ["<leader>u"] = "undotree: toggle",
+    --   })
+    -- end,
     config = function()
-      vim.g.undotree_TreeNodeShape = '◉' -- Alternative: '◦'
+      vim.g.undotree_SplitWidth = 40
+      vim.g.undotree_WindowLayout = 2
+      -- vim.g.undotree_TreeNodeShape = "◉" -- Alternative: '◦'
       vim.g.undotree_SetFocusWhenToggle = 1
+      vim.g.undotree_TreeNodeShape = '*'
+      vim.g.undotree_DiffpanelHeight = 10
+      vim.keymap.set('n', '<leader>u', '<cmd>UndotreeToggle<cr>', { desc = 'undotree: toggle' })
     end,
   })
 
