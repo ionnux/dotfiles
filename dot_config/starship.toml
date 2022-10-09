@@ -11,75 +11,49 @@ command_timeout = 4000
 # [╭─\($username$hostname\)$jobs-\[$directory\]-\[ $git_commit$git_state$git_metrics$java$kotlin$python$lua$cmake\]$git_branch$git_status$dart$battery](bold blue)
 # [╰─$character](bold blue)
 # '''
-format = """
-[ $sudo\\[$username$hostname\\]$jobs$directory$git_branch$git_status(-\\[\
-$cmake\
-$dart\
-$elixir\
-$erlang\
-$golang\
-$haskell\
-$java\
-$kotlin\
-$lua\
-$python\
-$rust\
-$conda\
-\\])$battery](bold blue)
-[ $character](bold blue)
-"""
+
+
+format = '''
+[╭$shell$sudo$hostname$jobs$directory$git_branch$git_status$battery
+╰$character](bold blue)
+'''
 [sudo]
-format = "[\\[[sudo](bold red)\\]-](bold blue)"
+format = '\[[sudo](bold yellow)\]'
+disabled = false
+
+
+[shell]
+# fish_indicator = ""
+fish_indicator = "fish"
+unknown_indicator = "mystery shell"
+style = "cyan bold"
+format = '\[[$indicator](bold cyan)\]'
 disabled = false
 
 [character]
 # success_symbol = "[❯](bold green) "
 # error_symbol = "[✗](bold red) "
 # vicmd_symbol = "[❮](bold green) "
-success_symbol = '[❯](bold blue)'
-error_symbol = '[❯](bold red)'
-vicmd_symbol = '[❮](bold purple)'
+# success_symbol = '\[[I](bold yellow)\]'
+success_symbol = '\[[INSERT](bold yellow)\]'
+# error_symbol = '\[[!](bold red)\]'
+error_symbol = '\[[ERROR](bold red)\]'
+# vimcmd_symbol = '\[[N](bold yellow)\]'
+vimcmd_symbol = '\[[NORMAl](bold yellow)\]'
+# vimcmd_replace_symbol = '\[[R](bold yellow)\]'
+vimcmd_replace_symbol = '\[[REPLACE](bold yellow)\]'
+# vimcmd_visual_symbol = '\[[V](bold yellow)\]'
+vimcmd_visual_symbol = '\[[VISUAL](bold yellow)\]'
+# vimcmd_replace_one_symbol = '\[[r](bold yellow)\]'
+vimcmd_replace_one_symbol = '\[[REPLACE ONE](bold yellow)\]'
 # vicmd_symbol = '[❯](bold blue) [](bold yellow)'
 
-[battery]
-full_symbol = " "
-charging_symbol = " "
-discharging_symbol = " "
-unknown_symbol = " "
-empty_symbol = " "
-format = '-[\[](bold blue)[$symbol$percentage]($style)[\]](bold blue)'
-disabled = true
-
-[[battery.display]]
-threshold = 14
-style = "bold red"
-
-[[battery.display]]
-threshold = 29
-style = "bold orange"
-
-[[battery.display]]
-threshold = 29
-style = 'bold yellow'
-
-[[battery.display]]
-threshold = 100
-style = "bold green"
-
 [directory]
-format = '-\[[$path]($style)[$read_only]( red)\]'
+format = '\[[$path]($style)[$read_only](red)\]'
 style = "bold cyan"
 read_only = "  "
 truncation_length = 8
 truncation_symbol = ".../"
-
-[memory_usage]
-disabled = true
-format = '\[$symbol [${ram}]($style)\] '
-# symbol = "🐏"
-symbol = " "
-threshold = -1
-style = "bold dimmed blue"
 
 [username]
 style_user = "purple bold"
@@ -90,19 +64,19 @@ show_always = true
 
 [hostname]
 ssh_only = true
-format =  "[@$hostname](bold cyan) "
+format =  '\[[@$hostname](bold cyan)\]'
 trim_at = ".companyname.com"
 disabled = false
 
 [jobs]
 style = "bold red"
-format = '[-\[](bold blue)[$symbol$number]($style)[\]](bold blue)'
+format = '\[[$symbol$number]($style)\]'
 symbol = "✦"
 threshold = 1
 
 [git_branch]
 style = 'bold purple'
-format = '-\[on [$symbol$branch]($style)\]' 
+format = '\[on [$symbol$branch]($style)\]' 
 symbol = ' '
 truncation_length = 4
 truncation_symbol = '...'
@@ -110,7 +84,7 @@ only_attached = false
 
 [git_status]
 style = 'bold blue'
-format = '([\[$staged$modified$ahead_behind\]]($style) )'
+format = '\[[$staged$modified$ahead_behind](bold purple)\]'
 
 # Show ahead/behind count of the branch being tracked
 ahead = "⇡${count}"
@@ -120,7 +94,7 @@ diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 conflicted = "="
 untracked = "?"
 stashed = "$"
-modified = "!${count}"
+modified = "*${count}"
 staged = "+${count}"
 renamed = "»"
 deleted = "✘"
