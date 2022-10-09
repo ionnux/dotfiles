@@ -115,9 +115,9 @@ rofi_device_menu() {
         "connect")
             local powered="$(bluetoothctl show | grep "Powered:" | awk -F ': ' '{print $2}')"
             if [[ $powered == no ]]; then
-                bluetoothctl power on && bluetoothctl connect $device_id && rofi_device_menu "$1"
+                bluetoothctl power on && bluetoothctl connect $device_id 
             else
-                bluetoothctl connect $device_id && rofi_device_menu "$1"
+                bluetoothctl connect $device_id
             fi
             ;;
         "pair") bluetoothctl pairable on && bluetoothctl pair $device_id && rofi_device_menu "$1" ;;
@@ -190,7 +190,14 @@ rofi_bluetooth_menu() {
         "pairable [yes]") bluetoothctl pairable off && rofi_bluetooth_menu ;;
         "pairable [no]") bluetoothctl pairable on && rofi_bluetooth_menu ;;
         "discoverable [yes]") bluetoothctl discoverable off && rofi_bluetooth_menu ;;
-        "discoverable [no]") bluetoothctl discoverable on && rofi_bluetooth_menu ;;
+        "discoverable [no]")
+            local powered="$(bluetoothctl show | grep "Powered:" | awk -F ': ' '{print $2}')"
+            if [[ $powered == no ]]; then
+                bluetoothctl power on && bluetoothctl discoverable on && rofi_bluetooth_menu
+            else
+                bluetoothctl discoverable on && rofi_bluetooth_menu
+            fi
+            ;;
     esac
 }
 
