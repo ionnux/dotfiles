@@ -39,10 +39,10 @@ gui:
   showCommandLog: false
   commandLogSize: 10
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
-    useConfig: false
+  # paging:
+  #   colorArg: always
+  #   pager: delta --dark --paging=never
+  #   useConfig: false
   merging:
     # only applicable to unix users
     manualCommit: false
@@ -194,3 +194,4 @@ keybinding:
     init: 'i'
     update: 'u'
     bulkMenu: 'b'
+
