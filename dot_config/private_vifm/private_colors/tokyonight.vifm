@@ -1,0 +1,31 @@
+" palenight color scheme for vifm
+
+" Reset all styles first
+
+highlight Border	gui=none	guifg=default	guibg=#24283b
+
+highlight TopLine	gui=bold	guifg=#a9b1d6	guibg=#24283b
+highlight TabLine	gui=bold	guifg=#a9b1d6	guibg=#24283b
+highlight TopLineSel	gui=bold	guifg=#a9b1d6	guibg=#24283b
+highlight Win		cterm=none	guifg=#a9b1d6	guibg=#1f2335
+highlight Executable		cterm=none	guifg=#a9b1d6	guibg=#1f2335
+highlight LineNr		gui=bold	guifg=#3b4261	guibg=#1f2335
+highlight AuxWin		cterm=none	guifg=#a9b1d6	guibg=#1f2335
+highlight OtherWin		cterm=none	guifg=#a9b1d6	guibg=#1f2335
+highlight Directory	gui=none	guifg=#81a1c1	 guibg=#1f2335
+highlight CurrLine	gui=bold	guifg=default	guibg=#292e42
+highlight OtherLine	cterm=bold	guifg=default	guibg=#1f2335
+highlight Selected	cterm=none	ctermfg=003	ctermbg=008
+
+highlight JobLine	gui=bold	ctermfg=251	ctermbg=008
+highlight StatusLine	gui=bold	guifg=#a9b1d6	guibg=#24283b
+highlight WildMenu	gui=bold,reverse	guifg=#a9b1d6	guibg=#24283b
+highlight SuggestBox	gui=none	guifg=#a9b1d6	guibg=#24283b
+highlight CmdLine	cterm=none	guifg=#a9b1d6	guibg=#1f2335
+highlight ErrorMsg	cterm=bold	ctermfg=001	ctermbg=default
+
+highlight Link		cterm=bold	ctermfg=006	ctermbg=default
+highlight BrokenLink	cterm=bold	ctermfg=001	ctermbg=default
+highlight Device	cterm=bold,standout	ctermfg=000	ctermbg=011
+highlight Fifo		cterm=none	ctermfg=003	ctermbg=default
+highlight Socket	cterm=bold	ctermfg=005	ctermbg=default
