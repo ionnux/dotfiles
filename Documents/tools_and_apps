@@ -60,3 +60,4 @@ mpd - music player daemon
 ncmpcpp - mpd client
 mpc - commandline mpd client
 mpDris2 - MPRIS2 bridge for mpd
+touchegg - multi-touch gesture
