@@ -16,6 +16,7 @@ let g:tokyonight_style = "storm"
 " let g:rose_pine_variant = 'moon'
 
 set nonumber
+set norelativenumber
 set ignorecase
 set smartcase
 set cursorline
@@ -28,6 +29,21 @@ set noruler
 set noshowcmd
 set shortmess+=F
 set clipboard+=unnamedplus
+set shell=bash
+set scrollback=100000
+set termguicolors
+set nomodifiable
 
-autocmd TermOpen * normal G
-map q :qa!<cr>
+nnoremap i <nop>
+nnoremap x <nop>
+nnoremap d <nop>
+nnoremap c <nop>
+nnoremap e <nop>
+nnoremap r <nop>
+nnoremap R <nop>
+nnoremap u <nop>
+nnoremap <c-r> <nop>
+" autocmd TermOpen * normal G
+" autocmd TermEnter * stopinsert
+" autocmd TermClose * call cursor(max([0,INPUT_LINE_NUMBER-1])+CURSOR_LINE, CURSOR_COLUMN
+map <silent> q :qa!<cr>
