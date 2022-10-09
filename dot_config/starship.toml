@@ -11,10 +11,27 @@ command_timeout = 4000
 # [╭─\($username$hostname\)$jobs-\[$directory\]-\[ $git_commit$git_state$git_metrics$java$kotlin$python$lua$cmake\]$git_branch$git_status$dart$battery](bold blue)
 # [╰─$character](bold blue)
 # '''
-format = '''
-[ \[$username$hostname\]$jobs$directory$git_branch$git_status$dart$battery](bold blue)
+format = """
+[ $sudo\\[$username$hostname\\]$jobs$directory$git_branch$git_status(-\\[\
+$cmake\
+$dart\
+$elixir\
+$erlang\
+$golang\
+$haskell\
+$java\
+$kotlin\
+$lua\
+$python\
+$rust\
+$conda\
+\\])$battery](bold blue)
 [ $character](bold blue)
-'''
+"""
+[sudo]
+format = "[\\[[sudo](bold red)\\]-](bold blue)"
+disabled = false
+
 [character]
 # success_symbol = "[❯](bold green) "
 # error_symbol = "[✗](bold red) "
@@ -33,21 +50,21 @@ empty_symbol = " "
 format = '-[\[](bold blue)[$symbol$percentage]($style)[\]](bold blue)'
 disabled = true
 
-# [[battery.display]]
-# threshold = 14
-# style = "bold red"
+[[battery.display]]
+threshold = 14
+style = "bold red"
 
-# [[battery.display]]
-# threshold = 29
-# style = "bold orange"
+[[battery.display]]
+threshold = 29
+style = "bold orange"
 
 [[battery.display]]
 threshold = 29
 style = 'bold yellow'
 
-# [[battery.display]]
-# threshold = 100
-# style = "bold green"
+[[battery.display]]
+threshold = 100
+style = "bold green"
 
 [directory]
 format = '-\[[$path]($style)[$read_only]( red)\]'
@@ -83,10 +100,6 @@ format = '[-\[](bold blue)[$symbol$number]($style)[\]](bold blue)'
 symbol = "✦"
 threshold = 1
 
-[dart]
-style = 'bold blue'
-format = '-\[via [$symbol($version)]($style)\]'
-
 [git_branch]
 style = 'bold purple'
 format = '-\[on [$symbol$branch]($style)\]' 
@@ -112,14 +125,3 @@ staged = "+${count}"
 renamed = "»"
 deleted = "✘"
 
-# Alternate settings
-# conflicted = "🏳"
-# ahead = "🏎💨"
-# behind = "😰"
-# diverged = "😵"
-# untracked = "🤷‍"
-# stashed = "📦"
-# modified = "📝"
-# staged = '[++\($count\)](green)'
-# renamed = "👅"
-# deleted = "🗑"
