@@ -1,4 +1,4 @@
-directory: ~/Music/Albums
+directory: ~/Audio/Music
 paths:
     default: $albumartist/$album%aunique{}/$track $artist - $title
 library: ~/.config/beets/musiclibrary.db
