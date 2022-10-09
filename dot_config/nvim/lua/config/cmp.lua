@@ -68,15 +68,11 @@ cmp.setup({
       -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
 
       -- For `luasnip` user.
-      require('luasnip').lsp_expand(args.body)
+      luasnip.lsp_expand(args.body)
 
       -- For `ultisnips` user.
       -- vim.fn["UltiSnips#Anon"](args.body)
     end,
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -86,27 +82,27 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping(toggleCmp, { 'i' }),
     ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 
-    ['<Tab>'] = cmp.mapping(function()
-      if luasnip.jumpable() then
-        luasnip.jump(1)
-      else
-        vim.cmd('Tabout')
-      end
-    end, {
-      'i',
-      's',
-    }),
+    -- ['<Tab>'] = cmp.mapping(function()
+    --   if luasnip.jumpable() then
+    --     luasnip.jump(1)
+    --   else
+    --     vim.cmd('Tabout')
+    --   end
+    -- end, {
+    --   'i',
+    --   's',
+    -- }),
 
-    ['<S-Tab>'] = cmp.mapping(function()
-      if luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        vim.cmd('TaboutBack')
-      end
-    end, {
-      'i',
-      's',
-    }),
+    -- ['<S-Tab>'] = cmp.mapping(function()
+    --   if luasnip.jumpable(-1) then
+    --     luasnip.jump(-1)
+    --   else
+    --     vim.cmd('TaboutBack')
+    --   end
+    -- end, {
+    --   'i',
+    --   's',
+    -- }),
   }),
 
   -- documentation = {
@@ -115,9 +111,10 @@ cmp.setup({
   -- 	maxwidth = 70,
   -- 	maxheight = 20,
   -- },
+
   window = {
     completion = {
-      border = 'rounded',
+      border = require('config.borders').round,
       scrollbar = '║',
     },
     documentation = {
