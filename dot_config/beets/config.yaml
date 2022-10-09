@@ -6,8 +6,10 @@ plugins:
     - embedart
     - lyrics
     - deezer
+    # - lastgenre
+    - info
     # - spotify
-    # - fetchart
+    - fetchart
 deezer:
     source_weight: 0.0
 spotify:
@@ -26,6 +28,7 @@ fetchart:
     lastfm_key: 2554f89b2ab419b74ed9c18f4a2b78fb
 embedart:
     auto: yes
+    remove_art_file: yes
 import:
-    move: no
+    move: yes
     copy: no
