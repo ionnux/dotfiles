@@ -1,15 +1,16 @@
 .git/
 node_modules
 /home/og_saaz/*/
-!IdeaProjects/
-!elixir-projects/
-!exercism/
-!AndroidStudioProjects/
+/* !IdeaProjects/ */
+/* !elixir-projects/ */
+/* !exercism/ */
+/* !AndroidStudioProjects/ */
 !Downloads/
 !Documents/
 !Videos/
+!MyScripts/
 !Music/
 !Pictures/
-!flutter_dev/
+/* !flutter_dev/ */
 !.config/
 !.local/
