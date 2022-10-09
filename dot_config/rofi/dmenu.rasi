@@ -2,6 +2,7 @@ configuration {
   font: "Iosevka 13";
   /* modi:  "window,drun,run,ssh,combi"; */
   modi:  "run,window";
+  combi-hide-mode-prefix: true;
 	combi-modi: "drun,run";
   monitor: "-1";
   sort: true;
